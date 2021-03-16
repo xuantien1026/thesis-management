@@ -10,6 +10,6 @@
   <%= @topic.description %>
 </p>
 
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Edit', edit_topic_path(@topic) if policy(@topic).edit? %> |
 <%= link_to 'Back', topics_path %> |
 <%= link_to 'View Applications', topic_thesis_applications_path(@topic) %>

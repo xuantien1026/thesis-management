@@ -17,8 +17,8 @@
         <td><%= topic.title %></td>
         <td><%= topic.description %></td>
         <td><%= link_to 'Show', topic %></td>
-        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_topic_path(topic) if policy(topic).edit? %></td>
+        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } if policy(topic).destroy? %></td>
         <td><%= link_to 'Apply', new_topic_thesis_application_path(topic) %></td>
       </tr>
     <% end %>
@@ -27,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Topic', new_topic_path %>
+<%= link_to 'New Topic', new_topic_path if policy(Topic).new? %>
