@@ -1,0 +1,7 @@
+<h1>New Thesis Application</h1>
+
+<p>Topic: <%= @topic.title %></p>
+
+<%= render 'form', thesis_application: @thesis_application %>
+
+<%= link_to 'Back', topics_path %>

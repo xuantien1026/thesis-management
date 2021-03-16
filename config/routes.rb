@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
   root to: "topics#index"
-  resources :topics
+  devise_for :users
+
+  resources :topics do
+    member do
+      resources :thesis_applications, only: %i[index create new]
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

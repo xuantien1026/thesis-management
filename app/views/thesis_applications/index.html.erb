@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Applications</h1>
+<h2>Topic: <%= @topic.title %></h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>No.</th>
+    <th>Student</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @thesis_appications.each.with_index(1)do |thesis_application, i| %>
+    <tr>
+      <td><%= i %></td>
+      <td><%= thesis_application.user.email %></td>
+      <td><%= thesis_application.status %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', topic_path(@topic) %>
