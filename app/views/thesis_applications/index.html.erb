@@ -9,6 +9,7 @@
     <th>No.</th>
     <th>Student</th>
     <th>Status</th>
+    <th colspan="2">Action</th>
   </tr>
   </thead>
 
@@ -18,6 +19,8 @@
       <td><%= i %></td>
       <td><%= thesis_application.user.email %></td>
       <td><%= thesis_application.status %></td>
+      <td><%= button_to "Approve", thesis_application_path(thesis_application), method: :put, params: { status: :approved} %></td>
+      <td><%= button_to "Reject", thesis_application_path(thesis_application), method: :put, params: { status: :rejected} %></td>
     </tr>
   <% end %>
   </tbody>
