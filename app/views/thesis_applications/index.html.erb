@@ -5,24 +5,25 @@
 
 <table>
   <thead>
-  <tr>
-    <th>No.</th>
-    <th>Student</th>
-    <th>Status</th>
-    <th colspan="2">Action</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @thesis_appications.each.with_index(1)do |thesis_application, i| %>
     <tr>
-      <td><%= i %></td>
-      <td><%= thesis_application.user.email %></td>
-      <td><%= thesis_application.status %></td>
-      <td><%= button_to "Approve", thesis_application_path(thesis_application), method: :put, params: { status: :approved} %></td>
-      <td><%= button_to "Reject", thesis_application_path(thesis_application), method: :put, params: { status: :rejected} %></td>
+      <th>No.</th>
+      <th>Student</th>
+      <th>Status</th>
+      <th colspan="2">Action</th>
     </tr>
-  <% end %>
+  </thead>
+  <tbody>
+    <% @thesis_applications.each.with_index(1) do |thesis_application, i| %>
+      <tr>
+        <td><%= i %></td>
+        <td><%= thesis_application.user.email %></td>
+        <td><%= thesis_application.status %></td>
+        <% if policy(thesis_application).update? %>
+          <td><%= button_to "Approve", thesis_application_path(thesis_application), method: :put, params: { status: :approved } %></td>
+          <td><%= button_to "Reject", thesis_application_path(thesis_application), method: :put, params: { status: :rejected } %></td>
+        <% end %>>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 

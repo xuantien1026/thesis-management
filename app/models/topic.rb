@@ -1,3 +1,3 @@
 class Topic < ApplicationRecord
-  has_many :thesis_applications
+  has_many :thesis_applications, dependent: :destroy
 end

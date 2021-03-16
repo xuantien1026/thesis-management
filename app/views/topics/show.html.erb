@@ -12,4 +12,5 @@
 
 <%= link_to 'Edit', edit_topic_path(@topic) if policy(@topic).edit? %> |
 <%= link_to 'Back', topics_path %> |
-<%= link_to 'View Applications', topic_thesis_applications_path(@topic) %>
+<%= link_to 'View Applications', topic_thesis_applications_path(@topic) %> |
+<%= link_to 'Apply for this Topic', new_topic_thesis_application_path(@topic) if policy(@topic.thesis_applications.new).create? %>
