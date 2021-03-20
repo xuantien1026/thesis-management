@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.shared_context :signed_in_as_student do
-  let(:student) { create :user }
+  let(:student) { create :user, :as_student }
 
   before do
     sign_in student
@@ -17,10 +17,11 @@ RSpec.shared_context :signed_in_as_lecturer do
 end
 
 RSpec.shared_context :signed_in_as_head_of_department do
+  let(:department) { create :department, head: head_of_department }
   let(:head_of_department) { create :user, :as_head_of_department }
 
   before do
-    sign_in department_head
+    sign_in head_of_department
   end
 end
 

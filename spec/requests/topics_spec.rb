@@ -48,5 +48,46 @@ RSpec.describe 'Topics', type: :request do
         expect(response.body).not_to include(other_people_topic.title)
       end
     end
+
+    context 'when user is Head of Department' do
+      include_context :signed_in_as_head_of_department
+
+      let(:my_department_lecturers) { create_list :user, 3, :as_lecturer, department: department }
+      let!(:my_department_topics) do
+        create_list :topic, rand(1..5), status: :default, primary_advisor: my_department_lecturers.sample
+      end
+      let!(:other_department_topic) { create :topic, status: Topic.statuses.values.sample }
+
+      it 'only topics of my department are visible' do
+        get topics_path
+
+        expect(response.body).to include(*my_department_topics.map(&:title))
+      end
+
+      it 'topics from other departments are not visible' do
+        get topics_path
+
+        expect(response.body).not_to include(other_department_topic.title)
+      end
+    end
+
+    context 'when user is Head of Faculty' do
+      include_context :signed_in_as_head_of_faculty
+
+      let!(:department_approved_topics) { create_list :topic, rand(1..5), status: :department_approved }
+      let!(:unapproved_topic) { create :topic }
+
+      it 'only topics approved by department heads are visible' do
+        get topics_path
+
+        expect(response.body).to include(*department_approved_topics.map(&:title))
+      end
+
+      it 'topics which are not yet approved by department heads are not visible' do
+        get topics_path
+
+        expect(response.body).not_to include(unapproved_topic.title)
+      end
+    end
   end
 end

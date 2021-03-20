@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_20_122158) do
+ActiveRecord::Schema.define(version: 2021_03_20_145429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 2021_03_20_122158) do
     t.string "program"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "head_id", null: false
+    t.index ["head_id"], name: "index_departments_on_head_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -30,16 +32,6 @@ ActiveRecord::Schema.define(version: 2021_03_20_122158) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
-  end
-
-  create_table "thesis_applications", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "topic_id", null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["topic_id"], name: "index_thesis_applications_on_topic_id"
-    t.index ["user_id"], name: "index_thesis_applications_on_user_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -60,6 +52,8 @@ ActiveRecord::Schema.define(version: 2021_03_20_122158) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_users_on_department_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -72,5 +66,6 @@ ActiveRecord::Schema.define(version: 2021_03_20_122158) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "departments", "users", column: "head_id"
   add_foreign_key "topics", "users", column: "primary_advisor_id"
 end
