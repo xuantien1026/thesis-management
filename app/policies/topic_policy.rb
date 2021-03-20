@@ -13,7 +13,8 @@ class TopicPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.faculty_approved if user.has_role? :student
+      return scope.faculty_approved if user.has_role? :student
+      return scope.where(primary_advisor: user) if user.has_role? :lecturer
     end
   end
 end

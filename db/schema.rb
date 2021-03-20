@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_20_085030) do
+ActiveRecord::Schema.define(version: 2021_03_20_122158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2021_03_20_085030) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0
+    t.bigint "primary_advisor_id", null: false
+    t.index ["primary_advisor_id"], name: "index_topics_on_primary_advisor_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,4 +72,5 @@ ActiveRecord::Schema.define(version: 2021_03_20_085030) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "topics", "users", column: "primary_advisor_id"
 end

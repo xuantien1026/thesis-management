@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Topics", type: :request do
   describe "GET /topics" do
-    context 'when signed in as Student' do
+    context 'when user is a Student' do
       include_context :signed_in_as_student
 
       let!(:faculty_approved_topic_titles) { create_list(:topic, rand(1..5), status: :faculty_approved).map(&:title) }
@@ -25,6 +25,25 @@ RSpec.describe "Topics", type: :request do
         get topics_path
 
         expect(response.body).not_to include(department_approved_topic.title)
+      end
+    end
+
+    context 'when user is a Lecturer' do
+      include_context :signed_in_as_lecturer
+
+      let!(:my_topics) { create_list :topic, rand(1..5), status: :default, primary_advisor: lecturer }
+      let!(:other_people_topic) { create :topic, status: Topic.statuses.values.sample }
+
+      it 'only my topics are visible' do
+        get topics_path
+
+        expect(response.body).to include(*my_topics.map(&:title))
+      end
+
+      it 'other lecturers topics are not visible' do
+        get topics_path
+
+        expect(response.body).not_to include(other_people_topic.title)
       end
     end
   end
