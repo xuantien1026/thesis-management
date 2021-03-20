@@ -10,4 +10,10 @@ class TopicPolicy < ApplicationPolicy
   def destroy?
     user.has_role? :advisor
   end
+
+  class Scope < Scope
+    def resolve
+      scope.faculty_approved if user.has_role? :student
+    end
+  end
 end

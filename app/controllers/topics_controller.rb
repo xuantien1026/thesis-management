@@ -2,9 +2,8 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_topic, only: %i[ show edit update destroy ]
 
-  # GET /topics or /topics.json
   def index
-    @topics = Topic.all
+    @topics = policy_scope(Topic)
   end
 
   # GET /topics/1 or /topics/1.json
