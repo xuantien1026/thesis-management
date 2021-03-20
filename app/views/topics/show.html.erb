@@ -10,7 +10,11 @@
   <%= @topic.description %>
 </p>
 
+<p>
+  <strong>Status:</strong>
+  <%= @topic.status %>
+</p>
+
 <%= link_to 'Edit', edit_topic_path(@topic) if policy(@topic).edit? %> |
 <%= link_to 'Back', topics_path %> |
-<%= link_to 'View Applications', topic_thesis_applications_path(@topic) %> |
-<%= link_to 'Apply for this Topic', new_topic_thesis_application_path(@topic) if policy(@topic.thesis_applications.new).create? %>
+<%= link_to 'Department Approve', department_approve_topic_path(@topic), method: :post if policy(@topic).department_approve? %>

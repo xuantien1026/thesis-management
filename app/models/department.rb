@@ -2,5 +2,5 @@
 
 class Department < ApplicationRecord
   belongs_to :head, class_name: 'User'
-  has_many :lecturers, class_name: 'User'
+  has_many :lecturers, class_name: 'User', dependent: :restrict_with_error
 end

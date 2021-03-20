@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :user do
+  factory :user, aliases: %i[primary_advisor head] do
     email { Faker::Internet.email }
     password { Faker::Internet.password }
+
+    transient do
+      department { create :department }
+    end
   end
 
   trait :as_student do
@@ -13,8 +17,9 @@ FactoryBot.define do
   end
 
   trait :as_lecturer do
-    after :create do |user|
+    after :create do |user, evaluator|
       user.add_role :lecturer
+      user.update(department: evaluator.department)
     end
   end
 

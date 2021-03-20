@@ -2,27 +2,23 @@
 
 class TopicsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_topic, only: %i[show edit update destroy]
+  before_action :set_topic, only: %i[show edit update destroy department_approve]
 
   def index
     @topics = policy_scope(Topic)
   end
 
-  # GET /topics/1 or /topics/1.json
   def show; end
 
-  # GET /topics/new
   def new
     @topic = Topic.new
     authorize @topic
   end
 
-  # GET /topics/1/edit
   def edit
     authorize @topic
   end
 
-  # POST /topics or /topics.json
   def create
     @topic = Topic.new(topic_params)
     authorize @topic
@@ -62,14 +58,19 @@ class TopicsController < ApplicationController
     end
   end
 
+  def department_approve
+    authorize @topic
+    @topic.department_approved!
+    flash[:notice] = 'Topic is approved!'
+    redirect_to topics_path
+  end
+
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_topic
     @topic = Topic.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def topic_params
     params.require(:topic).permit(:title, :description)
   end

@@ -11,3 +11,5 @@ Style/Documentation:
   Enabled: false
 Rails/HasAndBelongsToMany:
   Enabled: false
+Metrics/BlockLength:
+  Enabled: false

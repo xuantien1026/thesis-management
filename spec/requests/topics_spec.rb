@@ -8,7 +8,7 @@ RSpec.describe 'Topics', type: :request do
       include_context :signed_in_as_student
 
       let!(:faculty_approved_topic_titles) { create_list(:topic, rand(1..5), status: :faculty_approved).map(&:title) }
-      let!(:new_topic) { create :topic, status: :default }
+      let!(:new_topic) { create :topic, status: :newly_created }
       let!(:department_approved_topic) { create :topic, status: :department_approved }
 
       it 'only faculty approved topics are visible to students' do
@@ -33,7 +33,7 @@ RSpec.describe 'Topics', type: :request do
     context 'when user is a Lecturer' do
       include_context :signed_in_as_lecturer
 
-      let!(:my_topics) { create_list :topic, rand(1..5), status: :default, primary_advisor: lecturer }
+      let!(:my_topics) { create_list :topic, rand(1..5), status: :newly_created, primary_advisor: lecturer }
       let!(:other_people_topic) { create :topic, status: Topic.statuses.values.sample }
 
       it 'only my topics are visible' do
@@ -54,7 +54,7 @@ RSpec.describe 'Topics', type: :request do
 
       let(:my_department_lecturers) { create_list :user, 3, :as_lecturer, department: department }
       let!(:my_department_topics) do
-        create_list :topic, rand(1..5), status: :default, primary_advisor: my_department_lecturers.sample
+        create_list :topic, rand(1..5), status: :newly_created, primary_advisor: my_department_lecturers.sample
       end
       let!(:other_department_topic) { create :topic, status: Topic.statuses.values.sample }
 
@@ -87,6 +87,56 @@ RSpec.describe 'Topics', type: :request do
         get topics_path
 
         expect(response.body).not_to include(unapproved_topic.title)
+      end
+    end
+  end
+
+  describe 'POST /topics/:id/department_approve' do
+    context 'when user is not head of any department' do
+      include_context :signed_in_as_student
+
+      let(:topic) { create :topic }
+
+      it 'returns 403 forbidden' do
+        post department_approve_topic_path(topic)
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    context 'when user is Head of Department' do
+      include_context :signed_in_as_head_of_department
+
+      context 'when topic belongs to another department' do
+        let(:topic) { create :topic }
+
+        it 'returns 403 forbidden' do
+          post department_approve_topic_path(topic)
+
+          expect(response).to have_http_status(:forbidden)
+        end
+      end
+
+      context 'when topic belongs to the same department' do
+        context 'when topic is still waiting for department approval' do
+          let(:topic) { create :topic, department: department }
+
+          it 'successfully transition topic into department approved' do
+            post department_approve_topic_path(topic)
+
+            expect(response).to redirect_to topics_path
+          end
+        end
+
+        context 'when topic is already approved' do
+          let(:topic) { create :topic, department: department, status: :department_approved }
+
+          it 'returns 403 forbidden' do
+            post department_approve_topic_path(topic)
+
+            expect(response).to have_http_status(:forbidden)
+          end
+        end
       end
     end
   end

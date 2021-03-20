@@ -2,8 +2,12 @@
 
 FactoryBot.define do
   factory :topic do
+    transient do
+      department { create :department }
+    end
+
     title { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
-    primary_advisor factory: %i[user as_lecturer]
+    primary_advisor { create :user, :as_lecturer, department: department }
   end
 end
