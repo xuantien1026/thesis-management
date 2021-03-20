@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TopicPolicy < ApplicationPolicy
   def create?
     user.has_role? :advisor

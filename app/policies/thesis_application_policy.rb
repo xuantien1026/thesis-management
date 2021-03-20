@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThesisApplicationPolicy < ApplicationPolicy
   def create?
     user.has_role?(:student) && !applied_for_same_topic?
@@ -10,6 +12,6 @@ class ThesisApplicationPolicy < ApplicationPolicy
   private
 
   def applied_for_same_topic?
-    ThesisApplication.where(user: user, topic: record.topic).exists?
+    ThesisApplication.exists?(user: user, topic: record.topic)
   end
 end

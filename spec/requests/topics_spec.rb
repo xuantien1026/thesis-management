@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Topics", type: :request do
-  describe "GET /topics" do
+RSpec.describe 'Topics', type: :request do
+  describe 'GET /topics' do
     context 'when user is a Student' do
       include_context :signed_in_as_student
 

@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class TopicsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_topic, only: %i[ show edit update destroy ]
+  before_action :set_topic, only: %i[show edit update destroy]
 
   def index
     @topics = policy_scope(Topic)
   end
 
   # GET /topics/1 or /topics/1.json
-  def show
-  end
+  def show; end
 
   # GET /topics/new
   def new
@@ -28,7 +29,7 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to @topic, notice: "Topic was successfully created." }
+        format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
         format.json { render :show, status: :created, location: @topic }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +43,7 @@ class TopicsController < ApplicationController
     authorize @topic
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to @topic, notice: "Topic was successfully updated." }
+        format.html { redirect_to @topic, notice: 'Topic was successfully updated.' }
         format.json { render :show, status: :ok, location: @topic }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,19 +57,20 @@ class TopicsController < ApplicationController
     authorize @topic
     @topic.destroy
     respond_to do |format|
-      format.html { redirect_to topics_url, notice: "Topic was successfully destroyed." }
+      format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = Topic.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def topic_params
-      params.require(:topic).permit(:title, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_topic
+    @topic = Topic.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def topic_params
+    params.require(:topic).permit(:title, :description)
+  end
 end
