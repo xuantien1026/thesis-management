@@ -2,7 +2,7 @@
 
 class TopicsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_topic, only: %i[show edit update destroy department_approve]
+  before_action :set_topic, only: %i[show edit update destroy department_approve faculty_approve]
 
   def index
     @topics = policy_scope(Topic)
@@ -61,6 +61,13 @@ class TopicsController < ApplicationController
   def department_approve
     authorize @topic
     @topic.department_approved!
+    flash[:notice] = 'Topic is approved!'
+    redirect_to topics_path
+  end
+
+  def faculty_approve
+    authorize @topic
+    @topic.faculty_approved!
     flash[:notice] = 'Topic is approved!'
     redirect_to topics_path
   end

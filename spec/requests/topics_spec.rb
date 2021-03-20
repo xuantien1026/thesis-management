@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Topics', type: :request do
-  describe 'GET /topics' do
+  describe 'GET /topics (Show topics for current user)' do
     context 'when user is a Student' do
       include_context :signed_in_as_student
 
@@ -91,7 +91,7 @@ RSpec.describe 'Topics', type: :request do
     end
   end
 
-  describe 'POST /topics/:id/department_approve' do
+  describe 'POST /topics/:id/department_approve (Approval of a Topic by Head of Department)' do
     context 'when user is not head of any department' do
       include_context :signed_in_as_student
 
@@ -136,6 +136,44 @@ RSpec.describe 'Topics', type: :request do
 
             expect(response).to have_http_status(:forbidden)
           end
+        end
+      end
+    end
+  end
+
+  describe 'POST /topics/:id/faculty_approve (Approval of a Topic by Head of Faculty)' do
+    context 'when user is not Head of Faculty' do
+      include_context :signed_in_as_student
+
+      let(:topic) { create :topic }
+
+      it 'returns 403 forbidden' do
+        post faculty_approve_topic_path(topic)
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    context 'when user is Head of Faculty' do
+      include_context :signed_in_as_head_of_faculty
+
+      context 'when topic is not yet approved by department' do
+        let(:topic) { create :topic, status: :newly_created }
+
+        it 'returns 403 forbidden' do
+          post faculty_approve_topic_path(topic)
+
+          expect(response).to have_http_status(:forbidden)
+        end
+      end
+
+      context 'when topic is department approved, waiting for faculty approval' do
+        let(:topic) { create :topic, status: :department_approved }
+
+        it 'successfully transition topic into faculty approved' do
+          post faculty_approve_topic_path(topic)
+
+          expect(response).to redirect_to topics_path
         end
       end
     end

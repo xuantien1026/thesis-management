@@ -17,6 +17,10 @@ class TopicPolicy < ApplicationPolicy
     user.has_role?(:head_of_department) && topic_belongs_to_same_department && record.newly_created?
   end
 
+  def faculty_approve?
+    user.has_role?(:head_of_faculty) && record.department_approved?
+  end
+
   class Scope < Scope
     def resolve
       return scope.faculty_approved if user.has_role? :student

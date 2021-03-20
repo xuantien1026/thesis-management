@@ -6,15 +6,18 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Admin
 admin = User.create email: 'admin@hcmut.edu.vn', password: 'password'
 admin.add_role :admin
 
+# Students
 students = [
   { email: 'tien.nguyen.1026@hcmut.edu.vn', password: 'password' },
   { email:  'nguyen.van.a@hcmut.edu.vn', password: 'password' },
 ]
 students.each { |s| User.create s }
 
+# Department & Department heads
 department_heads = [
   { email: 'CS-department@hcmut.edu.vn', password: 'password' },
   { email: 'SN-department@hcmut.edu.vn', password: 'password' },
@@ -40,6 +43,7 @@ departments = [
   lecturer.add_role :lecturer
 end
 
+# Lecturers & their topics
 lecturers = User.with_role :lecturer
 
 topics = [
@@ -70,3 +74,7 @@ topics = [
   },
 ]
 topics.each { |topic| Topic.create topic }
+
+# Head of faculty
+head_of_faculty = User.create(email: 'faculty@hcmut.edu.vn', password: 'password')
+head_of_faculty.add_role :head_of_faculty
