@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :user, aliases: %i[primary_advisor head] do
+    name { Faker::Name.name }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
 

@@ -1,0 +1,4 @@
+tr
+  td = @topic.primary_advisor_name
+  td = link_to @topic.title, @topic
+  td = render StatusComponent.new(status: @topic.status)

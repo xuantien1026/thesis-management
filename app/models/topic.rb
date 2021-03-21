@@ -13,4 +13,5 @@ class Topic < ApplicationRecord
   scope :by_department, ->(department) { where(primary_advisor: department.lecturers) }
 
   delegate :department, to: :primary_advisor
+  delegate :name, to: :primary_advisor, prefix: true
 end

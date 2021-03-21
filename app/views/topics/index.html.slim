@@ -6,15 +6,10 @@
     table.table
       thead
         tr
+          th Lecturer
           th Title
-          th Description
           th Status
       tbody
-        - @topics.each do |topic|
-          tr
-            td = topic.title
-            td = topic.description
-            td
-              span.badge.bg-primary.text-white = topic.status
+        = render TopicComponent.with_collection(@topics)
     br
     = link_to 'New Topic', new_topic_path if policy(Topic).new?

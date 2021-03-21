@@ -15,7 +15,7 @@ students = [
   { name: 'Nguyen Xuan Tien', email: 'tien.nguyen.1026@hcmut.edu.vn', password: 'password' },
   { name: 'Nguyen Van A', email:  'nguyen.van.a@hcmut.edu.vn', password: 'password' },
 ]
-students.each { |s| User.create s }
+students.each { |s| student = User.create s; student.add_role :student }
 
 # Department & Department heads
 department_heads = [
