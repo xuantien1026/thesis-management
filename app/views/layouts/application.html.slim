@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    title Thesis Management
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    / coreui icon
+    link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/all.min.css"
+    / coreui css
+    link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" crossorigin="anonymous"
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body class="c-app"
+    .c-sidebar.c-sidebar-show#sidebar
+      nav.c-sidebar-nav
+        .c-sidebar-brand
+          i.cil-school style="font-size:xx-large"
+        .c-sidebar-nav-item
+          = link_to topics_path, class: "c-sidebar-nav-link"
+            i.c-sidebar-nav-icon.cil-list
+            = "Topics"
+    .c-wrapper
+      header.c-header
+      .c-body
+        = yield
+      .c-footer
+    / coreui scripts
+    script src="https://unpkg.com/@popperjs/core@2"
+    script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"
