@@ -75,12 +75,19 @@ RSpec.describe 'Topics', type: :request do
       include_context :signed_in_as_head_of_faculty
 
       let!(:department_approved_topics) { create_list :topic, rand(1..5), status: :department_approved }
+      let!(:faculty_approved_topics) { create_list :topic, rand(1..5), status: :faculty_approved}
       let!(:unapproved_topic) { create :topic }
 
-      it 'only topics approved by department heads are visible' do
+      it 'topics approved by department heads are visible' do
         get topics_path
 
         expect(response.body).to include(*department_approved_topics.map(&:title))
+      end
+
+      it 'topics approved by faculty are visible' do
+        get topics_path
+
+        expect(response.body).to include(*faculty_approved_topics.map(&:title))
       end
 
       it 'topics which are not yet approved by department heads are not visible' do
