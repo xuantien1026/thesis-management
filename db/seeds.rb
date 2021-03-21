@@ -7,23 +7,23 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Admin
-admin = User.create email: 'admin@hcmut.edu.vn', password: 'password'
+admin = User.create name: 'Admin', email: 'admin@hcmut.edu.vn', password: 'password'
 admin.add_role :admin
 
 # Students
 students = [
-  { email: 'tien.nguyen.1026@hcmut.edu.vn', password: 'password' },
-  { email:  'nguyen.van.a@hcmut.edu.vn', password: 'password' },
+  { name: 'Nguyen Xuan Tien', email: 'tien.nguyen.1026@hcmut.edu.vn', password: 'password' },
+  { name: 'Nguyen Van A', email:  'nguyen.van.a@hcmut.edu.vn', password: 'password' },
 ]
 students.each { |s| User.create s }
 
 # Department & Department heads
 department_heads = [
-  { email: 'CS-department@hcmut.edu.vn', password: 'password' },
-  { email: 'SN-department@hcmut.edu.vn', password: 'password' },
-  { email: 'IS-department@hcmut.edu.vn', password: 'password' },
-  { email: 'SE-department@hcmut.edu.vn', password: 'password' },
-  { email: 'CE-department@hcmut.edu.vn', password: 'password' },
+  { name: 'TS. CS', email: 'CS-department@hcmut.edu.vn', password: 'password' },
+  { name: 'TS. SN', email: 'SN-department@hcmut.edu.vn', password: 'password' },
+  { name: 'TS. IS', email: 'IS-department@hcmut.edu.vn', password: 'password' },
+  { name: 'TS. SE', email: 'SE-department@hcmut.edu.vn', password: 'password' },
+  { name: 'TS. CE', email: 'CE-department@hcmut.edu.vn', password: 'password' },
 ]
 
 departments = [
@@ -39,7 +39,7 @@ departments = [
 
   dept = Department.create departments[index].merge(head: dept_head)
 
-  lecturer = User.create(email: "lecturer-#{index}@hcmut.edu.vn", password: 'password', department: dept)
+  lecturer = User.create(name: "ThS #{index}", email: "lecturer-#{index}@hcmut.edu.vn", password: 'password', department: dept)
   lecturer.add_role :lecturer
 end
 
@@ -76,5 +76,5 @@ topics = [
 topics.each { |topic| Topic.create topic }
 
 # Head of faculty
-head_of_faculty = User.create(email: 'faculty@hcmut.edu.vn', password: 'password')
+head_of_faculty = User.create(name: 'PGS. TS. Pham Tran Vu', email: 'faculty@hcmut.edu.vn', password: 'password')
 head_of_faculty.add_role :head_of_faculty
