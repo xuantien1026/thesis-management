@@ -13,3 +13,5 @@ Rails/HasAndBelongsToMany:
   Enabled: false
 Metrics/BlockLength:
   Enabled: false
+Lint/MissingSuper:
+  Enabled: false

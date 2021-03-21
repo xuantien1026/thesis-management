@@ -75,7 +75,7 @@ RSpec.describe 'Topics', type: :request do
       include_context :signed_in_as_head_of_faculty
 
       let!(:department_approved_topics) { create_list :topic, rand(1..5), status: :department_approved }
-      let!(:faculty_approved_topics) { create_list :topic, rand(1..5), status: :faculty_approved}
+      let!(:faculty_approved_topics) { create_list :topic, rand(1..5), status: :faculty_approved }
       let!(:unapproved_topic) { create :topic }
 
       it 'topics approved by department heads are visible' do

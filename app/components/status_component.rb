@@ -7,6 +7,6 @@ class StatusComponent < ViewComponent::Base
   end
 
   def badge_classes
-    { "newly_created" => "bg-dark", "department_approved" => "bg-info", "faculty_approved" => "bg-success" }
+    { 'newly_created' => 'bg-dark', 'department_approved' => 'bg-info', 'faculty_approved' => 'bg-success' }
   end
 end
