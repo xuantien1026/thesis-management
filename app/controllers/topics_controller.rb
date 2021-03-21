@@ -79,6 +79,6 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:title, :description)
+    params.require(:topic).permit(:title, :description, :primary_advisor_id)
   end
 end

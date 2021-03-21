@@ -21,6 +21,10 @@
     <%= form.text_area :description %>
   </div>
 
+  <div class="field">
+    <%= form.hidden_field :primary_advisor_id, value: current_user.id %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
