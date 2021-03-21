@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.alert h4 {
+  margin-bottom: 0
+}
+
+.table td {
+  vertical-align: middle;
+}

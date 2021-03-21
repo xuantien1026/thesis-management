@@ -25,8 +25,15 @@ html
             i.c-sidebar-nav-icon.cil-list
             = "Topics"
     .c-wrapper
-      header.c-header
-      .c-body
+      header.c-header.flex-row-reverse.mb-3
+        / span.align-self-center.m-2
+        /   = "Welcome, #{current_user.email}"
+        = link_to 'Log Out', destroy_user_session_path, method: :delete
+      .c-body.container-fluid
+        - if notice
+          .alert.alert-success.alert-dismissable#notice role="alert"
+            button.close type="button" data-dismiss="alert" aria-label="Close" &times;
+            h4 = notice
         = yield
       .c-footer
     / coreui scripts
