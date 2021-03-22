@@ -1,0 +1,22 @@
+.card
+  .card-body
+    dl
+      dt Title
+      dd = @topic.title
+
+      dt Description
+      dd = @topic.description
+
+      dt Status
+      dd= @topic.status
+
+      dt Number of students
+      dd = @topic.number_of_students
+
+      dt Program
+      dd = @topic.program
+  .card-footer
+    = link_to 'Edit', edit_topic_path(@topic), class: 'card-link' if policy(@topic).edit?
+    = link_to 'Back', topics_path, class: 'card-link'
+    = link_to 'Department Approve', department_approve_topic_path(@topic), method: :post, class: 'card-link' if policy(@topic).department_approve?
+    = link_to 'Faculty Approve', faculty_approve_topic_path(@topic), method: :post, class: 'card-link' if policy(@topic).faculty_approve?

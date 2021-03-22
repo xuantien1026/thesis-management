@@ -12,6 +12,7 @@ class Topic < ApplicationRecord
   validates :description, presence: true
   validates :primary_advisor, presence: true
   validates :program, inclusion: PROGRAMS
+  validates :number_of_students, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
   scope :by_department, ->(department) { where(primary_advisor: department.lecturers) }
 

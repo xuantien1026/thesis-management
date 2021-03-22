@@ -12,11 +12,16 @@
 
   .form-group
     = form.label :description
-    = form.text_area :description, class: 'form-control'
+    = form.text_area :description, class: 'form-control', rows: 5
 
   .form-group
-    = form.label :program
-    = form.select :program, Topic::PROGRAMS, {}, class: 'form-control'
+    .row
+      .col-3
+        = form.label :program
+        = form.select :program, Topic::PROGRAMS, {}, class: 'form-control'
+      .col-3
+        = form.label :number_of_students
+        = form.number_field :number_of_students, min: 1, class: 'form-control'
 
   .form-group
     = form.hidden_field :primary_advisor_id, value: current_user.id
