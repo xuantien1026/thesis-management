@@ -9,5 +9,6 @@ FactoryBot.define do
     title { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
     primary_advisor { create :user, :as_lecturer, department: department }
+    program { Topic::PROGRAMS.sample }
   end
 end

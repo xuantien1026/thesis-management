@@ -23,39 +23,26 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     authorize @topic
 
-    respond_to do |format|
-      if @topic.save
-        format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
-        format.json { render :show, status: :created, location: @topic }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
-      end
+    if @topic.save
+      redirect_to @topic, notice: 'Topic was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /topics/1 or /topics/1.json
   def update
     authorize @topic
-    respond_to do |format|
-      if @topic.update(topic_params)
-        format.html { redirect_to @topic, notice: 'Topic was successfully updated.' }
-        format.json { render :show, status: :ok, location: @topic }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
-      end
+    if @topic.update(topic_params)
+      redirect_to @topic, notice: 'Topic was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /topics/1 or /topics/1.json
   def destroy
     authorize @topic
     @topic.destroy
-    respond_to do |format|
-      format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to topics_url, notice: 'Topic was successfully destroyed.'
   end
 
   def department_approve
@@ -79,6 +66,6 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:title, :description, :primary_advisor_id, :program)
+    params.require(:topic).permit(:title, :description, :primary_advisor_id, :program, :number_of_students)
   end
 end
