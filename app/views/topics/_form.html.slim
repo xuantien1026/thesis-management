@@ -1,0 +1,25 @@
+= form_with model: topic do |form|
+  - if topic.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(topic.errors.count, "error")}  prohibited this topic from being saved:"
+      ul
+        - topic.errors.each do |error|
+          li = error.full_message
+
+  .form-group
+    = form.label :title
+    = form.text_field :title, class: 'form-control'
+
+  .form-group
+    = form.label :description
+    = form.text_area :description, class: 'form-control'
+
+  .form-group
+    = form.label :program
+    = form.select :program, Topic::PROGRAMS, {}, class: 'form-control'
+
+  .form-group
+    = form.hidden_field :primary_advisor_id, value: current_user.id
+
+  .form-group
+    = form.submit 'Submit', class: 'btn btn-primary'

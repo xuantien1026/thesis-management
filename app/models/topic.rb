@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Topic < ApplicationRecord
+  PROGRAMS = %w[CS CE CS_CE].freeze
+
   has_many :thesis_applications, dependent: :destroy
   belongs_to :primary_advisor, class_name: 'User'
 
@@ -9,6 +11,7 @@ class Topic < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :primary_advisor, presence: true
+  validates :program, inclusion: PROGRAMS
 
   scope :by_department, ->(department) { where(primary_advisor: department.lecturers) }
 

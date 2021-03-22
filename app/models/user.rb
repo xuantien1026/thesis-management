@@ -11,4 +11,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true
+
+  delegate :program, to: :department, allow_nil: true
 end

@@ -1,0 +1,7 @@
+.card
+  .card-header
+    h3 New Topic
+  .card-body
+    = render 'form', topic: @topic
+
+    = link_to 'Back', topics_path
