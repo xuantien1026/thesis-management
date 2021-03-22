@@ -3,13 +3,13 @@
     h3 Topics
 
   .card-body
-    table.table
-      thead
+    table.table.table-outline
+      thead.thead-light
         tr
           th Lecturer
           th Title
           th Status
       tbody
         = render TopicComponent.with_collection(@topics)
-    br
+  .card-footer
     = link_to 'New Topic', new_topic_path if policy(Topic).new?
