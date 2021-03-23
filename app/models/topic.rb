@@ -22,4 +22,8 @@ class Topic < ApplicationRecord
   def available_for_application?
     number_of_students > topic_applications.count
   end
+
+  def applied_students
+    User.where(id: topic_applications.pluck(:user_id))
+  end
 end

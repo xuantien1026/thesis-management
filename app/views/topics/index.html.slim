@@ -1,15 +1,15 @@
 .card
   .card-header
-    h3 Topics
+    h3 Đề tài
 
   .card-body
     table.table.table-outline
       thead.thead-light
         tr
-          th Lecturer
-          th Title
-          th Status
+          th Giảng viên
+          th Tên đề tài
+          th Trạng thái
       tbody
         = render TopicComponent.with_collection(@topics)
   .card-footer
-    = link_to 'New Topic', new_topic_path if policy(Topic).new?
+    = link_to 'Đề tài mới', new_topic_path if policy(Topic).new?

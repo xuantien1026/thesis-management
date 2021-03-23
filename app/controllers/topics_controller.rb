@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
     authorize @topic
 
     if @topic.save
-      redirect_to @topic, notice: 'Topic was successfully created.'
+      redirect_to @topic, notice: 'Tạo đề tài thành công'
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class TopicsController < ApplicationController
   def update
     authorize @topic
     if @topic.update(topic_params)
-      redirect_to @topic, notice: 'Topic was successfully updated.'
+      redirect_to @topic, notice: 'Cập nhật đề tài thành công'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,20 +42,20 @@ class TopicsController < ApplicationController
   def destroy
     authorize @topic
     @topic.destroy
-    redirect_to topics_url, notice: 'Topic was successfully destroyed.'
+    redirect_to topics_url, notice: 'Xoá đề tài thành công'
   end
 
   def department_approve
     authorize @topic
     @topic.department_approved!
-    flash[:notice] = 'Topic is approved!'
+    flash[:notice] = 'Đề tài đã được Bộ Môn duyệt'
     redirect_to topics_path
   end
 
   def faculty_approve
     authorize @topic
     @topic.faculty_approved!
-    flash[:notice] = 'Topic is approved!'
+    flash[:notice] = 'Đề tài đã được Khoa duyệt'
     redirect_to topics_path
   end
 
