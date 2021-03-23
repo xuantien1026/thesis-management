@@ -3,7 +3,7 @@
 class Topic < ApplicationRecord
   PROGRAMS = %w[CS CE CS_CE].freeze
 
-  has_many :thesis_applications, dependent: :destroy
+  has_many :topic_applications, dependent: :destroy
   belongs_to :primary_advisor, class_name: 'User'
 
   enum status: { newly_created: 0, department_approved: 1, faculty_approved: 2 }
@@ -18,4 +18,8 @@ class Topic < ApplicationRecord
 
   delegate :department, to: :primary_advisor
   delegate :name, to: :primary_advisor, prefix: true
+
+  def available_for_application?
+    number_of_students > topic_applications.count
+  end
 end

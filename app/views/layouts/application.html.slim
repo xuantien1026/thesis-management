@@ -32,6 +32,10 @@ html
           .alert.alert-success.alert-dismissable#notice role="alert"
             button.close type="button" data-dismiss="alert" aria-label="Close" &times;
             h4 = notice
+        - if alert
+          .alert.alert-danger.alert-dismissable#notice role="alert"
+            button.close type="button" data-dismiss="alert" aria-label="Close" &times;
+            h4 = alert
         = yield
       .c-footer
     / coreui scripts
