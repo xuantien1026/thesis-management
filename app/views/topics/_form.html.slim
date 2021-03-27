@@ -7,24 +7,26 @@
           li = error.full_message
 
   .form-group
-    = form.label :title
-    = form.text_field :title, class: 'form-control'
-
+    = form.label :title, "Đề tài"
+    = form.text_field :title, class: 'form-control', required: true
   .form-group
-    = form.label :description
-    = form.text_area :description, class: 'form-control', rows: 5
+    = form.label :description, "Mô tả"
+    = form.text_area :description, class: 'form-control', rows: 5, required: true
+  .form-group
+    = form.label :mission, "Nhiệm vụ"
+    = form.text_area :mission, class: 'form-control', rows: 5
+
+  = render TopicReferencesComponent.new(topic: topic)
 
   .form-group
     .row
       .col-3
-        = form.label :program
+        = form.label :program, "Ngành"
         = form.select :program, Topic::PROGRAMS, {}, class: 'form-control'
       .col-3
-        = form.label :number_of_students
+        = form.label :number_of_students, "Số lượng sinh viên"
         = form.number_field :number_of_students, min: 1, class: 'form-control'
-
   .form-group
     = form.hidden_field :primary_advisor_id, value: current_user.id
-
   .form-group
     = form.submit 'Submit', class: 'btn btn-primary'

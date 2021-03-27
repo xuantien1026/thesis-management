@@ -35,6 +35,7 @@ gem 'rolify'
 gem 'slim'
 gem 'view_component', require: 'view_component/engine'
 gem 'interactor-rails'
+gem 'stimulus-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
