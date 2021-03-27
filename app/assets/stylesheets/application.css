@@ -21,3 +21,11 @@
 .table td {
   vertical-align: middle;
 }
+
+/* Customize tooltips */
+.tooltip {
+  max-width: 30%;
+}
+.tooltip-inner {
+  max-width: none;
+}

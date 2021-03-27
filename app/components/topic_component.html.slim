@@ -1,4 +1,9 @@
 tr
+  td = link_to @topic.id, @topic
   td = @topic.primary_advisor_name
-  td = link_to @topic.title, @topic
+  td
+    span data-tooltip="true" data-html="true" title="#{@tooltip}"
+      = @topic.title
+  td = @topic.number_of_students
+  td = @topic.program
   td = render StatusComponent.new(status: @topic.status)
