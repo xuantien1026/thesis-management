@@ -8,7 +8,7 @@ class TopicApplicationsController < ApplicationController
     if result.success?
       flash[:notice] = 'Đăng kí thành công'
     else
-      flash[:alert] = result.error
+      flash[:alert] = result.errors
     end
     redirect_to topic_path(@topic)
   end
