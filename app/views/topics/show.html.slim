@@ -7,6 +7,15 @@
       dt Mô tả
       dd = @topic.description
 
+      dt Nhiệm vụ đề tài
+      dd = @topic.mission
+
+      dt Tài liệu tham khảo
+      dd
+        ol
+          - @topic.references.each do |ref|
+            li = ref
+
       dt Trạng thái
       dd = render StatusComponent.new(status: @topic.status)
 
