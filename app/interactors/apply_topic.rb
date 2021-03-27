@@ -1,15 +1,17 @@
 class ApplyTopic
   include Interactor
 
+  delegate :student, :topic, to: :context
+
   def call
-    context.fail!(error: "Đề tài đã đủ số sinh viên đăng kí") unless context.topic.available_for_application?
-    context.fail!(error: "Bạn cần huỷ đề tài đã đăng kí để đăng kí mới") if already_applied?
-    TopicApplication.create!(user: context.student, topic: context.topic)
+    policy = ApplyTopicPolicy.new(student, topic)
+    context.fail!(errors: policy.errors) unless policy.allowed?
+    TopicApplication.create!(user: student, topic: topic)
   end
 
   private
 
   def already_applied?
-    TopicApplication.where(user: context.student).exists?
+
   end
 end

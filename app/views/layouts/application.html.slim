@@ -35,6 +35,10 @@ html
         - if alert
           .alert.alert-danger.alert-dismissable#notice role="alert"
             button.close type="button" data-dismiss="alert" aria-label="Close" &times;
-            h4 = alert
+            - if alert.respond_to? :each
+              - alert.each do |message|
+                h4 message
+            - else
+              h4 alert
         = yield
       .c-footer
