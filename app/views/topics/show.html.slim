@@ -29,9 +29,9 @@
       dd
         ol
           - @topic.applied_students.each do |student|
-            li = student.name
+            li = "#{student.mssv} - #{student.name}"
 
-      = button_to 'Đăng kí', topic_applications_path(@topic), method: :post, class: 'btn btn-primary' if TopicApplicationPolicy.new(current_user, @topic).create?
+      = button_to 'Đăng kí', topic_applications_path(@topic), method: :post, class: 'btn btn-primary' if ApplyTopicPolicy.new(current_user, @topic).allowed?
   .card-footer
     = link_to 'Chỉnh sửa', edit_topic_path(@topic), class: 'card-link' if policy(@topic).edit?
     = link_to 'Quay lại', topics_path, class: 'card-link'

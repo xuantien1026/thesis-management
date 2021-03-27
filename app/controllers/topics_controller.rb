@@ -21,13 +21,12 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.new(topic_params)
-    authorize @topic
-
-    if @topic.save
-      redirect_to @topic, notice: 'Tạo đề tài thành công'
+    result = CreateTopic.call(topic_params: topic_params, students: students)
+    if result.success?
+      flash[:notice] = 'Tạo đề tài thành công'
+      redirect_to result.topic
     else
-      render :new, status: :unprocessable_entity
+      render :new, alert: result.errors
     end
   end
 
@@ -68,6 +67,10 @@ class TopicsController < ApplicationController
 
   def set_topics
     @topics = Topic.where(id: params[:ids])
+  end
+
+  def students
+    User.with_role(:student).where(id: params[:student_ids])
   end
 
   def topic_params

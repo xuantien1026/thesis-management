@@ -8,10 +8,4 @@ class ApplyTopic
     context.fail!(errors: policy.errors) unless policy.allowed?
     TopicApplication.create!(user: student, topic: topic)
   end
-
-  private
-
-  def already_applied?
-
-  end
 end

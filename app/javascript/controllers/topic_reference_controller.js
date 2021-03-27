@@ -3,10 +3,6 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = [ "referenceList", "reference" ]
 
-  connect () {
-    console.log("Controller connected")
-  }
-
   addReference() {
     const newReference = this.referenceTarget.cloneNode(true)
     newReference.querySelector("input").value = ""

@@ -2,7 +2,6 @@
 
 class TopicApplicationsController < ApplicationController
   before_action :set_topic
-  before_action { authorize @topic, policy_class: TopicApplicationPolicy }
 
   def create
     result = ApplyTopic.call(student: current_user, topic: @topic)

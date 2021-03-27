@@ -31,16 +31,22 @@ RSpec.describe "Topics", type: :system do
   describe 'Lecturer creating a new topic and assign students' do
     include_context :browser_signed_in_as_lecturer
 
+    let(:students) { create_list :user, 5, :as_student }
+
+    before do
+      students
+    end
+
     it 'success' do
       fill_in_topic_info
       fill_in "Số lượng sinh viên", with: 2
-      select "Nguyễn Xuân Tiến", from: "Chọn sinh viên"
-      select "Nguyễn Văn A", from: "Chọn sinh viên"
+      select "#{students.first.name}", from: "student_ids[]"
+      select "#{students.second.name}", from: "student_ids[]"
       click_on "Submit"
 
       expect(page).to have_content("Tạo đề tài thành công")
-      expect(page).to have_content("Nguyễn Xuân Tiến")
-      expect(page).to have_content("Nguyễn Văn A")
+      expect(page).to have_content("#{students.first.name}")
+      expect(page).to have_content("#{students.second.name}")
     end
   end
 end
