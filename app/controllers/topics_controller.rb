@@ -2,7 +2,8 @@
 
 class TopicsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_topic, only: %i[show edit update destroy department_approve faculty_approve]
+  before_action :set_topic, only: %i[show edit update destroy]
+  before_action :set_topics, only: %i[department_approve faculty_approve]
 
   def index
     @topics = policy_scope(Topic)
@@ -46,16 +47,16 @@ class TopicsController < ApplicationController
   end
 
   def department_approve
-    authorize @topic
-    @topic.department_approved!
-    flash[:notice] = 'Đề tài đã được Bộ Môn duyệt'
+    authorize :topic
+    @topics.each(&:department_approved!)
+    flash[:notice] = "(#{@topics.count}) Đề tài đã được Bộ Môn duyệt"
     redirect_to topics_path
   end
 
   def faculty_approve
-    authorize @topic
-    @topic.faculty_approved!
-    flash[:notice] = 'Đề tài đã được Khoa duyệt'
+    authorize :topic
+    @topics.each(&:faculty_approved!)
+    flash[:notice] = "(#{@topics.count}) Đề tài đã được Khoa duyệt"
     redirect_to topics_path
   end
 
@@ -63,6 +64,10 @@ class TopicsController < ApplicationController
 
   def set_topic
     @topic = Topic.find(params[:id])
+  end
+
+  def set_topics
+    @topics = Topic.where(id: params[:ids])
   end
 
   def topic_params

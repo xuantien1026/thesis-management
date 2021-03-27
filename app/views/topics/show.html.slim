@@ -26,5 +26,5 @@
   .card-footer
     = link_to 'Chỉnh sửa', edit_topic_path(@topic), class: 'card-link' if policy(@topic).edit?
     = link_to 'Quay lại', topics_path, class: 'card-link'
-    = link_to 'Duyệt đề tài', department_approve_topic_path(@topic), method: :post, class: 'card-link' if policy(@topic).department_approve?
-    = link_to 'Duyệt đề tài', faculty_approve_topic_path(@topic), method: :post, class: 'card-link' if policy(@topic).faculty_approve?
+    = link_to 'Duyệt đề tài', department_approve_topics_path(ids: [@topic]), method: :post, class: 'card-link' if policy(@topic).department_approve?
+    = link_to 'Duyệt đề tài', faculty_approve_topics_path(ids: [@topic]), method: :post, class: 'card-link' if policy(@topic).faculty_approve?

@@ -14,11 +14,11 @@ class TopicPolicy < ApplicationPolicy
   end
 
   def department_approve?
-    user.has_role?(:head_of_department) && topic_belongs_to_same_department && record.newly_created?
+    user.has_role? :head_of_department
   end
 
   def faculty_approve?
-    user.has_role?(:head_of_faculty) && record.department_approved?
+    user.has_role? :head_of_faculty
   end
 
   class Scope < Scope
