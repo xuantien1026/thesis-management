@@ -16,5 +16,3 @@
         = render TopicComponent.with_collection(@topics)
   .card-footer
     = link_to 'Đề tài mới', new_topic_path if policy(Topic).new?
-
-= javascript_pack_tag 'coreui'

@@ -33,7 +33,7 @@ html
             button.close type="button" data-dismiss="alert" aria-label="Close" &times;
             h4 = notice
         - if alert
-          .alert.alert-danger.alert-dismissable#notice role="alert"
+          .alert.alert-danger.alert-dismissable#alert role="alert"
             button.close type="button" data-dismiss="alert" aria-label="Close" &times;
             - if alert.respond_to? :each
               - alert.each do |message|
@@ -42,3 +42,4 @@ html
               h4 = alert
         = yield
       .c-footer
+    = javascript_pack_tag 'coreui'
