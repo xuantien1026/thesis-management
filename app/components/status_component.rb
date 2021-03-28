@@ -14,6 +14,7 @@ class StatusComponent < ViewComponent::Base
   end
 
   def translation
-    { 'newly_created' => 'Đang chờ duyệt', 'department_approved' => 'Bộ môn đã duyệt', 'faculty_approved' => 'Khoa đã duyệt' }
+    { 'newly_created' => 'Đang chờ duyệt', 'department_approved' => 'Bộ môn đã duyệt',
+      'faculty_approved' => 'Khoa đã duyệt' }
   end
 end

@@ -9,7 +9,7 @@ FactoryBot.define do
     title { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
     mission { Faker::Lorem.paragraph }
-    references { 3.times.map { Faker::Lorem.sentence} }
+    references { 3.times.map { Faker::Lorem.sentence } }
     primary_advisor { create :user, :as_lecturer, department: department }
     program { Topic::PROGRAMS.sample }
     number_of_students { rand 1..5 }

@@ -3,6 +3,6 @@
 class TopicReferencesComponent < ViewComponent::Base
   def initialize(topic:)
     @topic = topic
-    @references = topic.references.blank? ? [""] : topic.references
+    @references = topic.references.presence || ['']
   end
 end
