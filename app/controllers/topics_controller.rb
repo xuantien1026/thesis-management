@@ -47,11 +47,13 @@ class TopicsController < ApplicationController
   def department_approve
     authorize @topic
     @topic.department_approved!
+    render 'approval'
   end
 
   def faculty_approve
     authorize @topic
     @topic.faculty_approved!
+    render 'approval'
   end
 
   private

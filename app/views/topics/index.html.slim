@@ -3,12 +3,16 @@
     h3 Đề tài
 
   .card-body
-    table
-      tbody
-        - @topics.each do |topic|
-          tr
-            td
-              = turbo_frame_tag topic
-                = render TopicComponent.new(topic: topic)
+    .d-table.table
+      .d-table-row.font-weight-bold
+        .d-table-cell.p-2 MĐT
+        .d-table-cell.p-2 Giảng viên
+        .d-table-cell.p-2 Tên đề tài
+        .d-table-cell.p-2 Số SV
+        .d-table-cell.p-2 Ngành
+        .d-table-cell.p-2 Trạng thái
+      - @topics.each do |topic|
+        = turbo_frame_tag topic, class: "d-table-row"
+          = render TopicComponent.new(user: current_user, topic: topic)
   .card-footer
     = link_to 'Đề tài mới', new_topic_path if policy(Topic).new?
