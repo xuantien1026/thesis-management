@@ -1,4 +1,4 @@
-.d-table-cell.p-2 = link_to @topic.id, @topic
+.d-table-cell.p-2 = link_to @topic.id, @topic, target: '_top'
 .d-table-cell.p-2 = @topic.primary_advisor_name
 .d-table-cell.p-2
   span data-tooltip="true" data-html="true" title="#{@tooltip}"

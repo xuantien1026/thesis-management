@@ -30,12 +30,12 @@ gem 'redis', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
+gem 'hotwire-rails'
 gem 'interactor-rails'
 gem 'pundit'
 gem 'rolify'
 gem 'slim'
 gem 'view_component', require: 'view_component/engine'
-gem 'hotwire-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

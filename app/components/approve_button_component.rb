@@ -7,7 +7,7 @@ class ApproveButtonComponent < ViewComponent::Base
   end
 
   def call
-    button_to "Approve", @url, class: "btn btn-outline-#{@button_class}"
+    button_to 'Approve', @url, class: "btn btn-outline-#{@button_class}"
   end
 
   private
