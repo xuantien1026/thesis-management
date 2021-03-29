@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :topics do
-    collection do
+    member do
       post 'department_approve', to: 'topics#department_approve'
       post 'faculty_approve', to: 'topics#faculty_approve'
     end
