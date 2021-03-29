@@ -47,25 +47,11 @@ class TopicsController < ApplicationController
   def department_approve
     authorize @topic
     @topic.department_approved!
-    respond_to do |format|
-      format.html do
-        flash[:notice] = "Đề tài đã được Bộ Môn duyệt"
-        redirect_to topics_path
-      end
-      format.json { render json: { message: "Đề tài đã được Bộ Môn duyệt" }, status: :ok }
-    end
   end
 
   def faculty_approve
     authorize @topic
     @topic.faculty_approved!
-    respond_to do |format|
-      format.html do
-        flash[:notice] = "Đề tài đã được Khoa duyệt"
-        redirect_to topics_path
-      end
-      format.json { render :json, { message: "Đề tài đã được Khoa duyệt" }, status: :ok }
-    end
   end
 
   private

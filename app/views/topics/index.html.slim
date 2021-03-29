@@ -3,16 +3,12 @@
     h3 Đề tài
 
   .card-body
-    table.table.table-outline
-      thead.thead-light
-        tr
-          th MĐT
-          th Giảng viên
-          th Tên đề tài
-          th Số SV
-          th Ngành
-          th Trạng thái
+    table
       tbody
-        = render TopicComponent.with_collection(@topics)
+        - @topics.each do |topic|
+          tr
+            td
+              = turbo_frame_tag topic
+                = render TopicComponent.new(topic: topic)
   .card-footer
     = link_to 'Đề tài mới', new_topic_path if policy(Topic).new?

@@ -1,9 +1,10 @@
-tr
-  td = link_to @topic.id, @topic
-  td = @topic.primary_advisor_name
-  td
+.row
+  .col-1 = link_to @topic.id, @topic
+  .col = @topic.primary_advisor_name
+  .col
     span data-tooltip="true" data-html="true" title="#{@tooltip}"
       = @topic.title
-  td = @topic.number_of_students
-  td = @topic.program
-  td = render StatusComponent.new(status: @topic.status)
+  .col-1 = @topic.number_of_students
+  .col-1 = @topic.program
+  .col = render StatusComponent.new(status: @topic.status)
+  .col = button_to "Approve", department_approve_topic_path(@topic)
