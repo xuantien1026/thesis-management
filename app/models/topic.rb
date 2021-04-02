@@ -23,7 +23,7 @@ class Topic < ApplicationRecord
     number_of_students > topic_applications.count
   end
 
-  def applied_students
+  def students
     User.where(id: topic_applications.pluck(:user_id))
   end
 end

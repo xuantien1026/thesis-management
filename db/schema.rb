@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_110949) do
+ActiveRecord::Schema.define(version: 2021_04_02_090513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,21 @@ ActiveRecord::Schema.define(version: 2021_03_27_110949) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "theses", force: :cascade do |t|
+    t.bigint "thesis_proposal_id"
+    t.float "midterm_point"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
+  end
+
+  create_table "thesis_proposals", force: :cascade do |t|
+    t.bigint "topic_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["topic_id"], name: "index_thesis_proposals_on_topic_id"
   end
 
   create_table "topic_applications", force: :cascade do |t|

@@ -28,7 +28,7 @@
       dt Sinh viên đã đăng kí
       dd
         ol
-          - @topic.applied_students.each do |student|
+          - @topic.students.each do |student|
             li = "#{student.mssv} - #{student.name}"
 
       = button_to 'Đăng kí', topic_applications_path(@topic), method: :post, class: 'btn btn-primary' if current_user.has_role? :student
