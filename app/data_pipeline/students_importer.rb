@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class StudentsImporter
@@ -6,9 +8,9 @@ class StudentsImporter
   end
 
   def import(filepath)
-    read_file(filepath).
-      map { |data_row| process_data(data_row) }.
-      map { |student_data| Student.create!(student_data) }
+    read_file(filepath)
+      .map { |data_row| process_data(data_row) }
+      .map { |student_data| Student.create!(student_data) }
   end
 
   private
@@ -35,6 +37,7 @@ class StudentsImporter
 
   def build_student(data)
     name = "#{data[:family_name]} #{data[:first_name]}"
-    data.merge(name: name, password: 'password', email: "#{data[:mssv]}@hcmut.edu.vn").except!(:family_name, :first_name)
+    data.merge(name: name, password: 'password', email: "#{data[:mssv]}@hcmut.edu.vn").except!(:family_name,
+                                                                                               :first_name)
   end
 end

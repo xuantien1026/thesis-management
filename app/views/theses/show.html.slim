@@ -1,17 +1,14 @@
 .card
   .card-body
     dl
+      dt Mã đề tài
+      dd = @thesis.ordering
+
       dt Tên đề tài
       dd = @thesis.title
 
-      dt Mô tả
-      dd = @thesis.description
-
-      dt Nhiệm vụ đề tài
-      dd = @thesis.mission
-
-      dt Ngành
-      dd = @thesis.program
+      dt Tên tiếng anh
+      dd = @thesis.english_title
 
       dt Kết quả giữa kì
       dd

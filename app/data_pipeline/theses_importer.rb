@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class ThesesImporter
@@ -6,9 +8,9 @@ class ThesesImporter
   end
 
   def import(filepath)
-    read_file(filepath).
-      map { |data_row| process_data(data_row) }.
-      map { |thesis_data| Thesis.create!(thesis_data) }
+    read_file(filepath)
+      .map { |data_row| process_data(data_row) }
+      .map { |thesis_data| Thesis.create!(thesis_data) }
   end
 
   private

@@ -13,7 +13,7 @@
       tbody
         - @theses.each do |thesis|
           tr
-            td = link_to thesis.id, thesis
+            td = link_to thesis.ordering, thesis
             td = thesis.primary_advisor.name
-            td = thesis.title
+            td = thesis.title || thesis.english_title
             td = thesis.program
