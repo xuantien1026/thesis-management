@@ -5,7 +5,7 @@ class TurboController < ApplicationController
     def to_turbo_stream
       controller.render(options.merge(formats: :html))
     rescue ActionView::MissingTemplate => e
-      if get?
+      if get? # rubocop:disable GuardClause
         raise e
       elsif has_errors? && default_action
         render rendering_options.merge(format: :html, status: :unprocessable_entity)

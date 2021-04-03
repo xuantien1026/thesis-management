@@ -11,9 +11,9 @@
 #  student_id :bigint           not null
 #
 class ThesisMembership < ApplicationRecord
-  belongs_to :student, class_name: 'User'
+  belongs_to :student
   belongs_to :thesis
-  has_one :midterm_evaluation
+  has_one :midterm_evaluation, dependent: :destroy
 
   delegate :name, to: :student
   delegate :mssv, to: :student

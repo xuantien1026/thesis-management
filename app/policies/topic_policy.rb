@@ -23,12 +23,30 @@ class TopicPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      return scope.faculty_approved if user.has_role? :student
-      return scope.where(primary_advisor: user) if user.has_role? :lecturer
-      return scope.by_department(Department.find_by(head: user)) if user.has_role? :head_of_department
-      return scope.where(status: %i[department_approved faculty_approved]) if user.has_role? :head_of_faculty
+      return student_scope if user.has_role? :student
+      return lecturer_scope if user.has_role? :lecturer
+      return head_of_department_scope if user.has_role? :head_of_department
+      return head_of_faculty_scope if user.has_role? :head_of_faculty
 
       scope.none
+    end
+
+    private
+
+    def student_scope
+      scope.faculty_approved
+    end
+
+    def lecturer_scope
+      scope.where(primary_advisor: user)
+    end
+
+    def head_of_department_scope
+      scope.by_department(Department.find_by(head: user))
+    end
+
+    def head_of_faculty_scope
+      scope.where(status: %i[department_approved faculty_approved])
     end
   end
 

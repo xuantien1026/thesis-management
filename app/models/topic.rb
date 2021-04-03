@@ -20,7 +20,7 @@ class Topic < ApplicationRecord
   PROGRAMS = %w[CS CE CS_CE].freeze
 
   has_many :topic_applications, dependent: :destroy
-  belongs_to :primary_advisor, class_name: 'User'
+  belongs_to :primary_advisor, class_name: 'Lecturer'
 
   enum status: { newly_created: 0, department_approved: 1, faculty_approved: 2 }
 
