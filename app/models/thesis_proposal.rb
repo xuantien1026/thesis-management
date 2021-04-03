@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThesisProposal < ApplicationRecord
   belongs_to :topic
 

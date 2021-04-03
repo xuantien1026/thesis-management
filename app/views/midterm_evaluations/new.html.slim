@@ -1,0 +1,27 @@
+.card
+  .card-header
+    h3 Chấm điểm giữa kì
+  = form_tag midterm_evaluations_thesis_path(@thesis)
+    .card-body
+      dt Tên đề tài
+      dd = @thesis.title
+      dt Giảng viên
+      dd = current_user.name
+      table.table
+        thead
+          tr
+            th MSSV
+            th Tên sinh viên
+            th Đạt
+            th Ghi chú
+        tbody
+          - @thesis.thesis_memberships.each do |member|
+            tr
+              td = member.mssv
+              td = member.name
+              td = check_box_tag "evaluations[][passed]", '1', false, class: 'form-control'
+              td
+                = text_field_tag "evaluations[][note]", nil, class: 'form-control'
+                = hidden_field_tag "evaluations[][thesis_membership_id]", member.id
+    .card-footer
+      = submit_tag "Submit", class: 'btn btn-primary'

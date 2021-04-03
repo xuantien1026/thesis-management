@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_090513) do
+ActiveRecord::Schema.define(version: 2021_04_02_163718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 2021_04_02_090513) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "head_id", null: false
     t.index ["head_id"], name: "index_departments_on_head_id"
+  end
+
+  create_table "midterm_evaluations", force: :cascade do |t|
+    t.bigint "thesis_membership_id", null: false
+    t.boolean "passed", null: false
+    t.string "note"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["thesis_membership_id"], name: "index_midterm_evaluations_on_thesis_membership_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -36,10 +45,18 @@ ActiveRecord::Schema.define(version: 2021_04_02_090513) do
 
   create_table "theses", force: :cascade do |t|
     t.bigint "thesis_proposal_id"
-    t.float "midterm_point"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
+  end
+
+  create_table "thesis_memberships", force: :cascade do |t|
+    t.bigint "thesis_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "student_id", null: false
+    t.index ["student_id"], name: "index_thesis_memberships_on_student_id"
+    t.index ["thesis_id"], name: "index_thesis_memberships_on_thesis_id"
   end
 
   create_table "thesis_proposals", force: :cascade do |t|
@@ -98,5 +115,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_090513) do
   end
 
   add_foreign_key "departments", "users", column: "head_id"
+  add_foreign_key "midterm_evaluations", "thesis_memberships"
+  add_foreign_key "thesis_memberships", "users", column: "student_id"
   add_foreign_key "topics", "users", column: "primary_advisor_id"
 end

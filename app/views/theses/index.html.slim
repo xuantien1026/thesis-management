@@ -1,0 +1,19 @@
+.card
+  .card-header
+    h3 Luận văn
+
+  .card-body
+    table.table
+      thead
+        tr
+          th Mã luận văn
+          th Giảng viên
+          th Tên đề tài
+          th Ngành
+      tbody
+        - @theses.each do |thesis|
+          tr
+            td = link_to thesis.id, thesis
+            td = thesis.primary_advisor.name
+            td = thesis.title
+            td = thesis.program

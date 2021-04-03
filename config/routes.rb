@@ -9,5 +9,12 @@ Rails.application.routes.draw do
     end
     resources :topic_applications, only: %i[create destroy], as: :applications, shallow: true
   end
+
+  resources :theses, only: %i[index show] do
+    member do
+      get '/midterm_evaluations', to: 'midterm_evaluations#new'
+      post '/midterm_evaluations', to: 'midterm_evaluations#evaluate_all_students'
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

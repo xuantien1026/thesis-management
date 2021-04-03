@@ -1,0 +1,23 @@
+.card
+  .card-header
+    h3 Kết quả giữa kì
+
+  .card-body
+    h5 Tên đề tài
+    p = @thesis.title
+    table.table
+      thead
+        tr
+          th STT
+          th MSSV
+          th Họ và tên
+          th Đạt
+          th Ghi chú
+      tbody
+        - @members.each.with_index(1) do |member, i|
+          tr
+            td = i
+            td = member.student.mssv
+            td = member.student.name
+            td = check_box_tag :midterm_result, '1', member.midterm_result, disabled: true
+            td = member.midterm_note
