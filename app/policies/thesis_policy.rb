@@ -3,7 +3,7 @@
 class ThesisPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.joins(thesis_proposal: :topic).where(topics: { primary_advisor_id: user.id }) if user.has_role? :lecturer
+      scope.where(primary_advisor: user) if user.is_a?(Lecturer)
     end
   end
 end

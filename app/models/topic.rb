@@ -15,9 +15,10 @@
 #  number_of_students :integer          default(1), not null
 #  mission            :text
 #  references         :string           default([]), is an Array
+#  english_title      :string
 #
 class Topic < ApplicationRecord
-  PROGRAMS = %w[CS CE CS_CE].freeze
+  PROGRAMS = %w[CS CE LN].freeze
 
   has_many :topic_applications, dependent: :destroy
   belongs_to :primary_advisor, class_name: 'Lecturer'

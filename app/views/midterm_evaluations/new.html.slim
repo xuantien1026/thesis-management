@@ -1,12 +1,18 @@
 .card
   .card-header
     h3 Chấm điểm giữa kì
+
   = form_tag midterm_evaluations_thesis_path(@thesis)
     .card-body
       dt Tên đề tài
       dd = @thesis.title
+
+      dt Tên tiếng anh
+      dd = @thesis.english_title
+
       dt Giảng viên
-      dd = current_user.name
+      dd = @thesis.primary_advisor.name
+
       table.table
         thead
           tr
