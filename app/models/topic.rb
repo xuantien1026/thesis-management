@@ -15,6 +15,7 @@
 #  number_of_students :integer          default(1), not null
 #  mission            :text
 #  references         :string           default([]), is an Array
+#  english_title      :string
 #
 class Topic < ApplicationRecord
   PROGRAMS = %w[CS CE CS_CE].freeze

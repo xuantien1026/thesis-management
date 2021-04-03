@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_082513) do
+ActiveRecord::Schema.define(version: 2021_04_03_111634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,6 @@ ActiveRecord::Schema.define(version: 2021_04_03_082513) do
     t.string "program"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "head_id", null: false
-    t.index ["head_id"], name: "index_departments_on_head_id"
   end
 
   create_table "midterm_evaluations", force: :cascade do |t|
@@ -86,6 +84,7 @@ ActiveRecord::Schema.define(version: 2021_04_03_082513) do
     t.integer "number_of_students", default: 1, null: false
     t.text "mission"
     t.string "references", default: [], array: true
+    t.string "english_title"
     t.index ["primary_advisor_id"], name: "index_topics_on_primary_advisor_id"
     t.check_constraint "number_of_students >= 1", name: "check_number_of_students"
   end
@@ -127,7 +126,6 @@ ActiveRecord::Schema.define(version: 2021_04_03_082513) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "departments", "users", column: "head_id"
   add_foreign_key "midterm_evaluations", "thesis_memberships"
   add_foreign_key "thesis_memberships", "users", column: "student_id"
   add_foreign_key "topics", "users", column: "primary_advisor_id"

@@ -24,6 +24,7 @@
 #  invited_by_type        :string
 #  invited_by_id          :bigint
 #  invitations_count      :integer          default(0)
+#  mscb                   :string
 #
 class Student < User
 end
