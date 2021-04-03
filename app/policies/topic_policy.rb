@@ -2,7 +2,7 @@
 
 class TopicPolicy < ApplicationPolicy
   def create?
-    user.has_role? :lecturer
+    user.is_a?(Lecturer)
   end
 
   def update?
@@ -24,7 +24,7 @@ class TopicPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       return student_scope if user.has_role? :student
-      return lecturer_scope if user.has_role? :lecturer
+      return lecturer_scope if user.is_a?(Lecturer)
       return head_of_department_scope if user.has_role? :head_of_department
       return head_of_faculty_scope if user.has_role? :head_of_faculty
 

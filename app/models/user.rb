@@ -15,12 +15,21 @@
 #  department_id          :bigint
 #  name                   :string           not null
 #  mssv                   :integer
+#  type                   :string
+#  invitation_token       :string
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_type        :string
+#  invited_by_id          :bigint
+#  invitations_count      :integer          default(0)
 #
 class User < ApplicationRecord
   rolify
   # Include default devise modules. Others available are:
   # :registerable, :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :recoverable, :rememberable, :validatable
+  devise :invitable, :database_authenticatable, :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
   validates :email, presence: true

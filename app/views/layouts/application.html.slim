@@ -20,6 +20,11 @@ html
       nav.c-sidebar-nav
         .c-sidebar-brand
           i.cil-school style="font-size:xx-large"
+        - if policy(:invitation).create?
+          .c-sidebar-nav-item
+            = link_to new_user_invitation_path, class: 'c-sidebar-nav-link'
+              i.c-sidebar-nav-icon.cil-list
+              = 'Mời giảng viên'
         .c-sidebar-nav-item
           = link_to topics_path, class: "c-sidebar-nav-link"
             i.c-sidebar-nav-icon.cil-list

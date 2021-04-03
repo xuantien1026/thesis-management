@@ -30,6 +30,7 @@ gem 'redis', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
+gem 'devise_invitable'
 gem 'hotwire-rails'
 gem 'interactor-rails'
 gem 'pundit'
@@ -54,8 +55,8 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   gem 'letter_opener'
+  gem 'spring'
 end
 
 group :test do

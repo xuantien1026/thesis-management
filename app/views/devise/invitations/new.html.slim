@@ -1,0 +1,13 @@
+.card
+  .card-header = t "devise.invitations.new.header"
+  .card-body
+    = form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post }) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      - resource.class.invite_key_fields.each do |field|
+        .form-group
+          = f.label field
+          = f.text_field field, class: 'form-control', required: true
+      = f.hidden_field :type, value: 'Lecturer'
+      = f.hidden_field :department_id, value: current_user.department_id
+      .form-group
+        = f.submit t("devise.invitations.new.submit_button"), class: 'btn btn-primary'
