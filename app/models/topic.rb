@@ -18,7 +18,7 @@
 #  english_title      :string
 #
 class Topic < ApplicationRecord
-  PROGRAMS = %w[CS CE CS_CE].freeze
+  PROGRAMS = %w[CS CE LN].freeze
 
   has_many :topic_applications, dependent: :destroy
   belongs_to :primary_advisor, class_name: 'Lecturer'

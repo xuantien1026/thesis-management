@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_111634) do
+ActiveRecord::Schema.define(version: 2021_04_03_150819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(version: 2021_04_03_111634) do
     t.bigint "thesis_proposal_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "ordering"
+    t.string "title"
+    t.string "english_title"
+    t.bigint "primary_advisor_id", null: false
+    t.index ["primary_advisor_id"], name: "index_theses_on_primary_advisor_id"
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
   end
 
@@ -127,6 +132,7 @@ ActiveRecord::Schema.define(version: 2021_04_03_111634) do
   end
 
   add_foreign_key "midterm_evaluations", "thesis_memberships"
+  add_foreign_key "theses", "users", column: "primary_advisor_id"
   add_foreign_key "thesis_memberships", "users", column: "student_id"
   add_foreign_key "topics", "users", column: "primary_advisor_id"
 end

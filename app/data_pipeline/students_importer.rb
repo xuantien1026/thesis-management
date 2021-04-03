@@ -14,7 +14,7 @@ class StudentsImporter
   private
 
   def read_file(filepath)
-    CSV.read(filepath).drop 3
+    CSV.read(filepath).drop 1
   end
 
   def process_data(data)
@@ -24,7 +24,7 @@ class StudentsImporter
   end
 
   def select_fields(data)
-    selected_data = data.filter.with_index { |value, i| value if [0, 1, 2].include?(i) }
+    selected_data = data.filter.with_index { |_, i| [0, 1, 2].include?(i) }
     keys = %i[mssv family_name first_name]
     keys.zip(selected_data).to_h
   end
