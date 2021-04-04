@@ -20,6 +20,6 @@ class MidtermEvaluationsController < ApplicationController
   end
 
   def evaluation_params
-    params.require(:evaluations).map { |p| p.permit(:thesis_membership_id, :passed, :note) }
+    params.require(:evaluations).map { |p| p.permit(:thesis_member_id, :passed, :note) }
   end
 end

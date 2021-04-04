@@ -21,13 +21,13 @@
             th Đạt
             th Ghi chú
         tbody
-          - @thesis.thesis_memberships.each do |member|
+          - @thesis.thesis_members.each do |member|
             tr
               td = member.mssv
               td = member.name
               td = check_box_tag "evaluations[][passed]", '1', false, class: 'form-control'
               td
                 = text_field_tag "evaluations[][note]", nil, class: 'form-control'
-                = hidden_field_tag "evaluations[][thesis_membership_id]", member.id
+                = hidden_field_tag "evaluations[][thesis_member_id]", member.id
     .card-footer
       = submit_tag "Submit", class: 'btn btn-primary'

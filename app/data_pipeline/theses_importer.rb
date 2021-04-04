@@ -28,7 +28,7 @@ class ThesesImporter
   end
 
   def select_fields(data)
-    selected_data = data.filter.with_index { |v, i| [0, 1, 2, 4].include?(i) }
+    selected_data = data.filter.with_index { |_v, i| [0, 1, 2, 4].include?(i) }
     keys = %i[ordering title english_title mscb]
     keys.zip(selected_data).to_h
   end
