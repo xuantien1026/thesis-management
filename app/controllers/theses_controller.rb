@@ -2,7 +2,7 @@
 
 class ThesesController < ApplicationController
   def index
-    @theses = policy_scope(Thesis)
+    @theses = policy_scope(Thesis).order(:ordering)
   end
 
   def show
