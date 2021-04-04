@@ -27,4 +27,4 @@
                   td = evaluation.note
         - else
           div = "Chưa có kết quả giữa kì"
-          div = link_to "Chấm điểm giữa kì", midterm_evaluations_thesis_path(@thesis)
+          div = link_to "Chấm điểm giữa kì", midterm_evaluations_thesis_path(@thesis) if MidtermEvaluationPolicy.new(user: current_user, thesis: @thesis).allowed?

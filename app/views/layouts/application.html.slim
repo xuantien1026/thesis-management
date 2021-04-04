@@ -28,10 +28,14 @@ html
         .c-sidebar-nav-item
           = link_to topics_path, class: "c-sidebar-nav-link"
             i.c-sidebar-nav-icon.cil-list
-            = "Danh sách đề tài"
+            = "Đề tài"
+        .c-sidebar-nav-item
+          = link_to theses_path, class: "c-sidebar-nav-link"
+            i.c-sidebar-nav-icon.cil-list
+            = "Luận văn"
     .c-wrapper
       header.c-header.flex-row-reverse.align-content-center.mb-3.px-3
-        = render HeaderComponent.new(user: current_user)
+        = render Layout::HeaderComponent.new(user: current_user)
       .c-body.container-fluid
         - if notice
           .alert.alert-success.alert-dismissable#notice role="alert"

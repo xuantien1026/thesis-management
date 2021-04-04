@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "topics#index"
+  root to: "theses#index"
   devise_for :users
 
   resources :topics do

@@ -2,6 +2,7 @@
 
 class MidtermEvaluationsController < ApplicationController
   before_action :set_thesis
+  before_action { head :forbidden unless MidtermEvaluationPolicy.new(user: current_user, thesis: @thesis).allowed? }
 
   def new; end
 
