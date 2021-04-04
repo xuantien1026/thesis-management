@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_150819) do
+ActiveRecord::Schema.define(version: 2021_04_04_033405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,12 @@ ActiveRecord::Schema.define(version: 2021_04_03_150819) do
   end
 
   create_table "midterm_evaluations", force: :cascade do |t|
-    t.bigint "thesis_membership_id", null: false
+    t.bigint "thesis_member_id", null: false
     t.boolean "passed", null: false
     t.string "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["thesis_membership_id"], name: "index_midterm_evaluations_on_thesis_membership_id"
+    t.index ["thesis_member_id"], name: "index_midterm_evaluations_on_thesis_member_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -53,13 +53,13 @@ ActiveRecord::Schema.define(version: 2021_04_03_150819) do
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
   end
 
-  create_table "thesis_memberships", force: :cascade do |t|
+  create_table "thesis_members", force: :cascade do |t|
     t.bigint "thesis_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "student_id", null: false
-    t.index ["student_id"], name: "index_thesis_memberships_on_student_id"
-    t.index ["thesis_id"], name: "index_thesis_memberships_on_thesis_id"
+    t.index ["student_id"], name: "index_thesis_members_on_student_id"
+    t.index ["thesis_id"], name: "index_thesis_members_on_thesis_id"
   end
 
   create_table "thesis_proposals", force: :cascade do |t|
@@ -131,8 +131,8 @@ ActiveRecord::Schema.define(version: 2021_04_03_150819) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "midterm_evaluations", "thesis_memberships"
+  add_foreign_key "midterm_evaluations", "thesis_members"
   add_foreign_key "theses", "users", column: "primary_advisor_id"
-  add_foreign_key "thesis_memberships", "users", column: "student_id"
+  add_foreign_key "thesis_members", "users", column: "student_id"
   add_foreign_key "topics", "users", column: "primary_advisor_id"
 end

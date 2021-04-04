@@ -12,8 +12,8 @@
 #  updated_at           :datetime         not null
 #
 class MidtermEvaluation < ApplicationRecord
-  belongs_to :thesis_membership
+  belongs_to :thesis_member
 
-  delegate :name, to: :thesis_membership, prefix: :student
-  delegate :mssv, to: :thesis_membership, prefix: :student
+  delegate :name, to: :thesis_member, prefix: :student
+  delegate :mssv, to: :thesis_member, prefix: :student
 end

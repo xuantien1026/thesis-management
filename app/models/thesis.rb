@@ -15,8 +15,8 @@
 class Thesis < ApplicationRecord
   belongs_to :primary_advisor, class_name: 'Lecturer'
   belongs_to :thesis_proposal, optional: true
-  has_many :thesis_memberships, dependent: :destroy
-  has_many :midterm_evaluations, through: :thesis_memberships
+  has_many :thesis_members, dependent: :destroy
+  has_many :midterm_evaluations, through: :thesis_members
 
   delegate :description, :program, :mission, :students, to: :thesis_proposal, allow_nil: true
 end

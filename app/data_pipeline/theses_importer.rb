@@ -9,6 +9,7 @@ class ThesesImporter
 
   def import(filepath)
     read_file(filepath)
+      .filter { |data_row| data_row[17] == 'LVTN' }
       .map { |data_row| process_data(data_row) }
       .map { |thesis_data| Thesis.create!(thesis_data) }
   end
@@ -27,7 +28,7 @@ class ThesesImporter
   end
 
   def select_fields(data)
-    selected_data = data.filter.with_index { |_, i| [0, 1, 2, 4].include?(i) }
+    selected_data = data.filter.with_index { |v, i| [0, 1, 2, 4].include?(i) }
     keys = %i[ordering title english_title mscb]
     keys.zip(selected_data).to_h
   end

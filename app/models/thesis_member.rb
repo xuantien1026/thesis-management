@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #  student_id :bigint           not null
 #
-class ThesisMembership < ApplicationRecord
+class ThesisMember < ApplicationRecord
   belongs_to :student
   belongs_to :thesis
   has_one :midterm_evaluation, dependent: :destroy
