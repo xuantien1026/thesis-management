@@ -19,5 +19,5 @@ class Thesis < ApplicationRecord
   has_many :midterm_evaluations, through: :thesis_members
   has_many :students, through: :thesis_members
 
-  delegate :description, :program, :mission, :students, to: :thesis_proposal, allow_nil: true
+  delegate :description, :program, :mission, to: :thesis_proposal, allow_nil: true
 end

@@ -10,6 +10,12 @@
       dt Tên tiếng anh
       dd = @thesis.english_title
 
+      dt = "Sinh viên thực hiện (#{@thesis.students.count})"
+      dd
+        ul
+          - @thesis.students.each do |student|
+            li = "#{student.mssv} - #{student.name}"
+
       dt Kết quả giữa kì
       dd
         - if @thesis.midterm_evaluations.exists?
