@@ -11,9 +11,6 @@
 #  updated_at :datetime         not null
 #
 class Department < ApplicationRecord
-  PROGRAMS = %w[CS CE].freeze
-
   has_many :lecturers, dependent: :restrict_with_error
-
-  validates :program, inclusion: PROGRAMS
+  belongs_to :faculty
 end

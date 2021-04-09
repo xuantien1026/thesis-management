@@ -10,16 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_04_033405) do
+ActiveRecord::Schema.define(version: 2021_04_09_155519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
-    t.string "program"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "faculty_id", null: false
+    t.index ["faculty_id"], name: "index_departments_on_faculty_id"
+  end
+
+  create_table "faculties", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "majors", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "faculty_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["faculty_id"], name: "index_majors_on_faculty_id"
   end
 
   create_table "midterm_evaluations", force: :cascade do |t|
@@ -131,6 +146,8 @@ ActiveRecord::Schema.define(version: 2021_04_04_033405) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "departments", "faculties"
+  add_foreign_key "majors", "faculties"
   add_foreign_key "midterm_evaluations", "thesis_members"
   add_foreign_key "theses", "users", column: "primary_advisor_id"
   add_foreign_key "thesis_members", "users", column: "student_id"

@@ -13,7 +13,6 @@
 FactoryBot.define do
   factory :department do
     name { Faker::Lorem.sentence }
-    head factory: %i[user as_head_of_department]
-    program { Department::PROGRAMS.sample }
+    association :faculty
   end
 end
