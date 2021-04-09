@@ -1,0 +1,26 @@
+
+.card
+  .card-body
+    SELECT id ="departmentselector"
+      - @department.each do |eachdepartment|
+          - if eachdepartment.id == 1
+              OPTION SELECTED="SELECTED" VALUE= eachdepartment.id #{eachdepartment.name}
+          - else
+              OPTION VALUE= eachdepartment.id #{eachdepartment.name}
+
+  .card-body
+    dl
+      table.table id = "lecturertable"
+        thead
+          tr
+            th Mscb
+            th Tên
+            th Email
+        tbody
+
+
+= javascript_pack_tag "lecturerbydepartment.js"
+
+
+
+
