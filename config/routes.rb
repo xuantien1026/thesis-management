@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: "theses#index"
   devise_for :users
-
+  get '/showlecturer', to: 'lecturer#index'
+  get '/edit', to: 'lecturer#edit'
   resources :thesis_proposals do
     member do
       post 'department_approve', to: 'thesis_proposals#department_approve'

@@ -1,5 +1,5 @@
-class TopicComponent < ViewComponent::Base
+class LecturerDepartmentComponent < ViewComponent::Base
   def initialize(lecturer:)
-    @lecturer = user
+    @lecturer = lecturer
   end
 end

@@ -1,0 +1,21 @@
+//.dropdown
+  button.btn.btn-secondary.dropdown-toggle type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false" Chon Nganh
+  .dropdown-menu aria-labelledby="dropdownMenuButton"
+    - @department.each do |eachdepartment|
+      a.dropdown-item href="lecturerbydepartment?id=#{eachdepartment.id}"  #{eachdepartment.name}
+
+.card-body
+  dl
+    a href="/edit" Click de thay doi
+    table.table id = "lecturertable"
+      thead
+        tr
+          th Mscb
+          th Tên
+          th Email
+      tbody
+        - @lecturer.each do |eachlecturer|
+          tr
+            td = eachlecturer.mscb
+            td = eachlecturer.name
+            td = eachlecturer.email

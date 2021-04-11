@@ -4,10 +4,8 @@ class LecturerController < ApplicationController
     @lecturer = Lecturer.all
     @department = Department.all
   end
-  def lecturerbydepartment
-    @lecturerbyddepartment = Lecturer.where("department_id = ?", params[:department] )
-    respond_to do |format|
-      format.json  { render :json => @lecturerbyddepartment }
-    end
+  def edit
+    @lecturer = Lecturer.where("department_id = ?", 2)
+    render  'lecturer_department'
   end
 end

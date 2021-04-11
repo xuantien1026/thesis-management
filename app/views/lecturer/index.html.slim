@@ -1,25 +1,21 @@
 
 .card
   .card-body
-    SELECT id ="departmentselector"
-      - @department.each do |eachdepartment|
-          - if eachdepartment.id == 1
-              OPTION SELECTED="SELECTED" VALUE= eachdepartment.id #{eachdepartment.name}
-          - else
-              OPTION VALUE= eachdepartment.id #{eachdepartment.name}
-
-  .card-body
-    dl
-      table.table id = "lecturertable"
-        thead
-          tr
-            th Mscb
-            th Tên
-            th Email
-        tbody
+    //<div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+        Dropdown button
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Item</a>
+        <a class="dropdown-item" href="#">Another Item</a>
+        <a class="dropdown-item" href="#">One more item</a>
+      </div>
+    //</div> //
+    = turbo_frame_tag @lecturer
+      = render LecturerDepartmentComponent.new(lecturer: @lecturer)
 
 
-= javascript_pack_tag "lecturerbydepartment.js"
+
 
 
 
