@@ -37,7 +37,7 @@ class LecturersImporter
     data.transform_values(&:strip)
   end
 
-  def map_department_name_to_id(data)
+  def map_department_name_to_id(data) # rubocop:disable Metrics/MethodLength
     department_id =
       case data[:department]
       when 'HT&MMT'

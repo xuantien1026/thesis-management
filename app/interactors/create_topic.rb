@@ -5,7 +5,7 @@ class CreateTopic
 
   delegate :topic_params, :students, to: :context
 
-  def call
+  def call # rubocop:disable Metrics/AbcSize
     context.topic = Topic.new(topic_params)
     context.fail!(errors: topic.errors.full_messages) unless context.topic.save
 

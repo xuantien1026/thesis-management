@@ -24,8 +24,8 @@ class TopicPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       return student_scope if user.has_role? :student
-      return lecturer_scope if user.is_a?(Lecturer)
       return head_of_department_scope if user.has_role? :head_of_department
+      return lecturer_scope if user.is_a?(Lecturer)
       return head_of_faculty_scope if user.has_role? :head_of_faculty
 
       scope.none
@@ -42,7 +42,7 @@ class TopicPolicy < ApplicationPolicy
     end
 
     def head_of_department_scope
-      scope.by_department(Department.find_by(head: user))
+      scope.by_department(user.department)
     end
 
     def head_of_faculty_scope

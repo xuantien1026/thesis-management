@@ -15,3 +15,11 @@ Metrics/BlockLength:
   Enabled: false
 Lint/MissingSuper:
   Enabled: false
+Lint/ShadowingOuterLocalVariable:
+  Enabled: true
+  Exclude:
+    - 'app/data_pipeline/**/*'
+Rails/SkipsModelValidations:
+  Enabled: true
+  Exclude:
+    - 'lib/tasks/**/*'
