@@ -5,12 +5,29 @@
 # Table name: theses
 #
 #  id                 :bigint           not null, primary key
-#  thesis_proposal_id :bigint
+#  description        :text
+#  education_program  :string
+#  english_title      :string
+#  max_student_count  :integer          default(1), not null
+#  mission            :string
+#  ordering           :integer
+#  references         :string           default([]), is an Array
+#  semester           :string
+#  status             :integer          default(0)
+#  title              :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  ordering           :integer
-#  title              :string
-#  english_title      :string
+#  primary_advisor_id :bigint           not null
+#  thesis_proposal_id :bigint
+#
+# Indexes
+#
+#  index_theses_on_primary_advisor_id  (primary_advisor_id)
+#  index_theses_on_thesis_proposal_id  (thesis_proposal_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (primary_advisor_id => users.id)
 #
 class Thesis < ApplicationRecord
   belongs_to :primary_advisor, class_name: 'Lecturer'

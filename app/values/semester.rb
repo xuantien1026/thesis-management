@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class Semester
-  def initialize(day = Time.zone.today, name: nil)
+  attr_reader :semester
+
+  def initialize(semester = nil, day = Time.zone.today)
     @day = day
-    @name = name || infer_semester_name
+    @semester = semester || infer_semester_name
   end
 
   def to_s
-    @name
+    semester
   end
 
   def ==(other)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_155519) do
+ActiveRecord::Schema.define(version: 2021_04_11_061745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,8 +64,16 @@ ActiveRecord::Schema.define(version: 2021_04_09_155519) do
     t.string "title"
     t.string "english_title"
     t.bigint "primary_advisor_id", null: false
+    t.string "mission"
+    t.text "description"
+    t.string "references", default: [], array: true
+    t.integer "max_student_count", default: 1, null: false
+    t.integer "status", default: 0
+    t.string "semester"
+    t.string "education_program"
     t.index ["primary_advisor_id"], name: "index_theses_on_primary_advisor_id"
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
+    t.check_constraint "max_student_count >= 1", name: "check_thesis_max_student_count"
   end
 
   create_table "thesis_members", force: :cascade do |t|
@@ -78,35 +86,19 @@ ActiveRecord::Schema.define(version: 2021_04_09_155519) do
   end
 
   create_table "thesis_proposals", force: :cascade do |t|
-    t.bigint "topic_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["topic_id"], name: "index_thesis_proposals_on_topic_id"
-  end
-
-  create_table "topic_applications", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "topic_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["topic_id"], name: "index_topic_applications_on_topic_id"
-    t.index ["user_id"], name: "index_topic_applications_on_user_id", unique: true
-  end
-
-  create_table "topics", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "status", default: 0
-    t.bigint "primary_advisor_id", null: false
-    t.string "program", default: "CS", null: false
-    t.integer "number_of_students", default: 1, null: false
-    t.text "mission"
-    t.string "references", default: [], array: true
+    t.integer "ordering"
+    t.string "title", null: false
     t.string "english_title"
-    t.index ["primary_advisor_id"], name: "index_topics_on_primary_advisor_id"
-    t.check_constraint "number_of_students >= 1", name: "check_number_of_students"
+    t.string "mission"
+    t.text "description"
+    t.string "references", default: [], array: true
+    t.integer "max_student_count", default: 1, null: false
+    t.integer "status", default: 0
+    t.string "semester"
+    t.string "education_program"
+    t.check_constraint "max_student_count >= 1", name: "check_thesis_proposal_max_student_count"
   end
 
   create_table "users", force: :cascade do |t|
@@ -151,5 +143,4 @@ ActiveRecord::Schema.define(version: 2021_04_09_155519) do
   add_foreign_key "midterm_evaluations", "thesis_members"
   add_foreign_key "theses", "users", column: "primary_advisor_id"
   add_foreign_key "thesis_members", "users", column: "student_id"
-  add_foreign_key "topics", "users", column: "primary_advisor_id"
 end

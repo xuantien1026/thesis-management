@@ -2,13 +2,22 @@
 
 # == Schema Information
 #
-# Table name: thesis_memberships
+# Table name: thesis_members
 #
 #  id         :bigint           not null, primary key
-#  thesis_id  :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  student_id :bigint           not null
+#  thesis_id  :bigint
+#
+# Indexes
+#
+#  index_thesis_members_on_student_id  (student_id)
+#  index_thesis_members_on_thesis_id   (thesis_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (student_id => users.id)
 #
 class ThesisMember < ApplicationRecord
   belongs_to :student
