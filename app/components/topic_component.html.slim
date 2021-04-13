@@ -3,7 +3,7 @@
 .d-table-cell.p-2
   span data-tooltip="true" data-html="true" title="#{@tooltip}"
     = @topic.title
-.d-table-cell.p-2 = @topic.number_of_students
-.d-table-cell.p-2 = @topic.program
+.d-table-cell.p-2 = @topic.max_student_count
+.d-table-cell.p-2 = @topic.majors
 .d-table-cell.p-2 = render StatusComponent.new(status: @topic.status)
 .d-table-cell.p-2 = render ApproveButtonComponent.new(user: @user, topic: @topic)

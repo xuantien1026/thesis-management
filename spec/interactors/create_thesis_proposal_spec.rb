@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe CreateTopic, type: :interactor do
-  subject(:context) { CreateTopic.call(topic_params: topic_params, students: students) }
+RSpec.describe CreateThesisProposal, type: :interactor do
+  subject(:context) { CreateThesisProposal.call(topic_params: topic_params, students: students) }
 
   let(:topic_params) { attributes_for :topic }
   let(:students) { create_list :user, 2, :as_student }

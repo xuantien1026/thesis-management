@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TopicPolicy < ApplicationPolicy
+class ThesisProposalPolicy < ApplicationPolicy
   def create?
     user.is_a?(Lecturer)
   end
@@ -25,8 +25,8 @@ class TopicPolicy < ApplicationPolicy
     def resolve
       return student_scope if user.has_role? :student
       return head_of_department_scope if user.has_role? :head_of_department
-      return lecturer_scope if user.is_a?(Lecturer)
       return head_of_faculty_scope if user.has_role? :head_of_faculty
+      return lecturer_scope if user.is_a?(Lecturer)
 
       scope.none
     end
@@ -38,7 +38,7 @@ class TopicPolicy < ApplicationPolicy
     end
 
     def lecturer_scope
-      scope.where(primary_advisor: user)
+      scope.by_lecturer(user)
     end
 
     def head_of_department_scope
@@ -46,13 +46,7 @@ class TopicPolicy < ApplicationPolicy
     end
 
     def head_of_faculty_scope
-      scope.where(status: %i[department_approved faculty_approved])
+      scope.by_faculty(user.faculty)
     end
-  end
-
-  private
-
-  def topic_belongs_to_same_department
-    record.department == Department.find_by(head_id: user)
   end
 end

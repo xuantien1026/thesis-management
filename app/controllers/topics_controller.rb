@@ -19,7 +19,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    result = CreateTopic.call(topic_params: topic_params, students: students)
+    result = CreateThesisProposal.call(topic_params: topic_params, students: students)
     if result.success?
       flash[:notice] = 'Tạo đề tài thành công'
       redirect_to result.topic

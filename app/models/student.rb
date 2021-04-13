@@ -36,4 +36,5 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class Student < User
+  scope :without_proposal, -> { where.not(id: ThesisProposalMember.pluck(:student_id)) }
 end

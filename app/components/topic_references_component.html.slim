@@ -1,8 +1,8 @@
-= label :topic, :references, "Tài liệu tham khảo"
+= label :thesis_proposal, :references, "Tài liệu tham khảo"
 div data-topic-reference-target="referenceList"
   - @references.each do |ref|
     .input-group.form-group data-topic-reference-target="reference"
-      = text_field :topic, :references, multiple: true, class: 'form-control', value: "#{ref}", required: "true"
+      = text_field :thesis_proposal, :references, multiple: true, class: 'form-control', value: "#{ref}", required: "true"
       .input-group-append
         button.btn.btn-danger type="button" data-action="topic-reference#removeReference"
           i.cil-minus

@@ -11,4 +11,5 @@
 #
 class Faculty < ApplicationRecord
   has_many :majors, dependent: :destroy
+  has_many :departments, dependent: :destroy
 end

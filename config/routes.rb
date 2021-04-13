@@ -10,6 +10,13 @@ Rails.application.routes.draw do
     resources :topic_applications, only: %i[create destroy], as: :applications, shallow: true
   end
 
+  resources :thesis_proposals do
+    member do
+      post 'department_approve', to: 'topics#department_approve'
+      post 'faculty_approve', to: 'topics#faculty_approve'
+    end
+  end
+
   resources :theses, only: %i[index show] do
     member do
       get '/midterm_evaluations', to: 'midterm_evaluations#new'

@@ -41,15 +41,15 @@ class LecturersImporter
     department_id =
       case data[:department]
       when 'HT&MMT'
-        Department.find_by!(name: 'Department of System and Networking').id
+        Department.find_by!(name: 'System and Networking').id
       when 'CNPM'
-        Department.find_by!(name: 'Department of Software Engineering').id
+        Department.find_by!(name: 'Software Engineering').id
       when 'HTTT'
-        Department.find_by!(name: 'Department of Information System').id
+        Department.find_by!(name: 'Information System').id
       when 'KHMT'
-        Department.find_by!(name: 'Department of Computer Science').id
+        Department.find_by!(name: 'Computer Science').id
       when 'KTMT'
-        Department.find_by!(name: 'Department of Computer Engineering').id
+        Department.find_by!(name: 'Computer Engineering').id
       else
         raise "Department #{value} not found"
       end

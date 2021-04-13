@@ -12,11 +12,7 @@ class TopicStudentsComponent < ViewComponent::Base
     params[:action] != 'edit'
   end
 
-  def students_with_no_topic
-    User.with_role(:student).where.not(id: TopicApplication.pluck(:user_id))
-  end
-
   def student_options
-    students_with_no_topic.map { |s| ["#{s.mssv} - #{s.name}", s.id] }
+    Student.without_proposal.map { |s| ["#{s.mssv} - #{s.name}", s.id] }
   end
 end
