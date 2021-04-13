@@ -1,11 +1,13 @@
 
-class LecturerController < ApplicationController
+class LecturersController < ApplicationController
   def index
-    @lecturer = Lecturer.all
-    @department = Department.all
+    @lecturers = Lecturer.where("department_id = ?", 1)
+    @departments = Department.all
   end
-  def edit
-    @lecturer = Lecturer.where("department_id = ?", 2)
+  def department
+    @lecturers = Lecturer.where("department_id = ?", params[:id])
+    @departments = Department.all
+    @department_id = params[:id]
     render  'lecturer_department'
   end
 end
