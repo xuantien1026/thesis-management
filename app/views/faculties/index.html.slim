@@ -1,0 +1,14 @@
+.card
+  .card-body
+    dl
+      table.table
+        thead
+          tr
+            th Mã ngành
+            th Tên ngành
+        tbody
+          - @faculties.each do |faculty|
+              tr
+                  td
+                    a href= "/faculties/#{faculty.id}/" #{faculty.id}
+                  td =faculty.name

@@ -1,8 +1,8 @@
 
-class LecturersController < ApplicationController
+class LecturerController < ApplicationController
   def index
-    @lecturers = Lecturer.where("department_id = ?", 1)
-    @departments = Department.all
+    @departments = Department.where("faculty_id = ?", params[:faculty_id])
+    @lecturers = Lecturer.where("department_id = ?", @departments[0].id)
   end
   def department
     @lecturers = Lecturer.where("department_id = ?", params[:id])

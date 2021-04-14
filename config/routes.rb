@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   get '/showlecturer', to: 'lecturer#index'
   get '/edit', to: 'lecturer#edit'
+  get '/faculties/:faculty_id/departments/:id/', to: 'lecturer#department'
+  get '/faculties/:faculty_id', to: 'lecturer#index'
+  get '/faculties', to: 'faculties#index'
   resources :thesis_proposals do
     member do
       post 'department_approve', to: 'thesis_proposals#department_approve'

@@ -1,5 +1,5 @@
 import $ from 'jquery'
-function showlecturerbydepartment(id){
+/*function showlecturerbydepartment(id){
     $.ajax({
         url: "/lecturerbydepartment",
         method: "GET",
@@ -21,16 +21,12 @@ function showlecturerbydepartment(id){
             });
         }
     });
-}
-$(document).ready(function(){
-    showlecturerbydepartment(1);
-});
+} */
 
-$("#departmentselector").change(function () {
-    var department = $(this).val();
-    showlecturerbydepartment(department);
-});
 
+$(document).on('turbolinks:load', function() {
+    console.log("It works on each visit!")
+})
 /*v
 import $ from 'jquery'
 $("#departmentselector").change(function () {

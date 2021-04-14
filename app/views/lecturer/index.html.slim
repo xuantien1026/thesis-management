@@ -1,18 +1,8 @@
 
 .card
   .card-body
-    //<div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-        Dropdown button
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Item</a>
-        <a class="dropdown-item" href="#">Another Item</a>
-        <a class="dropdown-item" href="#">One more item</a>
-      </div>
-    //</div> //
-    = turbo_frame_tag @lecturer
-      = render LecturerDepartmentComponent.new(lecturer: @lecturer)
+    = turbo_frame_tag "lecturer"
+      = render LecturerDepartmentComponent.new(lecturers: @lecturers,departments: @departments,department_id: 1)
 
 
 
