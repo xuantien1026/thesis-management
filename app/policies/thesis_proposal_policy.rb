@@ -6,11 +6,11 @@ class ThesisProposalPolicy < ApplicationPolicy
   end
 
   def update?
-    user.has_role? :lecturer
+    user.is_a? Lecturer
   end
 
   def destroy?
-    user.has_role? :lecturer
+    user.is_a? Lecturer
   end
 
   def department_approve?

@@ -1,0 +1,41 @@
+.card
+  .card-body
+    dl
+      dt Học kì
+      dd = @thesis_proposal.semester
+
+      dt Tên đề tài
+      dd = @thesis_proposal.title
+
+      dt Mô tả
+      dd = @thesis_proposal.description
+
+      dt Nhiệm vụ đề tài
+      dd = @thesis_proposal.mission
+
+      dt Tài liệu tham khảo
+      dd
+        ol
+          - @thesis_proposal.references.each do |ref|
+            li = ref
+
+      dt Trạng thái
+      dd = render StatusComponent.new(status: @thesis_proposal.status)
+
+      dt Số sinh viên
+      dd = @thesis_proposal.max_student_count
+
+      dt Ngành
+      dd = @thesis_proposal.majors
+
+      dt Sinh viên đã đăng kí
+      dd
+        ol
+          - @thesis_proposal.students.each do |student|
+            li = "#{student.mssv} - #{student.name}"
+
+      = button_to 'Đăng kí', topic_applications_path(@thesis_proposal), method: :post, class: 'btn btn-primary' if current_user.has_role? :student
+  .card-footer
+    = link_to 'Chỉnh sửa', edit_thesis_proposal_path(@thesis_proposal), class: 'card-link' if policy(@thesis_proposal).edit?
+    = link_to 'Quay lại', thesis_proposals_path, class: 'card-link'
+    = render ApproveButtonComponent.new(user: current_user, topic: @thesis_proposal)

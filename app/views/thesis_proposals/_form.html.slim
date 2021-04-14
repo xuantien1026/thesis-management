@@ -12,7 +12,7 @@
         = form.text_field :semester, class: 'form-control', disabled: true
       .col-6
         = form.label :majors, "Ngành"
-        = form.select :majors, @majors, {}, class: 'form-control', multiple: true
+        = form.select :majors, @majors, { include_hidden: false }, class: 'form-control', multiple: true
   .form-group
     = form.label :title, "Tên Đề tài"
     = form.text_field :title, class: 'form-control', required: true
@@ -34,7 +34,7 @@
         = render TopicStudentsComponent.new(topic: thesis_proposal)
   .form-group
     = hidden_field_tag :primary_advisor_id, current_user.id
-  .form-group
+  .form-group.d-flex.justify-content-center
     = form.submit 'Submit', class: 'btn btn-primary'
 
 = javascript_pack_tag "select2"

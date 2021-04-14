@@ -14,10 +14,10 @@ class ApproveButtonComponent < ViewComponent::Base
 
   def before_render
     if department_approve?
-      @url = department_approve_topic_path(@topic)
+      @url = department_approve_thesis_proposal_path(@topic)
       @button_class = 'btn btn-outline-info'
     elsif faculty_approve?
-      @url = faculty_approve_topic_path(@topic)
+      @url = faculty_approve_thesis_proposal_path(@topic)
       @button_class = 'btn btn-outline-success'
     end
   end
@@ -27,7 +27,7 @@ class ApproveButtonComponent < ViewComponent::Base
   end
 
   def department_approve?
-    @user.has_role?(:head_of_department) && @topic.newly_created?
+    @user.has_role?(:head_of_department) && @topic.waiting_for_approval?
   end
 
   def faculty_approve?

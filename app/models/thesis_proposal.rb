@@ -8,6 +8,7 @@
 #  description       :text
 #  education_program :string
 #  english_title     :string
+#  majors            :string           default([]), is an Array
 #  max_student_count :integer          default(1), not null
 #  mission           :string
 #  ordering          :integer
@@ -24,6 +25,9 @@ class ThesisProposal < ApplicationRecord
 
   has_many :thesis_proposal_advisors, dependent: :destroy
   has_many :lecturers, through: :thesis_proposal_advisors
+
+  has_many :thesis_proposal_members, dependent: :destroy
+  has_many :students, through: :thesis_proposal_members
 
   validates :title, presence: true
 

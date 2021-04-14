@@ -1,0 +1,8 @@
+.card
+  .card-header
+    h3 Chỉnh sửa Đề Cương Luận Văn
+  .card-body
+    = render 'form', thesis_proposal: @thesis_proposal
+
+  .card-footer
+    = link_to 'Quay lại', @thesis_proposal

@@ -17,6 +17,7 @@ class ThesisProposalsController < ApplicationController
 
   def edit
     authorize @thesis_proposal
+    @majors = current_user.faculty.majors
   end
 
   def create
@@ -66,7 +67,7 @@ class ThesisProposalsController < ApplicationController
 
   def thesis_proposal_params
     params.require(:thesis_proposal).permit(
-      :semester, :majors, :title, :english_title, :description, :mission, :max_student_count, references: []
+      :semester, :title, :english_title, :description, :mission, :max_student_count, references: [], majors: []
     )
   end
 
