@@ -44,4 +44,8 @@ class ThesisProposal < ApplicationRecord
   def primary_advisor
     thesis_proposal_advisors.find_by(primary: true).lecturer
   end
+
+  def create_member(student)
+    thesis_proposal_members.create(student: student)
+  end
 end

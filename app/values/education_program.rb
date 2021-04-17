@@ -14,4 +14,8 @@ class EducationProgram
   def to_s
     education_program
   end
+
+  def ==(other)
+    education_program == other.education_program
+  end
 end

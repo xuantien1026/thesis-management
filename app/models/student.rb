@@ -5,6 +5,8 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  dkmh                   :string
+#  education_program      :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  invitation_accepted_at :datetime
@@ -14,6 +16,7 @@
 #  invitation_token       :string
 #  invitations_count      :integer          default(0)
 #  invited_by_type        :string
+#  major                  :string
 #  mscb                   :string
 #  mssv                   :integer
 #  name                   :string           not null
@@ -36,5 +39,9 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class Student < User
+  composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
+
   scope :without_proposal, -> { where.not(id: ThesisProposalMember.pluck(:student_id)) }
+
+  validates :dkmh, inclusion: %w[DCLV LVTN]
 end

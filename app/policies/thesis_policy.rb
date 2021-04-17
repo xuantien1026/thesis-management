@@ -15,7 +15,7 @@ class ThesisPolicy < ApplicationPolicy
     end
 
     def student_scope
-      scope.joins(thesis_members: :student).where(users: { id: user.id })
+      scope.faculty_approved
     end
   end
 end

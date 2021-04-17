@@ -8,6 +8,6 @@ class ApplyTopic
   def call
     policy = ApplyTopicPolicy.new(student, topic)
     context.fail!(errors: policy.errors) unless policy.allowed?
-    ThesisProposalMember.create!(student: student, thesis_proposal: topic)
+    topic.create_member(student)
   end
 end

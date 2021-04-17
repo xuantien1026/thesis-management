@@ -34,3 +34,7 @@
         - else
           div = "Chưa có kết quả giữa kì"
           div = link_to "Chấm điểm giữa kì", midterm_evaluations_thesis_path(@thesis) if MidtermEvaluationPolicy.new(user: current_user, thesis: @thesis).allowed?
+
+
+  .card-footer
+    = button_to 'Đăng kí', thesis_applications_path(@thesis), method: :post, class: 'btn btn-primary' if current_user.is_a?(Student)

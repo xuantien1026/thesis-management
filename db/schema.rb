@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_160847) do
+ActiveRecord::Schema.define(version: 2021_04_17_143308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_04_14_160847) do
     t.integer "status", default: 0
     t.string "semester"
     t.string "education_program"
+    t.string "majors", default: [], array: true
     t.index ["primary_advisor_id"], name: "index_theses_on_primary_advisor_id"
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_max_student_count"
@@ -142,6 +143,9 @@ ActiveRecord::Schema.define(version: 2021_04_14_160847) do
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.string "mscb"
+    t.string "major"
+    t.string "education_program"
+    t.string "dkmh"
     t.index ["department_id"], name: "index_users_on_department_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
