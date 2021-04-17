@@ -37,7 +37,7 @@
           - @thesis_proposal.students.each do |student|
             li = "#{student.mssv} - #{student.name}"
 
-      = button_to 'Đăng kí', topic_applications_path(@thesis_proposal), method: :post, class: 'btn btn-primary' if current_user.has_role? :student
+      = button_to 'Đăng kí', thesis_proposal_applications_path(@thesis_proposal), method: :post, class: 'btn btn-primary' if current_user.is_a?(Student)
   .card-footer
     = link_to 'Chỉnh sửa', edit_thesis_proposal_path(@thesis_proposal), class: 'card-link' if policy(@thesis_proposal).edit?
     = link_to 'Quay lại', thesis_proposals_path, class: 'card-link'

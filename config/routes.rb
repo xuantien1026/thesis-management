@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post 'department_approve', to: 'thesis_proposals#department_approve'
       post 'faculty_approve', to: 'thesis_proposals#faculty_approve'
     end
+    resources :thesis_proposal_members, only: %i[create], as: :applications, shallow: true
   end
 
   resources :theses, only: %i[index show] do
