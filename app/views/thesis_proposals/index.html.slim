@@ -14,3 +14,5 @@
       - @thesis_proposals.each do |thesis_proposal|
         = turbo_frame_tag thesis_proposal, class: "d-table-row"
           = render TopicComponent.new(user: current_user, topic: thesis_proposal)
+  .card-footer
+    = link_to 'Đề Cương Luận Văn Mới', new_thesis_proposal_path, class: 'btn btn-primary'

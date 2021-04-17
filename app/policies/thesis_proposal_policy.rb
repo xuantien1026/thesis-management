@@ -24,8 +24,8 @@ class ThesisProposalPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       return student_scope if user.has_role? :student
-      return head_of_department_scope if user.has_role? :head_of_department
       return head_of_faculty_scope if user.has_role? :head_of_faculty
+      return head_of_department_scope if user.has_role? :head_of_department
       return lecturer_scope if user.is_a?(Lecturer)
 
       scope.none

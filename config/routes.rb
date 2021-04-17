@@ -2,18 +2,10 @@ Rails.application.routes.draw do
   root to: "theses#index"
   devise_for :users
 
-  resources :topics do
-    member do
-      post 'department_approve', to: 'topics#department_approve'
-      post 'faculty_approve', to: 'topics#faculty_approve'
-    end
-    resources :topic_applications, only: %i[create destroy], as: :applications, shallow: true
-  end
-
   resources :thesis_proposals do
     member do
-      post 'department_approve', to: 'topics#department_approve'
-      post 'faculty_approve', to: 'topics#faculty_approve'
+      post 'department_approve', to: 'thesis_proposals#department_approve'
+      post 'faculty_approve', to: 'thesis_proposals#faculty_approve'
     end
   end
 

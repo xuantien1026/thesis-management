@@ -20,8 +20,8 @@
 #  updated_at        :datetime         not null
 #
 class ThesisProposal < ApplicationRecord
-  composed_of :semester
-  composed_of :education_program
+  composed_of :semester, converter: proc { |string| Semester.new(string) }
+  composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
 
   has_many :thesis_proposal_advisors, dependent: :destroy
   has_many :lecturers, through: :thesis_proposal_advisors
@@ -37,6 +37,7 @@ class ThesisProposal < ApplicationRecord
                         joins(:thesis_proposal_advisors).where(thesis_proposal_advisors: { lecturer: lecturer })
                       }
   scope :by_department, ->(department) { joins(:lecturers).where(users: { department_id: department.id }) }
+  scope :by_faculty, ->(faculty) { joins(:lecturers).where(users: { department_id: faculty.department_ids }) }
 
   delegate :name, to: :primary_advisor, prefix: true
 
