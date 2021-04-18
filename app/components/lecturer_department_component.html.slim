@@ -1,9 +1,3 @@
-.dropdown.filter-dropdown
-  button.btn.btn-secondary.dropdown-toggle type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"
-  .dropdown-menu aria-labelledby="dropdownMenuButton"
-    - @departments.each do |department|
-      a.dropdown-item href="departments/#{department.id}/"  #{department.name}
-
 .card-body
   dl
     table.table
@@ -18,4 +12,3 @@
             td = lecturer.mscb
             td = lecturer.name
             td = lecturer.email
-= javascript_pack_tag "lecturerbydepartment"
