@@ -2,17 +2,14 @@
 
 # == Schema Information
 #
-# Table name: topic_applications
+# Table name: defense_committees
 #
 #  id         :bigint           not null, primary key
-#  user_id    :bigint
-#  topic_id   :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-FactoryBot.define do
-  factory :topic_application do
-    user
-    topic
-  end
+require 'rails_helper'
+
+RSpec.describe DefenseCommittee, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

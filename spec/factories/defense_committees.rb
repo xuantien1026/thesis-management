@@ -2,17 +2,16 @@
 
 # == Schema Information
 #
-# Table name: topic_applications
+# Table name: defense_committees
 #
 #  id         :bigint           not null, primary key
-#  user_id    :bigint
-#  topic_id   :bigint
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class TopicApplication < ApplicationRecord
-  belongs_to :user
-  belongs_to :topic
-
-  validates :user, uniqueness: true
+FactoryBot.define do
+  factory :defense_committee do
+    name { 'MyString' }
+    chairman_id { 1 }
+    secretary_id { 1 }
+  end
 end

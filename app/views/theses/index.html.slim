@@ -16,4 +16,4 @@
             td = link_to thesis.ordering, thesis
             td = thesis.primary_advisor.name
             td = thesis.title || thesis.english_title
-            td = thesis.program
+            td = thesis.majors.join(' ')
