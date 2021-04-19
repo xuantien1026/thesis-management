@@ -32,7 +32,11 @@ html
         .c-sidebar-nav-item
           = link_to theses_path, class: "c-sidebar-nav-link"
             i.c-sidebar-nav-icon.cil-list
-            = "Luận văn"
+            = "Luận văn tốt nghiệp"
+        .c-sidebar-nav-item
+          = link_to defense_committees_path, class: "c-sidebar-nav-link"
+            i.c-sidebar-nav-icon.cil-list
+            = "Hội Đồng Bảo Vệ"
     .c-wrapper
       header.c-header.flex-row-reverse.align-content-center.mb-3.px-3
         = render Layout::HeaderComponent.new(user: current_user)
