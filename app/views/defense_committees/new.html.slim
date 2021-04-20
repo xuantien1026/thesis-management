@@ -1,0 +1,18 @@
+.card
+  .card-header Đề xuất Hội Đồng Bảo Vệ
+  .card-body
+    = form_for @form, url: defense_committees_path do |f|
+      .form-group
+        = f.label 'Chủ tịch'
+        = f.select :chairman_id, @lecturers.pluck(:name, :id), { include_blank: true }, class: 'form-control'
+      .form-group
+        = f.label 'Thư kí'
+        = f.select :secretary_id, @lecturers.pluck(:name, :id), { include_blank: true }, class: 'form-control'
+      .form-group
+        = f.label 'Uỷ viên'
+        = f.select :member_ids, @lecturers.pluck(:name, :id), { include_hidden: false }, class: 'form-control select2', multiple: true
+      .form-group
+        = f.label 'Phân công đề tài'
+        = f.select :thesis_ids, @theses.pluck(:title, :id), { include_hidden: false }, class: 'form-control select2', multiple: true
+      .form-group
+        = f.submit 'Gửi đề xuất', class: 'btn btn-primary', data: { turbo: false }

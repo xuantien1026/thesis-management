@@ -17,8 +17,7 @@ RSpec.shared_context :signed_in_as_lecturer do
 end
 
 RSpec.shared_context :signed_in_as_head_of_department do
-  let(:department) { create :department, head: head_of_department }
-  let(:head_of_department) { create :user, :as_head_of_department }
+  let(:head_of_department) { create :lecturer, :as_head_of_department }
 
   before do
     sign_in head_of_department

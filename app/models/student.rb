@@ -39,9 +39,10 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class Student < User
+  DKMH = %w[DCLV LVTN].freeze
   composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
 
   scope :without_proposal, -> { where.not(id: ThesisProposalMember.pluck(:student_id)) }
 
-  validates :dkmh, inclusion: %w[DCLV LVTN]
+  validates :dkmh, inclusion: DKMH
 end

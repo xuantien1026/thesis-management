@@ -38,12 +38,18 @@
 #  index_users_on_invited_by_id         (invited_by_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class Lecturer < User
-  belongs_to :department, optional: true
+FactoryBot.define do
+  factory :lecturer do
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+    mscb { Faker::Lorem.word }
+    association :department
+  end
 
-  delegate :program, :faculty, to: :department, allow_nil: true
-
-  def to_s
-    name
+  trait :as_head_of_department do
+    after(:create) do |lecturer|
+      lecturer.add_role :head_of_department
+    end
   end
 end

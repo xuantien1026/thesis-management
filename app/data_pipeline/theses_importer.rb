@@ -11,7 +11,10 @@ class ThesesImporter
     read_file(filepath)
       .filter { |data_row| data_row[17] == 'LVTN' }
       .map { |data_row| process_data(data_row) }
-      .map { |thesis_data| Thesis.create!(thesis_data) }
+      .map do |thesis_data|
+        thesis = Thesis.create!(thesis_data.slice(:ordering, :title, :english_title))
+        thesis.thesis_advisors.create(lecturer_id: thesis_data[:primary_advisor_id], primary: true)
+      end
   end
 
   private

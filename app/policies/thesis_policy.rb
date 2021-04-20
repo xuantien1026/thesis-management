@@ -11,7 +11,7 @@ class ThesisPolicy < ApplicationPolicy
     private
 
     def lecturer_scope
-      scope.where(primary_advisor: user)
+      scope.by_lecturer(user)
     end
 
     def student_scope

@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_143308) do
+ActiveRecord::Schema.define(version: 2021_04_18_153623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "defense_committee_members", force: :cascade do |t|
+    t.bigint "defense_committee_id"
+    t.bigint "lecturer_id"
+    t.integer "role", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["defense_committee_id"], name: "index_defense_committee_members_on_defense_committee_id"
+    t.index ["lecturer_id"], name: "index_defense_committee_members_on_lecturer_id"
+  end
+
+  create_table "defense_committee_theses", force: :cascade do |t|
+    t.bigint "defense_committee_id"
+    t.bigint "thesis_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["defense_committee_id"], name: "index_defense_committee_theses_on_defense_committee_id"
+    t.index ["thesis_id"], name: "index_defense_committee_theses_on_thesis_id"
+  end
+
+  create_table "defense_committees", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
@@ -63,7 +87,6 @@ ActiveRecord::Schema.define(version: 2021_04_17_143308) do
     t.integer "ordering"
     t.string "title"
     t.string "english_title"
-    t.bigint "primary_advisor_id", null: false
     t.string "mission"
     t.text "description"
     t.string "references", default: [], array: true
@@ -72,9 +95,18 @@ ActiveRecord::Schema.define(version: 2021_04_17_143308) do
     t.string "semester"
     t.string "education_program"
     t.string "majors", default: [], array: true
-    t.index ["primary_advisor_id"], name: "index_theses_on_primary_advisor_id"
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_max_student_count"
+  end
+
+  create_table "thesis_advisors", force: :cascade do |t|
+    t.bigint "lecturer_id"
+    t.bigint "thesis_id"
+    t.boolean "primary", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecturer_id"], name: "index_thesis_advisors_on_lecturer_id"
+    t.index ["thesis_id"], name: "index_thesis_advisors_on_thesis_id"
   end
 
   create_table "thesis_members", force: :cascade do |t|
@@ -162,10 +194,15 @@ ActiveRecord::Schema.define(version: 2021_04_17_143308) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "defense_committee_members", "defense_committees"
+  add_foreign_key "defense_committee_members", "users", column: "lecturer_id"
+  add_foreign_key "defense_committee_theses", "defense_committees"
+  add_foreign_key "defense_committee_theses", "theses"
   add_foreign_key "departments", "faculties"
   add_foreign_key "majors", "faculties"
   add_foreign_key "midterm_evaluations", "thesis_members"
-  add_foreign_key "theses", "users", column: "primary_advisor_id"
+  add_foreign_key "thesis_advisors", "theses"
+  add_foreign_key "thesis_advisors", "users", column: "lecturer_id"
   add_foreign_key "thesis_members", "users", column: "student_id"
   add_foreign_key "thesis_proposal_advisors", "thesis_proposals"
   add_foreign_key "thesis_proposal_advisors", "users", column: "lecturer_id"
