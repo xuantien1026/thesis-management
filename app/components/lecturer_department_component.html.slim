@@ -1,0 +1,14 @@
+.card-body
+  dl
+    table.table
+      thead
+        tr
+          th Mscb
+          th Tên
+          th Email
+      tbody
+        - @lecturers.each do |lecturer|
+          tr
+            td = lecturer.mscb
+            td = lecturer.name
+            td = lecturer.email

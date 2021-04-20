@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   root to: "theses#index"
   devise_for :users
+  # get '/faculties/:faculty_id/departments/:id/', to: 'lecturer#department'
+  # get '/faculties/:faculty_id', to: 'lecturer#index'
+
+  resources :faculties, only: %i[index show], shallow: true do
+    resources :departments, only: :index do
+      resources :lecturers, only: :index
+    end
+    resources :majors, only: :index
+  end
 
   resources :thesis_proposals do
     member do
