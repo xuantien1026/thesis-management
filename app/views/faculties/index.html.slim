@@ -1,16 +1,15 @@
 .card
   .card-header
-    h3 Ngành
+    h3 Danh sách khoa
   .card-body
     dl
       table.table
         thead
           tr
-            th Mã ngành
-            th Tên ngành
+            th STT
+            th Tên Khoa
         tbody
           - @faculties.each do |faculty|
               tr
-                  td
-                    a href= "/faculties/#{faculty.id}/" #{faculty.id}
-                  td =faculty.name
+                  td = link_to faculty.id, faculty_path(faculty)
+                  td = faculty.name
