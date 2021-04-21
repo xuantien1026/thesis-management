@@ -10,9 +10,9 @@
         = f.select :secretary_id, @lecturers.pluck(:name, :id), { include_blank: true }, class: 'form-control'
       .form-group
         = f.label 'Uỷ viên'
-        = f.select :member_ids, @lecturers.pluck(:name, :id), { include_hidden: false }, class: 'form-control select2', multiple: true
+        = f.select :member_ids, @lecturers.pluck(:name, :id), { include_hidden: false }, class: 'form-control select2-init', multiple: true
       .form-group
         = f.label 'Phân công đề tài'
-        = f.select :thesis_ids, @theses.pluck(:title, :id), { include_hidden: false }, class: 'form-control select2', multiple: true
+        = f.select :thesis_ids, @theses.pluck(:title, :id), { include_hidden: false }, class: 'form-control select2-init', multiple: true
       .form-group
         = f.submit 'Gửi đề xuất', class: 'btn btn-primary', data: { turbo: false }
