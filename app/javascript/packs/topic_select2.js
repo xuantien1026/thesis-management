@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import select2 from 'select2'
 
-const numberOfStudent = $("#topic_number_of_students")
+const maxStudentCount = $("#topic_max_student_count")
 const studentSelectBox = $(".student-select-box")
 
 const initializeSelect2 = (selectionLength) => {
@@ -10,12 +10,12 @@ const initializeSelect2 = (selectionLength) => {
   })
 }
 
-numberOfStudent.change(() => {
+maxStudentCount.change(() => {
   studentSelectBox.val("")
-  initializeSelect2(numberOfStudent.val())
+  initializeSelect2(maxStudentCount.val())
 })
 
-initializeSelect2(numberOfStudent.val())
+initializeSelect2(maxStudentCount.val())
 
 
 
