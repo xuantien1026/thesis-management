@@ -21,4 +21,8 @@
 class Department < ApplicationRecord
   has_many :lecturers, dependent: :restrict_with_error
   belongs_to :faculty
+
+  def to_s
+    name
+  end
 end

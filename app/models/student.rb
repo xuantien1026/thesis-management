@@ -45,4 +45,15 @@ class Student < User
   scope :without_proposal, -> { where.not(id: ThesisProposalMember.pluck(:student_id)) }
 
   validates :dkmh, inclusion: DKMH
+
+  def profile
+    {
+      'Họ và tên' => name,
+      'Email' => email,
+      'MSSV' => mssv,
+      'Đăng kí môn học' => dkmh,
+      'Chương trình đào tạo' => education_program,
+      'Chuyên ngành' => major
+    }
+  end
 end
