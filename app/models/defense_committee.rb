@@ -18,8 +18,8 @@
 #  fk_rails_...  (department_id => departments.id)
 #
 class DefenseCommittee < ApplicationRecord
+  belongs_to :department
   has_many :defense_committee_members, dependent: :destroy
-
   has_many :defense_committee_theses, dependent: :destroy
   has_many :theses, through: :defense_committee_theses
 
