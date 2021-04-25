@@ -1,2 +1,7 @@
-= link_to 'Đăng xuất', destroy_user_session_path, method: :delete
+.dropdown
+  a data-toggle="dropdown"
+    i.cil-cog.font-2xl
+  .dropdown-menu.dropdown-menu-right
+    = link_to 'Profile', profile_path, class: 'dropdown-item'
+    = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item'
 span.mr-3 = "Xin chào, #{@user.name}"

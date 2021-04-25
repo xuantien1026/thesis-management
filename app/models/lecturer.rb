@@ -41,9 +41,19 @@
 class Lecturer < User
   belongs_to :department, optional: true
 
-  delegate :program, :faculty, to: :department, allow_nil: true
+  delegate :faculty, to: :department
 
   def to_s
     name
+  end
+
+  def profile
+    {
+      'Họ và tên' => name,
+      'Email' => email,
+      'MSCB' => mscb,
+      'Bộ môn' => department,
+      'Khoa' => faculty
+    }
   end
 end

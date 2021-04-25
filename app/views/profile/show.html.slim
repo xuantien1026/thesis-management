@@ -1,0 +1,7 @@
+.card
+  .card-header
+    h3 Profile
+  .card-body
+    - @profile.each do |label, content|
+      dt = label
+      dd = content.to_s

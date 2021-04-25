@@ -14,6 +14,7 @@ html
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'common', defer: true
 
   body class="c-app"
     .c-sidebar.c-sidebar-show#sidebar
@@ -55,4 +56,3 @@ html
               h4 = alert
         = yield
       .c-footer
-    = javascript_pack_tag 'common'

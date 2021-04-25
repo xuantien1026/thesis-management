@@ -12,7 +12,7 @@
         = form.text_field :semester, class: 'form-control', disabled: true
       .col-4
         = form.label :majors, "Ngành"
-        = form.select :majors, @majors, { include_hidden: false }, class: 'form-control select2', multiple: true
+        = form.select :majors, @majors, { include_hidden: false }, class: 'form-control select2-init', multiple: true
       .col-4
         = form.label :education_program, "Chương Trình Đào Tạo"
         = form.select :education_program, EducationProgram::PROGRAMS, { include_blank: true }, class: 'form-control'
