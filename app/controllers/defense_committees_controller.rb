@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class DefenseCommitteesController < ApplicationController
-  before_action :set_theses, :set_lecturers, only: :new
+  before_action :set_department
 
   def index
-    @committees = DefenseCommittee.all
+    @committees = DefenseCommittee.where(department: @department)
   end
 
   def create
@@ -13,15 +13,13 @@ class DefenseCommitteesController < ApplicationController
       flash[:notice] = 'Đề xuất Hội Đồng Bảo Vệ thành công'
       redirect_to defense_committees_path
     else
-      set_theses
-      set_lecturers
       flash[:alert] = @form.errors.full_messages
       render :new
     end
   end
 
   def new
-    @form = DefenseCommitteeForm.new
+    @thesis_groups = @department.lecturers.map { |lecturer| [lecturer, Thesis.by_lecturer(lecturer)] }.to_h
   end
 
   private
@@ -30,11 +28,7 @@ class DefenseCommitteesController < ApplicationController
     params.require(:defense_committee_form).permit(:chairman_id, :secretary_id, member_ids: [], thesis_ids: [])
   end
 
-  def set_theses
-    @theses = Thesis.by_department(current_user.department)
-  end
-
-  def set_lecturers
-    @lecturers = current_user.department.lecturers
+  def set_department
+    @department = Department.find(params[:department_id])
   end
 end
