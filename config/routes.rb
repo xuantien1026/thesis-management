@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :theses, only: %i[index show] do
-    member do
+    collection do
       get '/midterm_evaluations', to: 'midterm_evaluations#new'
       post '/midterm_evaluations', to: 'midterm_evaluations#evaluate_all_students'
     end

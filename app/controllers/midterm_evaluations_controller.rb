@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 class MidtermEvaluationsController < ApplicationController
-  before_action :set_thesis
-  before_action { head :forbidden unless MidtermEvaluationPolicy.new(user: current_user, thesis: @thesis).allowed? }
+  # before_action { head :forbidden unless MidtermEvaluationPolicy.new(user: current_user, thesis: @thesis).allowed? }
 
-  def new; end
+  def new
+    @theses = Thesis.by_lecturer(current_user)
+  end
 
   def evaluate_all_students
     evaluation_params.each do |evaluations|
       MidtermEvaluation.create!(evaluations)
     end
     flash.notice = 'Đã cập nhật kết quả giữa kì thành công'
-    redirect_to @thesis
+    redirect_to theses_path
   end
 
   private
