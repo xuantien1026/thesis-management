@@ -1,0 +1,12 @@
+= form_for new_faculty_major_path do |form|
+  .form-group
+    .row
+      .col-lg-8
+        h6 = "Tên chuyên ngành"
+    .row
+      .col-lg-8
+        = form.text_field :name, class: 'form-control'
+      .col-lg-4
+        =form.submit 'Thêm', class: 'btn btn-primary'
+
+

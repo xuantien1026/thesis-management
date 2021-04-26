@@ -1,2 +1,14 @@
-- @majors.each do |major|
-  p = major
+.card
+  .card-header
+    h3 Danh sách chuyên ngành
+    turbo-frame.card-body id = "majors"
+      h5 = render 'new'
+      .d-table.table
+        .d-table-row.font-weight-bold
+          .d-table-cell.p-2 Tên
+          .d-table-cell.p-2 Thao tác
+        - @majors.each do |major|
+          turbo-frame id = major.id class= "d-table-row"
+            .d-table-cell.p-2 = major.name
+            .d-table-cell.p-2 = link_to "Edit", edit_major_path(major)
+            .d-table-cell.p-2 = link_to "Delete", major_path(major), :method => :delete
