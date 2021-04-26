@@ -19,10 +19,14 @@ Rails.application.routes.draw do
     resources :thesis_proposal_members, only: %i[create], as: :applications
   end
 
-  resources :theses, only: %i[index show] do
+  resources :theses, only: %i[index show], shallow: true do
+    # collection do
+    #   get '/midterm_evaluations/new', to: 'midterm_evaluations#new'
+    #   get '/midterm_evaluations', to: 'midterm_evaluations#new'
+    #   post '/midterm_evaluations', to: 'midterm_evaluations#evaluate_all_students'
+    # end
     collection do
-      get '/midterm_evaluations', to: 'midterm_evaluations#new'
-      post '/midterm_evaluations', to: 'midterm_evaluations#evaluate_all_students'
+      resource :midterm_evaluations, only: %i[show new create]
     end
     resources :thesis_members, only: %i[create], as: :applications
   end
