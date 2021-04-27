@@ -16,7 +16,6 @@ class MidtermEvaluationsController < ApplicationController
 
   def create
     params[:evaluations].each do |member_id, evaluations|
-      byebug
       MidtermEvaluation.create!(evaluations.permit(:passed, :note).merge(thesis_member_id: member_id))
     end
     flash.notice = 'Đã cập nhật kết quả giữa kì thành công'
