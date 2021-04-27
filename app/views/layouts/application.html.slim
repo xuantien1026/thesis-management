@@ -23,20 +23,20 @@ html
           i.cil-school style="font-size:xx-large"
         - if policy(:invitation).create?
           .c-sidebar-nav-item
-            = link_to new_user_invitation_path, class: 'c-sidebar-nav-link'
-              i.c-sidebar-nav-icon.cil-list
+            = link_to '', class: 'c-sidebar-nav-link'
+              i.c-sidebar-nav-icon.cil-lock-locked
               = 'Mời giảng viên'
         .c-sidebar-nav-item
-          = link_to thesis_proposals_path, class: "c-sidebar-nav-link"
-            i.c-sidebar-nav-icon.cil-list
+          = link_to '', class: "c-sidebar-nav-link"
+            i.c-sidebar-nav-icon.cil-lock-locked
             = "Đề Cương Luận Văn"
         .c-sidebar-nav-item
           = link_to theses_path, class: "c-sidebar-nav-link"
             i.c-sidebar-nav-icon.cil-list
             = "Luận văn tốt nghiệp"
         .c-sidebar-nav-item
-          = link_to defense_committees_path, class: "c-sidebar-nav-link"
-            i.c-sidebar-nav-icon.cil-list
+          = link_to '', class: "c-sidebar-nav-link"
+            i.c-sidebar-nav-icon.cil-lock-locked
             = "Hội Đồng Bảo Vệ"
     .c-wrapper
       header.c-header.flex-row-reverse.align-content-center.mb-3.px-3
