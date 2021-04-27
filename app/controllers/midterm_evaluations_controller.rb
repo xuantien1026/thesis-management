@@ -15,8 +15,9 @@ class MidtermEvaluationsController < ApplicationController
   end
 
   def create
-    evaluation_params.each do |evaluations|
-      MidtermEvaluation.create!(evaluations)
+    params[:evaluations].each do |member_id, evaluations|
+      byebug
+      MidtermEvaluation.create!(evaluations.permit(:passed, :note).merge(thesis_member_id: member_id))
     end
     flash.notice = 'Đã cập nhật kết quả giữa kì thành công'
     redirect_to theses_path
@@ -26,9 +27,5 @@ class MidtermEvaluationsController < ApplicationController
 
   def set_thesis
     @thesis = Thesis.find(params[:id])
-  end
-
-  def evaluation_params
-    params.require(:evaluations).map { |p| p.permit(:thesis_member_id, :passed, :note) }
   end
 end

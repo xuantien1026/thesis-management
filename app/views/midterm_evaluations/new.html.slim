@@ -10,18 +10,21 @@
             th MSSV
             th Tên sinh viên
             th Đạt
+            th Không đạt
             th Ghi chú
         tbody
           - @theses.each do |thesis|
             tr.bg-light.text-dark
-              td colspan="4" = "Đề tài: #{thesis.title || thesis.english_title}"
+              td colspan="5" = "Đề tài: #{thesis.title || thesis.english_title}"
             - thesis.thesis_members.each do |member|
               tr
                 td = member.mssv
                 td = member.name
-                td = check_box_tag "evaluations[][passed]", '1', true, class: 'form-control'
                 td
-                  = text_field_tag "evaluations[][note]", nil, class: 'form-control'
-                  = hidden_field_tag "evaluations[][thesis_member_id]", member.id
+                  = radio_button_tag "evaluations[#{member.id}][passed]", '1', true, class: 'form-control'
+                td
+                  = radio_button_tag "evaluations[#{member.id}][passed]", '0', false, class: 'form-control'
+                td
+                  = text_field_tag "evaluations[#{member.id}][note]", nil, class: 'form-control'
     .card-footer
       = submit_tag "Submit", class: 'btn btn-primary'
