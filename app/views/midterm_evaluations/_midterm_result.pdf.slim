@@ -1,0 +1,58 @@
+p TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TPHCM
+p KHOA KHOA HỌC VÀ KĨ THUẬT MÁY TÍNH
+br
+h2.fw-bold.text-center PHIẾU CHẤM GIỮA KÌ LVTN
+h2.fw-bold.text-center Học kì 202 - Năm học 2020 - 2021
+br
+p.fw-bold GVHD:
+.row
+  .col-6
+    table.table.table-bordered
+      thead
+        tr
+          th MSCB
+          th Họ và tên
+      tbody
+        tr
+          td = current_user.mscb
+          td = current_user.name
+p.fw-bold Danh sách sinh viên:
+.row
+  .col-12
+    table.table.table-bordered
+      thead
+        tr
+          th STT
+          th MSSV
+          th Họ và tên
+          th Đạt
+          th Không đạt
+          th Ghi chú
+      tbody
+        - if thesis.thesis_members.none?
+          - 3.times do
+            tr
+              td
+              td
+              td
+              td
+              td
+              td
+        - thesis.thesis_members.each.with_index(1) do |member, i|
+          tr
+            td = i
+            td = member.mssv
+            td = member.name
+            td = 'x' if member.midterm_evaluation.passed?
+            td = 'x' unless member.midterm_evaluation.passed?
+            td = member.midterm_evaluation.note
+
+p.fw-bold * Lưu ý
+div - GVHD vui lòng kiểm tra, điều chỉnh / bổ sung cho đúng tình trạng thực tế hướng dẫn của mình, để Khoa có cơ sở chốt dữ liệu với Phòng Đào Tạo
+div - GVHD vui lòng nhắc nhở / hỗ trợ SV xử lý nếu đăng kí sai loại đề tài / sai ngành / chưa ĐKMH
+br
+.float-end.w-50
+  .text-center
+    div = "Ngày #{Time.current.day} tháng #{Time.current.month} năm #{Time.current.year}"
+    .fw-bold GVHD chính ký & ghi rõ họ tên
+.page-break

@@ -20,11 +20,6 @@ Rails.application.routes.draw do
   end
 
   resources :theses, only: %i[index show], shallow: true do
-    # collection do
-    #   get '/midterm_evaluations/new', to: 'midterm_evaluations#new'
-    #   get '/midterm_evaluations', to: 'midterm_evaluations#new'
-    #   post '/midterm_evaluations', to: 'midterm_evaluations#evaluate_all_students'
-    # end
     collection do
       resource :midterm_evaluations, only: %i[show new create]
     end

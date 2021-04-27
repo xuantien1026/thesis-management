@@ -3,6 +3,7 @@
 class ThesesController < ApplicationController
   def index
     @theses = policy_scope(Thesis).order(:ordering)
+    @midterm_evalutated = @theses.first.midterm_evaluations.any?
   end
 
   def show

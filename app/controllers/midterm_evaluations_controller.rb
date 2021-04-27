@@ -4,7 +4,7 @@ class MidtermEvaluationsController < ApplicationController
   # before_action { head :forbidden unless MidtermEvaluationPolicy.new(user: current_user, thesis: @thesis).allowed? }
 
   def show
-    @thesis = policy_scope(Thesis).first
+    @theses = policy_scope(Thesis)
     respond_to do |format|
       format.pdf { render pdf: 'ket_qua_giua_ki', margin:  { top: 20, bottom: 20, left: 20, right: 20 }, show_as_html: params.key?('debug') }
     end
@@ -14,7 +14,7 @@ class MidtermEvaluationsController < ApplicationController
     @theses = Thesis.by_lecturer(current_user)
   end
 
-  def evaluate_all_students
+  def create
     evaluation_params.each do |evaluations|
       MidtermEvaluation.create!(evaluations)
     end
