@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MidtermEvaluationsController < ApplicationController
-  # before_action { head :forbidden unless MidtermEvaluationPolicy.new(user: current_user, thesis: @thesis).allowed? }
+  before_action { head :forbidden unless current_user.is_a? Lecturer }
 
   def show
     @theses = policy_scope(Thesis)
