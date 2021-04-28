@@ -29,9 +29,3 @@
 .tooltip-inner {
   max-width: none;
 }
-
-/* Times New Roman font for printing pdf */
-@font-face {
-  font-family: 'Times New Roman';
-  src: asset-url('fonts/TimesNewRoman.ttf') format('truetype'), asset-url('fonts/TimesNewRomanBold.ttf') format('truetype') font-weight('bold');
-}
