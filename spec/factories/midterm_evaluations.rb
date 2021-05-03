@@ -21,8 +21,8 @@
 #
 FactoryBot.define do
   factory :midterm_evaluation do
-    thesis_membership { nil }
-    passed { false }
-    note { 'MyString' }
+    association :thesis_member
+    passed { true }
+    note { '' }
   end
 end

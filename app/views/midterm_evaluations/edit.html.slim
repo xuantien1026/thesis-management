@@ -1,0 +1,22 @@
+= turbo_frame_tag 'midterm_evaluations'
+  = form_with url: thesis_midterm_evaluations_path(@thesis), method: :put
+    table.table
+      thead
+        tr
+          th MSSV
+          th Tên sinh viên
+          th Đạt
+          th Không đạt
+          th Ghi chú
+      tbody
+        - @thesis.thesis_members.each do |member|
+          tr
+            td = member.mssv
+            td = member.name
+            td
+              = radio_button_tag "evaluations[#{member.id}][passed]", '1', member.midterm_evaluation.passed?, class: 'form-control'
+            td
+              = radio_button_tag "evaluations[#{member.id}][passed]", '0', !member.midterm_evaluation.passed?, class: 'form-control'
+            td
+              = text_field_tag "evaluations[#{member.id}][note]", member.midterm_evaluation.note, class: 'form-control'
+    = submit_tag 'Submit', class: 'btn btn-primary'

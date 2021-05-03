@@ -35,5 +35,21 @@ FactoryBot.define do
     max_student_count { rand 1..5 }
     semester { Semester.new }
     education_program { 'CQ' }
+
+    transient do
+      primary_advisor { create :lecturer }
+      students { [] }
+    end
+
+    after(:create) do |thesis, options|
+      thesis.thesis_advisors.create(lecturer: options.primary_advisor, primary: true)
+      options.students.each { |student| thesis.create_member(student) }
+    end
+
+    trait :with_midterm_results do
+      after(:create) do |thesis|
+        thesis.thesis_members.each { |member| create :midterm_evaluation, thesis_member: member }
+      end
+    end
   end
 end

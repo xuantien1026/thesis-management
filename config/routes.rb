@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     collection do
       resource :midterm_evaluations, only: %i[show new create]
     end
+    resource :midterm_evaluations, only: %i[edit update]
     resources :thesis_members, only: %i[create], as: :applications
   end
 
