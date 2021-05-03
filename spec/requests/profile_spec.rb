@@ -25,7 +25,7 @@ RSpec.describe 'Profiles', type: :request do
           signed_lecturer.mscb,
           signed_lecturer.email,
           signed_lecturer.department,
-          signed_lecturer.faculty,
+          signed_lecturer.faculty
         ]
 
         expect(response.body).to include(*lecturer_info.map(&:to_s))

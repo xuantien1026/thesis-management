@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :faculties, only: %i[index show], shallow: true do
     resources :departments, only: :index do
-      resources :lecturers, only: :index
+      resources :lecturers, only: :index do
+        resource :role, only: %i[show create]
+      end
     end
     resources :majors, only: :index
   end

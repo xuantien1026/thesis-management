@@ -1,0 +1,18 @@
+.card
+  .card-header
+    h3 = "Giảng viên: #{@lecturer}"
+  .card-body
+    h4 = "Thông tin giảng viên"
+    - @lecturer.profile.each do |label, content|
+      dt = label
+      dd = content.to_s
+    hr
+    h4 = 'Quản lý quyền truy cập'
+    = form_with url: lecturer_role_path(@lecturer), data: { turbo: 'false' }
+      - Role::ROLES.each do |role|
+        .form-check
+          = check_box_tag 'roles[]', role, @lecturer.has_role?(role), class: 'form-check-input'
+          = label_tag "role_#{role}", role.humanize, class: 'form-check-label'
+      = submit_tag 'Submit', class: 'btn btn-primary', target: '_top'
+
+

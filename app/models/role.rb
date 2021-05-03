@@ -17,7 +17,7 @@
 #  index_roles_on_resource                                (resource_type,resource_id)
 #
 class Role < ApplicationRecord
-  ROLES = %w[admin student lecturer head_of_department head_of_faculty].freeze
+  ROLES = %w[admin head_of_department head_of_faculty privileged_lecturer].freeze
 
   has_and_belongs_to_many :users, join_table: :users_roles
 

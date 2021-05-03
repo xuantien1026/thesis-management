@@ -7,7 +7,10 @@ class MidtermEvaluationsController < ApplicationController
     theses = Thesis.by_lecturer(current_user)
     @thesis_members = ThesisMember.where(thesis_id: theses.ids)
     respond_to do |format|
-      format.pdf { render pdf: 'ket_qua_giua_ki', margin:  { top: 20, bottom: 20, left: 20, right: 20 }, show_as_html: params.key?('debug') }
+      format.pdf do
+        render pdf: 'ket_qua_giua_ki', margin: { top: 20, bottom: 20, left: 20, right: 20 },
+               show_as_html: params.key?('debug')
+      end
     end
   end
 

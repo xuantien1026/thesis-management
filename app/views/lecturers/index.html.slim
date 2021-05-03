@@ -5,7 +5,7 @@
     h4 Danh sách giảng viên
     ul
       - @lecturers.each do |lecturer|
-        li = link_to lecturer.name
+        li = link_to lecturer.name, lecturer_role_path(lecturer)
   .card-footer
     = link_to 'Quay lại', faculty_path(@department.faculty_id)
 
