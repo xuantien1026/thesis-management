@@ -2,6 +2,6 @@
   .card-header
     h3 Danh sách khoa
   .card-body
-    ul
+    ol
       - @faculties.each do |faculty|
         li = link_to faculty, faculty_path(faculty)

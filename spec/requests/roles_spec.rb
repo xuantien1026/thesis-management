@@ -32,6 +32,12 @@ RSpec.describe 'Roles', type: :request do
         expect(lecturer.is_head_of_department?).to eq true
         expect(lecturer.roles.count).to eq 2
       end
+
+      it 'removes roles if none is selected' do
+        post lecturer_role_path(lecturer)
+
+        expect(lecturer.roles).to be_empty
+      end
     end
   end
 end
