@@ -20,7 +20,13 @@ RSpec.describe 'Profiles', type: :request do
 
       it 'shows lecturer information' do
         get profile_path
-        lecturer_info = [lecturer.name, lecturer.mscb, lecturer.email, lecturer.department, lecturer.faculty]
+        lecturer_info = [
+          signed_lecturer.name,
+          signed_lecturer.mscb,
+          signed_lecturer.email,
+          signed_lecturer.department,
+          signed_lecturer.faculty,
+        ]
 
         expect(response.body).to include(*lecturer_info.map(&:to_s))
       end

@@ -52,4 +52,16 @@ FactoryBot.define do
       lecturer.add_role :head_of_department
     end
   end
+
+  trait :as_head_of_faculty do
+    after(:create) do |lecturer|
+      lecturer.add_role :head_of_faculty
+    end
+  end
+
+  trait :as_admin do
+    after(:create) do |lecturer|
+      lecturer.add_role :admin
+    end
+  end
 end

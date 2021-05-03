@@ -9,10 +9,10 @@ RSpec.shared_context :signed_in_as_student do
 end
 
 RSpec.shared_context :signed_in_as_lecturer do
-  let(:lecturer) { create :lecturer }
+  let(:signed_lecturer) { create :lecturer }
 
   before do
-    sign_in lecturer
+    sign_in signed_lecturer
   end
 end
 
@@ -25,13 +25,20 @@ RSpec.shared_context :signed_in_as_head_of_department do
 end
 
 RSpec.shared_context :signed_in_as_head_of_faculty do
-  let(:head_of_faculty) { create :user, :as_head_of_faculty }
+  let(:head_of_faculty) { create :lecturer, :as_head_of_faculty }
 
   before do
     sign_in head_of_faculty
   end
 end
 
+RSpec.shared_context :signed_in_as_admin do
+  let(:admin) { create :lecturer, :as_admin }
+
+  before do
+    sign_in admin
+  end
+end
 # System test
 
 RSpec.shared_context :browser_signed_in_as_student do
