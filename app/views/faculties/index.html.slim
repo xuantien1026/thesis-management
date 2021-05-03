@@ -2,14 +2,6 @@
   .card-header
     h3 Danh sách khoa
   .card-body
-    dl
-      table.table
-        thead
-          tr
-            th STT
-            th Tên Khoa
-        tbody
-          - @faculties.each do |faculty|
-              tr
-                  td = link_to faculty.id, faculty_path(faculty)
-                  td = faculty.name
+    ul
+      - @faculties.each do |faculty|
+        li = link_to faculty, faculty_path(faculty)

@@ -1,17 +1,12 @@
 .card
   .card-header
-    h3 Giảng viên
-    / h3
-    /     .dropdown.filter-dropdown.float-right
-    /       button.btn.btn-secondary.dropdown-toggle type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"
-    /       .dropdown-menu aria-labelledby="dropdownMenuButton"
-    /         - @departments.each do |department|
-    /           a.dropdown-item href="departments/#{department.id}/"  data-turbo-frame = "lecturer" #{department.name}
+    h3 = "Bộ môn: #{@department}"
   .card-body
-    - @lecturers.each do |lecturer|
-      p = lecturer.name
-    / = turbo_frame_tag "lecturer"
-    /   = render LecturerDepartmentComponent.new(lecturers: @lecturers,departments: @departments,department_id: @department_id)
-
+    h4 Danh sách giảng viên
+    ul
+      - @lecturers.each do |lecturer|
+        li = link_to lecturer.name
+  .card-footer
+    = link_to 'Quay lại', faculty_path(@department.faculty_id)
 
 

@@ -1,2 +1,14 @@
-= link_to 'Danh sách bộ môn', faculty_departments_path(@faculty)
-= link_to 'Danh sách chuyên ngành', faculty_majors_path(@faculty)
+.card
+  .card-header
+    h3 = "Khoa: #{@faculty}"
+  .card-body
+    h4 Bộ môn
+    ul
+      - @departments.each do |department|
+        li = link_to department, department_lecturers_path(department)
+    h4 Chuyên ngành
+    ul
+      - @majors.each do |major|
+        li = major
+  .card-footer
+    = link_to 'Quay lại', faculties_path
