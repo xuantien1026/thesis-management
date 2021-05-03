@@ -10,7 +10,7 @@ class RolesController < ApplicationController
   def create
     authorize(Role)
     @lecturer.roles.destroy_all
-    params[:roles].each { |role| @lecturer.add_role role }
+    role_params.each { |role| @lecturer.add_role role }
     redirect_to lecturer_role_path(@lecturer), notice: 'Cập nhật thành công!'
   end
 
@@ -18,5 +18,9 @@ class RolesController < ApplicationController
 
   def set_lecturer
     @lecturer = Lecturer.find(params[:lecturer_id])
+  end
+
+  def role_params
+    params[:roles] || []
   end
 end
