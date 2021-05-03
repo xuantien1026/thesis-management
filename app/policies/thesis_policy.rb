@@ -3,7 +3,6 @@
 class ThesisPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      return scope.all if user.has_role? :admin
       return lecturer_scope if user.is_a?(Lecturer)
       return student_scope if user.is_a?(Student)
     end
