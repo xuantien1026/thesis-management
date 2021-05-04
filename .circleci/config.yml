@@ -33,6 +33,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
     environment:
+      PGHOST: 127.0.0.1
       PGUSER: postgres
       PGPASSWORD: password
       RAILS_ENV: test
