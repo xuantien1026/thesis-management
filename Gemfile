@@ -39,8 +39,6 @@ gem 'slim'
 gem 'view_component', require: 'view_component/engine'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem 'rspec_junit_formatter'
-gem 'rubocop'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -69,6 +67,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'rspec_junit_formatter'
+  gem 'rubocop-rails', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
