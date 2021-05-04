@@ -28,12 +28,11 @@ jobs:
   test:
     docker:
       - image: 'cimg/ruby:2.7.2-node'
-      - image: 'circleci/postgres:13.0-postgis-ram'
+      - image: 'circleci/postgres:13.0-ram'
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
     environment:
-      PGHOST: 127.0.0.1
       PGUSER: postgres
       PGPASSWORD: password
       RAILS_ENV: test
