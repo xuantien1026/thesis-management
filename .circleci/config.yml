@@ -29,6 +29,8 @@ jobs:
     docker:
       - image: 'cimg/ruby:2.7.2-node'
       - image: 'circleci/postgres:13.0-postgis-ram'
+        environment:
+          POSTGRES_PASSWORD: ''
     parallelism: 3
     steps:
       - checkout
