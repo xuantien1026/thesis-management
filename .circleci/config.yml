@@ -34,8 +34,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
     environment:
-      PGUSER: postgres
-      PGPASSWORD: password
+      DATABASE_URL: postgresql://postgres:password@localhost:5432/thesis_management_test
       RAILS_ENV: test
     parallelism: 3
     steps:
