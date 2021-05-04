@@ -30,7 +30,7 @@ jobs:
       - image: 'cimg/ruby:2.7.2-node'
       - image: 'circleci/postgres:13.0-ram'
         environment:
-          POSTGRES_DB: thesis-management_test
+          POSTGRES_DB: thesis_management_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
     environment:
