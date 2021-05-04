@@ -30,7 +30,12 @@ jobs:
       - image: 'cimg/ruby:2.7.2-node'
       - image: 'circleci/postgres:13.0-postgis-ram'
         environment:
-          POSTGRES_PASSWORD: ''
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: password
+      RAILS_ENV: test
     parallelism: 3
     steps:
       - checkout
