@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :thesis_proposal do
     title { Faker::Lorem.sentence }

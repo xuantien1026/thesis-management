@@ -3,7 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe CreateThesisProposal, type: :interactor do
-  subject(:context) { CreateThesisProposal.call(thesis_proposal_params: thesis_proposal_params, students: students, primary_advisor: primary_advisor) }
+  subject(:context) do
+    CreateThesisProposal.call(thesis_proposal_params: thesis_proposal_params, students: students,
+                              primary_advisor: primary_advisor)
+  end
 
   let(:thesis_proposal_params) { attributes_for :thesis_proposal }
   let(:students) { create_list :student, 2 }
