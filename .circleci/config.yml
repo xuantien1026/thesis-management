@@ -5,20 +5,22 @@ version: 2.1 # Use 2.1 to enable using orbs and other features.
 orbs:
   ruby: circleci/ruby@1.1.2
   node: circleci/node@2
+  browser-tools: circleci/browser-tools@1.1
 
 jobs:
   build:
     docker:
-      - image: 'cimg/ruby:2.7-node'
+      - image: 'cimg/ruby:2.7.2-browsers'
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - ruby/install-deps
       - node/install-packages:
           cache-key: yarn.lock
           pkg-manager: yarn
   checking:
     docker:
-      - image: 'cimg/ruby:2.7-node'
+      - image: 'cimg/ruby:2.7.2-browsers'
     steps:
       - checkout
       - ruby/install-deps
@@ -27,12 +29,19 @@ jobs:
           label: Inspecting with Rubocop
   test:
     docker:
-      - image: 'cimg/ruby:2.7-node'
-      - environment:
-        image: 'circleci/postgres:9.5-alpine'
+      - image: 'cimg/ruby:2.7.2-browsers'
+      - image: 'circleci/postgres:13.0-ram'
+        environment:
+          POSTGRES_DB: thesis_management_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+    environment:
+      DATABASE_URL: postgresql://postgres:password@localhost:5432/thesis_management_test
+      RAILS_ENV: test
     parallelism: 3
     steps:
       - checkout
+      - browser-tools/install-browser-tools
       - ruby/install-deps
       - node/install-packages:
           cache-key: yarn.lock
@@ -44,6 +53,8 @@ jobs:
           command: 'bundle exec rails db:schema:load --trace'
           name: Database setup
       - ruby/rspec-test
+      - store_artifacts:
+          path: tmp/screenshots
 
 workflows:
   build_and_test:

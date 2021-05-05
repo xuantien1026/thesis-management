@@ -14,10 +14,12 @@ RSpec.describe 'DefenseCommittees', type: :request do
 
       it 'creates new thesis defense committee' do
         post defense_committees_path, params: {
-          chairman_id: chairman.id,
-          secretary_id: secretary.id,
-          member_ids: members.map(&:id),
-          thesis_ids: theses.map(&:id)
+          defense_committee_form: {
+            chairman_id: chairman.id,
+            secretary_id: secretary.id,
+            member_ids: members.map(&:id),
+            thesis_ids: theses.map(&:id)
+          }
         }
 
         new_committee = DefenseCommittee.last

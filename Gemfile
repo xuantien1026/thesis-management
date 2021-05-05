@@ -39,7 +39,6 @@ gem 'slim'
 gem 'view_component', require: 'view_component/engine'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem 'rspec_junit_formatter'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -67,6 +66,8 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'rspec_junit_formatter'
+  gem 'rubocop-rails', require: false
   gem 'webdrivers'
 end
 

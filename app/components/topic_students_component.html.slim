@@ -1,6 +1,6 @@
 .form-group
-  = label :topic, :max_student_count, "Số lượng sinh viên"
-  = number_field :topic, :max_student_count, min: 1, class: 'form-control'
+  = label @topic.class.to_s.underscore, :max_student_count, "Số lượng sinh viên"
+  = number_field @topic.class.to_s.underscore, :max_student_count, min: 1, class: 'form-control'
 .form-group
   = label_tag "Chọn sinh viên"
   = select_tag "student_ids[]", options_for_select(@student_options), class: 'form-control student-select-box', multiple: true
