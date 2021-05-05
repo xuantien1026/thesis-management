@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe ApplyTopic, type: :interactor do
-  subject(:context) { ApplyTopic.call(student: student, topic: topic) }
+  subject(:context) { ApplyTopic.call(student: student, topic: thesis_proposal) }
 
   context 'when topic already has max number of students' do
-    let(:student) { create(:user, :as_student) }
-    let(:topic) { create(:topic, number_of_students: 2) }
+    let(:student) { create(:student) }
+    let(:thesis_proposal) { create(:thesis_proposal, max_student_count: 2) }
 
     before do
-      create_list :topic_application, 2, topic: topic
+      2.times { thesis_proposal.create_member(create(:student)) }
     end
 
     it 'fails' do
@@ -23,8 +23,8 @@ RSpec.describe ApplyTopic, type: :interactor do
   end
 
   context 'when student has already applied' do
-    let(:topic) { create :topic }
-    let(:student) { create(:topic_application).user }
+    let(:thesis_proposal) { create :thesis_proposal, students: [student] }
+    let(:student) { create :student }
 
     it 'fails' do
       expect(context).to be_a_failure
@@ -36,8 +36,8 @@ RSpec.describe ApplyTopic, type: :interactor do
   end
 
   context 'when student has not applied for any topic' do
-    let(:student) { create :user, :as_student }
-    let(:topic) { create :topic }
+    let(:student) { create :student, dkmh: 'DCLV', major: 'CS', education_program: 'CQ' }
+    let(:thesis_proposal) { create :thesis_proposal, majors: ['CS'], education_program: 'CQ' }
 
     it 'succeeds' do
       expect(context).to be_a_success

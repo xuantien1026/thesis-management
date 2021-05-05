@@ -10,9 +10,9 @@ class CreateThesisProposal
     context.fail!(errors: thesis_proposal.errors.full_messages) unless context.thesis_proposal.save
 
     students.each do |student|
-      ThesisProposalMember.create!(thesis_proposal: context.thesis_proposal, student: student)
+      context.thesis_proposal.create_member(student)
     end
 
-    ThesisProposalAdvisor.create!(thesis_proposal: context.thesis_proposal, lecturer: primary_advisor, primary: true)
+    context.thesis_proposal.thesis_proposal_advisors.create(lecturer: primary_advisor, primary: true)
   end
 end
