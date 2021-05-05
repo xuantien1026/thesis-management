@@ -10,7 +10,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: 'cimg/ruby:2.7.2-browser'
+      - image: 'cimg/ruby:2.7.2-browsers'
     steps:
       - checkout
       - browser-tools/install-browser-tools
@@ -20,7 +20,7 @@ jobs:
           pkg-manager: yarn
   checking:
     docker:
-      - image: 'cimg/ruby:2.7.2-browser'
+      - image: 'cimg/ruby:2.7.2-browsers'
     steps:
       - checkout
       - ruby/install-deps
@@ -29,7 +29,7 @@ jobs:
           label: Inspecting with Rubocop
   test:
     docker:
-      - image: 'cimg/ruby:2.7.2-browser'
+      - image: 'cimg/ruby:2.7.2-browsers'
       - image: 'circleci/postgres:13.0-ram'
         environment:
           POSTGRES_DB: thesis_management_test
