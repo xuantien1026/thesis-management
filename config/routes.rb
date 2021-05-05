@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/profile', to: 'profile#show'
+  post '/majors/:id/edit', to: 'majors#update'
+  delete '/majors/:id', to: 'majors#destroy'
 
   resources :faculties, only: %i[index show], shallow: true do
     resources :departments, only: :index do
@@ -10,7 +12,7 @@ Rails.application.routes.draw do
         resource :role, only: %i[show create]
       end
     end
-    resources :majors, only: :index
+    resources :majors
   end
 
   resources :thesis_proposals do

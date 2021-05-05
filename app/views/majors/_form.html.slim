@@ -1,0 +1,10 @@
+= form_with model: major do |form|
+  .form-group
+    .container.text-center
+      .row
+        .col-lg-8
+          = form.text_field :name, class: 'form-control'
+        .col-lg-4
+          = form.submit 'Sửa', class: 'btn btn-primary'
+
+
