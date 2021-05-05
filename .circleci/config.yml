@@ -53,6 +53,8 @@ jobs:
           command: 'bundle exec rails db:schema:load --trace'
           name: Database setup
       - ruby/rspec-test
+      - store_artifacts:
+          path: tmp/screenshots
 
 workflows:
   build_and_test:
