@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   scope module: 'admin' do
     resources :faculties, only: %i[index show], shallow: true do
+      resources :midterm_evaluations, only: :index
+
       resources :departments, only: [] do
         resources :lecturers, only: :index do
           resource :role, only: %i[show create]

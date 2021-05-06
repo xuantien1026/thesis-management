@@ -18,23 +18,27 @@ html
 
   body class="c-app"
     .c-sidebar.c-sidebar-show#sidebar
-      nav.c-sidebar-nav
-        .c-sidebar-brand
+      ul.c-sidebar-nav
+        li.c-sidebar-brand
           i.cil-school style="font-size:xx-large"
         - if current_user.has_role? :admin
-          .c-sidebar-nav-item
+          li.c-sidebar-nav-item
             = link_to faculties_path, class: "c-sidebar-nav-link"
               i.c-sidebar-nav-icon.cil-list
-              = "Admin"
-        .c-sidebar-nav-item onclick='alert("Chức năng đang trong quá trình xây dựng!")'
+              = "Bộ máy tổ chức"
+          li.c-sidebar-nav-item
+            = link_to faculty_midterm_evaluations_path(current_user.faculty), class: "c-sidebar-nav-link"
+              i.c-sidebar-nav-icon.cil-list
+              = "Kết quả giữa kì LVTN"
+        li.c-sidebar-nav-item onclick='alert("Chức năng đang trong quá trình xây dựng!")'
           = link_to '', class: "c-sidebar-nav-link"
             i.c-sidebar-nav-icon.cil-lock-locked
             = "Đề Cương Luận Văn"
-        .c-sidebar-nav-item
+        li.c-sidebar-nav-item
           = link_to theses_path, class: "c-sidebar-nav-link"
             i.c-sidebar-nav-icon.cil-list
             = "Luận văn tốt nghiệp"
-        .c-sidebar-nav-item onclick='alert("Chức năng đang trong quá trình xây dựng!")'
+        li.c-sidebar-nav-item onclick='alert("Chức năng đang trong quá trình xây dựng!")'
           = link_to '', class: "c-sidebar-nav-link"
             i.c-sidebar-nav-icon.cil-lock-locked
             = "Hội Đồng Bảo Vệ"
