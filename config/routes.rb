@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "theses#index"
   devise_for :users
 
-  get '/lecturers/5/role', to: '/'
+  get '/lecturers/5/role', to: redirect('/')
 
   get '/profile', to: 'profile#show'
 
