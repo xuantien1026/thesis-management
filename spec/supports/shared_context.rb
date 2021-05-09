@@ -39,6 +39,7 @@ RSpec.shared_context :signed_in_as_admin do
     sign_in admin
   end
 end
+
 # System test
 RSpec.shared_context :basic_faculty do
   let(:faculty) { create :faculty }

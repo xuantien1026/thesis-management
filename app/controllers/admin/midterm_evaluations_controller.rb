@@ -7,7 +7,6 @@ module Admin
     def index
       @faculty = Faculty.find(params[:faculty_id])
       respond_to do |format|
-        format.html
         format.csv { send_data midterm_result, filename: 'KetQuaChamGiuaKiLVTN.csv' }
       end
     end

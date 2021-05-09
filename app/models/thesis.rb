@@ -41,8 +41,12 @@ class Thesis < ApplicationRecord
   scope :by_lecturer, lambda { |lecturer|
     joins(:thesis_advisors).where(thesis_advisors: { lecturer: lecturer })
   }
-  scope :by_department, ->(department) { joins(:lecturers).where(users: { department_id: department.id }) }
-  scope :by_faculty, ->(faculty) { joins(:lecturers).where(users: { department_id: faculty.department_ids }) }
+  scope :by_department, lambda { |department|
+    joins(:lecturers).where(users: { department_id: department.id }, thesis_advisors: { primary: true })
+  }
+  scope :by_faculty, lambda { |faculty|
+    joins(:lecturers).where(users: { department_id: faculty.department_ids }, thesis_advisors: { primary: true })
+  }
 
   enum status: { 'waiting_for_approval' => 0, 'department_approved' => 1, 'faculty_approved' => 2 }
 
@@ -52,5 +56,9 @@ class Thesis < ApplicationRecord
 
   def create_member(student)
     thesis_members.create(student: student)
+  end
+
+  def to_s
+    title || english_title
   end
 end

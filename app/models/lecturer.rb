@@ -43,6 +43,8 @@ class Lecturer < User
 
   delegate :faculty, to: :department
 
+  scope :by_faculty, ->(faculty) { joins(:department).where(departments: { faculty_id: faculty.id }) }
+
   def to_s
     name
   end
