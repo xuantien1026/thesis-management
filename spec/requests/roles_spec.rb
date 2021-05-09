@@ -17,7 +17,7 @@ RSpec.describe 'Roles', type: :request do
     end
 
     context 'when user has authority to edit roles' do
-      include_context :signed_in_as_head_of_department
+      include_context :signed_in_as_admin
 
       it 'returns success' do
         post lecturer_role_path(lecturer), params: { roles: [:admin] }

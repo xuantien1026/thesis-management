@@ -9,7 +9,6 @@ module Admin
     end
 
     def create
-      authorize(Role)
       @lecturer.roles.destroy_all
       role_params.each { |role| @lecturer.add_role role }
       redirect_to lecturer_role_path(@lecturer), notice: 'Cập nhật thành công!'
