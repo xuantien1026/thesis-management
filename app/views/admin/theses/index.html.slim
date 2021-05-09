@@ -1,0 +1,16 @@
+.card
+  .card-header
+    h3 = "Danh sách luận văn tốt nghiệp - Khoa #{@faculty}"
+  .card-body
+    table.table
+      thead
+        tr
+          th Mã luận văn
+          th Tên đề tài
+          th GVHD
+      tbody
+        - @theses.each do |thesis|
+          tr
+            td = link_to thesis.ordering, thesis
+            td = thesis.title || thesis.english_title
+            td = thesis.primary_advisor

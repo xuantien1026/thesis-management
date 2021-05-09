@@ -42,6 +42,8 @@ class Thesis < ApplicationRecord
     joins(:thesis_advisors).where(thesis_advisors: { lecturer: lecturer })
   }
   scope :by_department, ->(department) { joins(:lecturers).where(users: { department_id: department.id }) }
+  scope :by_faculty, ->(faculty) { joins(:lecturers).where(users: { department_id: faculty.department_ids }) }
+
 
   enum status: { 'waiting_for_approval' => 0, 'department_approved' => 1, 'faculty_approved' => 2 }
 
