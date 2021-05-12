@@ -15,7 +15,7 @@
           span = 'Tìm kiếm'
     hr
       i.cil-cloud-download.mr-1
-      = link_to 'Download kết quả chấm điểm giữa kì', faculty_midterm_evaluations_path(@faculty, format: :csv)
+      = link_to 'Download kết quả chấm điểm giữa kì', faculty_midterm_evaluations_path(@faculty, format: :xlsx)
 .card
   .card-body
     - if @theses.blank?
