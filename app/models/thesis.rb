@@ -13,7 +13,8 @@
 #  mission            :string
 #  ordering           :integer
 #  references         :string           default([]), is an Array
-#  semester           :string
+#  school_year        :integer
+#  semester_number    :string
 #  status             :integer          default("waiting_for_approval")
 #  title              :string
 #  created_at         :datetime         not null

@@ -5,7 +5,7 @@ module Admin
     before_action :set_lecturer
 
     def show
-      @role = @lecturer.roles.first&.name
+      @available_roles = current_user.has_role?(:super_admin) ? Role::ROLES : ['privileged_lecturer']
     end
 
     def create

@@ -1,7 +1,0 @@
-vn:
-  roles:
-    show:
-      head_of_department: 'Chủ Nhiệm Bộ Môn'
-      head_of_faculty: 'Trưởng Khoa'
-      admin: 'Admin'
-      privileged_lecturer: 'Nâng quyền Giảng Viên'

@@ -36,7 +36,8 @@ module Admin
     def ransack_params
       return {} unless params[:q]
 
-      params.require(:q).permit(:title_or_english_title_cont)
+      params.require(:q).permit(:title_or_english_title_cont, :semester_number_eq, :school_year_eq,
+                                :education_program_eq)
     end
   end
 end

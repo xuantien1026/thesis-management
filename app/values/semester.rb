@@ -1,49 +1,27 @@
 # frozen_string_literal: true
 
 class Semester
-  attr_reader :semester
+  attr_reader :school_year, :semester_number
 
-  def initialize(semester = nil, day = Time.zone.today)
-    @day = day
-    @semester = semester || infer_semester_name
+  def initialize(semester_number = nil, school_year = nil)
+    @semester_number = semester_number
+    @school_year = school_year
+
+    set_default unless @semester_number && @school_year
   end
 
   def to_s
-    semester
+    "Học kì #{semester_number} (#{school_year}-#{school_year + 1})"
   end
 
   def ==(other)
-    to_s == other.to_s
+    school_year == other.school_year && semester_number == other.semester_number
   end
 
   private
 
-  def infer_semester_name
-    "HK#{year_component}#{semester_number}"
-  end
-
-  def year_component
-    return @day.year % 100 if @day >= start_hk1
-
-    @day.year % 100 - 1
-  end
-
-  def semester_number
-    return 2 if @day >= start_hk2 && @day < start_hk3
-    return 3 if @day >= start_hk3 && @day < start_hk1
-
-    1
-  end
-
-  def start_hk1
-    @day.change(month: 9, day: 1)
-  end
-
-  def start_hk2
-    @day.change(month: 3, day: 1)
-  end
-
-  def start_hk3
-    @day.change(month: 7, day: 1)
+  def set_default
+    @semester_number = 2
+    @school_year = 2020
   end
 end

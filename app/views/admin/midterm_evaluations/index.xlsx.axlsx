@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 workbook = xlsx_package.workbook
 workbook.add_worksheet(name: 'KetQuaChamGiuaKiLVTN') do |sheet|
   sheet.add_row ['MSSV', 'Họ và tên', 'MĐT', 'Kết quả giữa kì']

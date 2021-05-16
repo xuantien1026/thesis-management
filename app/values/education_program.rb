@@ -2,7 +2,7 @@
 
 class EducationProgram
   include ActiveModel::Validations
-  PROGRAMS = %w[CQ VLVH TC].freeze # Chinh Quy, Vua lam vua hoc, Tai Chuc
+  PROGRAMS = %w[CQ CLC VLVH TC].freeze # Chinh quy, Chat luong cao, Vua lam vua hoc, Tai chuc
   attr_reader :education_program
 
   validates :education_program, inclusion: PROGRAMS

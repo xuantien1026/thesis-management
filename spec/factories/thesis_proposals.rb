@@ -1,5 +1,25 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: thesis_proposals
+#
+#  id                :bigint           not null, primary key
+#  description       :text
+#  education_program :string
+#  english_title     :string
+#  majors            :string           default([]), is an Array
+#  max_student_count :integer          default(1), not null
+#  mission           :string
+#  ordering          :integer
+#  references        :string           default([]), is an Array
+#  school_year       :integer
+#  semester_number   :string
+#  status            :integer          default("waiting_for_approval")
+#  title             :string           not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
 FactoryBot.define do
   factory :thesis_proposal do
     title { Faker::Lorem.sentence }
@@ -9,7 +29,8 @@ FactoryBot.define do
     references { 3.times.map { Faker::Lorem.sentence } }
     majors { 3.times.map { Faker::Lorem.word } }
     max_student_count { rand 1..5 }
-    semester { Semester.new }
+    semester_number { 1 }
+    school_year { 2020 }
     education_program { 'CQ' }
 
     transient do
