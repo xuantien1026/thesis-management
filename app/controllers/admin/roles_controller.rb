@@ -9,7 +9,7 @@ module Admin
     end
 
     def create
-      @lecturer.roles.destroy_all
+      Role::ROLES.each { |role| @lecturer.remove_role role }
       role_params.each { |role| @lecturer.add_role role }
       redirect_to lecturer_role_path(@lecturer), notice: 'Cập nhật thành công!'
     end
