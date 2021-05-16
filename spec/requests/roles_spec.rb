@@ -6,7 +6,7 @@ RSpec.describe 'Roles', type: :request do
   describe 'POST /lecturers/:lecturer_id/roles' do
     let(:lecturer) { create :lecturer }
 
-    context 'when user does not have authority (admin, head of department, head of faculty) to edit roles' do
+    context 'when user does not have authority (admin or super admin) to edit roles' do
       include_context :signed_in_as_lecturer
 
       it 'is forbidden' do
