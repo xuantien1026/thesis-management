@@ -13,14 +13,15 @@
 #  mission           :string
 #  ordering          :integer
 #  references        :string           default([]), is an Array
-#  semester          :string
+#  school_year       :integer
+#  semester_number   :string
 #  status            :integer          default("waiting_for_approval")
 #  title             :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
 class ThesisProposal < ApplicationRecord
-  composed_of :semester, converter: proc { |string| Semester.new(string) }
+  composed_of :semester, mapping: [%w[semester_number semester_number], %w[school_year school_year]]
   composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
 
   has_many :thesis_proposal_advisors, dependent: :destroy

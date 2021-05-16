@@ -1,8 +1,24 @@
 .card
+  .card-header
+    h3 Luận Văn Tốt Nghiệp
   .card-body
     dl
-      dt Mã đề tài
-      dd = @thesis.ordering
+      .row
+        .col-3
+          dt Học kì
+          dd = @thesis.semester
+        .col-3
+          dt Mã đề tài
+          dd = @thesis.ordering
+        .col-3
+          dt Chương trình đào tạo
+          dd = @thesis.education_program
+        .col-3
+          dt Chuyên ngành
+          dd = @thesis.majors.join(" - ")
+
+      dt Giảng viên hướng dẫn
+      dd = @thesis.primary_advisor
 
       dt Tên đề tài
       dd = @thesis.title
@@ -35,7 +51,6 @@
             = link_to 'Chỉnh sửa kết quả giữa kì', edit_thesis_midterm_evaluations_path(@thesis) if policy(@thesis).update_midterm_evaluations?
         - else
           div = "Chưa có kết quả giữa kì"
-
 
   .card-footer
     = button_to 'Đăng kí', thesis_applications_path(@thesis), method: :post, class: 'btn btn-primary' if current_user.is_a?(Student)

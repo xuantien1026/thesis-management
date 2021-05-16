@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_18_153623) do
+ActiveRecord::Schema.define(version: 2021_05_16_153741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2021_04_18_153623) do
   create_table "defense_committees", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_defense_committees_on_department_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -92,9 +94,10 @@ ActiveRecord::Schema.define(version: 2021_04_18_153623) do
     t.string "references", default: [], array: true
     t.integer "max_student_count", default: 1, null: false
     t.integer "status", default: 0
-    t.string "semester"
+    t.string "semester_number"
     t.string "education_program"
     t.string "majors", default: [], array: true
+    t.integer "school_year"
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_max_student_count"
   end
@@ -148,9 +151,10 @@ ActiveRecord::Schema.define(version: 2021_04_18_153623) do
     t.string "references", default: [], array: true
     t.integer "max_student_count", default: 1, null: false
     t.integer "status", default: 0
-    t.string "semester"
+    t.string "semester_number"
     t.string "education_program"
     t.string "majors", default: [], array: true
+    t.integer "school_year"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_proposal_max_student_count"
   end
 
@@ -198,6 +202,7 @@ ActiveRecord::Schema.define(version: 2021_04_18_153623) do
   add_foreign_key "defense_committee_members", "users", column: "lecturer_id"
   add_foreign_key "defense_committee_theses", "defense_committees"
   add_foreign_key "defense_committee_theses", "theses"
+  add_foreign_key "defense_committees", "departments"
   add_foreign_key "departments", "faculties"
   add_foreign_key "majors", "faculties"
   add_foreign_key "midterm_evaluations", "thesis_members"

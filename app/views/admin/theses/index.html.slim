@@ -3,6 +3,19 @@
     h3 = "Danh sách luận văn tốt nghiệp - Khoa #{@faculty}"
   .card-body
     = search_form_for @q, url: faculty_theses_path(@faculty) do |f|
+      .row
+        .col-4
+          .form-group
+            = f.label :semester_number_eq, 'Học kì'
+            = f.select :semester_number_eq, [1,2,3], { include_blank: true, include_hidden: false }, class: 'form-control'
+        .col-4
+          .form-group
+            = f.label :school_year_eq, 'Năm học'
+            = f.select :school_year_eq, [['2019-2020', 2019], ['2020-2021', 2020]], { include_blank: true, include_hidden: false }, class: 'form-control'
+        .col-4
+          .form-group
+            = f.label :education_program_eq, 'Chương trình đào tạo'
+            = f.select :education_program_eq, EducationProgram::PROGRAMS, { include_blank: true, include_hidden: false }, class: 'form-control'
       .form-group
         = f.label :title_or_english_title_cont, 'Tên đề tài'
         = f.search_field :title_or_english_title_cont, class: 'form-control'
@@ -27,9 +40,15 @@
             th Mã luận văn
             th Tên đề tài
             th GVHD
+            th Chuyên ngành
+            th CTĐT
+            th Học kì
         tbody
           - @theses.each do |thesis|
             tr
               td = link_to thesis.ordering, thesis
               td = thesis.title || thesis.english_title
               td = thesis.primary_advisor
+              td = thesis.majors.join(' - ')
+              td = thesis.education_program
+              td = thesis.semester
