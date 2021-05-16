@@ -13,7 +13,8 @@ jobs:
       - image: 'cimg/ruby:2.7.2-browsers'
     steps:
       - checkout
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - ruby/install-deps
       - node/install-packages:
           cache-key: yarn.lock
@@ -41,7 +42,8 @@ jobs:
     parallelism: 3
     steps:
       - checkout
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - ruby/install-deps
       - node/install-packages:
           cache-key: yarn.lock
