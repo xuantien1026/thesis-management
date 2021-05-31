@@ -52,7 +52,7 @@ class Thesis < ApplicationRecord
   enum status: { 'waiting_for_approval' => 0, 'department_approved' => 1, 'faculty_approved' => 2 }
 
   def primary_advisor
-    thesis_advisors.find_by(primary: true).lecturer
+    thesis_advisors.find(&:primary).lecturer
   end
 
   def create_member(student)
