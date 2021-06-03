@@ -21,7 +21,7 @@
 #  updated_at        :datetime         not null
 #
 class ThesisProposal < ApplicationRecord
-  composed_of :semester, mapping: [%w[semester_number semester_number], %w[school_year school_year]]
+  composed_of :semester, mapping: [ %w(semester_number semester_number), %w(school_year school_year) ]
   composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
 
   has_many :thesis_proposal_advisors, dependent: :destroy

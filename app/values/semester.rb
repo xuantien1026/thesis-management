@@ -21,7 +21,8 @@ class Semester
   private
 
   def set_default
-    @semester_number = 2
-    @school_year = 2020
+    current_semester = SemesterTime.last
+    @semester_number = current_semester.semester_number
+    @school_year = current_semester.school_year
   end
 end
