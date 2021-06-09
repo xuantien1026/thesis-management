@@ -21,14 +21,16 @@ class ThesisProposalsController < ApplicationController
   end
 
   def create
-    result = CreateThesisProposal.call(thesis_proposal_params: thesis_proposal_params,
+    context = CreateThesisProposal.call(thesis_proposal_params: thesis_proposal_params,
                                        primary_advisor: primary_advisor,
                                        students: students)
-    if result.success?
+    if context.success?
       flash[:notice] = 'Tạo đề cương luận văn thành công'
-      redirect_to result.thesis_proposal
+      redirect_to context.thesis_proposal
     else
-      render :new, alert: result.errors
+      @thesis_proposal = context.thesis_proposal
+      @majors = current_user.faculty.majors
+      render :new, alert: context.errors
     end
   end
 

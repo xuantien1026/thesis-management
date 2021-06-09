@@ -21,7 +21,7 @@
 #  updated_at        :datetime         not null
 #
 class ThesisProposal < ApplicationRecord
-  composed_of :semester, mapping: [ %w(semester_number semester_number), %w(school_year school_year) ]
+  composed_of :semester, mapping: [ %w(semester_number semester_number), %w(school_year school_year) ], allow_nil: true
   composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
 
   has_many :thesis_proposal_advisors, dependent: :destroy
@@ -31,6 +31,7 @@ class ThesisProposal < ApplicationRecord
   has_many :students, through: :thesis_proposal_members
 
   validates :title, presence: true
+  validates :max_student_count, presence: true
 
   enum status: { 'waiting_for_approval' => 0, 'department_approved' => 1, 'faculty_approved' => 2 }
 
