@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: semester_times
@@ -13,6 +15,6 @@ FactoryBot.define do
   factory :semester_time do
     semester_number { 1 }
     school_year { 1 }
-    start_date { "2021-06-04" }
+    start_date { '2021-06-04' }
   end
 end

@@ -20,10 +20,10 @@ class ThesisProposalsController < ApplicationController
     @majors = current_user.faculty.majors
   end
 
-  def create
+  def create # rubocop:disable MethodLength
     context = CreateThesisProposal.call(thesis_proposal_params: thesis_proposal_params,
-                                       primary_advisor: primary_advisor,
-                                       students: students)
+                                        primary_advisor: primary_advisor,
+                                        students: students)
     if context.success?
       flash[:notice] = 'Tạo đề cương luận văn thành công'
       redirect_to context.thesis_proposal

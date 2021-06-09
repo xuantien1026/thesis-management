@@ -26,7 +26,7 @@
 #  index_theses_on_thesis_proposal_id  (thesis_proposal_id)
 #
 class Thesis < ApplicationRecord
-  composed_of :semester, mapping: [ %w(semester_number semester_number), %w(school_year school_year) ], allow_nil: true
+  composed_of :semester, mapping: [%w[semester_number semester_number], %w[school_year school_year]], allow_nil: true
   composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
 
   belongs_to :thesis_proposal, optional: true
