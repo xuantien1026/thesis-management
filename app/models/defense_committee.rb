@@ -20,18 +20,21 @@
 class DefenseCommittee < ApplicationRecord
   belongs_to :department
   has_many :defense_committee_members, dependent: :destroy
+  has_many :lecturers, through: :defense_committee_members
   has_many :defense_committee_theses, dependent: :destroy
   has_many :theses, through: :defense_committee_theses
 
+  accepts_nested_attributes_for :defense_committee_members
+
   def chairman
-    defense_committee_members.find_by(role: :chairman).lecturer
+    defense_committee_members.find_by(role: :chairman)&.lecturer
   end
 
   def secretary
-    defense_committee_members.find_by(role: :secretary).lecturer
+    defense_committee_members.find_by(role: :secretary)&.lecturer
   end
 
   def members
-    defense_committee_members.member.map(&:lecturer)
+    defense_committee_members.where(role: :member).map(&:lecturer)
   end
 end

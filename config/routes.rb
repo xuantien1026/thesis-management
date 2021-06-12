@@ -10,7 +10,11 @@ Rails.application.routes.draw do
       resources :midterm_evaluations, only: :index
 
       resources :departments, only: [] do
-        resources :defense_committees, only: %i[index new create]
+        resources :defense_committees, only: %i[index new create] do
+          collection do
+            get 'suggest', to: 'defense_committees#suggest'
+          end
+        end
         resources :lecturers, only: :index do
           resource :role, only: %i[show create]
         end

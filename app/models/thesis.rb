@@ -40,7 +40,7 @@ class Thesis < ApplicationRecord
   has_many :midterm_evaluations, through: :thesis_members
 
   scope :by_lecturer, lambda { |lecturer|
-    joins(:thesis_advisors).where(thesis_advisors: { lecturer: lecturer })
+    joins(:thesis_advisors).where(thesis_advisors: { lecturer: lecturer, primary: true })
   }
   scope :by_department, lambda { |department|
     joins(:lecturers).where(users: { department_id: department.id }, thesis_advisors: { primary: true })

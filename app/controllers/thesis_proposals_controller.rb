@@ -20,7 +20,7 @@ class ThesisProposalsController < ApplicationController
     @majors = current_user.faculty.majors
   end
 
-  def create # rubocop:disable MethodLength
+  def create # rubocop:disable Metrics/MethodLength
     context = CreateThesisProposal.call(thesis_proposal_params: thesis_proposal_params,
                                         primary_advisor: primary_advisor,
                                         students: students)

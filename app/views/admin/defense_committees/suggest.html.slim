@@ -1,0 +1,21 @@
+.card
+  .card-header
+    h3 = "Danh sách đề xuất Hội Đồng Bảo Vệ - Bộ môn #{@department}"
+  .card-body
+    = form_with model: @form, url: department_defense_committees_path(@department) do |f|
+      = f.fields_for :defense_committees do |f|
+        = f.hidden_field :department_id
+        h5 = "Hội đồng #{f.index}"
+        table.table.table-bordered
+          thead
+            tr
+              th Giảng viên
+              th Vai trò
+          tbody
+            = f.fields_for :defense_committee_members do |f|
+              tr
+                td = f.object.lecturer
+                td
+                  = f.hidden_field :lecturer_id
+                  = f.select :role, options_for_select(DefenseCommitteeMember.roles.keys)
+      = submit_tag 'Submit', class: 'btn btn-primary', data: { turbo: false }

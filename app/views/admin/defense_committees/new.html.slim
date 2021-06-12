@@ -1,22 +1,24 @@
 .card
   .card-header
     h3 = "Đề xuất Hội Đồng Bảo Vệ - Bộ môn #{@department}"
-  .card-body
+  .card-body data-controller='defense-committee'
     .d-flex.justify-content-end
-      button.btn.btn-primary Tách hội đồng
-      input type='number' placeholder='Số lượng'
-    table.table
-      thead
-        tr
-          th Mã luận văn
-          th Tên đề tài
-          th Hội đồng
-      tbody
-        - @thesis_groups.each do |primary_advisor, theses|
+      button.btn.btn-primary data-action='defense-committee#suggest' Tách hội đồng
+      input type='number' placeholder='Số lượng' data-defense-committee-target='numberOfCommittees'
+    = form_with url: suggest_department_defense_committees_path(@department), method: :get
+      table.table
+        thead
           tr
-            td.bg-light.text-dark colspan="3" = "GV: #{primary_advisor.name}"
-          - theses.each do |thesis|
+            th Mã luận văn
+            th Tên đề tài
+            th Hội đồng
+        - @thesis_groups.each do |primary_advisor, theses|
+          tbody data-defense-committee-target='thesisGroup'
             tr
-              td = link_to thesis.ordering, thesis
-              td = thesis.title || thesis.english_title
-              td = number_field :thesis_group, thesis.id, min: 1, class: 'form-control'
+              td.bg-light.text-dark colspan="3" = "GV: #{primary_advisor.name}"
+            - theses.each do |thesis|
+              tr
+                td = link_to thesis.ordering, thesis
+                td = thesis.title || thesis.english_title
+                td = number_field_tag "thesis_group[#{thesis.id}]", nil, min: 1, class: 'form-control committee-input', required: true, id: nil
+      = submit_tag 'Xem danh sách hội đồng', class: 'btn btn-primary'

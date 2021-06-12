@@ -15,7 +15,10 @@
             td = committee.id
             td = committee.chairman
             td = committee.secretary
-            td = committee.members.join(' ')
+            td
+              - committee.members.each do |member|
+                ul
+                  li = member
             td
               - committee.theses.each do |thesis|
                 ul

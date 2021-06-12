@@ -3,39 +3,25 @@
 class DefenseCommitteeForm
   include ActiveModel::Model
 
-  attr_accessor :chairman_id, :secretary_id, :member_ids, :thesis_ids
+  attr_reader :defense_committees
 
-  validates :chairman_id, presence: true, numericality: true
-  validates :secretary_id, presence: true, numericality: true
-  validates :member_ids, presence: true
-  validates :thesis_ids, presence: true
+  def initialize(defense_committees_params)
+    self.defense_committees_attributes = defense_committees_params[:defense_committees_attributes]
+  end
+
+  def defense_committees_attributes=(attributes)
+    @defense_committees = attributes.values.map do |attrs|
+      DefenseCommittee.new attrs
+    end
+  end
+
+  def valid?
+    defense_committees.all?(&:valid?)
+  end
 
   def save
     return false unless valid?
 
-    committee = DefenseCommittee.create!
-    committee.defense_committee_members.create!(lecturer: chairman, role: :chairman)
-    committee.defense_committee_members.create!(lecturer: secretary, role: :secretary)
-    members.each { |member| committee.defense_committee_members.create!(lecturer: member) }
-    theses.each { |thesis| committee.defense_committee_theses.create!(thesis: thesis) }
-    true
-  end
-
-  private
-
-  def chairman
-    Lecturer.find(chairman_id)
-  end
-
-  def secretary
-    Lecturer.find(secretary_id)
-  end
-
-  def members
-    Lecturer.where(id: member_ids)
-  end
-
-  def theses
-    Thesis.where(id: thesis_ids)
+    defense_committees.map(&:save)
   end
 end
