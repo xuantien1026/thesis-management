@@ -25,6 +25,7 @@ class DefenseCommittee < ApplicationRecord
   has_many :theses, through: :defense_committee_theses
 
   accepts_nested_attributes_for :defense_committee_members
+  validates_associated :defense_committee_members
 
   def chairman
     defense_committee_members.find_by(role: :chairman)&.lecturer

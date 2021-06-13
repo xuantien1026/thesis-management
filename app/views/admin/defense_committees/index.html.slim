@@ -22,6 +22,6 @@
             td
               - committee.theses.each do |thesis|
                 ul
-                  li = thesis.title
+                  li = thesis
   .card-footer
     = link_to 'Đề xuất Hội Đồng Bảo Vệ', new_department_defense_committee_path, class: 'btn btn-primary'

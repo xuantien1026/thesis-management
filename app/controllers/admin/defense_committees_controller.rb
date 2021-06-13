@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class DefenseCommitteesController < ApplicationController
+  class DefenseCommitteesController < AdminController
     before_action :set_department
 
     def index
@@ -25,6 +25,7 @@ module Admin
 
     def suggest
       @form = DefenseCommitteeForm.new(suggest_committee_params)
+      @lecturers = Lecturer.where(department: @department).pluck(:name, :id)
     end
 
     private
@@ -54,9 +55,11 @@ module Admin
     end
 
     def committee_params
-      params.require(:defense_committee_form).permit(defense_committees_attributes: [:department_id, {
-                                                       defense_committee_members_attributes: %i[lecturer_id role]
-                                                     }])
+      params.require(:defense_committee_form)
+            .permit(defense_committees_attributes: [
+                      :department_id,
+                      { defense_committee_members_attributes: %i[lecturer_id role], thesis_ids: [] }
+                    ])
     end
 
     def set_department

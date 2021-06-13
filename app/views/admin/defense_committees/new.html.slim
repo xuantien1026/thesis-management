@@ -2,8 +2,8 @@
   .card-header
     h3 = "Đề xuất Hội Đồng Bảo Vệ - Bộ môn #{@department}"
   .card-body data-controller='defense-committee'
-    .d-flex.justify-content-end
-      button.btn.btn-primary data-action='defense-committee#suggest' Tách hội đồng
+    .d-flex.justify-content-end.mb-3
+      button.btn.btn-primary.mr-1 data-action='defense-committee#suggest' Tách hội đồng
       input type='number' placeholder='Số lượng' data-defense-committee-target='numberOfCommittees'
     = form_with url: suggest_department_defense_committees_path(@department), method: :get
       table.table
@@ -21,4 +21,4 @@
                 td = link_to thesis.ordering, thesis
                 td = thesis.title || thesis.english_title
                 td = number_field_tag "thesis_group[#{thesis.id}]", nil, min: 1, class: 'form-control committee-input', required: true, id: nil
-      = submit_tag 'Xem danh sách hội đồng', class: 'btn btn-primary'
+      = submit_tag 'Xem danh sách hội đồng', class: 'btn btn-primary', data: { turbo: false }

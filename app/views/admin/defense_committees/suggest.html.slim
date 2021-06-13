@@ -1,21 +1,57 @@
 .card
   .card-header
     h3 = "Danh sách đề xuất Hội Đồng Bảo Vệ - Bộ môn #{@department}"
-  .card-body
-    = form_with model: @form, url: department_defense_committees_path(@department) do |f|
-      = f.fields_for :defense_committees do |f|
-        = f.hidden_field :department_id
-        h5 = "Hội đồng #{f.index}"
-        table.table.table-bordered
+  = form_with model: @form, url: department_defense_committees_path(@department) do |f|
+    .card-body
+      table.table.table-borderless
+        = f.fields_for :defense_committees do |f|
+          = f.hidden_field :department_id
+          - f.object.theses.each do |thesis|
+            = hidden_field_tag "defense_committee_form[defense_committees_attributes][#{f.index}][thesis_ids][]", thesis.id
+          thead
+            tr.bg-light.text-dark
+              td colspan=2 = "Hội đồng #{f.index + 1}"
           thead
             tr
               th Giảng viên
               th Vai trò
-          tbody
+          tbody data-controller='defense-committee' data-index="#{f.index}"
             = f.fields_for :defense_committee_members do |f|
               tr
-                td = f.object.lecturer
                 td
+                  = f.object.lecturer
                   = f.hidden_field :lecturer_id
-                  = f.select :role, options_for_select(DefenseCommitteeMember.roles.keys)
+                td
+                  = f.select :role, options_for_select(DefenseCommitteeMember.roles.keys), {}, class: 'form-control'
+            tr data-defense-committee-target="buttons"
+              td colspan=2
+                button.btn.btn-primary.mr-1 type="button" data-action="defense-committee#addMember"
+                  .d-flex
+                    i.cil-plus.mr-1
+                    span = "Thêm thành viên"
+                button.btn.btn-info type="button" data-toggle="modal" data-target="#modal-#{f.index + 1}"
+                  .d-flex
+                    i.cil-spreadsheet.mr-1
+                    span = "Chi tiết"
+      - @form.defense_committees.each.with_index(1) do |committee, index|
+        .modal.fade id="modal-#{index}" aria-hidden="true"
+          .modal-dialog.modal-xl
+            .modal-content
+              .modal-header = "Danh sách đề tài Hội Đồng #{index}"
+              .modal-body
+                table.table.table-bordered
+                  thead
+                    tr
+                      th Tên đề tài
+                      th GVHD chính
+                  tbody
+                    - committee.theses.each do |thesis|
+                      tr
+                        td = thesis
+                        td = thesis.primary_advisor
+              .modal-footer
+                button.btn.btn-secondary type="button" data-dismiss="modal" Đóng
+
+    .card-footer
       = submit_tag 'Submit', class: 'btn btn-primary', data: { turbo: false }
+script#all-lecturers = @lecturers.to_json.html_safe
