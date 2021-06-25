@@ -17,7 +17,7 @@
           - @theses.each do |thesis|
             tr
               td = link_to thesis.ordering, thesis
-              td = thesis.title || thesis.english_title
+              td = thesis
               td = thesis.primary_advisor
               td style="width:20%"
                 = turbo_frame_tag thesis do
@@ -29,4 +29,3 @@
                     = link_to new_dept_thesis_review_path(thesis), class: 'btn btn-outline-primary' do
                       i.cil-plus.mr-2
                       = "Phân công"
-

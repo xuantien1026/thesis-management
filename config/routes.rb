@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :thesis_reviews, only: :index
+
     resources :thesis_proposals do
       member do
         post 'department_approve', to: 'thesis_proposals#department_approve'
