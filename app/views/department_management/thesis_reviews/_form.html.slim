@@ -1,0 +1,5 @@
+= form_for @thesis_review, url: dept_thesis_review_path(@thesis) do |f|
+  .input-group
+    = f.collection_select :lecturer_id, @lecturers, :id, :name, {}, class: 'form-control'
+    .input-group-append
+      = f.submit 'Submit', class: 'btn btn-primary'

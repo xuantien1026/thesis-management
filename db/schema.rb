@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_173641) do
+ActiveRecord::Schema.define(version: 2021_06_23_173437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,15 @@ ActiveRecord::Schema.define(version: 2021_06_03_173641) do
     t.string "majors", default: [], array: true
     t.integer "school_year"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_proposal_max_student_count"
+  end
+
+  create_table "thesis_reviews", force: :cascade do |t|
+    t.bigint "thesis_id"
+    t.bigint "lecturer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecturer_id"], name: "index_thesis_reviews_on_lecturer_id"
+    t.index ["thesis_id"], name: "index_thesis_reviews_on_thesis_id"
   end
 
   create_table "users", force: :cascade do |t|

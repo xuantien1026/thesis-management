@@ -1,0 +1,32 @@
+.card
+  .card-header
+    h3 Danh sách luận văn tốt nghiệp
+    h4 = "Bộ môn #{current_department}"
+  .card-body
+    - if @theses.blank?
+      = 'Không có luận văn nào.'
+    - else
+      table.table
+        thead
+          tr
+            th Mã luận văn
+            th Tên đề tài
+            th GVHD
+            th style="width:20%" GVPB
+        tbody
+          - @theses.each do |thesis|
+            tr
+              td = link_to thesis.ordering, thesis
+              td = thesis.title || thesis.english_title
+              td = thesis.primary_advisor
+              td style="width:20%"
+                = turbo_frame_tag thesis do
+                  - if thesis.reviewer
+                    = link_to edit_dept_thesis_review_path(thesis), class: 'mr-2' do
+                      i.cil-pen
+                    = thesis.reviewer
+                  - else
+                    = link_to new_dept_thesis_review_path(thesis), class: 'btn btn-outline-primary' do
+                      i.cil-plus.mr-2
+                      = "Phân công"
+

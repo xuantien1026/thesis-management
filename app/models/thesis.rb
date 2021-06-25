@@ -39,11 +39,15 @@ class Thesis < ApplicationRecord
 
   has_many :midterm_evaluations, through: :thesis_members
 
+  has_one :thesis_review
+  alias :review :thesis_review
+  has_one :reviewer, through: :thesis_review, source: :lecturer
+
   scope :by_lecturer, lambda { |lecturer|
     joins(:thesis_advisors).where(thesis_advisors: { lecturer: lecturer, primary: true })
   }
   scope :by_department, lambda { |department|
-    joins(:lecturers).where(users: { department_id: department.id }, thesis_advisors: { primary: true })
+    includes(thesis_advisors: :lecturer).where(users: { department_id: department.id }, thesis_advisors: { primary: true })
   }
   scope :by_faculty, lambda { |faculty|
     joins(:lecturers).where(users: { department_id: faculty.department_ids }, thesis_advisors: { primary: true })
