@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DepartmentManagement
   class ThesisReviewsController < BaseController
     before_action :set_thesis
@@ -12,9 +14,7 @@ module DepartmentManagement
 
     def create
       @thesis_review = @thesis.build_thesis_review(review_params)
-      if @thesis_review.save
-        redirect_to dept_thesis_review_path(@thesis)
-      end
+      redirect_to dept_thesis_review_path(@thesis) if @thesis_review.save
     end
 
     def edit
@@ -23,9 +23,7 @@ module DepartmentManagement
     end
 
     def update
-      if @thesis.review.update(review_params)
-        redirect_to dept_thesis_review_path(@thesis)
-      end
+      redirect_to dept_thesis_review_path(@thesis) if @thesis.review.update(review_params)
     end
 
     private

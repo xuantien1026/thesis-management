@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DepartmentManagement
   class BaseController < ApplicationController
     before_action :check_permission

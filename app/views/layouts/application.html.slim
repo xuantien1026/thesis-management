@@ -39,6 +39,17 @@ html
                 = link_to department_defense_committees_path(current_user.department), class: "c-sidebar-nav-link"
                   i.c-sidebar-nav-icon.cil-cursor
                   = "Hội đồng bảo vệ"
+        - if current_user.has_role? :head_of_department
+          li.c-sidebar-nav-item.c-sidebar-nav-dropdown
+            a.c-sidebar-nav-link.c-sidebar-nav-dropdown-toggle data-coreui-toggle="dropdown"
+              i.c-sidebar-nav-icon.cil-list
+              = 'Quản lý bộ môn'
+            ul.c-sidebar-nav-dropdown-items
+              li.c-sidebar-nav-item
+                = link_to dept_theses_path, class: "c-sidebar-nav-link"
+                  i.c-sidebar-nav-icon.cil-cursor
+                  = "Phân công phản biện"
+
         li.c-sidebar-nav-item onclick='alert("Chức năng đang trong quá trình xây dựng!")'
           a.c-sidebar-nav-link
             i.c-sidebar-nav-icon.cil-lock-locked

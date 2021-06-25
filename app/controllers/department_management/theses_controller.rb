@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DepartmentManagement
   class ThesesController < BaseController
     def index
