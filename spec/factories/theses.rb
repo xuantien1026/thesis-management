@@ -37,6 +37,7 @@ FactoryBot.define do
     semester_number { 1 }
     school_year { 2020 }
     education_program { 'CQ' }
+    sequence :ordering
 
     transient do
       primary_advisor { create :lecturer }
