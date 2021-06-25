@@ -2,7 +2,7 @@
 
 class ThesisPolicy < ApplicationPolicy
   def update_midterm_evaluations?
-    record.primary_advisor == user && record.midterm_evaluations.exists? && user.has_role?(:privileged_lecturer)
+    record.primary_advisor == user && record.midterm_evaluations.any? && user.has_role?(:privileged_lecturer)
   end
 
   class Scope < Scope

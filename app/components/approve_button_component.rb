@@ -12,10 +12,6 @@ class ApproveButtonComponent < ViewComponent::Base
 
   private
 
-  def department_approve_topic_path(topic)
-    # code here
-  end
-
   def before_render
     if department_approve?
       @url = department_approve_thesis_proposal_path(@topic)

@@ -2,6 +2,7 @@
 
 class ThesisProposalsController < ApplicationController
   before_action :set_thesis_proposal, only: %i[show edit update destroy department_approve faculty_approve]
+  before_action :set_majors, :set_semesters, only: %i[new edit]
 
   def index
     @thesis_proposals = policy_scope(ThesisProposal).order(:id)
@@ -11,13 +12,11 @@ class ThesisProposalsController < ApplicationController
 
   def new
     @thesis_proposal = ThesisProposal.new
-    @majors = current_user.faculty.majors
     authorize @thesis_proposal
   end
 
   def edit
     authorize @thesis_proposal
-    @majors = current_user.faculty.majors
   end
 
   def create # rubocop:disable Metrics/MethodLength
@@ -63,13 +62,21 @@ class ThesisProposalsController < ApplicationController
 
   private
 
+  def set_majors
+    @majors = current_user.faculty.majors
+  end
+
+  def set_semesters
+    @semesters = Semester.all.order(id: :desc)
+  end
+
   def set_thesis_proposal
     @thesis_proposal = ThesisProposal.find(params[:id])
   end
 
   def thesis_proposal_params
     params.require(:thesis_proposal).permit(
-      :semester, :title, :english_title, :description, :mission, :max_student_count, :education_program,
+      :semester_id, :title, :english_title, :description, :mission, :max_student_count, :education_program,
       references: [], majors: []
     )
   end

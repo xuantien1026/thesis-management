@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_173437) do
+ActiveRecord::Schema.define(version: 2021_06_25_183519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,14 @@ ActiveRecord::Schema.define(version: 2021_06_23_173437) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "semesters", force: :cascade do |t|
+    t.integer "number", null: false
+    t.integer "academic_year", null: false
+    t.date "start_date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "theses", force: :cascade do |t|
     t.bigint "thesis_proposal_id"
     t.datetime "created_at", precision: 6, null: false
@@ -102,10 +110,10 @@ ActiveRecord::Schema.define(version: 2021_06_23_173437) do
     t.string "references", default: [], array: true
     t.integer "max_student_count", default: 1, null: false
     t.integer "status", default: 0
-    t.string "semester_number"
     t.string "education_program"
     t.string "majors", default: [], array: true
-    t.integer "school_year"
+    t.bigint "semester_id", null: false
+    t.index ["semester_id"], name: "index_theses_on_semester_id"
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_max_student_count"
   end
@@ -159,10 +167,10 @@ ActiveRecord::Schema.define(version: 2021_06_23_173437) do
     t.string "references", default: [], array: true
     t.integer "max_student_count", default: 1, null: false
     t.integer "status", default: 0
-    t.string "semester_number"
     t.string "education_program"
     t.string "majors", default: [], array: true
-    t.integer "school_year"
+    t.bigint "semester_id", null: false
+    t.index ["semester_id"], name: "index_thesis_proposals_on_semester_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_proposal_max_student_count"
   end
 
@@ -223,9 +231,11 @@ ActiveRecord::Schema.define(version: 2021_06_23_173437) do
   add_foreign_key "departments", "faculties"
   add_foreign_key "majors", "faculties"
   add_foreign_key "midterm_evaluations", "thesis_members"
+  add_foreign_key "theses", "semesters"
   add_foreign_key "thesis_advisors", "theses"
   add_foreign_key "thesis_advisors", "users", column: "lecturer_id"
   add_foreign_key "thesis_members", "users", column: "student_id"
   add_foreign_key "thesis_proposal_advisors", "thesis_proposals"
   add_foreign_key "thesis_proposal_advisors", "users", column: "lecturer_id"
+  add_foreign_key "thesis_proposals", "semesters"
 end

@@ -13,12 +13,19 @@
 #  mission           :string
 #  ordering          :integer
 #  references        :string           default([]), is an Array
-#  school_year       :integer
-#  semester_number   :string
 #  status            :integer          default("waiting_for_approval")
 #  title             :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  semester_id       :bigint           not null
+#
+# Indexes
+#
+#  index_thesis_proposals_on_semester_id  (semester_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (semester_id => semesters.id)
 #
 FactoryBot.define do
   factory :thesis_proposal do

@@ -3,13 +3,13 @@
     h3 Luận văn tốt nghiệp
 
   .card-body
-    - if @theses.any?
+    - if @theses
       .row.mb-2
         .col-6
-          span = "Giảng viên: #{current_user.name}"
+          span = "Giảng viên: #{current_user}"
         .col-6
           .float-right
-            - if @theses.first.midterm_evaluations.any?
+            - if @midterm_evaluated
               = link_to 'In phiếu chấm giữa kì' , midterm_evaluations_path(format: :pdf), class: 'btn btn-primary'
             - else
               = link_to 'Chấm điểm giữa kì', new_midterm_evaluations_path, class: 'btn btn-primary'
@@ -22,6 +22,6 @@
           - @theses.each do |thesis|
             tr
               td = link_to thesis.ordering, thesis
-              td = thesis.title || thesis.english_title
+              td = thesis
     - else
       p You dont have any thesis
