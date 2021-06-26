@@ -58,6 +58,10 @@ html
           = link_to theses_path, class: "c-sidebar-nav-link"
             i.c-sidebar-nav-icon.cil-cursor
             = "Luận văn tốt nghiệp"
+        li.c-sidebar-nav-item
+          = link_to thesis_reviews_path, class: "c-sidebar-nav-link"
+            i.c-sidebar-nav-icon.cil-cursor
+            = "Danh sách phản biện"
     .c-wrapper
       header.c-header.flex-row-reverse.align-content-center.mb-3.px-3
         = render Layout::HeaderComponent.new(user: current_user)

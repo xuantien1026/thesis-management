@@ -3,7 +3,7 @@
 module DepartmentManagement
   class ThesesController < BaseController
     def index
-      @theses = Thesis.by_department(current_department).includes(:reviewer)
+      @theses = Thesis.by_department(current_department).includes(:reviewer).order(:ordering)
     end
   end
 end
