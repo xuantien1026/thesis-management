@@ -5,6 +5,8 @@
 # Table name: theses
 #
 #  id                 :bigint           not null, primary key
+#  assignment_date    :date
+#  completion_date    :date
 #  description        :text
 #  education_program  :string
 #  english_title      :string
