@@ -50,6 +50,7 @@ class ThesisProposal < ApplicationRecord
   scope :by_faculty, ->(faculty) { joins(:lecturers).where(users: { department_id: faculty.department_ids }) }
 
   delegate :name, to: :primary_advisor, prefix: true
+  delegate :department, :faculty, to: :primary_advisor
 
   def primary_advisor
     thesis_proposal_advisors.find_by(primary: true).lecturer

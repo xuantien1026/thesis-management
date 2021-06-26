@@ -62,6 +62,8 @@ class Thesis < ApplicationRecord
 
   enum status: { 'waiting_for_approval' => 0, 'department_approved' => 1, 'faculty_approved' => 2 }
 
+  delegate :faculty, :department, to: :primary_advisor
+
   def primary_advisor
     thesis_advisors.find(&:primary).lecturer
   end
