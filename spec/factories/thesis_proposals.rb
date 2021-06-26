@@ -36,9 +36,8 @@ FactoryBot.define do
     references { 3.times.map { Faker::Lorem.sentence } }
     majors { 3.times.map { Faker::Lorem.word } }
     max_student_count { rand 1..5 }
-    semester_number { 1 }
-    school_year { 2020 }
     education_program { 'CQ' }
+    association :semester
 
     transient do
       primary_advisor { create :lecturer }

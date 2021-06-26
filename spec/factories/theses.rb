@@ -5,6 +5,8 @@
 # Table name: theses
 #
 #  id                 :bigint           not null, primary key
+#  assignment_date    :date
+#  completion_date    :date
 #  description        :text
 #  education_program  :string
 #  english_title      :string
@@ -38,10 +40,11 @@ FactoryBot.define do
     references { 3.times.map { Faker::Lorem.sentence } }
     majors { 3.times.map { Faker::Lorem.word } }
     max_student_count { rand 1..5 }
-    semester_number { 1 }
-    school_year { 2020 }
     education_program { 'CQ' }
+    assignment_date { Faker::Date.backward days: 100 }
+    completion_date { Faker::Date.backward days: 10 }
     sequence :ordering
+    association :semester
 
     transient do
       primary_advisor { create :lecturer }
