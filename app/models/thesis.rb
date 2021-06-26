@@ -70,6 +70,10 @@ class Thesis < ApplicationRecord
     thesis_members.create(student: student)
   end
 
+  def major
+    majors.join(' - ')
+  end
+
   def to_s
     title || english_title
   end

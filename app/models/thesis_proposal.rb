@@ -58,4 +58,8 @@ class ThesisProposal < ApplicationRecord
   def create_member(student)
     thesis_proposal_members.create(student: student)
   end
+
+  def major
+    majors.join(' - ')
+  end
 end
