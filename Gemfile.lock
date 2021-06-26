@@ -101,6 +101,9 @@ GEM
       actionmailer (>= 5.0)
       devise (>= 4.6)
     diff-lcs (1.4.4)
+    docx (0.6.1)
+      nokogiri (~> 1.10, >= 1.10.4)
+      rubyzip (~> 2.0)
     erubi (1.10.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
@@ -343,6 +346,7 @@ DEPENDENCIES
   caxlsx_rails
   devise
   devise_invitable
+  docx
   factory_bot_rails
   faker
   hotwire-rails

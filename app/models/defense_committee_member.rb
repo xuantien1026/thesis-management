@@ -26,6 +26,4 @@ class DefenseCommitteeMember < ApplicationRecord
   belongs_to :lecturer
 
   enum role: { 'member' => 0, 'secretary' => 1, 'chairman' => 2 }
-
-  validates :lecturer_id, uniqueness: { scope: :defense_committee_id }
 end
