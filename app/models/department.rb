@@ -22,6 +22,10 @@ class Department < ApplicationRecord
   has_many :lecturers, dependent: :restrict_with_error
   belongs_to :faculty
 
+  def head
+    Lecturer.where(department: self).with_role(:head_of_department).first
+  end
+
   def to_s
     name
   end

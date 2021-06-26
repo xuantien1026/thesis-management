@@ -5,6 +5,8 @@
 # Table name: theses
 #
 #  id                 :bigint           not null, primary key
+#  assignment_date    :date
+#  completion_date    :date
 #  description        :text
 #  education_program  :string
 #  english_title      :string
@@ -62,12 +64,18 @@ class Thesis < ApplicationRecord
 
   enum status: { 'waiting_for_approval' => 0, 'department_approved' => 1, 'faculty_approved' => 2 }
 
+  delegate :faculty, :department, to: :primary_advisor
+
   def primary_advisor
     thesis_advisors.find(&:primary).lecturer
   end
 
   def create_member(student)
     thesis_members.create(student: student)
+  end
+
+  def major
+    majors.join(' - ')
   end
 
   def to_s

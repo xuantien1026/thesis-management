@@ -45,6 +45,10 @@ Rails.application.routes.draw do
       end
       resource :midterm_evaluations, only: %i[edit update]
       resources :thesis_members, only: %i[create], as: :applications
+
+      scope module: :theses do
+        resource :mission_note, only: :show
+      end
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

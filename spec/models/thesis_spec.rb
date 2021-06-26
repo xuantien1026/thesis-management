@@ -31,35 +31,28 @@
 #
 #  fk_rails_...  (semester_id => semesters.id)
 #
-FactoryBot.define do
-  factory :thesis do
-    title { Faker::Lorem.sentence }
-    english_title { Faker::Lorem.sentence }
-    description { Faker::Lorem.paragraph }
-    mission { Faker::Lorem.paragraph }
-    references { 3.times.map { Faker::Lorem.sentence } }
-    majors { 3.times.map { Faker::Lorem.word } }
-    max_student_count { rand 1..5 }
-    education_program { 'CQ' }
-    assignment_date { Faker::Date.backward days: 100 }
-    completion_date { Faker::Date.backward days: 10 }
-    sequence :ordering
-    association :semester
+require 'rails_helper'
 
-    transient do
-      primary_advisor { create :lecturer }
-      students { [] }
+RSpec.describe Thesis, type: :model do
+  subject { create :thesis, primary_advisor: primary_advisor }
+
+  let(:primary_advisor) { create :lecturer }
+
+  describe '#department' do
+    it 'is the department of primary advisor' do
+      expect(subject.department).to eq(primary_advisor.department)
     end
+  end
 
-    after(:create) do |thesis, options|
-      thesis.thesis_advisors.create(lecturer: options.primary_advisor, primary: true)
-      options.students.each { |student| thesis.create_member(student) }
+  describe '#faculty' do
+    it 'is the faculty of primary advisor' do
+      expect(subject.faculty).to eq(primary_advisor.faculty)
     end
+  end
 
-    trait :with_midterm_results do
-      after(:create) do |thesis|
-        thesis.thesis_members.each { |member| create :midterm_evaluation, thesis_member: member }
-      end
+  describe '#major' do
+    it 'is the majors specified when thesis is created, joined if multiple' do
+      expect(subject.major).to eq(subject.majors.join(' - '))
     end
   end
 end

@@ -6,12 +6,8 @@
       .row
         .col-4
           .form-group
-            = f.label :semester_number_eq, 'Học kì'
-            = f.select :semester_number_eq, [1,2,3], { include_blank: true, include_hidden: false }, class: 'form-control'
-        .col-4
-          .form-group
-            = f.label :school_year_eq, 'Năm học'
-            = f.select :school_year_eq, [['2019-2020', 2019], ['2020-2021', 2020]], { include_blank: true, include_hidden: false }, class: 'form-control'
+            = f.label :semester_id_eq, 'Học kì'
+            = f.collection_select :semester_id_eq, Semester.all, :id, :to_s, { include_blank: true, include_hidden: false }, class: 'form-control'
         .col-4
           .form-group
             = f.label :education_program_eq, 'Chương trình đào tạo'
@@ -49,6 +45,6 @@
               td = link_to thesis.ordering, thesis
               td = thesis.title || thesis.english_title
               td = thesis.primary_advisor
-              td = thesis.majors.join(' - ')
+              td = thesis.major
               td = thesis.education_program
               td = thesis.semester

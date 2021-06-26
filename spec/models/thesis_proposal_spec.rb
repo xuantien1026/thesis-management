@@ -27,26 +27,28 @@
 #
 #  fk_rails_...  (semester_id => semesters.id)
 #
-FactoryBot.define do
-  factory :thesis_proposal do
-    title { Faker::Lorem.sentence }
-    english_title { Faker::Lorem.sentence }
-    description { Faker::Lorem.paragraph }
-    mission { Faker::Lorem.paragraph }
-    references { 3.times.map { Faker::Lorem.sentence } }
-    majors { 3.times.map { Faker::Lorem.word } }
-    max_student_count { rand 1..5 }
-    education_program { 'CQ' }
-    association :semester
+require 'rails_helper'
 
-    transient do
-      primary_advisor { create :lecturer }
-      students { [] }
+RSpec.describe ThesisProposal, type: :model do
+  subject { create :thesis_proposal, primary_advisor: primary_advisor }
+
+  let(:primary_advisor) { create :lecturer }
+
+  describe '#department' do
+    it 'is the department of primary advisor' do
+      expect(subject.department).to eq(primary_advisor.department)
     end
+  end
 
-    after(:create) do |thesis_proposal, options|
-      thesis_proposal.thesis_proposal_advisors.create(lecturer: options.primary_advisor, primary: true)
-      options.students.each { |student| thesis_proposal.create_member(student) }
+  describe '#faculty' do
+    it 'is the faculty of primary advisor' do
+      expect(subject.faculty).to eq(primary_advisor.faculty)
+    end
+  end
+
+  describe '#major' do
+    it 'is the majors specified when thesis proposal is created, joined if multiple' do
+      expect(subject.major).to eq(subject.majors.join(' - '))
     end
   end
 end

@@ -8,7 +8,8 @@ RSpec.describe CreateThesisProposal, type: :interactor do
                               primary_advisor: primary_advisor)
   end
 
-  let(:thesis_proposal_params) { attributes_for :thesis_proposal }
+  let(:semester) { create :semester }
+  let(:thesis_proposal_params) { attributes_for(:thesis_proposal).merge(semester: semester) }
   let(:students) { create_list :student, 2 }
   let(:primary_advisor) { create :lecturer }
 
