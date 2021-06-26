@@ -2,17 +2,14 @@
 
 module Theses
   class MissionNotesController < ApplicationController
-    MISSION_NOTE_FILE_PATH = 'tmp/mission_note.docx'
     MISSION_NOTE_TEMPLATE_PATH = 'app/documents/pre_defense/phieu_nhiem_vu_LVTN.docx'
 
     before_action :set_thesis
 
     def show
       generate_mission_note
-      send_file(MISSION_NOTE_FILE_PATH,
-                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                filename: 'phieu_nhiem_vu_LVTN.docx')
-      File.delete(MISSION_NOTE_FILE_PATH) if File.exist?(MISSION_NOTE_FILE_PATH)
+      send_data(File.read(mission_note_file_path), filename: 'phieu_nhiem_vu_LVTN.docx')
+      File.delete(mission_note_file_path)
     end
 
     private
@@ -35,7 +32,11 @@ module Theses
       doc.bookmarks['advisors'].insert_multiple_lines(mission_note.advisors_formatted)
       doc.bookmarks['head_of_department'].insert_text_before(mission_note.head_of_department)
       doc.bookmarks['primary_advisor'].insert_text_before(mission_note.primary_advisor)
-      doc.save(MISSION_NOTE_FILE_PATH)
+      doc.save(mission_note_file_path)
+    end
+
+    def mission_note_file_path
+      "tmp/mission_note_#{@thesis.id}.docx"
     end
   end
 end

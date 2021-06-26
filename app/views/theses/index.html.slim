@@ -18,10 +18,15 @@
           tr
             th Mã luận văn
             th Tên đề tài
+            th Thao tác
         tbody
           - @theses.each do |thesis|
             tr
               td = link_to thesis.ordering, thesis
               td = thesis
+              td
+                = link_to thesis_mission_note_path(thesis), class: 'btn btn-outline-primary', download: true
+                  i.cil-cloud-download.mr-2
+                  = 'Phiếu nhiệm vụ LVTN'
     - else
       p You dont have any thesis
