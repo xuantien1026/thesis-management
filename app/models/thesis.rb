@@ -44,9 +44,8 @@ class Thesis < ApplicationRecord
   has_many :advisors, class_name: 'Theses::Advisor', dependent: :destroy
   has_many :lecturers, through: :advisors
 
-  has_one :thesis_review, dependent: :destroy
-  alias review thesis_review
-  has_one :reviewer, through: :thesis_review, source: :lecturer
+  has_one :review, class_name: 'Theses::Review', dependent: :destroy
+  has_one :reviewer, through: :review, source: :lecturer
 
   scope :by_lecturer, lambda { |lecturer|
     joins(:advisors).where(advisors: { lecturer: lecturer, primary: true })

@@ -23,13 +23,17 @@ Rails.application.routes.draw do
       end
     end
 
-    namespace :department_management, as: :dept do
-      resources :theses, only: :index do
-        resource :thesis_review, except: :destroy, as: :review
-      end
+    namespace 'theses' do
+      resources :reviews, only: :index
     end
 
-    resources :thesis_reviews, only: :index
+    namespace :department_management, as: :dept do
+      resources :theses, only: :index do
+        scope module: :theses do
+          resource :review, except: :destroy
+        end
+      end
+    end
 
     resources :thesis_proposals do
       member do

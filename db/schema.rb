@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_27_114916) do
+ActiveRecord::Schema.define(version: 2021_06_27_121850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,15 @@ ActiveRecord::Schema.define(version: 2021_06_27_114916) do
     t.index ["member_id"], name: "index_theses_midterm_evaluations_on_member_id"
   end
 
+  create_table "theses_reviews", force: :cascade do |t|
+    t.bigint "thesis_id"
+    t.bigint "lecturer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecturer_id"], name: "index_theses_reviews_on_lecturer_id"
+    t.index ["thesis_id"], name: "index_theses_reviews_on_thesis_id"
+  end
+
   create_table "thesis_proposal_advisors", force: :cascade do |t|
     t.bigint "thesis_proposal_id", null: false
     t.bigint "lecturer_id", null: false
@@ -166,15 +175,6 @@ ActiveRecord::Schema.define(version: 2021_06_27_114916) do
     t.bigint "semester_id", null: false
     t.index ["semester_id"], name: "index_thesis_proposals_on_semester_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_proposal_max_student_count"
-  end
-
-  create_table "thesis_reviews", force: :cascade do |t|
-    t.bigint "thesis_id"
-    t.bigint "lecturer_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["lecturer_id"], name: "index_thesis_reviews_on_lecturer_id"
-    t.index ["thesis_id"], name: "index_thesis_reviews_on_thesis_id"
   end
 
   create_table "users", force: :cascade do |t|

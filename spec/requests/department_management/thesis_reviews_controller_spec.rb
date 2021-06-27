@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe DepartmentManagement::ThesisReviewsController, type: :request do
+RSpec.describe DepartmentManagement::Theses::ReviewsController, type: :request do
   describe 'GET /department_management/theses/:thesis_id/thesis_review' do
     subject { get dept_thesis_review_path(thesis) }
 
     let(:thesis) { create :thesis }
-    let!(:thesis_review) { create :thesis_review, thesis: thesis }
+    let!(:review) { create :theses_review, thesis: thesis }
 
     it_behaves_like :department_management_authorized
 
@@ -37,7 +37,7 @@ RSpec.describe DepartmentManagement::ThesisReviewsController, type: :request do
     end
 
     it 'create new thesis review' do
-      expect { subject }.to change(ThesisReview, :count).by(1)
+      expect { subject }.to change(Theses::Review, :count).by(1)
     end
   end
 
@@ -45,7 +45,7 @@ RSpec.describe DepartmentManagement::ThesisReviewsController, type: :request do
     subject { put dept_thesis_review_path(thesis), params: { thesis_review: { lecturer_id: lecturer.id } } }
 
     let(:thesis) { create :thesis }
-    let!(:thesis_review) { create :thesis_review, thesis: thesis }
+    let!(:review) { create :theses_review, thesis: thesis }
     let(:lecturer) { create :lecturer }
 
     it_behaves_like :department_management_authorized

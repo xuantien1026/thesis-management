@@ -2,7 +2,7 @@
   .card-header
     h3 Danh sách luận văn phản biện
   .card-body
-    - if @thesis_reviews.blank?
+    - if @reviews.blank?
       = 'Không có luận văn nào.'
     - else
       table.table
@@ -11,7 +11,7 @@
             th Mã luận văn
             th Tên đề tài
         tbody
-          - @thesis_reviews.each do |review|
+          - @reviews.each do |review|
             tr
               td = review.thesis.ordering
               td = review.thesis
