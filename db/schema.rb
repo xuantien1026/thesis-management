@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_080616) do
+ActiveRecord::Schema.define(version: 2021_06_26_163943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,14 +112,14 @@ ActiveRecord::Schema.define(version: 2021_06_26_080616) do
     t.check_constraint "max_student_count >= 1", name: "check_thesis_max_student_count"
   end
 
-  create_table "thesis_advisors", force: :cascade do |t|
+  create_table "theses_advisors", force: :cascade do |t|
     t.bigint "lecturer_id"
     t.bigint "thesis_id"
     t.boolean "primary", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["lecturer_id"], name: "index_thesis_advisors_on_lecturer_id"
-    t.index ["thesis_id"], name: "index_thesis_advisors_on_thesis_id"
+    t.index ["lecturer_id"], name: "index_theses_advisors_on_lecturer_id"
+    t.index ["thesis_id"], name: "index_theses_advisors_on_thesis_id"
   end
 
   create_table "thesis_members", force: :cascade do |t|
@@ -226,8 +226,8 @@ ActiveRecord::Schema.define(version: 2021_06_26_080616) do
   add_foreign_key "majors", "faculties"
   add_foreign_key "midterm_evaluations", "thesis_members"
   add_foreign_key "theses", "semesters"
-  add_foreign_key "thesis_advisors", "theses"
-  add_foreign_key "thesis_advisors", "users", column: "lecturer_id"
+  add_foreign_key "theses_advisors", "theses"
+  add_foreign_key "theses_advisors", "users", column: "lecturer_id"
   add_foreign_key "thesis_members", "users", column: "student_id"
   add_foreign_key "thesis_proposal_advisors", "thesis_proposals"
   add_foreign_key "thesis_proposal_advisors", "users", column: "lecturer_id"

@@ -52,7 +52,7 @@ FactoryBot.define do
     end
 
     after(:create) do |thesis, options|
-      thesis.thesis_advisors.create(lecturer: options.primary_advisor, primary: true)
+      thesis.advisors.create(lecturer: options.primary_advisor, primary: true)
       options.students.each { |student| thesis.create_member(student) }
     end
 

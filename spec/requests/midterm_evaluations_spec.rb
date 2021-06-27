@@ -2,7 +2,64 @@
 
 require 'rails_helper'
 
-RSpec.describe 'MidtermEvaluations', type: :request do
+RSpec.describe MidtermEvaluationsController, type: :request do
+  describe 'GET /theses/:thesis_id/midterm_evaluations.pdf' do
+    include_context :signed_in_as_lecturer
+
+    let(:thesis) { create :thesis, primary_advisor: signed_lecturer }
+
+    it 'success' do
+      get midterm_evaluations_path, params: { format: :pdf }
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe 'GET /theses/:thesis_id/midterm_evaluations/new' do
+    include_context :signed_in_as_lecturer
+
+    let(:thesis) { create :thesis, primary_advisor: signed_lecturer }
+
+    it 'success' do
+      get new_midterm_evaluations_path
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe 'POST /theses/midterm_evaluations' do
+    subject { post midterm_evaluations_path, params: params }
+
+    include_context :signed_in_as_lecturer
+
+    let(:students) { create_list :student, 2 }
+    let(:thesis) { create :thesis, primary_advisor: signed_lecturer, students: students }
+
+    let(:students2) { create_list :student, 2 }
+    let(:thesis2) { create :thesis, primary_advisor: signed_lecturer, students: students2 }
+
+    let(:params) do
+      {
+        evaluations: {
+          thesis.thesis_members.first.id => { passed: 0, note: '' },
+          thesis.thesis_members.second.id => { passed: 1, note: '' },
+          thesis2.thesis_members.first.id => { passed: 1, note: 'This is some midterm note' },
+          thesis2.thesis_members.second.id => { passed: 1, note: '' }
+        }
+      }
+    end
+
+    it 'success' do
+      subject
+
+      expect(response).to have_http_status(:redirect)
+    end
+
+    it 'creates some midterm result objects' do
+      expect { subject }.to change(MidtermEvaluation, :count).from(0).to(4)
+    end
+  end
+
   describe 'PUT /theses/:thesis_id/midterm_evaluations' do
     context 'when current user is a student' do
       include_context :signed_in_as_student
