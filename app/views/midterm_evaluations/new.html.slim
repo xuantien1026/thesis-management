@@ -16,7 +16,7 @@
           - @theses.each do |thesis|
             tr.bg-light.text-dark
               td colspan="5" = "Đề tài: #{thesis.title || thesis.english_title}"
-            - thesis.thesis_members.each do |member|
+            - thesis.members.each do |member|
               tr
                 td = member.mssv
                 td = member.name

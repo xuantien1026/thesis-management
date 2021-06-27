@@ -18,7 +18,7 @@ RSpec.describe Semester, type: :model do
     it 'returns vietnamese string representation' do
       semester = create :semester, number: 1, academic_year: 2020, start_date: Time.zone.today
 
-      expect(semester.to_s).to eq('Học kì 1 Năm học 2020-2021')
+      expect(semester.to_s).to eq('Học kì 1 (2020-2021)')
     end
   end
 end

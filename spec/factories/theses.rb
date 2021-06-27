@@ -53,12 +53,12 @@ FactoryBot.define do
 
     after(:create) do |thesis, options|
       thesis.advisors.create(lecturer: options.primary_advisor, primary: true)
-      options.students.each { |student| thesis.create_member(student) }
+      options.students.each { |student| thesis.members.create(student: student) }
     end
 
     trait :with_midterm_results do
       after(:create) do |thesis|
-        thesis.thesis_members.each { |member| create :midterm_evaluation, thesis_member: member }
+        thesis.members.each { |member| create :theses_midterm_evaluation, member: member }
       end
     end
   end

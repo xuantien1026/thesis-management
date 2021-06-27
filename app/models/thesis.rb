@@ -37,13 +37,12 @@ class Thesis < ApplicationRecord
   belongs_to :semester
   belongs_to :thesis_proposal, optional: true
 
-  has_many :thesis_members, dependent: :destroy
-  has_many :students, through: :thesis_members
+  has_many :members, class_name: 'Theses::Member', dependent: :destroy
+  has_many :students, through: :members
+  has_many :midterm_evaluations, class_name: 'Theses::MidtermEvaluation', through: :members
 
   has_many :advisors, class_name: 'Theses::Advisor', dependent: :destroy
   has_many :lecturers, through: :advisors
-
-  has_many :midterm_evaluations, through: :thesis_members
 
   has_one :thesis_review, dependent: :destroy
   alias review thesis_review
@@ -65,10 +64,6 @@ class Thesis < ApplicationRecord
 
   def primary_advisor
     advisors.find(&:primary).lecturer
-  end
-
-  def create_member(student)
-    thesis_members.create(student: student)
   end
 
   def major

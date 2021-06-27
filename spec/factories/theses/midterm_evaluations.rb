@@ -17,11 +17,11 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (thesis_member_id => thesis_members.id)
+#  fk_rails_...  (thesis_member_id => theses_members.id)
 #
 FactoryBot.define do
-  factory :midterm_evaluation do
-    association :thesis_member
+  factory :theses_midterm_evaluation, class: 'Theses::MidtermEvaluation' do
+    association :member
     passed { true }
     note { '' }
   end

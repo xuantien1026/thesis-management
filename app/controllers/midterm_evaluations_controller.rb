@@ -6,7 +6,7 @@ class MidtermEvaluationsController < ApplicationController
 
   def show
     theses = Thesis.by_lecturer(current_user)
-    @thesis_members = ThesisMember.where(thesis_id: theses.ids)
+    @thesis_members = Theses::Member.where(thesis_id: theses.ids)
     respond_to do |format|
       format.pdf do
         render pdf: 'ket_qua_giua_ki', margin: { top: 20, bottom: 20, left: 20, right: 20 },
@@ -21,7 +21,7 @@ class MidtermEvaluationsController < ApplicationController
 
   def create
     params[:evaluations].each do |member_id, evaluations|
-      MidtermEvaluation.create!(evaluations.permit(:passed, :note).merge(thesis_member_id: member_id))
+      Theses::MidtermEvaluation.create!(evaluations.permit(:passed, :note).merge(member_id: member_id))
     end
     flash.notice = 'Đã cập nhật kết quả giữa kì thành công'
     redirect_to theses_path
@@ -32,7 +32,7 @@ class MidtermEvaluationsController < ApplicationController
   def update
     authorize @thesis, :update_midterm_evaluations?
     params[:evaluations].each do |member_id, evaluations|
-      member = @thesis.thesis_members.find(member_id)
+      member = @thesis.members.find(member_id)
       member.midterm_evaluation.update(evaluations.permit(:passed, :note))
     end
     redirect_to @thesis

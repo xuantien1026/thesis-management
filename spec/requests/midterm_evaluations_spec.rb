@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe MidtermEvaluationsController, type: :request do
-  describe 'GET /theses/:thesis_id/midterm_evaluations.pdf' do
+  describe 'GET /theses/midterm_evaluations.pdf' do
     include_context :signed_in_as_lecturer
 
     let(:thesis) { create :thesis, primary_advisor: signed_lecturer }
@@ -18,7 +18,7 @@ RSpec.describe MidtermEvaluationsController, type: :request do
   describe 'GET /theses/:thesis_id/midterm_evaluations/new' do
     include_context :signed_in_as_lecturer
 
-    let(:thesis) { create :thesis, primary_advisor: signed_lecturer }
+    let!(:thesis) { create :thesis, primary_advisor: signed_lecturer }
 
     it 'success' do
       get new_midterm_evaluations_path
@@ -41,10 +41,10 @@ RSpec.describe MidtermEvaluationsController, type: :request do
     let(:params) do
       {
         evaluations: {
-          thesis.thesis_members.first.id => { passed: 0, note: '' },
-          thesis.thesis_members.second.id => { passed: 1, note: '' },
-          thesis2.thesis_members.first.id => { passed: 1, note: 'This is some midterm note' },
-          thesis2.thesis_members.second.id => { passed: 1, note: '' }
+          thesis.members.first.id => { passed: 0, note: '' },
+          thesis.members.second.id => { passed: 1, note: '' },
+          thesis2.members.first.id => { passed: 1, note: 'This is some midterm note' },
+          thesis2.members.second.id => { passed: 1, note: '' }
         }
       }
     end
@@ -56,7 +56,7 @@ RSpec.describe MidtermEvaluationsController, type: :request do
     end
 
     it 'creates some midterm result objects' do
-      expect { subject }.to change(MidtermEvaluation, :count).from(0).to(4)
+      expect { subject }.to change(Theses::MidtermEvaluation, :count).from(0).to(4)
     end
   end
 
@@ -118,7 +118,7 @@ RSpec.describe MidtermEvaluationsController, type: :request do
 
       let(:students) { create_list :student, 2 }
       let(:thesis) { create :thesis, :with_midterm_results, primary_advisor: signed_lecturer, students: students }
-      let(:members) { thesis.thesis_members }
+      let(:members) { thesis.members }
 
       it 'returns forbidden when lecturer is not granted update permission' do
         subject

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_163943) do
+ActiveRecord::Schema.define(version: 2021_06_27_114916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,15 +63,6 @@ ActiveRecord::Schema.define(version: 2021_06_26_163943) do
     t.index ["faculty_id"], name: "index_majors_on_faculty_id"
   end
 
-  create_table "midterm_evaluations", force: :cascade do |t|
-    t.bigint "thesis_member_id", null: false
-    t.boolean "passed", null: false
-    t.string "note"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["thesis_member_id"], name: "index_midterm_evaluations_on_thesis_member_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -122,13 +113,22 @@ ActiveRecord::Schema.define(version: 2021_06_26_163943) do
     t.index ["thesis_id"], name: "index_theses_advisors_on_thesis_id"
   end
 
-  create_table "thesis_members", force: :cascade do |t|
+  create_table "theses_members", force: :cascade do |t|
     t.bigint "thesis_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "student_id", null: false
-    t.index ["student_id"], name: "index_thesis_members_on_student_id"
-    t.index ["thesis_id"], name: "index_thesis_members_on_thesis_id"
+    t.index ["student_id"], name: "index_theses_members_on_student_id"
+    t.index ["thesis_id"], name: "index_theses_members_on_thesis_id"
+  end
+
+  create_table "theses_midterm_evaluations", force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.boolean "passed", null: false
+    t.string "note"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["member_id"], name: "index_theses_midterm_evaluations_on_member_id"
   end
 
   create_table "thesis_proposal_advisors", force: :cascade do |t|
@@ -224,11 +224,11 @@ ActiveRecord::Schema.define(version: 2021_06_26_163943) do
   add_foreign_key "defense_committees", "departments"
   add_foreign_key "departments", "faculties"
   add_foreign_key "majors", "faculties"
-  add_foreign_key "midterm_evaluations", "thesis_members"
   add_foreign_key "theses", "semesters"
   add_foreign_key "theses_advisors", "theses"
   add_foreign_key "theses_advisors", "users", column: "lecturer_id"
-  add_foreign_key "thesis_members", "users", column: "student_id"
+  add_foreign_key "theses_members", "users", column: "student_id"
+  add_foreign_key "theses_midterm_evaluations", "theses_members", column: "member_id"
   add_foreign_key "thesis_proposal_advisors", "thesis_proposals"
   add_foreign_key "thesis_proposal_advisors", "users", column: "lecturer_id"
   add_foreign_key "thesis_proposals", "semesters"
