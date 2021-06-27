@@ -23,4 +23,28 @@ RSpec.describe ThesesController, type: :request do
       end
     end
   end
+
+  describe 'GET /theses/:id' do
+    let(:thesis) { create :thesis, :with_midterm_results, students: create_list(:student, 2) }
+
+    context 'as a student' do
+      include_context :signed_in_as_student
+
+      it 'works' do
+        get thesis_path(thesis)
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'as a lecturer' do
+      include_context :signed_in_as_lecturer
+
+      it 'works' do
+        get thesis_path(thesis)
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
 end

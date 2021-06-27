@@ -1,0 +1,25 @@
+= form_for @midterm_evaluation_set, url: theses_midterm_evaluation_set_path do |f|
+  .card-body
+    table.table
+      thead
+        tr
+          th MSSV
+          th Tên sinh viên
+          th Đạt
+          th Ghi chú
+      tbody
+        - @midterm_evaluation_set.theses.each do |thesis|
+          tr.bg-light.text-dark
+            td colspan="5" = "Đề tài: #{thesis}"
+          - thesis.members.each do |member|
+            tr
+              td = member.mssv
+              td = member.name
+              member.midterm_evaluation
+              = f.fields_for member.midterm_evaluation, index: member.id  do |f|
+                td
+                  = f.check_box :passed
+                td
+                  = f.text_field :note
+  .card-footer
+    = submit_tag "Submit", class: 'btn btn-primary'

@@ -10,7 +10,7 @@ html
     p KHOA KHOA HỌC VÀ KỸ THUẬT MÁY TÍNH
     br
     h2.fw-bold.text-center PHIẾU CHẤM GIỮA KỲ LVTN
-    h2.fw-bold.text-center Học kỳ ...  Năm học ..........
+    h2.fw-bold.text-center = current_semester
     br
     p.fw-bold GVHD:
     .row
@@ -37,7 +37,7 @@ html
               th Không đạt
               th Ghi chú
           tbody
-            - @thesis_members.each.with_index(1) do |member, i|
+            - @midterm_evaluation_set.members.each.with_index(1) do |member, i|
               tr
                 td = i
                 td = member.mssv
