@@ -9,17 +9,17 @@ module DepartmentManagement
       def show; end
 
       def new
-        @thesis_review = @thesis.build_thesis_review
+        @review = @thesis.build_review
         @lecturers = Lecturer.where(department: current_department)
       end
 
       def create
-        @thesis_review = @thesis.build_review(review_params)
-        redirect_to dept_thesis_review_path(@thesis) if @thesis_review.save
+        @review = @thesis.build_review(review_params)
+        redirect_to dept_thesis_review_path(@thesis) if @review.save
       end
 
       def edit
-        @thesis_review = @thesis.review
+        @review = @thesis.review
         @lecturers = Lecturer.where(department: current_department)
       end
 
@@ -30,7 +30,7 @@ module DepartmentManagement
       private
 
       def review_params
-        params.require(:thesis_review).permit(:lecturer_id)
+        params.require(:theses_review).permit(:lecturer_id)
       end
 
       def set_thesis
