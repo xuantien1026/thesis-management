@@ -23,13 +23,18 @@ Rails.application.routes.draw do
       end
     end
 
-    namespace :department_management, as: :dept do
-      resources :theses, only: :index do
-        resource :thesis_review, except: :destroy, as: :review
-      end
+    namespace 'theses' do
+      resources :reviews, only: :index
+      resource :midterm_evaluation_set, except: :destroy
     end
 
-    resources :thesis_reviews, only: :index
+    namespace :department_management, as: :dept do
+      resources :theses, only: :index do
+        scope module: :theses do
+          resource :review, except: :destroy
+        end
+      end
+    end
 
     resources :thesis_proposals do
       member do
@@ -40,10 +45,6 @@ Rails.application.routes.draw do
     end
 
     resources :theses, only: %i[index show] do
-      collection do
-        resource :midterm_evaluations, only: %i[show new create]
-      end
-      resource :midterm_evaluations, only: %i[edit update]
       resources :thesis_members, only: %i[create], as: :applications
 
       scope module: :theses do
@@ -51,5 +52,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

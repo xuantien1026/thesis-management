@@ -37,29 +37,24 @@ class Thesis < ApplicationRecord
   belongs_to :semester
   belongs_to :thesis_proposal, optional: true
 
-  has_many :thesis_members, dependent: :destroy
-  has_many :students, through: :thesis_members
+  has_many :members, class_name: 'Theses::Member', dependent: :destroy
+  has_many :students, through: :members
+  has_many :midterm_evaluations, class_name: 'Theses::MidtermEvaluation', through: :members
 
-  has_many :thesis_advisors, dependent: :destroy
-  has_many :lecturers, through: :thesis_advisors
+  has_many :advisors, class_name: 'Theses::Advisor', dependent: :destroy
+  has_many :lecturers, through: :advisors
 
-  has_many :midterm_evaluations, through: :thesis_members
-
-  has_one :thesis_review, dependent: :destroy
-  alias review thesis_review
-  has_one :reviewer, through: :thesis_review, source: :lecturer
+  has_one :review, class_name: 'Theses::Review', dependent: :destroy
+  has_one :reviewer, through: :review, source: :lecturer
 
   scope :by_lecturer, lambda { |lecturer|
-    joins(:thesis_advisors).where(thesis_advisors: { lecturer: lecturer, primary: true })
+    joins(:advisors).where(advisors: { lecturer: lecturer, primary: true })
   }
   scope :by_department, lambda { |department|
-    includes(thesis_advisors: :lecturer).where(
-      users: { department_id: department.id },
-      thesis_advisors: { primary: true }
-    )
+    includes(advisors: :lecturer).where(users: { department_id: department.id }, advisors: { primary: true })
   }
   scope :by_faculty, lambda { |faculty|
-    joins(:lecturers).where(users: { department_id: faculty.department_ids }, thesis_advisors: { primary: true })
+    joins(:lecturers).where(users: { department_id: faculty.department_ids }, advisors: { primary: true })
   }
 
   enum status: { 'waiting_for_approval' => 0, 'department_approved' => 1, 'faculty_approved' => 2 }
@@ -67,11 +62,7 @@ class Thesis < ApplicationRecord
   delegate :faculty, :department, to: :primary_advisor
 
   def primary_advisor
-    thesis_advisors.find(&:primary).lecturer
-  end
-
-  def create_member(student)
-    thesis_members.create(student: student)
+    advisors.find(&:primary).lecturer
   end
 
   def major

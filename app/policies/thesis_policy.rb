@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class ThesisPolicy < ApplicationPolicy
-  def update_midterm_evaluations?
-    record.primary_advisor == user && record.midterm_evaluations.any? && user.has_role?(:privileged_lecturer)
-  end
-
   class Scope < Scope
     def resolve
       return lecturer_scope if user.is_a?(Lecturer)

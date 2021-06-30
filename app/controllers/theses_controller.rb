@@ -3,7 +3,7 @@
 class ThesesController < ApplicationController
   def index
     @theses = policy_scope(Thesis).order(:ordering).load
-    @midterm_evaluated = MidtermEvaluation.joins(:thesis_member).where(thesis_members: { thesis_id: @theses.ids }).any?
+    @midterm_evaluated = Theses::MidtermEvaluationSet.new(current_user, current_semester).evaluated?
   end
 
   def show

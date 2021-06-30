@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'AdminThesesManagement', type: :request do
+RSpec.describe Admin::ThesesController, type: :request do
   include_context :basic_faculty
   include_context :signed_in_as_admin
 
@@ -18,6 +18,7 @@ RSpec.describe 'AdminThesesManagement', type: :request do
         (create :thesis, primary_advisor: advisors_from_another_department.second)
       ]
     end
+    let(:theses_from_other_faculty) { create_list :thesis, 2 }
 
     it 'returns all theses of specified faculty' do
       get faculty_theses_path(faculty)
@@ -26,8 +27,14 @@ RSpec.describe 'AdminThesesManagement', type: :request do
       expect(response.body).to include(*theses.map(&:to_s))
     end
 
+    it 'does not show theses from other faculty' do
+      get faculty_theses_path(faculty)
+
+      expect(response.body).not_to include(*theses_from_other_faculty.map(&:to_s))
+    end
+
     it 'returns all theses of specified lecturer when searched by lecturer' do
-      get faculty_theses_path(faculty), params: { primary_advisor_ids: [advisors.map(&:id)] }
+      get faculty_theses_path(faculty), params: { q: { advisors_lecturer_id_in: [advisors.map(&:id)] } }
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include(theses.first.to_s)

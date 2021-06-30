@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: thesis_advisors
+# Table name: theses_advisors
 #
 #  id          :bigint           not null, primary key
 #  primary     :boolean          default(FALSE), not null
@@ -13,15 +13,18 @@
 #
 # Indexes
 #
-#  index_thesis_advisors_on_lecturer_id  (lecturer_id)
-#  index_thesis_advisors_on_thesis_id    (thesis_id)
+#  index_theses_advisors_on_lecturer_id  (lecturer_id)
+#  index_theses_advisors_on_thesis_id    (thesis_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (lecturer_id => users.id)
 #  fk_rails_...  (thesis_id => theses.id)
 #
-class ThesisAdvisor < ApplicationRecord
-  belongs_to :thesis
-  belongs_to :lecturer
+
+module Theses
+  class Advisor < ApplicationRecord
+    belongs_to :thesis
+    belongs_to :lecturer
+  end
 end

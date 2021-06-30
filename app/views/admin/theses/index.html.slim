@@ -16,8 +16,8 @@
         = f.label :title_or_english_title_cont, 'Tên đề tài'
         = f.search_field :title_or_english_title_cont, class: 'form-control'
       .form-group
-        = label_tag :primary_advisor_ids, 'GVHD'
-        = select_tag :primary_advisor_ids, options_from_collection_for_select(@lecturers, :id, :name, params[:primary_advisor_ids]), multiple: true, class: 'select2-init form-control'
+        = f.label :advisors_lecturer_id_in, 'GVHD'
+        = f.collection_select :advisors_lecturer_id_in, @lecturers, :id, :name, {}, multiple: true, class: 'select2-init form-control'
       .form-group
         = button_tag class: 'btn btn-primary d-flex align-items-center' do
           i.cil-search.mr-1
@@ -43,7 +43,7 @@
           - @theses.each do |thesis|
             tr
               td = link_to thesis.ordering, thesis
-              td = thesis.title || thesis.english_title
+              td = thesis
               td = thesis.primary_advisor
               td = thesis.major
               td = thesis.education_program

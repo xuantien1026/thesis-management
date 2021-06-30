@@ -15,7 +15,9 @@
 #  index_thesis_reviews_on_lecturer_id  (lecturer_id)
 #  index_thesis_reviews_on_thesis_id    (thesis_id)
 #
-class ThesisReview < ApplicationRecord
-  belongs_to :thesis
-  belongs_to :lecturer
+FactoryBot.define do
+  factory :theses_review, class: 'Theses::Review' do
+    association :thesis
+    association :lecturer
+  end
 end

@@ -35,20 +35,18 @@
       dt Kết quả giữa kì
       dd
         - if @thesis.midterm_evaluations.load.any?
-          = turbo_frame_tag 'midterm_evaluations'
-            table.table
-              thead
+          table.table
+            thead
+              tr
+                th Sinh viên
+                th Kết quả
+                th Ghi chú
+            tbody
+              - @thesis.midterm_evaluations.includes(member: :student).each do |evaluation|
                 tr
-                  th Sinh viên
-                  th Kết quả
-                  th Ghi chú
-              tbody
-                - @thesis.midterm_evaluations.includes(thesis_member: :student).each do |evaluation|
-                  tr
-                    td = "#{evaluation.student_mssv} - #{evaluation.student_name}"
-                    td = evaluation.passed? ? "Đạt" : "Không đạt"
-                    td = evaluation.note
-            = link_to 'Chỉnh sửa kết quả giữa kì', edit_thesis_midterm_evaluations_path(@thesis) if policy(@thesis).update_midterm_evaluations?
+                  td = "#{evaluation.student_mssv} - #{evaluation.student_name}"
+                  td = evaluation.passed? ? "Đạt" : "Không đạt"
+                  td = evaluation.note
         - else
           div = "Chưa có kết quả giữa kì"
 

@@ -15,6 +15,6 @@ class Semester < ApplicationRecord
   validates :number, inclusion: 1..3
 
   def to_s
-    "Học kì #{number} Năm học #{academic_year}-#{academic_year + 1}"
+    "Học kì #{number} (#{academic_year}-#{academic_year + 1})"
   end
 end

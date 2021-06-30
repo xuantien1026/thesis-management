@@ -3,7 +3,7 @@
 module Admin
   class FacultiesController < AdminController
     def index
-      @faculties = Faculty.all
+      @faculties = Faculty.all.order(:id)
     end
 
     def show

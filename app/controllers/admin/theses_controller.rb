@@ -5,7 +5,7 @@ module Admin
     before_action :set_faculty
 
     def index
-      @q = Thesis.by_faculty(@faculty).includes(thesis_advisors: :lecturer).ransack(search_params)
+      @q = Thesis.includes(:semester, advisors: :lecturer).ransack(search_params)
       @theses = @q.result.order(:ordering)
       @lecturers = Lecturer.by_faculty(@faculty)
     end
@@ -21,22 +21,22 @@ module Admin
     end
 
     def search_params
-      ransack_params.merge(primary_advisors_param)
+      ransack_params.merge(filter_by_current_faculty).merge(filter_by_primary_advisor)
     end
 
-    def primary_advisors_param
-      return {} unless params[:primary_advisor_ids]
+    def filter_by_current_faculty
+      { advisors_lecturer_department_faculty_id_eq: @faculty.id }
+    end
 
-      {
-        thesis_advisors_lecturer_id_in: params.require(:primary_advisor_ids),
-        thesis_advisors_primary_eq: true
-      }
+    def filter_by_primary_advisor
+      { advisors_primary_eq: true }
     end
 
     def ransack_params
       return {} unless params[:q]
 
-      params.require(:q).permit(:title_or_english_title_cont, :semester_id_eq, :education_program_eq)
+      params.require(:q).permit(:title_or_english_title_cont, :semester_id_eq, :education_program_eq,
+                                advisors_lecturer_id_in: [])
     end
   end
 end

@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def current_semester
+    Semester.last
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: %i[email name type department_id])
   end
@@ -18,4 +22,6 @@ class ApplicationController < ActionController::Base
     authorize :invitation
     super
   end
+
+  helper_method :current_semester
 end
