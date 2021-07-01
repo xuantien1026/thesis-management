@@ -36,7 +36,7 @@ html
                   i.c-sidebar-nav-icon.cil-cursor
                   = "LVTN toàn khoa"
               li.c-sidebar-nav-item
-                = link_to department_defense_committees_path(current_user.department), class: "c-sidebar-nav-link"
+                = link_to dept_defense_committees_path, class: "c-sidebar-nav-link"
                   i.c-sidebar-nav-icon.cil-cursor
                   = "Hội đồng bảo vệ"
         - if current_user.has_role? :head_of_department

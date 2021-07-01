@@ -1,5 +1,7 @@
 .card
-  .card-header Danh sách Hội Đồng Bảo Vệ
+  .card-header
+    h3 Danh sách Hội Đồng Bảo Vệ
+    h4 = "Bộ môn: #{current_department}"
   .card-body
     table.table.table-bordered
       thead
@@ -24,4 +26,4 @@
                 ul
                   li = thesis
   .card-footer
-    = link_to 'Đề xuất Hội Đồng Bảo Vệ', new_department_defense_committee_path, class: 'btn btn-primary'
+    = link_to 'Đề xuất Hội Đồng Bảo Vệ', new_dept_defense_committee_path, class: 'btn btn-primary'

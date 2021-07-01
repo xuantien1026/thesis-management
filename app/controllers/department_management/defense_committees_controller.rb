@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-module Admin
-  class DefenseCommitteesController < AdminController
-    before_action :set_department
-
+module DepartmentManagement
+  class DefenseCommitteesController < BaseController
     def index
-      @committees = DefenseCommittee.where(department: @department)
+      @committees = DefenseCommittee.where(department: current_department)
     end
 
     def create
@@ -60,10 +58,6 @@ module Admin
                       :department_id,
                       { defense_committee_members_attributes: %i[lecturer_id role], thesis_ids: [] }
                     ])
-    end
-
-    def set_department
-      @department = Department.find(params[:department_id])
     end
   end
 end
