@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_semester
-    Semester.last
+    Semester.order(:start_date).last
   end
 
   def configure_permitted_parameters
