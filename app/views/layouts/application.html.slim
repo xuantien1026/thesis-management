@@ -35,10 +35,6 @@ html
                 = link_to faculty_theses_path(current_user.faculty), class: "c-sidebar-nav-link"
                   i.c-sidebar-nav-icon.cil-cursor
                   = "LVTN toàn khoa"
-              li.c-sidebar-nav-item
-                = link_to dept_defense_committees_path, class: "c-sidebar-nav-link"
-                  i.c-sidebar-nav-icon.cil-cursor
-                  = "Hội đồng bảo vệ"
         - if current_user.has_role? :head_of_department
           li.c-sidebar-nav-item.c-sidebar-nav-dropdown
             a.c-sidebar-nav-link.c-sidebar-nav-dropdown-toggle data-coreui-toggle="dropdown"
@@ -49,7 +45,10 @@ html
                 = link_to dept_theses_path, class: "c-sidebar-nav-link"
                   i.c-sidebar-nav-icon.cil-cursor
                   = "Phân công phản biện"
-
+              li.c-sidebar-nav-item
+                = link_to dept_defense_committees_path, class: "c-sidebar-nav-link"
+                  i.c-sidebar-nav-icon.cil-cursor
+                  = "Hội đồng bảo vệ"
         li.c-sidebar-nav-item onclick='alert("Chức năng đang trong quá trình xây dựng!")'
           a.c-sidebar-nav-link
             i.c-sidebar-nav-icon.cil-lock-locked
