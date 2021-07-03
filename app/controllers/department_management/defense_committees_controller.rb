@@ -3,7 +3,7 @@
 module DepartmentManagement
   class DefenseCommitteesController < BaseController
     def index
-      @committees = DefenseCommittee.where(department: current_department)
+      @committees = DefenseCommittee.includes(:theses, defense_committee_members: :lecturer).where(department: current_department, semester: current_semester)
     end
 
     def create
