@@ -28,7 +28,7 @@ RSpec.describe 'DefenseCommittees', type: :system do
 
       all('.committee-form').each do |committee_form|
         within(committee_form) do
-          select('chairman')
+          select('Chủ tịch')
         end
       end
 
@@ -48,7 +48,7 @@ RSpec.describe 'DefenseCommittees', type: :system do
 
       all('.committee-form').each do |committee_form|
         within(committee_form) do
-          select('chairman')
+          select('Chủ tịch')
           click_button('Thêm thành viên')
           select(lecturer3.to_s)
         end

@@ -23,7 +23,7 @@
                   = f.object.lecturer
                   = f.hidden_field :lecturer_id
                 td
-                  = f.select :role, options_for_select(DefenseCommittees::Member.roles.keys), {}, class: 'form-control'
+                  = f.select :role, DefenseCommittees::Member.roles.keys.map { |role| [t("activerecord.attributes.defense_committees/member.#{role}"), role]} , {}, class: 'form-control'
             tr data-defense-committee-target="buttons"
               td colspan=2
                 button.btn.btn-primary.mr-1 type="button" data-action="defense-committee#addMember"

@@ -19,5 +19,6 @@ module ThesisManagement
     config.time_zone = "Hanoi"
     # config.eager_load_paths << Rails.root.join("extras")
     config.generators.template_engine :slim
+    config.i18n.default_locale = :vn
   end
 end
