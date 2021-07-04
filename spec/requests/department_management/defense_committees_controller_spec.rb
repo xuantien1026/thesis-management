@@ -53,4 +53,16 @@ RSpec.describe DepartmentManagement::DefenseCommitteesController, type: :request
       expect(response.body).not_to include(another_department_committee.chairman.to_s)
     end
   end
+
+  describe 'GET /department_management/defense_committees/new' do
+    subject { get new_dept_defense_committee_path }
+
+    include_context :signed_in_as_head_of_department
+
+    it 'works' do
+      subject
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end

@@ -5,7 +5,7 @@
     .d-flex.justify-content-end.mb-3
       button.btn.btn-primary.mr-1 data-action='defense-committee#suggest' Tách hội đồng
       input type='number' placeholder='Số lượng' data-defense-committee-target='numberOfCommittees' min=1
-    = form_with url: suggest_department_defense_committees_path(@department), method: :get
+    = form_with url: suggest_dept_defense_committees_path, method: :get
       table.table
         thead
           tr
