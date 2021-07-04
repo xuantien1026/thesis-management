@@ -30,14 +30,13 @@ module DepartmentManagement
 
     def suggest_committee_params # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
       attributes = group_theses_by_committee.map do |thesis_ids|
-        theses = Thesis.includes(advisors: :lecturer).where(id: thesis_ids)
-        lecturers = theses.map(&:primary_advisor).uniq
+        lecturer_ids = ::Theses::Advisor.where(primary: true, thesis_id: thesis_ids).pluck(:lecturer_id).uniq
 
         {
           department_id: current_department.id,
           semester_id: current_semester.id,
-          theses: theses,
-          lecturers: lecturers
+          thesis_ids: thesis_ids,
+          lecturer_ids: lecturer_ids,
         }
       end
       {
