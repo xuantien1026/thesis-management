@@ -3,7 +3,7 @@
 module DepartmentManagement
   class DefenseCommitteesController < BaseController
     def index
-      @committees = DefenseCommittee.includes(:theses, defense_committee_members: :lecturer).where(department: current_department, semester: current_semester)
+      @committees = DefenseCommittee.includes(:theses, members: :lecturer).where(department: current_department, semester: current_semester)
     end
 
     def create
@@ -61,7 +61,7 @@ module DepartmentManagement
       params.require(:defense_committee_form)
             .permit(defense_committees_attributes: [
                       :department_id, :semester_id,
-                      { defense_committee_members_attributes: %i[lecturer_id role], thesis_ids: [] }
+                      { members_attributes: %i[lecturer_id role], thesis_ids: [] }
                     ])
     end
   end

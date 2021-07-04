@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_173745) do
+ActiveRecord::Schema.define(version: 2021_07_04_083701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "defense_committee_members", force: :cascade do |t|
-    t.bigint "defense_committee_id"
-    t.bigint "lecturer_id"
-    t.integer "role", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["defense_committee_id"], name: "index_defense_committee_members_on_defense_committee_id"
-    t.index ["lecturer_id"], name: "index_defense_committee_members_on_lecturer_id"
-  end
 
   create_table "defense_committees", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -32,6 +22,16 @@ ActiveRecord::Schema.define(version: 2021_07_01_173745) do
     t.bigint "semester_id"
     t.index ["department_id"], name: "index_defense_committees_on_department_id"
     t.index ["semester_id"], name: "index_defense_committees_on_semester_id"
+  end
+
+  create_table "defense_committees_members", force: :cascade do |t|
+    t.bigint "defense_committee_id"
+    t.bigint "lecturer_id"
+    t.integer "role", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["defense_committee_id"], name: "index_defense_committees_members_on_defense_committee_id"
+    t.index ["lecturer_id"], name: "index_defense_committees_members_on_lecturer_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -212,10 +212,10 @@ ActiveRecord::Schema.define(version: 2021_07_01_173745) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "defense_committee_members", "defense_committees"
-  add_foreign_key "defense_committee_members", "users", column: "lecturer_id"
   add_foreign_key "defense_committees", "departments"
   add_foreign_key "defense_committees", "semesters"
+  add_foreign_key "defense_committees_members", "defense_committees"
+  add_foreign_key "defense_committees_members", "users", column: "lecturer_id"
   add_foreign_key "departments", "faculties"
   add_foreign_key "majors", "faculties"
   add_foreign_key "theses", "defense_committees"

@@ -13,7 +13,7 @@ export default class extends Controller {
     newRow.firstChild.replaceChildren(newLecturerSelect)
 
     let roleInput = newRow.lastChild.firstChild
-    roleInput.name = `defense_committee_form[defense_committees_attributes][${committeeIndex}][defense_committee_members_attributes][${newMemberIndex}][role]`
+    roleInput.name = `defense_committee_form[defense_committees_attributes][${committeeIndex}][members_attributes][${newMemberIndex}][role]`
 
     this.element.insertBefore(newRow, this.buttonsTarget)
   }
@@ -22,7 +22,7 @@ export default class extends Controller {
     let allLecturers = JSON.parse(document.getElementById('all-lecturers').innerText)
 
     let selectInput = document.createElement('select')
-    selectInput.name = `defense_committee_form[defense_committees_attributes][${committeeIndex}][defense_committee_members_attributes][${newMemberIndex}][lecturer_id]`
+    selectInput.name = `defense_committee_form[defense_committees_attributes][${committeeIndex}][members_attributes][${newMemberIndex}][lecturer_id]`
     selectInput.className = 'form-control'
     allLecturers.forEach(lecturer => {
       let option = document.createElement('option')

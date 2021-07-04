@@ -17,13 +17,13 @@
               th Giảng viên
               th Vai trò
           tbody.committee-form data-controller='defense-committee' data-index="#{f.index}"
-            = f.fields_for :defense_committee_members do |f|
+            = f.fields_for :members do |f|
               tr
                 td
                   = f.object.lecturer
                   = f.hidden_field :lecturer_id
                 td
-                  = f.select :role, options_for_select(DefenseCommitteeMember.roles.keys), {}, class: 'form-control'
+                  = f.select :role, options_for_select(DefenseCommittees::Member.roles.keys), {}, class: 'form-control'
             tr data-defense-committee-target="buttons"
               td colspan=2
                 button.btn.btn-primary.mr-1 type="button" data-action="defense-committee#addMember"

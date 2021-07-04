@@ -19,9 +19,9 @@
             td = committee.chairman
             td = committee.secretary
             td
-              - committee.members.each do |member|
+              - committee.peers.each do |peer|
                 ul
-                  li = member
+                  li = peer
             td
               - committee.theses.each do |thesis|
                 ul

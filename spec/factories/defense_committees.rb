@@ -28,13 +28,13 @@ FactoryBot.define do
     transient do
       chairman  { create :lecturer, department: department }
       secretary { create :lecturer, department: department }
-      member    { create :lecturer, department: department }
+      peer    { create :lecturer, department: department }
     end
 
     after(:create) do |committee, options|
-      committee.defense_committee_members.create(lecturer: options.chairman, role: :chairman)
-      committee.defense_committee_members.create(lecturer: options.secretary, role: :secretary)
-      committee.defense_committee_members.create(lecturer: options.member, role: :member)
+      committee.members.create(lecturer: options.chairman, role: :chairman)
+      committee.members.create(lecturer: options.secretary, role: :secretary)
+      committee.members.create(lecturer: options.peer, role: :peer)
     end
   end
 end

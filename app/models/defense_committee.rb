@@ -22,23 +22,23 @@
 #
 class DefenseCommittee < ApplicationRecord
   belongs_to :department
-  has_many :defense_committee_members, dependent: :destroy
-  has_many :lecturers, through: :defense_committee_members
+  has_many :members, class_name: 'DefenseCommittees::Member', dependent: :destroy
+  has_many :lecturers, through: :members
   has_many :theses, dependent: :nullify
   belongs_to :semester
 
-  accepts_nested_attributes_for :defense_committee_members
-  validates_associated :defense_committee_members
+  accepts_nested_attributes_for :members
+  validates_associated :members
 
   def chairman
-    defense_committee_members.find { |member| member.role == 'chairman' }&.lecturer
+    members.find { |member| member.role == 'chairman' }&.lecturer
   end
 
   def secretary
-    defense_committee_members.find { |member| member.role == 'secretary' }&.lecturer
+    members.find { |member| member.role == 'secretary' }&.lecturer
   end
 
-  def members
-    defense_committee_members.filter { |member| member.role == 'member' }.map(&:lecturer)
+  def peers
+    members.filter { |member| member.role == 'peer' }.map(&:lecturer)
   end
 end

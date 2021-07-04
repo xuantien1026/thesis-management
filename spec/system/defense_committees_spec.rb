@@ -39,8 +39,8 @@ RSpec.describe 'DefenseCommittees', type: :system do
       expect(page).to have_content(lecturer2.to_s)
 
       expect(DefenseCommittee.count).to eq(2)
-      expect(DefenseCommitteeMember.find_by(lecturer: lecturer1).role).to eq('chairman')
-      expect(DefenseCommitteeMember.find_by(lecturer: lecturer2).role).to eq('chairman')
+      expect(DefenseCommittees::Member.find_by(lecturer: lecturer1).role).to eq('chairman')
+      expect(DefenseCommittees::Member.find_by(lecturer: lecturer2).role).to eq('chairman')
     end
 
     it 'can add member to a committee' do
@@ -62,9 +62,9 @@ RSpec.describe 'DefenseCommittees', type: :system do
       expect(page).to have_content(lecturer3.to_s)
 
       expect(DefenseCommittee.first.chairman).to eq(lecturer1)
-      expect(DefenseCommittee.first.members).to include(lecturer3)
+      expect(DefenseCommittee.first.peers).to include(lecturer3)
       expect(DefenseCommittee.second.chairman).to eq(lecturer2)
-      expect(DefenseCommittee.second.members).to include(lecturer3)
+      expect(DefenseCommittee.second.peers).to include(lecturer3)
     end
   end
 end
