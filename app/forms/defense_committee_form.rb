@@ -16,7 +16,13 @@ class DefenseCommitteeForm
   end
 
   def valid?
-    defense_committees.each { |committee| committee.valid? ? next : errors.add(:base, committee.errors.full_messages); return false }
+    defense_committees.each do |committee|
+      next if committee.valid?
+
+      errors.add(:base, committee.errors.full_messages)
+      return false
+    end
+
     true
   end
 

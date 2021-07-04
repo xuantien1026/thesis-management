@@ -11,8 +11,12 @@ RSpec.describe DepartmentManagement::DefenseCommitteesController, type: :request
     include_context :signed_in_as_head_of_department
 
     let!(:committee) { create :defense_committee, department: current_department, semester: current_semester }
-    let!(:another_department_committee) { create :defense_committee, department: another_department, semester: current_semester }
-    let!(:another_semester_committee) { create :defense_committee, department: current_department, semester: another_semester }
+    let!(:another_department_committee) do
+      create :defense_committee, department: another_department, semester: current_semester
+    end
+    let!(:another_semester_committee) do
+      create :defense_committee, department: current_department, semester: another_semester
+    end
 
     let(:another_department) { create :department }
     let(:another_semester) { create :semester, start_date: current_semester.start_date - 1 }

@@ -3,7 +3,8 @@
 module DepartmentManagement
   class DefenseCommitteesController < BaseController
     def index
-      @committees = DefenseCommittee.includes(:theses, members: :lecturer).where(department: current_department, semester: current_semester)
+      @committees = DefenseCommittee.includes(:theses, members: :lecturer).where(department: current_department,
+                                                                                 semester: current_semester)
     end
 
     def create
@@ -28,7 +29,7 @@ module DepartmentManagement
 
     private
 
-    def suggest_committee_params # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+    def suggest_committee_params # rubocop:disable Metrics/MethodLength
       attributes = group_theses_by_committee.map do |thesis_ids|
         lecturer_ids = ::Theses::Advisor.where(primary: true, thesis_id: thesis_ids).pluck(:lecturer_id).uniq
 
@@ -36,7 +37,7 @@ module DepartmentManagement
           department_id: current_department.id,
           semester_id: current_semester.id,
           thesis_ids: thesis_ids,
-          lecturer_ids: lecturer_ids,
+          lecturer_ids: lecturer_ids
         }
       end
       {

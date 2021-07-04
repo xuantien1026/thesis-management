@@ -28,7 +28,7 @@ FactoryBot.define do
     transient do
       chairman  { create :lecturer, department: department }
       secretary { create :lecturer, department: department }
-      peer    { create :lecturer, department: department }
+      peer { create :lecturer, department: department }
     end
 
     after(:create) do |committee, options|
