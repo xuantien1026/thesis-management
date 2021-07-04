@@ -16,7 +16,7 @@
             tr
               th Giảng viên
               th Vai trò
-          tbody data-controller='defense-committee' data-index="#{f.index}"
+          tbody.committee-form data-controller='defense-committee' data-index="#{f.index}"
             = f.fields_for :defense_committee_members do |f|
               tr
                 td
