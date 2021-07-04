@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'profile#show'
 
   shallow do
-    scope module: 'admin' do
+    scope module: :admin do
       resources :faculties, only: %i[index show] do
         resources :theses, only: %i[index new create]
         resources :midterm_evaluations, only: :index
@@ -18,11 +18,6 @@ Rails.application.routes.draw do
       end
     end
 
-    namespace 'theses' do
-      resources :reviews, only: :index
-      resource :midterm_evaluation_set, except: :destroy
-    end
-
     namespace :department_management, as: :dept do
       resources :theses, only: :index do
         scope module: :theses do
@@ -34,6 +29,11 @@ Rails.application.routes.draw do
           get 'suggest', to: 'defense_committees#suggest'
         end
       end
+    end
+
+    namespace :theses do
+      resources :reviews, only: :index
+      resource :midterm_evaluation_set, except: :destroy
     end
 
     resources :thesis_proposals do
