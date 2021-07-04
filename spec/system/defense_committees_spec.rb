@@ -16,7 +16,7 @@ RSpec.describe 'DefenseCommittees', type: :system do
     let!(:lecturer5) { create :lecturer, department: current_department }
 
     def suggest_committees
-      visit new_dept_defense_committee_path
+      visit suggest_dept_defense_committees_path
 
       fill_in 'Số lượng', with: 2
       accept_alert { click_on 'Tách hội đồng' }

@@ -54,8 +54,8 @@ RSpec.describe DepartmentManagement::DefenseCommitteesController, type: :request
     end
   end
 
-  describe 'GET /department_management/defense_committees/new' do
-    subject { get new_dept_defense_committee_path }
+  describe 'GET /department_management/defense_committees/suggest' do
+    subject { get suggest_dept_defense_committees_path }
 
     include_context :signed_in_as_head_of_department
 

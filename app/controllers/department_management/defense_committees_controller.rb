@@ -17,11 +17,11 @@ module DepartmentManagement
       end
     end
 
-    def new
+    def suggest
       @thesis_groups = current_department.lecturers.index_with { |lecturer| Thesis.by_lecturer(lecturer) }
     end
 
-    def suggest
+    def new
       @form = DefenseCommitteeForm.new(suggest_committee_params)
       @lecturers = Lecturer.where(department: current_department).pluck(:name, :id)
     end
@@ -29,11 +29,7 @@ module DepartmentManagement
     private
 
     def suggest_committee_params # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-      committees = Hash.new { |hash, key| hash[key] = [] }
-      suggest_params.each_with_object(committees) do |(thesis_id, committee_number), memo|
-        memo[committee_number] << thesis_id
-      end
-      attributes = committees.map do |_, thesis_ids|
+      attributes = group_theses_by_committee.map do |thesis_ids|
         theses = Thesis.includes(advisors: :lecturer).where(id: thesis_ids)
         lecturers = theses.map(&:primary_advisor).uniq
 
@@ -47,6 +43,14 @@ module DepartmentManagement
       {
         defense_committees_attributes: (1..attributes.count).zip(attributes).to_h
       }
+    end
+
+    def group_theses_by_committee
+      committees = Hash.new { |hash, key| hash[key] = [] }
+      suggest_params.each_with_object(committees) do |(thesis_id, committee_number), memo|
+        memo[committee_number] << thesis_id
+      end
+      committees.values
     end
 
     def suggest_params
