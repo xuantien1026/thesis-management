@@ -20,8 +20,24 @@ RSpec.describe DepartmentManagement::Theses::ReviewsController, type: :request d
     end
   end
 
+  describe 'GET /department_management/theses/:thesis_id/thesis_review/new' do
+    subject { get new_dept_thesis_review_path(thesis) }
+
+    let(:thesis) { create :thesis }
+
+    it_behaves_like :department_management_authorized
+
+    include_context :signed_in_as_head_of_department
+
+    it 'works' do
+      subject
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe 'POST /department_management/theses/:thesis_id/thesis_review' do
-    subject { post dept_thesis_review_path(thesis), params: { thesis_review: { lecturer_id: lecturer.id } } }
+    subject { post dept_thesis_review_path(thesis), params: { theses_review: { lecturer_id: lecturer.id } } }
 
     let(:thesis) { create :thesis }
     let(:lecturer) { create :lecturer }
@@ -42,7 +58,7 @@ RSpec.describe DepartmentManagement::Theses::ReviewsController, type: :request d
   end
 
   describe 'PUT /department_management/theses/:thesis_id/thesis_review' do
-    subject { put dept_thesis_review_path(thesis), params: { thesis_review: { lecturer_id: lecturer.id } } }
+    subject { put dept_thesis_review_path(thesis), params: { theses_review: { lecturer_id: lecturer.id } } }
 
     let(:thesis) { create :thesis }
     let!(:review) { create :theses_review, thesis: thesis }

@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: defense_committee_members
+# Table name: defense_committees_members
 #
 #  id                   :bigint           not null, primary key
 #  role                 :integer          default("member")
@@ -13,17 +13,20 @@
 #
 # Indexes
 #
-#  index_defense_committee_members_on_defense_committee_id  (defense_committee_id)
-#  index_defense_committee_members_on_lecturer_id           (lecturer_id)
+#  index_defense_committees_members_on_defense_committee_id  (defense_committee_id)
+#  index_defense_committees_members_on_lecturer_id           (lecturer_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (defense_committee_id => defense_committees.id)
 #  fk_rails_...  (lecturer_id => users.id)
 #
-class DefenseCommitteeMember < ApplicationRecord
-  belongs_to :defense_committee
-  belongs_to :lecturer
 
-  enum role: { 'member' => 0, 'secretary' => 1, 'chairman' => 2 }
+module DefenseCommittees
+  class Member < ApplicationRecord
+    belongs_to :defense_committee
+    belongs_to :lecturer
+
+    enum role: { 'peer' => 0, 'secretary' => 1, 'chairman' => 2 }
+  end
 end

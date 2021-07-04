@@ -4,31 +4,34 @@
 #
 # Table name: theses
 #
-#  id                 :bigint           not null, primary key
-#  assignment_date    :date
-#  completion_date    :date
-#  description        :text
-#  education_program  :string
-#  english_title      :string
-#  majors             :string           default([]), is an Array
-#  max_student_count  :integer          default(1), not null
-#  mission            :string
-#  ordering           :integer
-#  references         :string           default([]), is an Array
-#  status             :integer          default("waiting_for_approval")
-#  title              :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  semester_id        :bigint           not null
-#  thesis_proposal_id :bigint
+#  id                   :bigint           not null, primary key
+#  assignment_date      :date
+#  completion_date      :date
+#  description          :text
+#  education_program    :string
+#  english_title        :string
+#  majors               :string           default([]), is an Array
+#  max_student_count    :integer          default(1), not null
+#  mission              :string
+#  ordering             :integer
+#  references           :string           default([]), is an Array
+#  status               :integer          default("waiting_for_approval")
+#  title                :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  defense_committee_id :bigint
+#  semester_id          :bigint           not null
+#  thesis_proposal_id   :bigint
 #
 # Indexes
 #
-#  index_theses_on_semester_id         (semester_id)
-#  index_theses_on_thesis_proposal_id  (thesis_proposal_id)
+#  index_theses_on_defense_committee_id  (defense_committee_id)
+#  index_theses_on_semester_id           (semester_id)
+#  index_theses_on_thesis_proposal_id    (thesis_proposal_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (defense_committee_id => defense_committees.id)
 #  fk_rails_...  (semester_id => semesters.id)
 #
 class Thesis < ApplicationRecord

@@ -1,11 +1,12 @@
 .card
   .card-header
-    h3 = "Danh sách đề xuất Hội Đồng Bảo Vệ - Bộ môn #{@department}"
-  = form_with model: @form, url: department_defense_committees_path(@department) do |f|
+    h3 = "Danh sách đề xuất Hội Đồng Bảo Vệ - Bộ môn #{current_department}"
+  = form_with model: @form, url: dept_defense_committees_path do |f|
     .card-body
       table.table.table-borderless
         = f.fields_for :defense_committees do |f|
           = f.hidden_field :department_id
+          = f.hidden_field :semester_id
           - f.object.theses.each do |thesis|
             = hidden_field_tag "defense_committee_form[defense_committees_attributes][#{f.index}][thesis_ids][]", thesis.id
           thead
@@ -15,14 +16,14 @@
             tr
               th Giảng viên
               th Vai trò
-          tbody data-controller='defense-committee' data-index="#{f.index}"
-            = f.fields_for :defense_committee_members do |f|
+          tbody.committee-form data-controller='defense-committee' data-index="#{f.index}"
+            = f.fields_for :members do |f|
               tr
                 td
                   = f.object.lecturer
                   = f.hidden_field :lecturer_id
                 td
-                  = f.select :role, options_for_select(DefenseCommitteeMember.roles.keys), {}, class: 'form-control'
+                  = f.select :role, DefenseCommittees::Member.roles.keys.map { |role| [t("activerecord.attributes.defense_committees/member.#{role}"), role]} , {}, class: 'form-control'
             tr data-defense-committee-target="buttons"
               td colspan=2
                 button.btn.btn-primary.mr-1 type="button" data-action="defense-committee#addMember"

@@ -1,0 +1,7 @@
+vn:
+  activerecord:
+    attributes:
+      defense_committees/member:
+        chairman: Chủ tịch
+        secretary: Thư kí
+        peer: Uỷ viên

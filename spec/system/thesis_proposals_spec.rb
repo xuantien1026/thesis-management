@@ -15,8 +15,8 @@ RSpec.describe 'ThesisProposals', type: :system do
 
   before do
     create_list :semester, 2
-    faculty.majors.create(name: 'Computer Science')
-    faculty.majors.create(name: 'Computer Engineering')
+    current_faculty.majors.create(name: 'Computer Science')
+    current_faculty.majors.create(name: 'Computer Engineering')
   end
 
   describe 'Lecturer creating a new topic' do

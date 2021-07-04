@@ -11,10 +11,9 @@ RSpec.describe DepartmentManagement::ThesesController, type: :request do
     context 'when current user is head of department' do
       include_context :signed_in_as_head_of_department
 
-      let(:department) { head_of_department.department }
       let!(:thesis_of_current_department) do
         3.times.map do
-          lecturer = create :lecturer, department: department
+          lecturer = create :lecturer, department: current_department
           create :thesis, primary_advisor: lecturer
         end
       end
