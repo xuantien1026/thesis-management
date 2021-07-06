@@ -5,6 +5,7 @@
 # Table name: defense_committees
 #
 #  id            :bigint           not null, primary key
+#  session       :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  department_id :bigint
@@ -27,8 +28,12 @@ class DefenseCommittee < ApplicationRecord
   has_many :theses, dependent: :nullify
   belongs_to :semester
 
+  enum session: { active: 1, inactive: 0 }
+
   accepts_nested_attributes_for :members
   validates_associated :members
+
+  scope :by_lecturer, -> (lecturer) { joins(:members).where(members: { lecturer_id: lecturer.id }) }
 
   def chairman
     members.find { |member| member.role == 'chairman' }&.lecturer

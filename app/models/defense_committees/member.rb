@@ -5,7 +5,7 @@
 # Table name: defense_committees_members
 #
 #  id                   :bigint           not null, primary key
-#  role                 :integer          default("member")
+#  role                 :integer          default("peer")
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  defense_committee_id :bigint

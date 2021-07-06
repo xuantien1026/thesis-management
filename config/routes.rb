@@ -51,6 +51,13 @@ Rails.application.routes.draw do
         resource :mission_note, only: :show
       end
     end
+
+    resources :defense_committees, only: %i[index show] do
+      member do
+        post 'start_session', to: 'defense_committees#start_session'
+        post 'end_session', to: 'defense_committees#end_session'
+      end
+    end
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

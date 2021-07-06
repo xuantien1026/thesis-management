@@ -1,0 +1,22 @@
+.card
+  .card-header
+    strong = "Hội đồng bảo vệ"
+    .badge.badge-primary.float-right = @committee.session.humanize
+  .card-body
+    dt = "Chủ tịch"
+    dd = @committee.chairman
+    dt = "Thư kí"
+    dd = @committee.secretary
+    dt = "Thành viên"
+    dd
+      ul
+      - @committee.peers.each do |peer|
+        li = peer
+    dt = "Đề tài"
+    dd
+      ul
+        - @committee.theses.each do |thesis|
+          li = thesis
+  .card-footer
+    = button_to 'Bắt đầu phiên làm việc', start_session_defense_committee_path(@committee), class: 'btn btn-primary' if policy(@committee).start_session?
+    = button_to 'Kết thúc phiên làm việc', end_session_defense_committee_path(@committee), class: 'btn btn-danger' if policy(@committee).end_session?

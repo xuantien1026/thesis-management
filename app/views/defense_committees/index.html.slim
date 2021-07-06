@@ -1,0 +1,28 @@
+.card
+  .card-header
+    strong Danh sách Hội Đồng Bảo Vệ
+    p = current_semester
+  .card-body
+    table.table.table-bordered
+      thead
+        tr
+          th STT
+          th Chủ tịch
+          th Thư kí
+          th Uỷ viên
+          th Đề tài
+      tbody
+        - @committees.each do |committee|
+          tr
+            td = link_to committee.id, defense_committee_path(committee)
+            td = committee.chairman
+            td = committee.secretary
+            td
+              - committee.peers.each do |peer|
+                ul
+                  li = peer
+            td
+              - committee.theses.each do |thesis|
+                ul
+                  li = thesis
+  .card-footer
