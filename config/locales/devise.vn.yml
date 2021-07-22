@@ -1,0 +1,5 @@
+vn:
+  devise:
+    sessions:
+      user:
+        signed_in: Đăng nhập thành công
