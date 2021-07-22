@@ -63,4 +63,8 @@ class ThesisProposal < ApplicationRecord
   def major
     majors.join(' - ')
   end
+
+  def to_s
+    title || english_title
+  end
 end

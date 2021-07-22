@@ -26,9 +26,9 @@
         = link_to dept_defense_committees_path, class: "c-sidebar-nav-link"
           i.c-sidebar-nav-icon.cil-cursor
           = "Hội đồng bảo vệ"
-li.c-sidebar-nav-item onclick='alert("Chức năng đang trong quá trình xây dựng!")'
-  a.c-sidebar-nav-link
-    i.c-sidebar-nav-icon.cil-lock-locked
+li.c-sidebar-nav-item
+  = link_to thesis_proposals_path, class: "c-sidebar-nav-link"
+    i.c-sidebar-nav-icon.cil-cursor
     = "Đề Cương Luận Văn"
 li.c-sidebar-nav-item
   = link_to theses_path, class: "c-sidebar-nav-link"

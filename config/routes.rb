@@ -36,6 +36,10 @@ Rails.application.routes.draw do
       resource :midterm_evaluation_set, except: :destroy
     end
 
+    namespace :students do
+      resources :thesis_proposals, only: :index
+    end
+
     resources :thesis_proposals do
       member do
         post 'department_approve', to: 'thesis_proposals#department_approve'
@@ -58,6 +62,7 @@ Rails.application.routes.draw do
         post 'end_session', to: 'defense_committees#end_session'
       end
     end
+
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

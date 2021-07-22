@@ -33,7 +33,7 @@ class DefenseCommittee < ApplicationRecord
   accepts_nested_attributes_for :members
   validates_associated :members
 
-  scope :by_lecturer, -> (lecturer) { joins(:members).where(members: { lecturer_id: lecturer.id }) }
+  scope :by_lecturer, ->(lecturer) { joins(:members).where(members: { lecturer_id: lecturer.id }) }
 
   def chairman
     members.find { |member| member.role == 'chairman' }&.lecturer

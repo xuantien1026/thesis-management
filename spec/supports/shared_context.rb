@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.shared_context :signed_in_as_student do
+  include_context :basic_faculty
+
   let(:student) { create :student }
 
   before do
