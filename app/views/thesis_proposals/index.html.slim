@@ -1,18 +1,26 @@
 .card
   .card-header
-    h3 Đề Cương Luận Văn
+    h3 Đề cương luận văn của tôi
 
   .card-body
-    .d-table.table
-      .d-table-row.font-weight-bold
-        .d-table-cell.p-2 MĐT
-        .d-table-cell.p-2 Giảng viên
-        .d-table-cell.p-2 Tên đề tài
-        .d-table-cell.p-2 Số SV
-        .d-table-cell.p-2 Ngành
-        .d-table-cell.p-2 Trạng thái
-      - @thesis_proposals.each do |thesis_proposal|
-        = turbo_frame_tag thesis_proposal, class: "d-table-row"
-          = render TopicComponent.new(user: current_user, topic: thesis_proposal)
+    table.table
+      thead
+        tr
+          th MĐT
+          th Giảng viên
+          th Tên đề tài
+          th Số SV
+          th Ngành
+          th Trạng thái
+      tbody
+        - @thesis_proposals.each do |thesis_proposal|
+          tr
+            td = link_to thesis_proposal.id, thesis_proposal, target: '_top'
+            td = thesis_proposal.primary_advisor_name
+            td = thesis_proposal.title
+            td = thesis_proposal.max_student_count
+            td = thesis_proposal.major
+            td = render StatusComponent.new(status: thesis_proposal.status)
+
   .card-footer
     = link_to 'Đề Cương Luận Văn Mới', new_thesis_proposal_path, class: 'btn btn-primary' if policy(ThesisProposal).create?

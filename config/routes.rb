@@ -36,15 +36,15 @@ Rails.application.routes.draw do
       resources :thesis_proposals, only: :index
     end
 
+    namespace :theses do
+      resources :reviews, only: :index
+      resource :midterm_evaluation_set, except: :destroy
+    end
+
     resources :theses, only: %i[index show] do
       scope module: :theses do
         resource :mission_note, only: :show
       end
-    end
-
-    namespace :theses do
-      resources :reviews, only: :index
-      resource :midterm_evaluation_set, except: :destroy
     end
 
     resources :thesis_proposals do
