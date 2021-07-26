@@ -5,3 +5,4 @@
     = link_to 'Profile', profile_path, class: 'dropdown-item'
     = link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item'
 span.mr-3 = "Xin chào, #{@user.name}"
+span.pr-3.mr-3.border-right = helpers.current_semester.to_s

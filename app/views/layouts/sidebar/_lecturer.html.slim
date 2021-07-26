@@ -19,6 +19,14 @@
       = 'Quản lý bộ môn'
     ul.c-sidebar-nav-dropdown-items
       li.c-sidebar-nav-item
+        = link_to dept_lecturers_path, class: "c-sidebar-nav-link"
+          i.c-sidebar-nav-icon.cil-cursor
+          = "Danh sách giảng viên"
+      li.c-sidebar-nav-item
+        = link_to dept_thesis_proposals_path, class: "c-sidebar-nav-link"
+          i.c-sidebar-nav-icon.cil-cursor
+          = "Duyệt đề cương luận văn"
+      li.c-sidebar-nav-item
         = link_to dept_theses_path, class: "c-sidebar-nav-link"
           i.c-sidebar-nav-icon.cil-cursor
           = "Phân công phản biện"

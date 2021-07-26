@@ -1,0 +1,17 @@
+.card
+  .card-header
+    h3 Đề cương luận văn
+    = "Bộ môn #{current_department}"
+
+  .card-body
+    .d-table.table
+      .d-table-row.font-weight-bold
+        .d-table-cell.p-2 MĐT
+        .d-table-cell.p-2 Giảng viên
+        .d-table-cell.p-2 Tên đề tài
+        .d-table-cell.p-2 Số SV
+        .d-table-cell.p-2 Ngành
+        .d-table-cell.p-2 Trạng thái
+      - @thesis_proposals.each do |thesis_proposal|
+        = turbo_frame_tag thesis_proposal, class: "d-table-row"
+          = render TopicComponent.new(user: current_user, topic: thesis_proposal)

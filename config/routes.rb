@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     end
 
     namespace :department_management, as: :dept do
+      resources :thesis_proposals, only: :index
+      resources :lecturers, only: :index
       resources :theses, only: :index do
         scope module: :theses do
           resource :review, except: :destroy
@@ -30,13 +32,19 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :students do
+      resources :thesis_proposals, only: :index
+    end
+
+    resources :theses, only: %i[index show] do
+      scope module: :theses do
+        resource :mission_note, only: :show
+      end
+    end
+
     namespace :theses do
       resources :reviews, only: :index
       resource :midterm_evaluation_set, except: :destroy
-    end
-
-    namespace :students do
-      resources :thesis_proposals, only: :index
     end
 
     resources :thesis_proposals do
@@ -47,21 +55,12 @@ Rails.application.routes.draw do
       resources :thesis_proposal_members, only: %i[create], as: :applications
     end
 
-    resources :theses, only: %i[index show] do
-      resources :thesis_members, only: %i[create], as: :applications
-
-      scope module: :theses do
-        resource :mission_note, only: :show
-      end
-    end
-
     resources :defense_committees, only: %i[index show] do
       member do
         post 'start_session', to: 'defense_committees#start_session'
         post 'end_session', to: 'defense_committees#end_session'
       end
     end
-
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
