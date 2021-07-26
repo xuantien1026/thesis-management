@@ -5,5 +5,5 @@
   .card-body
     ul
       - @lecturers.each do |lecturer|
-        li = link_to lecturer.name, lecturer
+        li = link_to lecturer.name, dept_lecturer_path(lecturer)
     button.btn.btn-primary onclick="alert('Chức năng đang trong quá trình xây dựng!')" Mời giảng viên

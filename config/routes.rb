@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
     namespace :department_management, as: :dept do
       resources :thesis_proposals, only: :index
-      resources :lecturers, only: :index
+      resources :lecturers, only: %i[index show]
       resources :theses, only: :index do
         scope module: :theses do
           resource :review, except: :destroy

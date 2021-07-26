@@ -5,5 +5,9 @@ module DepartmentManagement
     def index
       @lecturers = current_department.lecturers
     end
+
+    def show
+      @lecturer = Lecturer.find(params[:id])
+    end
   end
 end

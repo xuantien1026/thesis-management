@@ -5,7 +5,6 @@
     h4 Danh sách giảng viên
     ul
       - @lecturers.each do |lecturer|
-        li = link_to lecturer.name, lecturer
-    button.btn.btn-primary onclick="alert('Chức năng đang trong quá trình xây dựng!')" Mời giảng viên
+        li = link_to lecturer.name, admin_lecturer_path(lecturer)
   .card-footer
-    = link_to 'Quay lại', faculty_path(@department.faculty_id)
+    = link_to 'Quay lại', admin_faculty_path(@department.faculty_id)

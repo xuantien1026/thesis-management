@@ -8,7 +8,7 @@
       dd = content.to_s
     hr
     h4 = 'Quản lý quyền truy cập'
-    = form_with url: lecturer_role_path(@lecturer), data: { turbo: 'false' }
+    = form_with url: admin_lecturer_role_path(@lecturer), data: { turbo: 'false' }
     .form-group
       - @available_roles.each do |role|
         .form-check
@@ -16,4 +16,4 @@
           = label_tag "role_#{role}", t(".#{role}", locale: :vn), class: 'form-check-label'
     = submit_tag 'Submit', class: 'btn btn-primary', target: '_top'
   .card-footer
-    = link_to 'Quay lại', department_lecturers_path(@lecturer.department)
+    = link_to 'Quay lại', admin_department_lecturers_path(@lecturer.department)

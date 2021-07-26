@@ -4,4 +4,4 @@
   .card-body
     ol
       - @faculties.each do |faculty|
-        li = link_to faculty, faculty_path(faculty)
+        li = link_to faculty, admin_faculty_path(faculty)

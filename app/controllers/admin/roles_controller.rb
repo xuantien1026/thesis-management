@@ -7,7 +7,7 @@ module Admin
     def create
       Role::ROLES.each { |role| @lecturer.remove_role role }
       role_params.each { |role| @lecturer.add_role role }
-      redirect_to lecturer_path(@lecturer), notice: 'Cập nhật thành công!'
+      redirect_to admin_lecturer_path(@lecturer), notice: 'Cập nhật thành công!'
     end
 
     private
