@@ -3,3 +3,4 @@ vn:
     sessions:
       user:
         signed_in: Đăng nhập thành công
+        already_authenticated: Bạn đã đăng nhập

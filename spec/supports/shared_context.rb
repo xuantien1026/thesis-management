@@ -29,7 +29,9 @@ RSpec.shared_context :signed_in_as_head_of_department do
 end
 
 RSpec.shared_context :signed_in_as_head_of_faculty do
-  let(:head_of_faculty) { create :lecturer, :as_head_of_faculty }
+  include_context :basic_faculty
+
+  let(:head_of_faculty) { create :lecturer, :as_head_of_faculty, department: current_department }
 
   before do
     sign_in head_of_faculty
