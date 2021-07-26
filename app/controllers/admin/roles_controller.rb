@@ -4,14 +4,10 @@ module Admin
   class RolesController < AdminController
     before_action :set_lecturer
 
-    def show
-      @available_roles = current_user.has_role?(:super_admin) ? Role::ROLES : ['privileged_lecturer']
-    end
-
     def create
       Role::ROLES.each { |role| @lecturer.remove_role role }
       role_params.each { |role| @lecturer.add_role role }
-      redirect_to lecturer_role_path(@lecturer), notice: 'Cập nhật thành công!'
+      redirect_to lecturer_path(@lecturer), notice: 'Cập nhật thành công!'
     end
 
     private
