@@ -10,10 +10,6 @@ module Admin
       @lecturers = Lecturer.by_faculty(@faculty)
     end
 
-    def new; end
-
-    def create; end
-
     private
 
     def set_faculty

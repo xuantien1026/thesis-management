@@ -1,39 +1,18 @@
 - if current_user.has_role? :admin
-  li.c-sidebar-nav-item.c-sidebar-nav-dropdown
-    a.c-sidebar-nav-link.c-sidebar-nav-dropdown-toggle data-coreui-toggle="dropdown"
-      i.c-sidebar-nav-icon.cil-list
-      = 'Admin'
-    ul.c-sidebar-nav-dropdown-items
-      li.c-sidebar-nav-item
-        = link_to faculties_path, class: "c-sidebar-nav-link"
-          i.c-sidebar-nav-icon.cil-cursor
-          = "Bộ máy tổ chức"
-      li.c-sidebar-nav-item
-        = link_to faculty_theses_path(current_user.faculty), class: "c-sidebar-nav-link"
-          i.c-sidebar-nav-icon.cil-cursor
-          = "LVTN toàn khoa"
+  = render 'layouts/sidebar/admin'
+- if current_user.has_role? :head_of_faculty
+  = render 'layouts/sidebar/head_of_faculty'
 - if current_user.has_role? :head_of_department
-  li.c-sidebar-nav-item.c-sidebar-nav-dropdown
-    a.c-sidebar-nav-link.c-sidebar-nav-dropdown-toggle data-coreui-toggle="dropdown"
-      i.c-sidebar-nav-icon.cil-list
-      = 'Quản lý bộ môn'
-    ul.c-sidebar-nav-dropdown-items
-      li.c-sidebar-nav-item
-        = link_to dept_theses_path, class: "c-sidebar-nav-link"
-          i.c-sidebar-nav-icon.cil-cursor
-          = "Phân công phản biện"
-      li.c-sidebar-nav-item
-        = link_to dept_defense_committees_path, class: "c-sidebar-nav-link"
-          i.c-sidebar-nav-icon.cil-cursor
-          = "Hội đồng bảo vệ"
+  = render 'layouts/sidebar/head_of_department'
+
 li.c-sidebar-nav-item
   = link_to thesis_proposals_path, class: "c-sidebar-nav-link"
     i.c-sidebar-nav-icon.cil-cursor
-    = "Đề Cương Luận Văn"
+    = "Đề cương luận văn của tôi"
 li.c-sidebar-nav-item
   = link_to theses_path, class: "c-sidebar-nav-link"
     i.c-sidebar-nav-icon.cil-cursor
-    = "Luận văn tốt nghiệp"
+    = "Luận văn tốt nghiệp của tôi"
 li.c-sidebar-nav-item
   = link_to theses_reviews_path, class: "c-sidebar-nav-link"
     i.c-sidebar-nav-icon.cil-cursor

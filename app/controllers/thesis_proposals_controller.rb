@@ -5,7 +5,7 @@ class ThesisProposalsController < ApplicationController
   before_action :set_majors, :set_semesters, only: %i[new edit]
 
   def index
-    @thesis_proposals = policy_scope(ThesisProposal).order(:id)
+    @thesis_proposals = ThesisProposal.by_lecturer(current_user).order(:id)
   end
 
   def show; end

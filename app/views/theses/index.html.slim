@@ -1,13 +1,11 @@
 .card
   .card-header
-    strong Luận văn tốt nghiệp
+    h3 Luận văn tốt nghiệp của tôi
 
   .card-body
     - if @theses
       .row.mb-2
-        .col-6
-          span = "Giảng viên: #{current_user}"
-        .col-6
+        .col-12
           .float-right
             - if @midterm_evaluated
               = link_to 'In phiếu chấm giữa kì' , theses_midterm_evaluation_set_path(format: :pdf), class: 'btn btn-primary'

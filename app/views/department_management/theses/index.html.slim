@@ -1,7 +1,7 @@
 .card
   .card-header
     h3 Danh sách luận văn tốt nghiệp
-    h4 = "Bộ môn #{current_department}"
+    = "Bộ môn #{current_department}"
   .card-body
     - if @theses.blank?
       = 'Không có luận văn nào.'

@@ -3,7 +3,7 @@
 workbook = xlsx_package.workbook
 workbook.add_worksheet(name: 'KetQuaChamGiuaKiLVTN') do |sheet|
   sheet.add_row ['MSSV', 'Họ và tên', 'MĐT', 'Kết quả giữa kì']
-  ThesisMember.includes(:student, :thesis, :midterm_evaluation).find_each do |member|
+  Theses::Member.includes(:student, :thesis, :midterm_evaluation).find_each do |member|
     sheet << [member.mssv, member.name, member.thesis.ordering,
               (if member.midterm_evaluation.present?
                  member.midterm_evaluation.passed? ? 'Đạt' : 'Không Đạt'
