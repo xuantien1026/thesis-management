@@ -8,7 +8,8 @@
         .col-12
           .float-right
             - if @midterm_evaluated
-              = link_to 'In phiếu chấm giữa kì' , theses_midterm_evaluation_set_path(format: :pdf), class: 'btn btn-primary'
+              = link_to 'In phiếu chấm giữa kì', theses_midterm_evaluation_set_path(format: :pdf), class: 'btn btn-primary'
+              = link_to 'Sửa kết quả giữa kì', edit_theses_midterm_evaluation_set_path, class: "btn btn-primary ml-1 #{'disabled' unless current_user.has_role?(:privileged_lecturer)}"
             - else
               = link_to 'Chấm điểm giữa kì', new_theses_midterm_evaluation_set_path, class: 'btn btn-primary'
       table.table
