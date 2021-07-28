@@ -10,10 +10,10 @@
     h4 = 'Quản lý quyền truy cập'
     = form_with url: admin_lecturer_role_path(@lecturer), data: { turbo: 'false' }
     .form-group
-      - @available_roles.each do |role|
+      - Role::ROLES.each do |role|
         .form-check
           = check_box_tag 'roles[]', role, @lecturer.has_role?(role), class: 'form-check-input', id: "role_#{role}"
-          = label_tag "role_#{role}", t(".#{role}", locale: :vn), class: 'form-check-label'
-    = submit_tag 'Submit', class: 'btn btn-primary', target: '_top'
+          = label_tag "role_#{role}", t(".#{role}"), class: 'form-check-label'
+    = submit_tag 'Submit', class: 'btn btn-primary'
   .card-footer
     = link_to 'Quay lại', admin_department_lecturers_path(@lecturer.department)

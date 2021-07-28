@@ -9,9 +9,7 @@ module Admin
       @lecturers = Lecturer.where(department: @department)
     end
 
-    def show
-      @available_roles = current_user.has_role?(:super_admin) ? Role::ROLES : ['privileged_lecturer']
-    end
+    def show; end
 
     private
 
