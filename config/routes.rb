@@ -43,6 +43,10 @@ Rails.application.routes.draw do
     namespace :theses do
       resources :reviews, only: :index
       resource :midterm_evaluation_set, except: :destroy
+      resources :members, only: [] do
+        resource :advisor_evaluation, except: :destroy
+        resource :reviewer_evaluation, except: :destroy
+      end
     end
 
     resources :theses, only: %i[index show] do

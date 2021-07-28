@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_013054) do
+ActiveRecord::Schema.define(version: 2021_07_28_144748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,55 @@ ActiveRecord::Schema.define(version: 2021_07_06_013054) do
     t.check_constraint "max_student_count >= 1", name: "check_thesis_max_student_count"
   end
 
+  create_table "theses_advisor_evaluations", force: :cascade do |t|
+    t.bigint "theses_member_id"
+    t.integer "marking1"
+    t.integer "marking2"
+    t.integer "marking3"
+    t.integer "marking4"
+    t.integer "marking5"
+    t.integer "marking6"
+    t.integer "marking7"
+    t.integer "marking8"
+    t.integer "marking9"
+    t.integer "bonus_point"
+    t.string "bonus_reason"
+    t.string "learning_outcome1"
+    t.string "learning_outcome1_remark"
+    t.string "learning_outcome2"
+    t.string "learning_outcome2_remark"
+    t.string "learning_outcome3"
+    t.string "learning_outcome3_remark"
+    t.string "learning_outcome4"
+    t.string "learning_outcome4_remark"
+    t.string "learning_outcome5"
+    t.string "learning_outcome5_remark"
+    t.string "learning_outcome6"
+    t.string "learning_outcome6_remark"
+    t.string "learning_outcome7"
+    t.string "learning_outcome7_remark"
+    t.string "learning_outcome8"
+    t.string "learning_outcome8_remark"
+    t.string "learning_outcome9"
+    t.string "learning_outcome9_remark"
+    t.string "learning_outcome10"
+    t.string "learning_outcome10_remark"
+    t.string "learning_outcome11"
+    t.string "learning_outcome11_remark"
+    t.string "learning_outcome12"
+    t.string "learning_outcome12_remark"
+    t.string "learning_outcome13"
+    t.string "learning_outcome13_remark"
+    t.string "learning_outcome14"
+    t.string "learning_outcome14_remark"
+    t.string "learning_outcome15"
+    t.string "learning_outcome15_remark"
+    t.string "opinion_about_form"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["theses_member_id"], name: "index_theses_advisor_evaluations_on_theses_member_id"
+  end
+
   create_table "theses_advisors", force: :cascade do |t|
     t.bigint "lecturer_id"
     t.bigint "thesis_id"
@@ -125,6 +174,55 @@ ActiveRecord::Schema.define(version: 2021_07_06_013054) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["member_id"], name: "index_theses_midterm_evaluations_on_member_id"
+  end
+
+  create_table "theses_reviewer_evaluations", force: :cascade do |t|
+    t.bigint "theses_member_id"
+    t.integer "marking1"
+    t.integer "marking2"
+    t.integer "marking3"
+    t.integer "marking4"
+    t.integer "marking5"
+    t.integer "marking6"
+    t.integer "marking7"
+    t.integer "marking8"
+    t.integer "marking9"
+    t.integer "bonus_point"
+    t.string "bonus_reason"
+    t.string "learning_outcome1"
+    t.string "learning_outcome1_remark"
+    t.string "learning_outcome2"
+    t.string "learning_outcome2_remark"
+    t.string "learning_outcome3"
+    t.string "learning_outcome3_remark"
+    t.string "learning_outcome4"
+    t.string "learning_outcome4_remark"
+    t.string "learning_outcome5"
+    t.string "learning_outcome5_remark"
+    t.string "learning_outcome6"
+    t.string "learning_outcome6_remark"
+    t.string "learning_outcome7"
+    t.string "learning_outcome7_remark"
+    t.string "learning_outcome8"
+    t.string "learning_outcome8_remark"
+    t.string "learning_outcome9"
+    t.string "learning_outcome9_remark"
+    t.string "learning_outcome10"
+    t.string "learning_outcome10_remark"
+    t.string "learning_outcome11"
+    t.string "learning_outcome11_remark"
+    t.string "learning_outcome12"
+    t.string "learning_outcome12_remark"
+    t.string "learning_outcome13"
+    t.string "learning_outcome13_remark"
+    t.string "learning_outcome14"
+    t.string "learning_outcome14_remark"
+    t.string "learning_outcome15"
+    t.string "learning_outcome15_remark"
+    t.string "opinion_about_form"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["theses_member_id"], name: "index_theses_reviewer_evaluations_on_theses_member_id"
   end
 
   create_table "theses_reviews", force: :cascade do |t|
@@ -221,10 +319,12 @@ ActiveRecord::Schema.define(version: 2021_07_06_013054) do
   add_foreign_key "majors", "faculties"
   add_foreign_key "theses", "defense_committees"
   add_foreign_key "theses", "semesters"
+  add_foreign_key "theses_advisor_evaluations", "theses_members"
   add_foreign_key "theses_advisors", "theses"
   add_foreign_key "theses_advisors", "users", column: "lecturer_id"
   add_foreign_key "theses_members", "users", column: "student_id"
   add_foreign_key "theses_midterm_evaluations", "theses_members", column: "member_id"
+  add_foreign_key "theses_reviewer_evaluations", "theses_members"
   add_foreign_key "thesis_proposal_advisors", "thesis_proposals"
   add_foreign_key "thesis_proposal_advisors", "users", column: "lecturer_id"
   add_foreign_key "thesis_proposals", "semesters"

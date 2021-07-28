@@ -13,5 +13,5 @@
         tbody
           - @reviews.each do |review|
             tr
-              td = review.thesis.ordering
+              td = link_to review.thesis.ordering, review.thesis
               td = review.thesis

@@ -28,9 +28,28 @@
 
       dt = "Sinh viên thực hiện (#{@thesis.students.count})"
       dd
-        ul
-          - @thesis.students.each do |student|
-            li = "#{student.mssv} - #{student.name}"
+        table.table
+          thead
+            tr
+              th Sinh viên
+              th Thao tác
+          tbody
+            - @thesis.members.each do |member|
+              tr
+                td = "#{member.mssv} - #{member.name}"
+                td
+                  - if current_user == @thesis.primary_advisor
+                    - if member.advisor_evaluation.nil?
+                      = link_to 'Điền phiếu đánh giá LVTN (GVHD)', new_theses_member_advisor_evaluation_path(member)
+                    - else
+                      = link_to 'Download phiếu đánh giá LVTN (GVHD)', theses_member_advisor_evaluation_path(member)
+                      = link_to 'Chỉnh sửa', edit_theses_member_advisor_evaluation_path(member), class: 'ml-2'
+                  - if current_user == @thesis.reviewer
+                    - if member.reviewer_evaluation.nil?
+                      = link_to 'Điền phiếu đánh giá LVTN (GVPB)', new_theses_member_reviewer_evaluation_path(member)
+                    - else
+                      = link_to 'Download phiếu đánh giá LVTN (GVPB)', theses_member_reviewer_evaluation_path(member)
+                      = link_to 'Chỉnh sửa', edit_theses_member_reviewer_evaluation_path(member), class: 'ml-2'
 
       dt Kết quả giữa kì
       dd
