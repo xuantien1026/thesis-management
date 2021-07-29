@@ -20,20 +20,20 @@ RSpec.describe Admin::ThesesController, type: :request do
     let(:theses_from_other_faculty) { create_list :thesis, 2 }
 
     it 'returns all theses of specified faculty' do
-      get faculty_theses_path(current_faculty)
+      get admin_faculty_theses_path(current_faculty)
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include(*theses.map(&:to_s))
     end
 
     it 'does not show theses from other faculty' do
-      get faculty_theses_path(current_faculty)
+      get admin_faculty_theses_path(current_faculty)
 
       expect(response.body).not_to include(*theses_from_other_faculty.map(&:to_s))
     end
 
     it 'returns all theses of specified lecturer when searched by lecturer' do
-      get faculty_theses_path(current_faculty), params: { q: { advisors_lecturer_id_in: [advisors.map(&:id)] } }
+      get admin_faculty_theses_path(current_faculty), params: { q: { advisors_lecturer_id_in: [advisors.map(&:id)] } }
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include(theses.first.to_s)

@@ -68,6 +68,3 @@
                   td = evaluation.note
         - else
           div = "Chưa có kết quả giữa kì"
-
-  .card-footer
-    = button_to 'Đăng kí', thesis_applications_path(@thesis), method: :post, class: 'btn btn-primary' if current_user.is_a?(Student)

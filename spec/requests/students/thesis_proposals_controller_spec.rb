@@ -55,7 +55,7 @@ RSpec.describe Students::ThesisProposalsController, type: :request do
       it 'does not show proposals from previous semesters' do
         subject
 
-        expect(response.body).not_to include(previous_semester.to_s)
+        expect(response.body).not_to include(proposal_from_another_semester.to_s)
       end
     end
   end

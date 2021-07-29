@@ -34,7 +34,11 @@ module Theses
       return false unless valid?
 
       ApplicationRecord.transaction do
-        members.each { |member| member.create_midterm_evaluation!(evaluations[member.id]) }
+        members.each do |member|
+          evaluation = MidtermEvaluation.find_or_initialize_by(member: member)
+          evaluation.assign_attributes(evaluations[member.id])
+          evaluation.save!
+        end
       end
 
       true
