@@ -1,4 +1,11 @@
 = form_for evaluation, url: url do |f|
+  p = "Tên đề tài: #{@member.thesis}"
+  p = "Tên sinh viên: #{@member.name}"
+  p = "Mã số sinh viên: #{@member.mssv}"
+  hr
+  p
+    <span>Phiếu đánh giá LVTN gồm 2 phần: phần <strong>Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp</strong> và phần <strong>Đánh giá dành cho chuẩn đầu ra của chương trình</strong>. Thầy/ Cô vui lòng đánh giá cho cả 2 phần.<span>
+  p = 'Nếu Thầy/ Cô có ý kiến góp ý cho phiếu đánh giá này thì Thầy/ Cô vui lòng ghi chú lại ở phần sau cùng của phiếu đánh giá. Khoa trân trọng cảm ơn các ý kiến góp ý của Thầy/ Cô!'
   h4 I. Phần đánh giá điểm của sinh viện thực hiện luận văn tốt nghiệp
   p <span><u>Hướng dẫn đánh giá</u>: cho mỗi <strong>Tiêu chí đánh giá</strong>, Thầy / Cô cho điểm đánh giá ở cột <strong>Điểm đánh giá</strong> tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp.</span>
   table.table.table-bordered
@@ -221,7 +228,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome1_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome1, class: 'form-control'
+          = f.select :learning_outcome1, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 2. Khả năng phân tích vấn đề cho bài toán trong đề tài'
@@ -234,7 +241,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome2_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome2, class: 'form-control'
+          = f.select :learning_outcome2, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 3. Khả năng thiết kế hệ thống (một phần hệ thống như kiến trúc phần mềm, cơ sở dữ liệu, mạng, ...) dựa trên yêu cầu bài toán'
@@ -247,7 +254,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome3_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome3, class: 'form-control'
+          = f.select :learning_outcome3, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 4. Khả năng sử dụng các nguyên lý phát triển phần mềm, các quy trình phát triển phần mềm, và/ hoặc các công cụ thiết kế phần mềm, ... để mô hình hóa hệ thống phần mềm trong đề tài luận văn'
@@ -260,7 +267,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome4_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome4, class: 'form-control'
+          = f.select :learning_outcome4, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 5. Khả năng hiện thực các cấu trúc dữ liệu và giải thuật, cài đặt cơ sở dữ liệu, hoặc triển khai mạng máy tính đáp ứng yêu cầu được cho trong đề tài'
@@ -273,7 +280,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome5_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome5, class: 'form-control'
+          = f.select :learning_outcome5, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 6. Khả năng ứng dụng kiến thức tin học trong công việc'
@@ -286,7 +293,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome6_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome6, class: 'form-control'
+          = f.select :learning_outcome6, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 7. Khả năng dùng cấu trúc dữ liệu và giải thuật phù hợp khi lập trình cho bài toán trong đề tài'
@@ -299,7 +306,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome7_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome7, class: 'form-control'
+          = f.select :learning_outcome7, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 8. Khả năng sử dụng ngôn ngữ lập trình cấp cao để viết chương trình cho bài toán của đề tài'
@@ -312,7 +319,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome8_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome8, class: 'form-control'
+          = f.select :learning_outcome8, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 9. Khả năng phát triển phong cách thiết kế/ lập trình phù hợp'
@@ -325,7 +332,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome9_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome9, class: 'form-control'
+          = f.select :learning_outcome9, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 10. Khả năng lý giải việc sử dụng tài nguyên (tài liệu tham khảo, thư viện lập trình, phần mềm hỗ trợ, trang thiết bị, ...) cho công việc được giao'
@@ -338,7 +345,27 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome10_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome10, class: 'form-control'
+          = f.select :learning_outcome10, %w[A B C D E], {}, class: 'form-control'
+      tr
+        td
+          p: b <u>Lưu ý</u>: Câu 11 – 15 được dùng đánh giá kỹ năng LÀM VIỆC NHÓM của sinh viên. Các Thầy/ Cô có thể dựa trên các nguồn minh chứng sau để đánh giá ở mỗi câu:
+          .pl-1
+            p
+              b = 'Câu 11: '
+              = 'Các nguồn minh chứng (email, chat text, message ...) khi sinh viên lập nhóm, hẹn họp nhóm, và biên bản họp nhóm.'
+            p
+              b = 'Câu 12: '
+              = 'Kế hoạch thực hiện công việc khi được giao việc cùng với bảng phân công công việc và các thảo luận nhóm.'
+            p
+              b = 'Câu 13: '
+              = 'Bảng phân vai trong nhóm cho mỗi công việc được giao hoặc cho toàn bộ đề tài.'
+            p
+              b = 'Câu 14: '
+              = 'Quan sát của mỗi GVHD thông qua các đợt hướng dẫn và sự cố xảy ra với nhóm. GVHD có thể dựa trên các hành động được giới thiệu trong câu hỏi để đánh giá.'
+            p
+              b = 'Câu 15: '
+              = 'Kết quả đạt được so với bảng phân công công việc để đánh giá mức độ đóng góp của mỗi thành viên. Phần này có thể được tham khảo từ phần tự đánh giá về mức độ đóng góp của mỗi thành viên trong nhóm.'
+        td
       tr
         td
           p.font-weight-bold = 'Câu 11. Khả năng tổ chức nhóm thực hiện công việc được giao'
@@ -351,7 +378,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome11_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome11, class: 'form-control'
+          = f.select :learning_outcome11, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 12. Khả năng trao đổi ý tưởng và chia sẻ công việc'
@@ -364,7 +391,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome12_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome12, class: 'form-control'
+          = f.select :learning_outcome12, %w[A B C D E], {}, class: 'form-control'
 
       tr
         td
@@ -378,7 +405,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome13_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome13, class: 'form-control'
+          = f.select :learning_outcome13, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 14. Khả năng dẫn dắt nhóm trong công việc thông qua các hành động như: đưa ra sáng kiến, đề xuất nội dung công việc, tạo động lực làm việc cho nhóm, sẵn sàng nhận phân công có rủi ro, hoặc sẵn sàng giải quyết mâu thuẫn trong nhóm, ...'
@@ -391,7 +418,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome14_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome14, class: 'form-control'
+          = f.select :learning_outcome14, %w[A B C D E], {}, class: 'form-control'
       tr
         td
           p.font-weight-bold = 'Câu 15. Khả năng đóng góp kỹ thuật vào dự án chung của nhóm'
@@ -404,7 +431,7 @@
               = 'E. Không đánh giá được vì:'
               = f.text_field :learning_outcome15_remark, class: 'form-control'
         td
-          = f.text_field :learning_outcome15, class: 'form-control'
+          = f.select :learning_outcome15, %w[A B C D E], {}, class: 'form-control'
   .form-group
     label = 'Ý KIẾN GÓP Ý VỀ BIỂU MẪU ĐÁNH GIÁ'
     = f.text_area :opinion_about_form, class: 'form-control'

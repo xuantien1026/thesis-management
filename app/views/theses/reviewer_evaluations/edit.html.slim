@@ -2,4 +2,7 @@
   .card-header
     h3 Phiếu đánh giá LVTN - Dành cho GVPB
   .card-body
+    p
+      strong = "GV phản biện: "
+      = current_user
     = render 'theses/shared/evaluation_form', evaluation: @reviewer_evaluation, url: theses_member_reviewer_evaluation_path
