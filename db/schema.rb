@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_28_144748) do
+ActiveRecord::Schema.define(version: 2021_09_12_080403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,18 +207,6 @@ ActiveRecord::Schema.define(version: 2021_07_28_144748) do
     t.string "learning_outcome8_remark"
     t.string "learning_outcome9"
     t.string "learning_outcome9_remark"
-    t.string "learning_outcome10"
-    t.string "learning_outcome10_remark"
-    t.string "learning_outcome11"
-    t.string "learning_outcome11_remark"
-    t.string "learning_outcome12"
-    t.string "learning_outcome12_remark"
-    t.string "learning_outcome13"
-    t.string "learning_outcome13_remark"
-    t.string "learning_outcome14"
-    t.string "learning_outcome14_remark"
-    t.string "learning_outcome15"
-    t.string "learning_outcome15_remark"
     t.string "opinion_about_form"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

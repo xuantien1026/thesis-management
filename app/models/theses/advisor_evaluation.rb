@@ -70,10 +70,11 @@ module Theses
     validates *LEARNING_OUTCOME_ATTRS, presence: true
     validates :marking1, inclusion: 0..50
     validates :marking2, :marking3, :marking6, :marking7, :marking8, :marking9, inclusion: 0..5
-    validates :marking4, :marking5, :bonus_point, inclusion: 0..10
+    validates :marking4, :marking5, inclusion: 0..10
+    validates :bonus_point, inclusion: 0..10, allow_nil: true
 
     def total_marking
-      (MARKING_ATTRS.map { |attr| send(attr) }.sum + bonus_point).clamp(0, 100)
+      (MARKING_ATTRS.map { |attr| send(attr) }.sum + bonus_point.to_i).clamp(0, 100)
     end
   end
 end

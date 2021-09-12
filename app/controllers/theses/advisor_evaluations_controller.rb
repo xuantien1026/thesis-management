@@ -38,7 +38,7 @@ module Theses
         flash.notice = 'Đã lưu phiếu đánh giá LVTN'
         redirect_to @member.thesis
       else
-        render :edit
+        render :edit, status: :unprocessable_entity
       end
     end
 

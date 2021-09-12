@@ -5,4 +5,4 @@
     p
       strong = "GV phản biện: "
       = current_user
-    = render 'theses/shared/evaluation_form', evaluation: @reviewer_evaluation, url: theses_member_reviewer_evaluation_path
+    = render 'form', evaluation: @reviewer_evaluation, url: theses_member_reviewer_evaluation_path
