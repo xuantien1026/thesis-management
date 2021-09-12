@@ -23,7 +23,7 @@ module Theses
         flash.notice = 'Đã lưu phiếu đánh giá LVTN'
         redirect_to @member.thesis
       else
-        render :new
+        render :new, status: :unprocessable_entity
       end
     end
 
@@ -67,6 +67,7 @@ module Theses
       doc.bookmarks['member'].insert_text_before(@member.name)
       doc.bookmarks['mssv'].insert_text_before(@member.mssv)
       doc.bookmarks['thesis'].insert_text_before(thesis.to_s)
+      doc.bookmarks['total_marking'].insert_text_before(evaluation.total_marking)
       (evaluation.attributes.keys - %w[id theses_member_id created_at updated_at]).each do |key|
         doc.bookmarks[key].insert_text_before(evaluation.send(key))
       end

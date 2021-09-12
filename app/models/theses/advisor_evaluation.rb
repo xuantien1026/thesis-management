@@ -62,5 +62,18 @@
 module Theses
   class AdvisorEvaluation < ApplicationRecord
     belongs_to :member, foreign_key: :theses_member_id, inverse_of: :advisor_evaluation
+
+    LEARNING_OUTCOME_ATTRS = (1..15).map { |i| "learning_outcome#{i}" }
+    MARKING_ATTRS = (1..9).map { |i| "marking#{i}" }
+
+    validates *MARKING_ATTRS, presence: true
+    validates *LEARNING_OUTCOME_ATTRS, presence: true
+    validates :marking1, inclusion: 0..50
+    validates :marking2, :marking3, :marking6, :marking7, :marking8, :marking9, inclusion: 0..5
+    validates :marking4, :marking5, :bonus_point, inclusion: 0..10
+
+    def total_marking
+      (MARKING_ATTRS.map { |attr| send(attr) }.sum + bonus_point).clamp(0, 100)
+    end
   end
 end
