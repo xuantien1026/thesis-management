@@ -8,9 +8,9 @@ module Theses
     ADVISOR_EVALUATION_TEMPLATE_PATH = 'app/documents/pre_defense/phieu_danh_gia_LVTN_GVHD_CS.docx'
 
     def show
-      generate_advisor_evaluation_docx
-      send_data(File.read(advisor_evaluation_file_path), filename: "Phieu_danh_gia_LVTN_GVHD_CS_#{@member.name}.docx")
-      File.delete(advisor_evaluation_file_path)
+      file_path = DocxTemplateGenerator.new(ADVISOR_EVALUATION_TEMPLATE_PATH, bookmarks).generate
+      send_data(File.read(file_path), filename: "Phieu_danh_gia_LVTN_GVHD_CS_#{@member.name}.docx")
+      File.delete(file_path)
     end
 
     def new
@@ -56,26 +56,27 @@ module Theses
       head :forbidden unless @member.thesis.primary_advisor == current_user
     end
 
-    def generate_advisor_evaluation_docx
-      doc = ::Docx::Document.new(ADVISOR_EVALUATION_TEMPLATE_PATH)
+    # TODO: move to model
+    def bookmarks
       evaluation = @member.advisor_evaluation
       thesis = @member.thesis
       primary_advisor = thesis.primary_advisor
-      doc.bookmarks['semester'].insert_text_before(current_semester.number)
-      doc.bookmarks['year'].insert_text_before(current_semester.year)
-      doc.bookmarks['advisor_name'].insert_text_before(primary_advisor.name)
-      doc.bookmarks['member'].insert_text_before(@member.name)
-      doc.bookmarks['mssv'].insert_text_before(@member.mssv)
-      doc.bookmarks['thesis'].insert_text_before(thesis.to_s)
-      doc.bookmarks['total_marking'].insert_text_before(evaluation.total_marking)
-      (evaluation.attributes.keys - %w[id theses_member_id created_at updated_at]).each do |key|
-        doc.bookmarks[key].insert_text_before(evaluation.send(key))
-      end
-      doc.save(advisor_evaluation_file_path)
-    end
+      keys = (evaluation.attributes.keys - %w[id theses_member_id created_at updated_at])
+      values = keys.map { |key| evaluation.send(key) }
 
-    def advisor_evaluation_file_path
-      "tmp/advisor_evaluation_#{@member.id}.docx"
+      attr_bookmarks = keys.zip(values).to_h
+
+      non_attr_bookmarks = {
+        semester: current_semester.number,
+        year: current_semester.year,
+        advisor_name: primary_advisor.name,
+        member: @member.name,
+        mssv: @member.mssv,
+        thesis: thesis.to_s,
+        total_marking: evaluation.total_marking,
+      }
+
+      non_attr_bookmarks.merge(attr_bookmarks)
     end
   end
 end

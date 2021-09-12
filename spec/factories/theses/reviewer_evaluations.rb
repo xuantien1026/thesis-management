@@ -70,12 +70,6 @@ FactoryBot.define do
     learning_outcome7 { 'A' }
     learning_outcome8 { 'A' }
     learning_outcome9 { 'A' }
-    learning_outcome10 { 'A' }
-    learning_outcome11 { 'A' }
-    learning_outcome12 { 'A' }
-    learning_outcome13 { 'A' }
-    learning_outcome14 { 'A' }
-    learning_outcome15 { 'A' }
     opinion_about_form { 'This form is good' }
   end
 end

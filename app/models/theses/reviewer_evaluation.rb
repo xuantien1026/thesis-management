@@ -64,5 +64,21 @@ module Theses
     def total_marking
       (MARKING_ATTRS.map { |attr| send(attr) }.sum + bonus_point.to_i).clamp(0, 100)
     end
+
+    def bookmarks
+      thesis = member.thesis
+      reviewer = thesis.reviewer
+      semester = thesis.semester
+
+      attributes.except('id', 'theses_member_id', 'created_at', 'updated_at').merge(
+        total_marking: total_marking,
+        semester: semester.number,
+        year: semester.year,
+        reviewer: reviewer.name,
+        member: member.name,
+        mssv: member.mssv,
+        thesis: thesis.to_s,
+      )
+    end
   end
 end
