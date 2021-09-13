@@ -260,6 +260,9 @@ GEM
       rubocop (>= 0.90.0, < 2.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
+    rubyXL (3.4.18)
+      nokogiri (>= 1.10.8)
+      rubyzip (>= 1.3.0)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -368,6 +371,7 @@ DEPENDENCIES
   rspec-rails
   rspec_junit_formatter
   rubocop-rails
+  rubyXL (~> 3.4, >= 3.4.18)
   sass-rails (>= 6)
   selenium-webdriver
   sentry-rails
