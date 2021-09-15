@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DocxTemplateGenerator
   def initialize(template_path, single_bookmarks = {}, multiple_lines_bookmarks = {})
     @template_path = template_path

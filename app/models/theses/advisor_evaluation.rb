@@ -66,8 +66,8 @@ module Theses
     LEARNING_OUTCOME_ATTRS = (1..15).map { |i| "learning_outcome#{i}" }
     MARKING_ATTRS = (1..9).map { |i| "marking#{i}" }
 
-    validates *MARKING_ATTRS, presence: true
-    validates *LEARNING_OUTCOME_ATTRS, presence: true
+    validates(*MARKING_ATTRS, presence: true)
+    validates(*LEARNING_OUTCOME_ATTRS, presence: true)
     validates :marking1, inclusion: 0..50
     validates :marking2, :marking3, :marking6, :marking7, :marking8, :marking9, inclusion: 0..5
     validates :marking4, :marking5, inclusion: 0..10

@@ -73,7 +73,7 @@ module Theses
         member: @member.name,
         mssv: @member.mssv,
         thesis: thesis.to_s,
-        total_marking: evaluation.total_marking,
+        total_marking: evaluation.total_marking
       }
 
       non_attr_bookmarks.merge(attr_bookmarks)

@@ -39,14 +39,14 @@ gem 'interactor-rails'
 gem 'pundit'
 gem 'ransack'
 gem 'rolify'
+gem 'rubyXL', '~> 3.4', '>= 3.4.18'
 gem 'sentry-rails'
 gem 'sentry-ruby'
+gem 'simple_form'
 gem 'slim'
 gem 'view_component', require: 'view_component/engine'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-gem 'simple_form'
-gem 'rubyXL', '~> 3.4', '>= 3.4.18'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -8,7 +8,8 @@ module Theses
     REVIEWER_EVALUATION_TEMPLATE_PATH = 'app/documents/pre_defense/phieu_danh_gia_LVTN_GVPB_CS.docx'
 
     def show
-      file_path = DocxTemplateGenerator.new(REVIEWER_EVALUATION_TEMPLATE_PATH, @member.reviewer_evaluation.bookmarks).generate
+      file_path = DocxTemplateGenerator.new(REVIEWER_EVALUATION_TEMPLATE_PATH,
+                                            @member.reviewer_evaluation.bookmarks).generate
       send_data(File.read(file_path), filename: "Phieu_danh_gia_LVTN_GVHD_CS_#{@member.name}.docx")
       File.delete(file_path)
     end

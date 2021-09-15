@@ -104,7 +104,8 @@ RSpec.describe Theses::ReviewerEvaluationsController, type: :request do
 
     let(:params) do
       {
-        theses_reviewer_evaluation: attributes_for(:theses_reviewer_evaluation).merge(theses_member_id: member.id, marking1: 50)
+        theses_reviewer_evaluation: attributes_for(:theses_reviewer_evaluation).merge(theses_member_id: member.id,
+                                                                                      marking1: 50)
       }
     end
 

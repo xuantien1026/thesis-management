@@ -25,14 +25,14 @@ module Theses
         assignment_date: @mission_note.assignment_date,
         completion_date: @mission_note.completion_date,
         head_of_department: @mission_note.head_of_department,
-        primary_advisor: @mission_note.primary_advisor,
+        primary_advisor: @mission_note.primary_advisor
       }
     end
 
     def multiple_bookmarks
       {
         students: @mission_note.students_formatted,
-        advisors: @mission_note.advisors_formatted,
+        advisors: @mission_note.advisors_formatted
       }
     end
 

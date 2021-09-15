@@ -20,7 +20,7 @@ module Admin
       workbook = RubyXL::Parser.parse(lecturer_excel_file.path)
       sheet = workbook[0]
       row_index = HEADER_ROW_COUNT
-      until sheet[row_index].nil? do
+      until sheet[row_index].nil?
         mscb = sheet[row_index][0].value
         name = sheet[row_index][1].value
         email = sheet[row_index][2].value
@@ -31,11 +31,12 @@ module Admin
             name: name,
             email: email,
             password: DEFAULT_PASSWORD,
-            department: Department.find_by!(short_name: department))
+            department: Department.find_by!(short_name: department)
+          )
           lecturer.save!
         end
 
-        row_index+= 1
+        row_index += 1
       end
     end
   end
