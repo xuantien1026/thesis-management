@@ -5,8 +5,6 @@ module Admin
     HEADER_ROW_COUNT = 1
     DEFAULT_PASSWORD = 'password'
 
-    def new; end
-
     def create
       import_lecturers
       redirect_to new_admin_lecturer_import_path, notice: 'Thành công!'

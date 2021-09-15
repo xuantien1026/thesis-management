@@ -1,8 +1,8 @@
 .card
-  .card-header = 'Nhập thông tin Giảng Viên'
+  .card-header = 'Nhập thông tin vào hệ thống'
   .card-body
     = form_with url: admin_lecturer_import_path, method: :post do |f|
       .form-group
-        = f.label 'Excel File'
+        = f.label 'Nhập file excel thông tin giảng viên:'
         = f.file_field 'excel_file', accept: '.xlsx', class: 'form-control-file'
       = f.submit 'Submit', data: { turbo: false }, class: 'btn btn-primary'
