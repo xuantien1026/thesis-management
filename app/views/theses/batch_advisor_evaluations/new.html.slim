@@ -7,7 +7,7 @@
       = current_user
     = render 'theses/shared/evaluation_form',
             evaluation: @advisor_evaluation,
-            url: theses_member_advisor_evaluation_path(@member),
-            thesis: @member.thesis,
-            name: @member.name,
-            mssv: @member.mssv
+            url: thesis_batch_advisor_evaluation_path(@thesis),
+            thesis: @thesis,
+            name: @thesis.members.map { |member| "#{member.name} - #{member.mssv}" }.join(', '),
+            mssv: nil

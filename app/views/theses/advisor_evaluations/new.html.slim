@@ -1,8 +1,1 @@
-.card
-  .card-header
-    h3 Phiếu đánh giá LVTN - Dành cho GVHD
-  .card-body
-    p
-      strong = "GV hướng dẫn: "
-      = current_user
-    = render 'theses/shared/evaluation_form', evaluation: @advisor_evaluation, url: theses_member_advisor_evaluation_path
+= render 'form'

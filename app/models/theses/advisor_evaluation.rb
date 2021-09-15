@@ -63,6 +63,8 @@ module Theses
   class AdvisorEvaluation < ApplicationRecord
     belongs_to :member, foreign_key: :theses_member_id, inverse_of: :advisor_evaluation
 
+    TEMPLATE_PATH = 'app/documents/pre_defense/phieu_danh_gia_LVTN_GVHD_CS.docx'
+
     LEARNING_OUTCOME_ATTRS = (1..15).map { |i| "learning_outcome#{i}" }
     MARKING_ATTRS = (1..9).map { |i| "marking#{i}" }
 
@@ -75,6 +77,22 @@ module Theses
 
     def total_marking
       (MARKING_ATTRS.map { |attr| send(attr) }.sum + bonus_point.to_i).clamp(0, 100)
+    end
+
+    def bookmarks
+      thesis = member.thesis
+      primary_advisor = thesis.primary_advisor
+      semester = thesis.semester
+
+      attributes.except('id', 'theses_member_id', 'created_at', 'updated_at').merge(
+        semester: semester.number,
+        year: semester.year,
+        advisor_name: primary_advisor.name,
+        member: member.name,
+        mssv: member.mssv,
+        thesis: thesis.to_s,
+        total_marking: total_marking
+      )
     end
   end
 end

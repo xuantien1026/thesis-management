@@ -53,6 +53,7 @@ Rails.application.routes.draw do
 
     resources :theses, only: %i[index show] do
       scope module: :theses do
+        resource :batch_advisor_evaluation, only: %i[new create]
         resource :mission_note, only: :show
       end
     end

@@ -1,7 +1,8 @@
 = simple_form_for evaluation, url: url, defaults: { input_html: { class: 'form-control' }, label: false } do |f|
-  p = "Tên đề tài: #{@member.thesis}"
-  p = "Tên sinh viên: #{@member.name}"
-  p = "Mã số sinh viên: #{@member.mssv}"
+  p = "Tên đề tài: #{thesis}"
+  p = "Tên sinh viên: #{name}"
+  - if mssv
+    p = "Mã số sinh viên: #{mssv}"
   hr
   p
     <span>Phiếu đánh giá LVTN gồm 2 phần: phần <strong>Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp</strong> và phần <strong>Đánh giá dành cho chuẩn đầu ra của chương trình</strong>. Thầy/ Cô vui lòng đánh giá cho cả 2 phần.<span>

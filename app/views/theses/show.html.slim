@@ -67,6 +67,11 @@
                   = link_to 'Download phiếu đánh giá LVTN (GVPB)', theses_member_reviewer_evaluation_path(member)
                   = link_to 'Chỉnh sửa', edit_theses_member_reviewer_evaluation_path(member), class: 'ml-2'
 
+        tr
+          td
+          td
+            = link_to 'Điền phiếu đánh giá LVTN cho tất cả SV', new_thesis_batch_advisor_evaluation_path(@thesis)
+
 .card
   .card-body
     h3 Kết quả giữa kì
