@@ -22,6 +22,7 @@
 FactoryBot.define do
   factory :department do
     name { Faker::Lorem.sentence }
+    short_name { Faker::Lorem.name }
     association :faculty
   end
 end

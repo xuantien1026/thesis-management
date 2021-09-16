@@ -48,7 +48,7 @@ module Theses
     end
 
     def check_permission
-      head :forbidden unless @member.thesis.primary_advisor == current_user
+      head :forbidden unless authorize(@member.thesis, :evaluate_as_advisor?)
     end
 
     def advisor_evaluation_params

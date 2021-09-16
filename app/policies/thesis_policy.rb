@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ThesisPolicy < ApplicationPolicy
+  def evaluate_as_advisor?
+    record.primary_advisor == user
+  end
+
   class Scope < Scope
     def resolve
       return lecturer_scope if user.is_a?(Lecturer)

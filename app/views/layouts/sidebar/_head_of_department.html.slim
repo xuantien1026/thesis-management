@@ -4,18 +4,10 @@ li.c-sidebar-nav-item.c-sidebar-nav-dropdown
     = 'Quản lý bộ môn'
   ul.c-sidebar-nav-dropdown-items
     li.c-sidebar-nav-item
-      = link_to dept_lecturers_path, class: "c-sidebar-nav-link"
-        i.c-sidebar-nav-icon.cil-cursor
-        = "Danh sách giảng viên"
+      = link_to "Danh sách giảng viên", dept_lecturers_path, class: "c-sidebar-nav-link"
     li.c-sidebar-nav-item
-      = link_to dept_thesis_proposals_path, class: "c-sidebar-nav-link"
-        i.c-sidebar-nav-icon.cil-cursor
-        = "Duyệt đề cương luận văn"
+      = link_to "Duyệt đề cương luận văn", dept_thesis_proposals_path, class: "c-sidebar-nav-link"
     li.c-sidebar-nav-item
-      = link_to dept_theses_path, class: "c-sidebar-nav-link"
-        i.c-sidebar-nav-icon.cil-cursor
-        = "Phân công phản biện"
+      = link_to "Phân công phản biện", dept_theses_path, class: "c-sidebar-nav-link"
     li.c-sidebar-nav-item
-      = link_to dept_defense_committees_path, class: "c-sidebar-nav-link"
-        i.c-sidebar-nav-icon.cil-cursor
-        = "Hội đồng bảo vệ"
+      = link_to "Hội đồng bảo vệ", dept_defense_committees_path, class: "c-sidebar-nav-link"

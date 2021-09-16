@@ -4,14 +4,8 @@ li.c-sidebar-nav-item.c-sidebar-nav-dropdown
     = 'Admin'
   ul.c-sidebar-nav-dropdown-items
     li.c-sidebar-nav-item
-      = link_to admin_faculties_path, class: "c-sidebar-nav-link"
-        i.c-sidebar-nav-icon.cil-cursor
-        = "Bộ máy tổ chức"
+      = link_to "Bộ máy tổ chức", admin_faculties_path, class: "c-sidebar-nav-link"
     li.c-sidebar-nav-item
-      = link_to admin_faculty_theses_path(current_user.faculty), class: "c-sidebar-nav-link"
-        i.c-sidebar-nav-icon.cil-cursor
-        = "LVTN toàn khoa"
+      = link_to "LVTN toàn khoa", admin_faculty_theses_path(current_user.faculty), class: "c-sidebar-nav-link"
     li.c-sidebar-nav-item
-      = link_to admin_imports_path, class: "c-sidebar-nav-link"
-        i.c-sidebar-nav-icon.cil-cursor
-        = "Nhập thông tin GV"
+      = link_to "Nhập thông tin GV", admin_imports_path, class: "c-sidebar-nav-link"
