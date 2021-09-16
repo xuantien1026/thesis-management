@@ -16,7 +16,7 @@ module Admin
       params[:excel_file]
     end
 
-    def import_lecturers
+    def import_lecturers # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
       workbook = RubyXL::Parser.parse(lecturer_excel_file.path)
       sheet = workbook[0]
       row_index = HEADER_ROW_COUNT

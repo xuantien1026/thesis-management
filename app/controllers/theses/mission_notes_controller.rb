@@ -16,8 +16,7 @@ module Theses
     private
 
     def single_bookmarks
-      {
-        faculty: @mission_note.faculty,
+      { faculty: @mission_note.faculty,
         department: @mission_note.department,
         major: @mission_note.major,
         title: @mission_note.title,
@@ -25,8 +24,7 @@ module Theses
         assignment_date: @mission_note.assignment_date,
         completion_date: @mission_note.completion_date,
         head_of_department: @mission_note.head_of_department,
-        primary_advisor: @mission_note.primary_advisor
-      }
+        primary_advisor: @mission_note.primary_advisor }
     end
 
     def multiple_bookmarks

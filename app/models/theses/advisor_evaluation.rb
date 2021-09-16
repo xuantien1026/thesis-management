@@ -79,7 +79,7 @@ module Theses
       (MARKING_ATTRS.map { |attr| send(attr) }.sum + bonus_point.to_i).clamp(0, 100)
     end
 
-    def bookmarks
+    def bookmarks # rubocop:disable Metrics/MethodLength
       thesis = member.thesis
       primary_advisor = thesis.primary_advisor
       semester = thesis.semester

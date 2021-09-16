@@ -14,7 +14,7 @@ module Theses
         member_params = advisor_evaluation_params.merge(theses_member_id: member.id)
         @advisor_evaluation = AdvisorEvaluation.find_or_initialize_by(theses_member_id: member.id)
         @advisor_evaluation.assign_attributes(member_params)
-        render :new, status: :unprocessable_entity and return unless @advisor_evaluation.save
+        render :new, status: :unprocessable_entity and return unless @advisor_evaluation.save # rubocop:disable Lint/NonLocalExitFromIterator
       end
       flash.notice = 'Đã lưu phiếu đánh giá LVTN cho tất cả SV trong đề tài'
       redirect_to @thesis
