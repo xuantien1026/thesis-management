@@ -4,10 +4,11 @@
   .card-body
     p
       strong = "GV hướng dẫn: "
-      = current_user
-    = render 'theses/shared/evaluation_form',
-            evaluation: @advisor_evaluation,
-            url: thesis_batch_advisor_evaluation_path(@thesis),
-            thesis: @thesis,
-            name: @thesis.members.map { |member| "#{member.name} - #{member.mssv}" }.join(', '),
-            mssv: nil
+      = @thesis.primary_advisor
+    p = "Tên đề tài: #{@thesis}"
+    p = "Tên sinh viên: #{@thesis.members.map { |member| "#{member.name} - #{member.mssv}" }.join(', ')}"
+    hr
+    p
+    = simple_form_for @advisor_evaluation, url: thesis_batch_advisor_evaluation_path(@thesis), method: :post,
+            defaults: { input_html: { class: 'form-control' }, label: false } do |simple_form|
+      = render 'theses/shared/advisor_evaluation_form_fields', f: simple_form
