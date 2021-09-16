@@ -7,7 +7,7 @@ module Admin
 
     def create
       import_lecturers
-      redirect_to new_admin_lecturer_import_path, notice: 'Thành công!'
+      redirect_to admin_imports_path, notice: 'Thành công!'
     end
 
     private
