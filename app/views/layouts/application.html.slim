@@ -28,7 +28,7 @@ html
     .c-wrapper
       header.c-header.flex-row-reverse.align-content-center.mb-3.px-3
         = render Layout::HeaderComponent.new(user: current_user)
-      .c-body.container-fluid
+      .c-body.container-lg
         - if notice
           .alert.alert-success.alert-dismissable#notice role="alert"
             button.close type="button" data-dismiss="alert" aria-label="Close" &times;

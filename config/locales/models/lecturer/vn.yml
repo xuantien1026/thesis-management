@@ -1,0 +1,8 @@
+vn:
+  activerecord:
+    attributes:
+      lecturer:
+        mscb: Mã số cán bộ
+        name: Tên GV
+        email: Email
+        department: Bộ môn

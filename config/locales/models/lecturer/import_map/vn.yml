@@ -1,0 +1,9 @@
+vn:
+  activemodel:
+    attributes:
+      lecturer/import_map:
+        header_rows: Số dòng header
+        mscb: Mã số cán bộ
+        name: Tên GV
+        email: Email
+        department: Bộ môn

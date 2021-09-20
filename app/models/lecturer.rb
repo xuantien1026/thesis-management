@@ -41,6 +41,9 @@
 class Lecturer < User
   belongs_to :department, optional: true
 
+  validates :mscb, presence: true, numericality: { only_integer: true }, uniqueness: true
+  validates :department, presence: true
+
   delegate :faculty, to: :department
 
   scope :by_faculty, ->(faculty) { joins(:department).where(departments: { faculty_id: faculty.id }) }

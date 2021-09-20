@@ -1,0 +1,33 @@
+.card
+  .card-header
+    h3 = 'Nhập thông tin GV'
+  .card-body
+    = form_with url: admin_lecturer_import_path, method: :post do |f|
+      .row
+        .col-6
+          .form-group
+            = f.file_field 'excel_file', accept: '.xlsx', class: 'form-control-file', required: true
+            small.form-text.text-muted
+              = 'Nhập file excel thông tin giảng viên'
+      = f.simple_fields_for :import_map, @import_map, defaults: { input_html: { class: 'form-control' } } do |ff|
+        .row
+          .col
+            .form-group
+              = ff.input :header_rows, as: :numeric, input_html: { min: 0, style: 'width: 100px' }, required: true
+              small.form-text.text-muted
+                = 'Nhập số dòng header trong file excel'
+        .row
+          .col
+            = ff.input :mscb, collection: Lecturer::ImportMap::EXCEL_COLUMNS, required: true
+          .col
+            = ff.input :name, collection: Lecturer::ImportMap::EXCEL_COLUMNS, required: true
+          .col
+            = ff.input :email, collection: Lecturer::ImportMap::EXCEL_COLUMNS, required: true
+          .col
+            = ff.input :department, collection: Lecturer::ImportMap::EXCEL_COLUMNS, required: true
+        .row
+          .col
+            small.form-text.text-muted
+              .form-group
+                = 'Chọn tên cột trong file excel ứng với từng trường dữ liệu'
+      = f.submit 'Submit', data: { turbo: false }, class: 'btn btn-primary'

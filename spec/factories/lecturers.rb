@@ -43,7 +43,7 @@ FactoryBot.define do
     name { Faker::Name.name }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
-    mscb { Faker::Lorem.word }
+    mscb { Faker::Number.number(digits: 4) }
     association :department
   end
 
