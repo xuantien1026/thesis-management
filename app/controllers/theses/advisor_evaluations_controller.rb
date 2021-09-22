@@ -8,7 +8,7 @@ module Theses
     def show
       file_path = DocxTemplateGenerator.new(AdvisorEvaluation::TEMPLATE_PATH,
                                             @member.advisor_evaluation.bookmarks).generate
-      send_data(File.read(file_path), filename: "Phieu_danh_gia_LVTN_GVHD_CS_#{@member.name}.docx")
+      send_data(File.read(file_path), filename: "Phieu_danh_gia_LVTN_GVHD_#{@member.name}.docx")
       File.delete(file_path)
     end
 

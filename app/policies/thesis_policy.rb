@@ -5,6 +5,10 @@ class ThesisPolicy < ApplicationPolicy
     record.primary_advisor == user
   end
 
+  def evaluate_as_reviewer?
+    record.reviewer == user
+  end
+
   class Scope < Scope
     def resolve
       return lecturer_scope if user.is_a?(Lecturer)

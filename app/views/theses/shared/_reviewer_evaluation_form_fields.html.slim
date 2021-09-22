@@ -1,4 +1,5 @@
-p <span>Phiếu đánh giá LVTN gồm 2 phần: phần <strong>Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp</strong> và phần <strong>Đánh giá dành cho chuẩn đầu ra của chương trình</strong>. Thầy/ Cô vui lòng đánh giá cho cả 2 phần.<span>
+p
+  <span>Phiếu đánh giá LVTN gồm 2 phần: phần <strong>Đánh giá điểm của sinh viên thực hiện luận văn tốt nghiệp</strong> và phần <strong>Đánh giá dành cho chuẩn đầu ra của chương trình</strong>. Thầy/ Cô vui lòng đánh giá cho cả 2 phần.<span>
 p = 'Nếu Thầy/ Cô có ý kiến góp ý cho phiếu đánh giá này thì Thầy/ Cô vui lòng ghi chú lại ở phần sau cùng của phiếu đánh giá. Khoa trân trọng cảm ơn các ý kiến góp ý của Thầy/ Cô!'
 h4 I. Phần đánh giá điểm của sinh viện thực hiện luận văn tốt nghiệp
 p <span><u>Hướng dẫn đánh giá</u>: cho mỗi <strong>Tiêu chí đánh giá</strong>, Thầy / Cô cho điểm đánh giá ở cột <strong>Điểm đánh giá</strong> tương ứng với lựa chọn A, B, C, hoặc D nhằm phản ánh kết quả luận văn cũng như năng lực và thái độ của sinh viên ngay sau khi thực hiện luận văn tốt nghiệp.</span>
@@ -174,19 +175,19 @@ table.table.table-bordered
         = f.input :marking8
     tr
       td
-        p.font-weight-bold = 'Câu 9. Đánh giá về việc tổ chức / chuẩn bị cho nhiệm vụ được giao'
+        p.font-weight-bold = 'Câu 9. Trả lời các câu hỏi phản biện'
         .pl-1
           p
-            span = 'A. Sinh viên không có tổ chức/ chuẩn bị cho nhiệm vụ được giao, không quan tâm đến nhiệm vụ, không có để dành thời gian và công sức để hoàn thành nhiệm vụ. '
+            span = 'A. Sinh viên không trả lời được các câu hỏi phản biện. '
             strong = '(0≤Điểm≤1)'
           p
-            span = 'B. Sinh viên thực hiện tổ chức/ chuẩn bị qua loa cho nhiệm vụ được giao, dành ít thời gian và công sức để hoàn thành nhiệm vụ. '
+            span = 'B. Sinh viên trả lời được một vài câu hỏi phản biện nhưng thiếu minh chứng. '
             strong = '(1≤Điểm≤3)'
           p
-            span = 'C. Sinh viên thực hiện tổ chức/ chuẩn bị vừa phải cho nhiệm vụ được giao, dành vừa đủ thời gian và công sức để hoàn thành nhiệm vụ. '
+            span = 'C. Sinh viên trả lời được hầu hết các câu hỏi phản biện, có minh chứng nhưng chưa đầy đủ. '
             strong = '(3≤Điểm≤4)'
           p
-            span = 'D. Sinh viên thực hiện tổ chức/ chuẩn bị tốt cho nhiệm vụ được giao, dành nhiều thời gian và công sức để hoàn thành tốt nhiệm vụ. '
+            span = 'D. Sinh viên trả lời được tất cả các câu hỏi phản biện, có minh chứng phù hợp và đầy đủ. '
             strong = '(4≤Điểm≤5)'
       td
         label = '(Tối đa 5 điểm)'
@@ -280,7 +281,7 @@ table.table.table-bordered
         p.font-weight-bold = 'Câu 6. Khả năng ứng dụng kiến thức tin học trong công việc'
         .pl-1
           p = 'A. Sinh viên không thể ứng dụng kiến thức tin học để phát triển chương trình máy tính đơn giản.'
-          p = 'B. Sinh viên có thể ứng dụng kiến thức tin học để phát triển chương trình đơn giản; nhưng chương trình vẫn còn nhiều lỗi (≥ 5 lỗi) và những khái niệm cơ bản của kiến thức tin học không được diễn đạt đúng.'
+          p = 'B. Sinh viên có thể ứng dụng kiến thức tin học để phát triển chương trình đơn giản; nhưng chương trình vẫn còn nhiều lỗi ( 5 lỗi) và những khái niệm cơ bản của kiến thức tin học không được diễn đạt đúng.'
           p = 'C. Sinh viên có thể ứng dụng kiến thức tin học để phát triển chương trình đơn giản; nhưng chương trình vẫn còn lỗi (< 5 lỗi) với hầu hết các khái niệm cơ bản của kiến thức tin học.'
           p = 'D. Sinh viên có thể ứng dụng kiến thức tin học phù hợp để phát triển chương trình máy tính hầu như không có lỗi.'
           p
@@ -316,20 +317,7 @@ table.table.table-bordered
         = f.input :learning_outcome8, collection: %w[A B C D E]
     tr
       td
-        p.font-weight-bold = 'Câu 9. Khả năng phát triển phong cách thiết kế/ lập trình phù hợp'
-        .pl-1
-          p = 'A. Người khác không thể đọc hiểu được bản thiết kế/ mã của chương trình trong đề tài. Không có tài liệu hay ghi chú về thiết kế/ chương trình được chuẩn bị.'
-          p = 'B. Người khác có thể đọc hiểu được bản thiết kế/ mã của chương trình trong đề tài sau khi xem các chú thích trong bản thiết kế/ chương trình. Không có tài liệu được chuẩn bị kèm với bản thiết kế/ chương trình.'
-          p = 'C. Người khác có thể đọc hiểu được bản thiết kế/ mã của chương trình trong đề tài sau khi xem các chú thích trong bản thiết kế/ chương trình và một số ít tài liệu được chuẩn bị kèm với bản thiết kế/ chương trình.'
-          p = 'D. Người khác có thể đọc hiểu dễ dàng được bản thiết kế/ mã của chương trình trong đề tài. Tài liệu được chuẩn bị kèm với bản thiết kế/ chương trình đầy đủ.'
-          p
-            = 'E. Không đánh giá được vì:'
-            = f.input :learning_outcome9_remark
-      td
-        = f.input :learning_outcome9, collection: %w[A B C D E]
-    tr
-      td
-        p.font-weight-bold = 'Câu 10. Khả năng lý giải việc sử dụng tài nguyên (tài liệu tham khảo, thư viện lập trình, phần mềm hỗ trợ, trang thiết bị, ...) cho công việc được giao'
+        p.font-weight-bold = 'Câu 9. Khả năng lý giải việc sử dụng tài nguyên (tài liệu tham khảo, thư viện lập trình, phần mềm hỗ trợ, trang thiết bị, ...) cho công việc được giao'
         .pl-1
           p = 'A. Sinh viên không thể lý giải việc sử dụng tài nguyên cho công việc được giao.'
           p = 'B. Sinh viên có lý giải việc sử dụng tài nguyên cho công việc được giao nhưng không rõ ràng và phù hợp cho công việc được giao.'
@@ -337,95 +325,9 @@ table.table.table-bordered
           p = 'D. Sinh viên có lý giải rõ ràng và phù hợp về việc sử dụng tài nguyên cho công việc được giao dựa trên các hướng dẫn cụ thể về đạo đức nghề nghiệp cũng như những lập luận chung về đạo đức trong lĩnh vực máy tính.'
           p
             = 'E. Không đánh giá được vì:'
-            = f.input :learning_outcome10_remark
+            = f.input :learning_outcome9_remark
       td
-        = f.input :learning_outcome10, collection: %w[A B C D E]
-    tr
-      td
-        p: b <u>Lưu ý</u>: Câu 11 – 15 được dùng đánh giá kỹ năng LÀM VIỆC NHÓM của sinh viên. Các Thầy/ Cô có thể dựa trên các nguồn minh chứng sau để đánh giá ở mỗi câu:
-        .pl-1
-          p
-            b = 'Câu 11: '
-            = 'Các nguồn minh chứng (email, chat text, message ...) khi sinh viên lập nhóm, hẹn họp nhóm, và biên bản họp nhóm.'
-          p
-            b = 'Câu 12: '
-            = 'Kế hoạch thực hiện công việc khi được giao việc cùng với bảng phân công công việc và các thảo luận nhóm.'
-          p
-            b = 'Câu 13: '
-            = 'Bảng phân vai trong nhóm cho mỗi công việc được giao hoặc cho toàn bộ đề tài.'
-          p
-            b = 'Câu 14: '
-            = 'Quan sát của mỗi GVHD thông qua các đợt hướng dẫn và sự cố xảy ra với nhóm. GVHD có thể dựa trên các hành động được giới thiệu trong câu hỏi để đánh giá.'
-          p
-            b = 'Câu 15: '
-            = 'Kết quả đạt được so với bảng phân công công việc để đánh giá mức độ đóng góp của mỗi thành viên. Phần này có thể được tham khảo từ phần tự đánh giá về mức độ đóng góp của mỗi thành viên trong nhóm.'
-      td
-    tr
-      td
-        p.font-weight-bold = 'Câu 11. Khả năng tổ chức nhóm thực hiện công việc được giao'
-        .pl-1
-          p = 'A. Không tổ chức nhóm thực hiện công việc được giao, không giao tiếp nhóm và họp nhóm.'
-          p = 'B. Có tổ chức nhóm thực hiện công việc được giao; nhưng qua loa, dành ít thời gian, và chưa hình thành môi trường làm việc nhóm như giao tiếp nhóm và họp nhóm.'
-          p = 'C. Có tổ chức nhóm thực hiện công việc được giao và hình thành môi trường làm việc nhóm với phần giao tiếp nhóm để hoàn thành công việc được giao; nhưng hạn chế họp nhóm.'
-          p = 'D. Có tổ chức nhóm thực hiện công việc được giao và hình thành môi trường làm việc nhóm với phần giao tiếp và họp nhóm thường xuyên để hoàn thành tốt công việc được giao.'
-          p
-            = 'E. Không đánh giá được vì:'
-            = f.input :learning_outcome11_remark
-      td
-        = f.input :learning_outcome11, collection: %w[A B C D E]
-    tr
-      td
-        p.font-weight-bold = 'Câu 12. Khả năng trao đổi ý tưởng và chia sẻ công việc'
-        .pl-1
-          p = 'A. Không có trao đổi ý tưởng và chia sẻ công việc trong nhóm.'
-          p = 'B. Có trao đổi và chia sẻ công việc trong nhóm khi gặp vấn đề nhưng không có kế hoạch cụ thể.'
-          p = 'C. Có kế hoạch cụ thể để thảo luận và trao đổi ý tưởng, chia sẻ công việc trong nhóm nhưng hiệu quả không theo đúng kế hoạch.'
-          p = 'D. Có kế hoạch cụ thể để thảo luận và trao đổi ý tưởng, chia sẻ công việc trong nhóm và đạt hiệu quả theo đúng kế hoạch.'
-          p
-            = 'E. Không đánh giá được vì:'
-            = f.input :learning_outcome12_remark
-      td
-        = f.input :learning_outcome12, collection: %w[A B C D E]
-
-    tr
-      td
-        p.font-weight-bold = 'Câu 13. Khả năng xác định được vai trò và trách nhiệm của mình khi làm việc nhóm'
-        .pl-1
-          p = 'A. Không xác định được vai trò và trách nhiệm khi làm việc nhóm.'
-          p = 'B. Xác định được vai trò nhưng không biết được trách nhiệm tương ứng khi làm việc nhóm.'
-          p = 'C. Xác định được vai trò và trách nhiệm tương ứng nhưng không thực hiện tốt được vai trò khi làm việc nhóm.'
-          p = 'D. Xác định được vai trò và trách nhiệm tương ứng, thực hiện tốt được vai trò khi làm việc nhóm.'
-          p
-            = 'E. Không đánh giá được vì:'
-            = f.input :learning_outcome13_remark
-      td
-        = f.input :learning_outcome13, collection: %w[A B C D E]
-    tr
-      td
-        p.font-weight-bold = 'Câu 14. Khả năng dẫn dắt nhóm trong công việc thông qua các hành động như: đưa ra sáng kiến, đề xuất nội dung công việc, tạo động lực làm việc cho nhóm, sẵn sàng nhận phân công có rủi ro, hoặc sẵn sàng giải quyết mâu thuẫn trong nhóm, ...'
-        .pl-1
-          p = 'A. Không có hành động dẫn dắt nhóm trong công việc khi cần thiết.'
-          p = 'B. Hiếm khi có hành động dẫn dắt nhóm trong công việc khi cần thiết.'
-          p = 'C. Thỉnh thoảng có hành động dẫn dắt nhóm trong công việc khi cần thiết.'
-          p = 'D. Thường xuyên có hành động dẫn dắt nhóm trong công việc khi cần thiết.'
-          p
-            = 'E. Không đánh giá được vì:'
-            = f.input :learning_outcome14_remark
-      td
-        = f.input :learning_outcome14, collection: %w[A B C D E]
-    tr
-      td
-        p.font-weight-bold = 'Câu 15. Khả năng đóng góp kỹ thuật vào dự án chung của nhóm'
-        .pl-1
-          p = 'A. Có ít hơn 20% đóng góp kỹ thuật như được phân công vào dự án chung của nhóm.'
-          p = 'B. Có đóng góp kỹ thuật vào dự án chung của nhóm nhưng ít hơn 60% nội dung đóng góp được phân công.'
-          p = 'C. Có đóng góp kỹ thuật quan trọng vào dự án chung của nhóm với ít hơn 85% nội dung đóng góp được phân công.'
-          p = 'D. Có đóng góp kỹ thuật chủ yếu vào dự án chung của nhóm, dẫn dắt đến giải pháp kỹ thuật chính của dự án với nội dung đóng góp được phân công từ 85% trở lên.'
-          p
-            = 'E. Không đánh giá được vì:'
-            = f.input :learning_outcome15_remark
-      td
-        = f.input :learning_outcome15, collection: %w[A B C D E]
+        = f.input :learning_outcome9, collection: %w[A B C D E]
 .form-group
   label = 'Ý KIẾN GÓP Ý VỀ BIỂU MẪU ĐÁNH GIÁ'
   = f.input :opinion_about_form

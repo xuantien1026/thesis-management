@@ -51,6 +51,8 @@ module Theses
   class ReviewerEvaluation < ApplicationRecord
     belongs_to :member, foreign_key: :theses_member_id, inverse_of: :reviewer_evaluation
 
+    TEMPLATE_PATH = 'app/documents/pre_defense/phieu_danh_gia_LVTN_GVPB_CS.docx'
+
     LEARNING_OUTCOME_ATTRS = (1..9).map { |i| "learning_outcome#{i}" }
     MARKING_ATTRS = (1..9).map { |i| "marking#{i}" }
 

@@ -4,12 +4,10 @@
   .card-body
     p
       strong = "GV phản biện: "
-      = @member.thesis.reviewer
-    p = "Tên đề tài: #{@member.thesis}"
-    p = "Tên sinh viên: #{@member.name}"
-    p = "MSSV: #{@member.mssv}"
+      = @thesis.reviewer
+    p = "Tên đề tài: #{@thesis}"
+    p = "Tên sinh viên: #{@thesis.members.map { |member| "#{member.name} - #{member.mssv}" }.join(', ')}"
     hr
-    p
-    = simple_form_for @reviewer_evaluation, url: theses_member_reviewer_evaluation_path(@member),
+    = simple_form_for @reviewer_evaluation, url: thesis_batch_reviewer_evaluation_path(@thesis), method: :post,
             defaults: { input_html: { class: 'form-control' }, label: false } do |simple_form|
       = render 'theses/shared/reviewer_evaluation_form_fields', f: simple_form
