@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class ThesisPolicy < ApplicationPolicy
+  alias thesis record
+
   def evaluate_as_advisor?
-    record.primary_advisor == user
+    user == thesis.primary_advisor && thesis_has_members
   end
 
   def evaluate_as_reviewer?
-    record.reviewer == user
+    user == thesis.reviewer && thesis_has_members
   end
 
   class Scope < Scope
@@ -24,5 +26,11 @@ class ThesisPolicy < ApplicationPolicy
     def student_scope
       scope.faculty_approved
     end
+  end
+
+  private
+
+  def thesis_has_members
+    thesis.members.present?
   end
 end
