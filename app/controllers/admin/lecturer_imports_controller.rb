@@ -3,12 +3,12 @@
 module Admin
   class LecturerImportsController < AdminController
     def new
-      @import_map = Lecturer::ImportMap.new
+      @import_map = Lecturers::ImportMap.new
     end
 
     def create
-      @import_map = Lecturer::ImportMap.new(import_map_params)
-      context = Lecturer::ImportExcel.call(excel_file: excel_file, import_map: @import_map)
+      @import_map = Lecturers::ImportMap.new(import_map_params)
+      context = Lecturers::ImportExcel.call(excel_file: excel_file, import_map: @import_map)
       if context.success?
         flash.notice = 'Thành công!'
         redirect_to new_admin_lecturer_import_path

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Lecturer
+module Lecturers
   class ImportMap
     include ActiveModel::Model
 
