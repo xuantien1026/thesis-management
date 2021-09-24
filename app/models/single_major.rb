@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: majors
@@ -19,10 +17,8 @@
 #
 #  fk_rails_...  (faculty_id => faculties.id)
 #
-class Major < ApplicationRecord
-  belongs_to :faculty
-
-  def to_s
-    name
+class SingleMajor < Major
+  def accept?(major)
+    name == major
   end
 end

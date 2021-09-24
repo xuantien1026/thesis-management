@@ -6,6 +6,7 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
+#  type       :string           default("SingleMajor"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  faculty_id :bigint           not null

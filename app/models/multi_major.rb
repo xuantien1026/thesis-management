@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: majors
@@ -19,10 +17,11 @@
 #
 #  fk_rails_...  (faculty_id => faculties.id)
 #
-class Major < ApplicationRecord
-  belongs_to :faculty
+class MultiMajor < Major
+  has_many :major_compositions
+  has_many :single_majors, through: :major_compositions
 
-  def to_s
-    name
+  def accept?(major)
+    single_majors.any? { |single_major| single_major.accept?(major) }
   end
 end

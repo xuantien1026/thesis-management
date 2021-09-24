@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_142229) do
+ActiveRecord::Schema.define(version: 2021_09_24_141636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,11 +50,38 @@ ActiveRecord::Schema.define(version: 2021_09_13_142229) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "major_committee_members", force: :cascade do |t|
+    t.bigint "lecturer_id"
+    t.bigint "major_committee_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecturer_id"], name: "index_major_committee_members_on_lecturer_id"
+    t.index ["major_committee_id"], name: "index_major_committee_members_on_major_committee_id"
+  end
+
+  create_table "major_committees", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "major_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["major_id"], name: "index_major_committees_on_major_id"
+  end
+
+  create_table "major_compositions", force: :cascade do |t|
+    t.bigint "single_major_id"
+    t.bigint "multi_major_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["multi_major_id"], name: "index_major_compositions_on_multi_major_id"
+    t.index ["single_major_id"], name: "index_major_compositions_on_single_major_id"
+  end
+
   create_table "majors", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "faculty_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "type", default: "SingleMajor", null: false
     t.index ["faculty_id"], name: "index_majors_on_faculty_id"
   end
 
@@ -305,6 +332,11 @@ ActiveRecord::Schema.define(version: 2021_09_13_142229) do
   add_foreign_key "defense_committees_members", "defense_committees"
   add_foreign_key "defense_committees_members", "users", column: "lecturer_id"
   add_foreign_key "departments", "faculties"
+  add_foreign_key "major_committee_members", "major_committees"
+  add_foreign_key "major_committee_members", "users", column: "lecturer_id"
+  add_foreign_key "major_committees", "majors"
+  add_foreign_key "major_compositions", "majors", column: "multi_major_id"
+  add_foreign_key "major_compositions", "majors", column: "single_major_id"
   add_foreign_key "majors", "faculties"
   add_foreign_key "theses", "defense_committees"
   add_foreign_key "theses", "semesters"
