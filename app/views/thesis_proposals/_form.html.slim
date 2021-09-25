@@ -5,11 +5,11 @@
         = form.label :semester_id, 'Học kì'
         = form.collection_select :semester_id, @semesters, :id, :to_s, {}, class: 'form-control'
       .col-3
-        = form.label :majors, "Ngành"
-        = form.select :majors, @majors, { include_hidden: false }, class: 'form-control select2-init', multiple: true
+        = form.label :major_id, "Ngành"
+        = form.collection_select :major_id, @majors, :id, :name, {}, class: 'form-control'
       .col-3
         = form.label :education_program, "Chương Trình Đào Tạo"
-        = form.select :education_program, EducationProgram::PROGRAMS, { include_blank: true }, class: 'form-control'
+        = form.select :education_program, EducationProgram::PROGRAMS, {}, class: 'form-control'
   .form-group
     = form.label :title, "Tên Đề tài"
     = form.text_field :title, class: 'form-control', required: true

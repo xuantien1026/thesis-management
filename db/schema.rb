@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_24_141636) do
+ActiveRecord::Schema.define(version: 2021_09_24_153117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -281,8 +281,9 @@ ActiveRecord::Schema.define(version: 2021_09_24_141636) do
     t.integer "max_student_count", default: 1, null: false
     t.integer "status", default: 0
     t.string "education_program"
-    t.string "majors", default: [], array: true
     t.bigint "semester_id", null: false
+    t.bigint "major_id", null: false
+    t.index ["major_id"], name: "index_thesis_proposals_on_major_id"
     t.index ["semester_id"], name: "index_thesis_proposals_on_semester_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_proposal_max_student_count"
   end
@@ -348,5 +349,6 @@ ActiveRecord::Schema.define(version: 2021_09_24_141636) do
   add_foreign_key "theses_reviewer_evaluations", "theses_members"
   add_foreign_key "thesis_proposal_advisors", "thesis_proposals"
   add_foreign_key "thesis_proposal_advisors", "users", column: "lecturer_id"
+  add_foreign_key "thesis_proposals", "majors"
   add_foreign_key "thesis_proposals", "semesters"
 end

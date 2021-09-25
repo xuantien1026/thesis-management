@@ -11,6 +11,8 @@ RSpec.shared_context :signed_in_as_student do
 end
 
 RSpec.shared_context :signed_in_as_lecturer do
+  include_context :basic_faculty
+
   let(:signed_lecturer) { create :lecturer }
 
   before do
@@ -45,6 +47,16 @@ RSpec.shared_context :signed_in_as_admin do
 
   before do
     sign_in admin
+  end
+end
+
+RSpec.shared_context :signed_in_as_privileged_major_committee_member do
+  include_context :basic_faculty
+
+  let(:major_committee_member) { create :lecturer, :as_privileged_major_committee_member }
+
+  before do
+    sign_in major_committee_member
   end
 end
 

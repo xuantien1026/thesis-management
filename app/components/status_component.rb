@@ -10,11 +10,16 @@ class StatusComponent < ViewComponent::Base
   private
 
   def badge_classes
-    { 'waiting_for_approval' => 'bg-dark', 'department_approved' => 'bg-info', 'faculty_approved' => 'bg-success' }
+    { 'waiting_for_approval' => 'bg-dark',
+      'department_approved' => 'bg-info',
+      'major_committee_approved' => 'bg-primary',
+      'faculty_approved' => 'bg-success' }
   end
 
   def translation
-    { 'waiting_for_approval' => 'Đang chờ duyệt', 'department_approved' => 'Bộ môn đã duyệt',
+    { 'waiting_for_approval' => 'Đang chờ duyệt',
+      'department_approved' => 'Bộ môn đã duyệt',
+      'major_committee_approved' => 'Hội đồng ngành đã duyệt',
       'faculty_approved' => 'Khoa đã duyệt' }
   end
 end

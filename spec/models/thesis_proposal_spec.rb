@@ -8,7 +8,6 @@
 #  description       :text
 #  education_program :string
 #  english_title     :string
-#  majors            :string           default([]), is an Array
 #  max_student_count :integer          default(1), not null
 #  mission           :string
 #  ordering          :integer
@@ -17,14 +16,17 @@
 #  title             :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  major_id          :bigint           not null
 #  semester_id       :bigint           not null
 #
 # Indexes
 #
+#  index_thesis_proposals_on_major_id     (major_id)
 #  index_thesis_proposals_on_semester_id  (semester_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (major_id => majors.id)
 #  fk_rails_...  (semester_id => semesters.id)
 #
 require 'rails_helper'

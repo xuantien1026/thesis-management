@@ -4,7 +4,8 @@
   = render 'layouts/sidebar/head_of_faculty'
 - if current_user.has_role? :head_of_department
   = render 'layouts/sidebar/head_of_department'
-
+- if current_user.has_role? :privileged_major_committee_member
+  = render 'layouts/sidebar/major_committee'
 li.c-sidebar-nav-item
   = link_to thesis_proposals_path, class: "c-sidebar-nav-link"
     i.c-sidebar-nav-icon.cil-cursor

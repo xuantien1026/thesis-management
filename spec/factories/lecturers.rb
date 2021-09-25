@@ -64,4 +64,10 @@ FactoryBot.define do
       lecturer.add_role :admin
     end
   end
+
+  trait :as_privileged_major_committee_member do
+    after(:create) do |lecturer|
+      lecturer.add_role :privileged_major_committee_member
+    end
+  end
 end

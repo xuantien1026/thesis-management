@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class ThesisProposalsController < ApplicationController
-  before_action :set_thesis_proposal, only: %i[show edit update destroy department_approve faculty_approve]
+class ThesisProposalsController < LecturerController
+  before_action :set_thesis_proposal, except: %i[index new create]
   before_action :set_majors, :set_semesters, only: %i[new edit]
 
   def index
@@ -29,6 +29,7 @@ class ThesisProposalsController < ApplicationController
     else
       @thesis_proposal = context.thesis_proposal
       @majors = current_user.faculty.majors
+      byebug
       render :new, alert: context.errors
     end
   end
@@ -54,6 +55,12 @@ class ThesisProposalsController < ApplicationController
     render 'approval'
   end
 
+  def major_committee_approve
+    authorize @thesis_proposal
+    @thesis_proposal.major_committee_approved!
+    render 'approval'
+  end
+
   def faculty_approve
     authorize @thesis_proposal
     @thesis_proposal.faculty_approved!
@@ -76,8 +83,8 @@ class ThesisProposalsController < ApplicationController
 
   def thesis_proposal_params
     params.require(:thesis_proposal).permit(
-      :semester_id, :title, :english_title, :description, :mission, :max_student_count, :education_program,
-      references: [], majors: []
+      :semester_id, :title, :english_title, :description, :mission, :max_student_count, :education_program, :major_id,
+      references: []
     )
   end
 

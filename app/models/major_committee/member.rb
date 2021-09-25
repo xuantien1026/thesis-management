@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: major_committee_members
@@ -18,7 +20,9 @@
 #  fk_rails_...  (lecturer_id => users.id)
 #  fk_rails_...  (major_committee_id => major_committees.id)
 #
-class MajorCommittee::Member < ApplicationRecord
-  belongs_to :major_committee
-  belongs_to :lecturer
+class MajorCommittee
+  class Member < ApplicationRecord
+    belongs_to :major_committee
+    belongs_to :lecturer
+  end
 end

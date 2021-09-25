@@ -20,4 +20,8 @@ class ThesisProposalPolicy < ApplicationPolicy
   def faculty_approve?
     user.has_role? :head_of_faculty
   end
+
+  def major_committee_approve?
+    user.is_a?(Lecturer) && user.has_role?(:privileged_major_committee_member)
+  end
 end

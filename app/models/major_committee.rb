@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: major_committees
@@ -21,4 +23,8 @@ class MajorCommittee < ApplicationRecord
 
   has_many :members
   has_many :lecturers, through: :members
+
+  def to_s
+    name
+  end
 end

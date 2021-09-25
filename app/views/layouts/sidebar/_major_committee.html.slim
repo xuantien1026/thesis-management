@@ -1,0 +1,9 @@
+li.c-sidebar-nav-item.c-sidebar-nav-dropdown
+  a.c-sidebar-nav-link.c-sidebar-nav-dropdown-toggle data-coreui-toggle="dropdown"
+    i.c-sidebar-nav-icon.cil-list
+    = 'Quản lý Hội đồng ngành'
+  ul.c-sidebar-nav-dropdown-items
+    - current_major_committees.each do |committee|
+      li.c-sidebar-nav-item
+        = link_to major_committee_thesis_proposals_path(committee), class: "c-sidebar-nav-link"
+          = committee

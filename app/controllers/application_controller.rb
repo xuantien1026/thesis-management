@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     Semester.order(:start_date).last
   end
 
+  def current_major_committees
+    MajorCommittee.joins(:members).where(members: { lecturer_id: current_user.id })
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: %i[email name type department_id])
   end
@@ -24,4 +28,5 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_semester
+  helper_method :current_major_committees
 end

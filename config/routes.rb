@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     resources :thesis_proposals do
       member do
         post 'department_approve', to: 'thesis_proposals#department_approve'
+        post 'major_committee_approve', to: 'thesis_proposals#major_committee_approve'
         post 'faculty_approve', to: 'thesis_proposals#faculty_approve'
       end
       resources :thesis_proposal_members, only: %i[create], as: :applications
@@ -71,6 +72,10 @@ Rails.application.routes.draw do
         post 'start_session', to: 'defense_committees#start_session'
         post 'end_session', to: 'defense_committees#end_session'
       end
+    end
+
+    resources :major_committees, only: [] do
+      resources :thesis_proposals, only: :index, module: :major_committees
     end
   end
 

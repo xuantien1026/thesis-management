@@ -8,7 +8,6 @@
 #  description       :text
 #  education_program :string
 #  english_title     :string
-#  majors            :string           default([]), is an Array
 #  max_student_count :integer          default(1), not null
 #  mission           :string
 #  ordering          :integer
@@ -17,20 +16,24 @@
 #  title             :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  major_id          :bigint           not null
 #  semester_id       :bigint           not null
 #
 # Indexes
 #
+#  index_thesis_proposals_on_major_id     (major_id)
 #  index_thesis_proposals_on_semester_id  (semester_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (major_id => majors.id)
 #  fk_rails_...  (semester_id => semesters.id)
 #
 class ThesisProposal < ApplicationRecord
   composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
 
   belongs_to :semester
+  belongs_to :major
 
   has_many :thesis_proposal_advisors, dependent: :destroy
   has_many :lecturers, through: :thesis_proposal_advisors
@@ -41,13 +44,17 @@ class ThesisProposal < ApplicationRecord
   validates :title, presence: true
   validates :max_student_count, presence: true
 
-  enum status: { 'waiting_for_approval' => 0, 'department_approved' => 1, 'faculty_approved' => 2 }
+  enum status: { 'waiting_for_approval' => 0,
+                 'department_approved' => 1,
+                 'faculty_approved' => 2,
+                 'major_committee_approved' => 3 }
 
   scope :by_lecturer, lambda { |lecturer|
                         joins(:thesis_proposal_advisors).where(thesis_proposal_advisors: { lecturer: lecturer })
                       }
   scope :by_department, ->(department) { joins(:lecturers).where(users: { department_id: department.id }) }
   scope :by_faculty, ->(faculty) { joins(:lecturers).where(users: { department_id: faculty.department_ids }) }
+  scope :by_major_committee, ->(comm) {}
 
   delegate :name, to: :primary_advisor, prefix: true
   delegate :department, :faculty, to: :primary_advisor
@@ -58,10 +65,6 @@ class ThesisProposal < ApplicationRecord
 
   def create_member(student)
     thesis_proposal_members.create(student: student)
-  end
-
-  def major
-    majors.join(' - ')
   end
 
   def to_s
