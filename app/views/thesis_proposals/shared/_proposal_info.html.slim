@@ -1,0 +1,41 @@
+dl
+  .row
+    .col-3
+      dt Học kì
+      dd = @thesis_proposal.semester
+    .col-3
+      dt Mã đề cương
+      dd = @thesis_proposal.ordering
+    .col-3
+      dt Ngành
+      dd = @thesis_proposal.major
+    .col-3
+      dt Chương trình đào tạo
+      dd = @thesis_proposal.education_program.to_s
+
+  dt Tên đề tài
+  dd = @thesis_proposal.title
+
+  dt Mô tả
+  dd = @thesis_proposal.description
+
+  dt Nhiệm vụ đề tài
+  dd = @thesis_proposal.mission
+
+  dt Tài liệu tham khảo
+  dd
+    ol
+      - @thesis_proposal.references.each do |ref|
+        li = ref
+
+  dt Trạng thái
+  dd = render StatusComponent.new(status: @thesis_proposal.status)
+
+  dt Số sinh viên
+  dd = @thesis_proposal.max_student_count
+
+  dt Sinh viên đã đăng kí
+  dd
+    ol
+      - @thesis_proposal.students.each do |student|
+        li = "#{student.mssv} - #{student.name}"

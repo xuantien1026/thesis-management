@@ -9,7 +9,7 @@
 #  education_program :string
 #  english_title     :string
 #  max_student_count :integer          default(1), not null
-#  mission           :string
+#  mission           :text
 #  ordering          :integer
 #  references        :string           default([]), is an Array
 #  status            :integer          default("waiting_for_approval")
@@ -30,19 +30,22 @@
 #  fk_rails_...  (semester_id => semesters.id)
 #
 class ThesisProposal < ApplicationRecord
-  composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
+  composed_of :education_program, converter: proc { |str|
+                                               str.present? ? EducationProgram.new(str) : nil
+                                             }, allow_nil: true
 
   belongs_to :semester
   belongs_to :major
 
-  has_many :thesis_proposal_advisors, dependent: :destroy
-  has_many :lecturers, through: :thesis_proposal_advisors
+  has_many :advisors, dependent: :destroy
+  has_many :lecturers, through: :advisors
 
-  has_many :thesis_proposal_members, dependent: :destroy
-  has_many :students, through: :thesis_proposal_members
+  has_many :members, dependent: :destroy
+  has_many :students, through: :members
 
-  validates :title, presence: true
-  validates :max_student_count, presence: true
+  validates :title, :english_title, :semester_id, :major_id, :education_program,
+            :mission, :description, :max_student_count, presence: true
+  validates :max_student_count, numericality: { greater_than_or_equal_to: 1 }
 
   enum status: { 'waiting_for_approval' => 0,
                  'department_approved' => 1,
@@ -50,21 +53,20 @@ class ThesisProposal < ApplicationRecord
                  'major_committee_approved' => 3 }
 
   scope :by_lecturer, lambda { |lecturer|
-                        joins(:thesis_proposal_advisors).where(thesis_proposal_advisors: { lecturer: lecturer })
+                        joins(:advisors).where(advisors: { lecturer: lecturer })
                       }
   scope :by_department, ->(department) { joins(:lecturers).where(users: { department_id: department.id }) }
   scope :by_faculty, ->(faculty) { joins(:lecturers).where(users: { department_id: faculty.department_ids }) }
-  scope :by_major_committee, ->(comm) {}
 
   delegate :name, to: :primary_advisor, prefix: true
   delegate :department, :faculty, to: :primary_advisor
 
-  def primary_advisor
-    thesis_proposal_advisors.find_by(primary: true).lecturer
+  def self.by_student(student)
+    joins(:members).find_by(members: { student_id: student.id })
   end
 
-  def create_member(student)
-    thesis_proposal_members.create(student: student)
+  def primary_advisor
+    advisors.find_by(primary: true).lecturer
   end
 
   def to_s

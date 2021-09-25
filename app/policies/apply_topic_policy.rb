@@ -36,7 +36,7 @@ class ApplyTopicPolicy < BaseActionPolicy
   end
 
   def student_has_appropriate_major
-    topic.majors.include? student.major
+    topic.major.accept? student.major
   end
 
   def student_has_appropriate_education_program
@@ -44,7 +44,7 @@ class ApplyTopicPolicy < BaseActionPolicy
   end
 
   def topic_application
-    return ThesisProposalMember if topic.is_a?(ThesisProposal)
-    return ThesisMember if topic.is_a?(Thesis)
+    return ThesisProposal::Member if topic.is_a?(ThesisProposal)
+    return Theses::Member if topic.is_a?(Thesis)
   end
 end

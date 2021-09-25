@@ -38,7 +38,12 @@ Rails.application.routes.draw do
     end
 
     namespace :students do
-      resources :thesis_proposals, only: :index
+      resources :thesis_proposals, only: %i[index show] do
+        collection do
+          get 'registered', to: 'thesis_proposals#registered', as: :registered
+        end
+        resources :members, only: :create, module: :thesis_proposal
+      end
     end
 
     namespace :theses do
@@ -64,7 +69,6 @@ Rails.application.routes.draw do
         post 'major_committee_approve', to: 'thesis_proposals#major_committee_approve'
         post 'faculty_approve', to: 'thesis_proposals#faculty_approve'
       end
-      resources :thesis_proposal_members, only: %i[create], as: :applications
     end
 
     resources :defense_committees, only: %i[index show] do

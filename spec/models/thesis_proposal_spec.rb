@@ -9,7 +9,7 @@
 #  education_program :string
 #  english_title     :string
 #  max_student_count :integer          default(1), not null
-#  mission           :string
+#  mission           :text
 #  ordering          :integer
 #  references        :string           default([]), is an Array
 #  status            :integer          default("waiting_for_approval")
@@ -45,12 +45,6 @@ RSpec.describe ThesisProposal, type: :model do
   describe '#faculty' do
     it 'is the faculty of primary advisor' do
       expect(subject.faculty).to eq(primary_advisor.faculty)
-    end
-  end
-
-  describe '#major' do
-    it 'is the majors specified when thesis proposal is created, joined if multiple' do
-      expect(subject.major).to eq(subject.majors.join(' - '))
     end
   end
 end

@@ -1,0 +1,10 @@
+.card
+  .card-header
+    h3 Đề cương luận văn của tôi
+  .card-body
+    - if @thesis_proposal
+      = render 'thesis_proposals/shared/proposal_info'
+    - else
+      div
+        = 'Bạn chưa đăng kí ĐCLV nào. Xem danh sách ĐCLV tại '
+        = link_to 'đây', students_thesis_proposals_path

@@ -1,43 +1,10 @@
 .card
+  .card-header
+    h3 Đề cương luận văn
   .card-body
-    dl
-      dt Học kì
-      dd = @thesis_proposal.semester
-
-      dt Tên đề tài
-      dd = @thesis_proposal.title
-
-      dt Mô tả
-      dd = @thesis_proposal.description
-
-      dt Nhiệm vụ đề tài
-      dd = @thesis_proposal.mission
-
-      dt Tài liệu tham khảo
-      dd
-        ol
-          - @thesis_proposal.references.each do |ref|
-            li = ref
-
-      dt Trạng thái
-      dd = render StatusComponent.new(status: @thesis_proposal.status)
-
-      dt Số sinh viên
-      dd = @thesis_proposal.max_student_count
-
-      dt Ngành
-      dd = @thesis_proposal.major
-
-      dt Chương trình đào tạo
-      dd = @thesis_proposal.education_program.to_s
-
-      dt Sinh viên đã đăng kí
-      dd
-        ol
-          - @thesis_proposal.students.each do |student|
-            li = "#{student.mssv} - #{student.name}"
-
-      = button_to 'Đăng kí', thesis_proposal_applications_path(@thesis_proposal), method: :post, class: 'btn btn-primary' if current_user.is_a?(Student)
+    = render 'thesis_proposals/shared/proposal_info'
   .card-footer
-    = link_to 'Chỉnh sửa', edit_thesis_proposal_path(@thesis_proposal), class: 'card-link' if policy(@thesis_proposal).edit?
-    = render ApproveButtonComponent.new(user: current_user, topic: @thesis_proposal)
+    - if policy(@thesis_proposal).edit?
+      = link_to edit_thesis_proposal_path(@thesis_proposal), class: 'btn btn-primary' do
+        i.cil-pen.mr-2
+        = 'Chỉnh sửa'

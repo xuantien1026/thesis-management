@@ -12,7 +12,7 @@
 #  english_title        :string
 #  majors               :string           default([]), is an Array
 #  max_student_count    :integer          default(1), not null
-#  mission              :string
+#  mission              :text
 #  ordering             :integer
 #  references           :string           default([]), is an Array
 #  status               :integer          default("waiting_for_approval")

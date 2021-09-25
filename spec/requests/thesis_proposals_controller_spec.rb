@@ -28,34 +28,55 @@ RSpec.describe ThesisProposalsController, type: :request do
     context 'when user is a student' do
       include_context :signed_in_as_student
 
-      it { is_expected.to eq(403) }
+      it { is_expected.to eq(200) }
     end
   end
 
   describe 'GET /thesis_proposals/new' do
     subject { get new_thesis_proposal_path }
 
-    include_context :signed_in_as_lecturer
+    context 'when user is a lecturer' do
+      include_context :signed_in_as_lecturer
 
-    it { is_expected.to eq(200) }
+      it { is_expected.to eq(200) }
+    end
+
+    context 'when user is a student' do
+      include_context :signed_in_as_student
+
+      it { is_expected.to eq(403) }
+    end
   end
 
   describe 'POST /thesis_proposals' do
     subject { post thesis_proposals_path, params: params }
 
-    include_context :signed_in_as_lecturer
+    context 'when user is a lecturer' do
+      include_context :signed_in_as_lecturer
 
-    context 'when validation passes' do
-      let(:params) do
-        { thesis_proposal: attributes_for(:thesis_proposal).merge(semester_id: current_semester.id, major_id: current_faculty.majors.first.id),
-          primary_advisor_id: signed_lecturer.id }
+      context 'when validation passes' do
+        let(:params) do
+          { thesis_proposal: attributes_for(:thesis_proposal).merge(semester_id: current_semester.id,
+                                                                    major_id: current_faculty.majors.first.id),
+            primary_advisor_id: signed_lecturer.id }
+        end
+
+        it { is_expected.to eq(302) }
+
+        it 'creates new thesis proposal' do
+          subject
+
+          expect(ThesisProposal.last.primary_advisor).to eq(signed_lecturer)
+        end
       end
+    end
 
-      it { is_expected.to eq(302) }
+    context 'when user is a student' do
+      include_context :signed_in_as_student
 
-      it 'creates new thesis proposal' do
-        expect { subject }.to change(ThesisProposal, :count).by(1)
-      end
+      let(:params) { {} }
+
+      it { is_expected.to eq(403) }
     end
   end
 

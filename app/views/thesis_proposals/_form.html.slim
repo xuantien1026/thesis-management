@@ -1,38 +1,27 @@
-= form_with model: thesis_proposal do |form|
+= simple_form_for thesis_proposal, defaults: { input_html: { class: 'form-control' } } do |form|
   .form-group
     .row
       .col-3
-        = form.label :semester_id, 'Học kì'
-        = form.collection_select :semester_id, @semesters, :id, :to_s, {}, class: 'form-control'
+        = form.input :semester_id, collection: Semester.all.order(id: :desc), value_method: :id, label_method: :to_s
       .col-3
-        = form.label :major_id, "Ngành"
-        = form.collection_select :major_id, @majors, :id, :name, {}, class: 'form-control'
+        = form.input :major_id, collection: current_user.faculty.majors, value_method: :id, label_method: :name
       .col-3
-        = form.label :education_program, "Chương Trình Đào Tạo"
-        = form.select :education_program, EducationProgram::PROGRAMS, {}, class: 'form-control'
+        = form.input :education_program, collection: EducationProgram::PROGRAMS
   .form-group
-    = form.label :title, "Tên Đề tài"
-    = form.text_field :title, class: 'form-control', required: true
+    = form.input :title
   .form-group
-    = form.label :english_title, "Tên Tiếng Anh"
-    = form.text_field :english_title, class: 'form-control'
+    = form.input :english_title
   .form-group
-    = form.label :description, "Mô tả"
-    = form.text_area :description, class: 'form-control', rows: 5, required: true
+    = form.input :description, input_html: { rows: 5 }
   .form-group
-    = form.label :mission, "Nhiệm vụ"
-    = form.text_area :mission, class: 'form-control', rows: 5
-
+    = form.input :mission, input_html: { rows: 5 }
   .form-group
     .row
       .col-6 data-controller="topic-reference"
         = render TopicReferencesComponent.new(topic: thesis_proposal)
       .col-6
-        = render TopicStudentsComponent.new(topic: thesis_proposal)
+        = form.input :max_student_count
   .form-group
     = hidden_field_tag :primary_advisor_id, current_user.id
   .form-group.d-flex.justify-content-center
     = form.submit 'Submit', class: 'btn btn-primary'
-
-= javascript_pack_tag "topic_select2"
-

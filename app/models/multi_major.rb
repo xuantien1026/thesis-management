@@ -20,7 +20,7 @@
 #  fk_rails_...  (faculty_id => faculties.id)
 #
 class MultiMajor < Major
-  has_many :major_compositions
+  has_many :major_compositions, dependent: :destroy
   has_many :single_majors, through: :major_compositions
 
   def accept?(major)

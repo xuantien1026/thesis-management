@@ -1,0 +1,8 @@
+.card
+  .card-header
+    h3 Đề cương luận văn
+  .card-body
+    = render 'thesis_proposals/shared/proposal_info'
+    = button_to 'Đăng kí', students_thesis_proposal_members_path(@thesis_proposal), method: :post, class: 'btn btn-primary'
+  .card-footer
+    = link_to 'Quay lại', students_thesis_proposals_path

@@ -14,7 +14,7 @@
       tbody
         - @thesis_proposals.each do |thesis_proposal|
           tr
-            td = link_to thesis_proposal.id, thesis_proposal, target: '_top'
+            td = link_to thesis_proposal.id, students_thesis_proposal_path(thesis_proposal)
             td = thesis_proposal.primary_advisor_name
             td = thesis_proposal.title
             td = thesis_proposal.max_student_count

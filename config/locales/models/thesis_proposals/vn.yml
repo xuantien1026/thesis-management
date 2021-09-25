@@ -1,0 +1,13 @@
+vn:
+  activerecord:
+    attributes:
+      thesis_proposal:
+        semester_id: 'Học kì'
+        major_id: 'Ngành'
+        education_program: 'Chương trình đào tạo'
+        title: 'Tên đề tài tiếng Việt'
+        english_title: 'Tên đề tài tiếng Anh'
+        description: 'Mô tả'
+        mission: 'Nhiệm vụ'
+        references: 'Tài liệu tham khảo'
+        max_student_count: 'Số lượng sinh viên tối đa'

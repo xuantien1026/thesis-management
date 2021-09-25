@@ -21,7 +21,7 @@
 class MajorCommittee < ApplicationRecord
   belongs_to :major
 
-  has_many :members
+  has_many :members, dependent: :destroy
   has_many :lecturers, through: :members
 
   def to_s

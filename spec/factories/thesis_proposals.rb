@@ -9,7 +9,7 @@
 #  education_program :string
 #  english_title     :string
 #  max_student_count :integer          default(1), not null
-#  mission           :string
+#  mission           :text
 #  ordering          :integer
 #  references        :string           default([]), is an Array
 #  status            :integer          default("waiting_for_approval")
@@ -47,8 +47,8 @@ FactoryBot.define do
     end
 
     after(:create) do |thesis_proposal, options|
-      thesis_proposal.thesis_proposal_advisors.create(lecturer: options.primary_advisor, primary: true)
-      options.students.each { |student| thesis_proposal.create_member(student) }
+      thesis_proposal.advisors.create(lecturer: options.primary_advisor, primary: true)
+      options.students.each { |student| thesis_proposal.members.create(student: student) }
     end
   end
 end
