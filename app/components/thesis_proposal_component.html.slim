@@ -1,0 +1,16 @@
+= turbo_frame_tag @thesis_proposal, class: 'd-table-row', style: 'height: 52px' do
+  .d-table-cell.align-middle
+    = link_to @thesis_proposal.id, @thesis_proposal, target: '_top'
+  .d-table-cell.align-middle
+    = @thesis_proposal.primary_advisor_name
+  .d-table-cell.align-middle
+    span data-tooltip="true" data-html="true" title="#{@tooltip}"
+      = @thesis_proposal.title
+  .d-table-cell.align-middle
+    = @thesis_proposal.max_student_count
+  .d-table-cell.align-middle
+    = @thesis_proposal.major
+  .d-table-cell.align-middle
+    = render StatusComponent.new(status: @thesis_proposal.status)
+  .d-table-cell.align-middle
+    = render ApproveButtonComponent.new(thesis_proposal: @thesis_proposal, target_status: @target_status)

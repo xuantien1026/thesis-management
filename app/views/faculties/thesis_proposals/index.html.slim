@@ -12,6 +12,4 @@
         .d-table-cell.p-2 Số SV
         .d-table-cell.p-2 Ngành
         .d-table-cell.p-2 Trạng thái
-      - @thesis_proposals.each do |thesis_proposal|
-        = turbo_frame_tag thesis_proposal, class: "d-table-row"
-          = render TopicComponent.new(user: current_user, topic: thesis_proposal)
+      = render ThesisProposalComponent.with_collection(@thesis_proposals, target_status: :faculty_approved)
