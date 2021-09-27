@@ -10,5 +10,9 @@
     ul
       - @majors.each do |major|
         li = major
+    h4 Hội đồng ngành
+    ul
+      - @major_committees.each do |major_committee|
+        li = link_to major_committee, admin_major_committee_path(major_committee)
   .card-footer
     = link_to 'Quay lại', admin_faculties_path

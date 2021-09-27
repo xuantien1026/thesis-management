@@ -1,0 +1,8 @@
+.card
+  .card-header
+    h3 Danh sách thành viên
+    = @major_committee
+  .card-body
+    ul
+      - @major_committee.lecturers.each do |lecturer|
+        li = link_to lecturer, admin_lecturer_path(lecturer)

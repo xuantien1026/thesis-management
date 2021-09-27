@@ -24,5 +24,7 @@ class MajorCommittee
   class Member < ApplicationRecord
     belongs_to :major_committee
     belongs_to :lecturer
+
+    delegate :name, to: :lecturer
   end
 end

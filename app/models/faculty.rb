@@ -11,6 +11,7 @@
 #
 class Faculty < ApplicationRecord
   has_many :majors, dependent: :destroy
+  has_many :major_committees, through: :majors
   has_many :departments, dependent: :destroy
 
   def to_s

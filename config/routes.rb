@@ -15,6 +15,7 @@ Rails.application.routes.draw do
           end
         end
       end
+      resources :major_committees, only: %i[show]
       resource :lecturer_import, only: %i[new create]
     end
 

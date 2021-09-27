@@ -21,6 +21,7 @@
 #
 class Major < ApplicationRecord
   belongs_to :faculty
+  has_one :major_committee
 
   def to_s
     name

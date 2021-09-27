@@ -10,6 +10,7 @@ module Admin
       @faculty = Faculty.find(params[:id])
       @departments = @faculty.departments
       @majors = @faculty.majors
+      @major_committees = @faculty.major_committees
     end
   end
 end
