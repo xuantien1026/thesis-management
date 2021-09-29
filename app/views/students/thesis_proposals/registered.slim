@@ -8,3 +8,7 @@
       div
         = 'Bạn chưa đăng kí ĐCLV nào. Xem danh sách ĐCLV đã được công bố tại '
         = link_to 'đây', students_thesis_proposals_path
+  - if @thesis_proposal
+    .card-footer
+      = button_to 'Huỷ đăng kí', students_thesis_proposal_member_path(@thesis_proposal, @member),
+              method: :delete, data: { turbo: "false" }, class: 'btn btn-danger'

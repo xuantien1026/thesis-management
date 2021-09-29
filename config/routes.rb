@@ -43,7 +43,7 @@ Rails.application.routes.draw do
         collection do
           get 'registered', to: 'thesis_proposals#registered', as: :registered
         end
-        resources :members, only: :create, module: :thesis_proposal
+        resources :members, only: %i[create destroy], module: :thesis_proposal, shallow: false
       end
     end
 

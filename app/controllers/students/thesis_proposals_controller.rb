@@ -11,7 +11,8 @@ module Students
     end
 
     def registered
-      @thesis_proposal = ::ThesisProposal.by_student(current_user)
+      @member = ::ThesisProposal::Member.find_by(student_id: current_user)
+      @thesis_proposal = @member&.thesis_proposal
     end
   end
 end

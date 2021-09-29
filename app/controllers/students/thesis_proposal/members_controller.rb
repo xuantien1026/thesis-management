@@ -15,6 +15,11 @@ module Students
         redirect_to students_thesis_proposal_path(@thesis_proposal)
       end
 
+      def destroy
+        ::ThesisProposal::Member.find(params[:id]).destroy
+        redirect_back fallback_location: root_path, notice: 'Đã huỷ đăng kí ĐCLV'
+      end
+
       private
 
       def set_thesis_proposal

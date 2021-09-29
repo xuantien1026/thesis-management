@@ -21,7 +21,7 @@
 #
 class Major < ApplicationRecord
   belongs_to :faculty
-  has_one :major_committee
+  has_one :major_committee, dependent: :destroy
 
   def to_s
     name

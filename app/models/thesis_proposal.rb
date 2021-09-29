@@ -61,10 +61,6 @@ class ThesisProposal < ApplicationRecord
   delegate :name, to: :primary_advisor, prefix: true
   delegate :department, :faculty, to: :primary_advisor
 
-  def self.by_student(student)
-    joins(:members).find_by(members: { student_id: student.id })
-  end
-
   def primary_advisor
     advisors.find_by(primary: true).lecturer
   end
