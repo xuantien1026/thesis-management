@@ -79,6 +79,12 @@ $ psql --version
 psql (PostgreSQL) 14.0
 ```
 
+Set up an admin account:
+```
+$ export ADMIN_EMAIL=your_email
+$ export ADMIN_PASSWORD=your_password
+```
+
 Set up initial data:
 ```
 $ rails db:create db:migrate db:seed

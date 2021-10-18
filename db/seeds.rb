@@ -1,34 +1,37 @@
 # Create faculties
-cse = Faculty.create(name: 'Computer Science & Engineering')
-ee = Faculty.create(name: 'Electrical & Electronic Engineering')
-Faculty.create(name: 'Chemical Engineering')
-Faculty.create(name: 'Mechanical Engineering')
-Faculty.create(name: 'Civil Engineering')
-Faculty.create(name: 'Environment & Natural Resources')
-Faculty.create(name: 'Geology & Petroleum Engineering')
-Faculty.create(name: 'Transportation Engineering')
-Faculty.create(name: 'Materials Technology')
+cse = Faculty.find_or_create_by(name: 'Computer Science & Engineering')
+ee = Faculty.find_or_create_by(name: 'Electrical & Electronic Engineering')
 
 # Computer Science & Engineering deparments
-Department.create(name: 'Computer Science', short_name: 'KHMT', faculty: cse)
-Department.create(name: 'System and Networking', short_name: 'HT&MMT', faculty: cse)
-Department.create(name: 'Information System', short_name: 'HTTT', faculty: cse)
-Department.create(name: 'Software Engineering', short_name: 'CNPM', faculty: cse)
-Department.create(name: 'Computer Engineering', short_name: 'KTMT', faculty: cse)
+cs = Department.find_or_create_by(name: 'Computer Science', short_name: 'KHMT', faculty: cse)
+Department.find_or_create_by(name: 'System and Networking', short_name: 'HT&MMT', faculty: cse)
+Department.find_or_create_by(name: 'Information System', short_name: 'HTTT', faculty: cse)
+Department.find_or_create_by(name: 'Software Engineering', short_name: 'CNPM', faculty: cse)
+Department.find_or_create_by(name: 'Computer Engineering', short_name: 'KTMT', faculty: cse)
 
 # Electrical & Electronic Engineering Departments
-Department.create(name: 'Basic Electrical & Electronics Engineering', short_name: 'KHMT', faculty: ee)
-Department.create(name: 'Electronics Engineering', short_name: 'KHMT', faculty: ee)
-Department.create(name: 'Telecommunications Engineering', short_name: 'KHMT', faculty: ee)
-Department.create(name: 'Automatic Control Engineering', short_name: 'KHMT', faculty: ee)
-Department.create(name: 'Power Equipment & Machines Engineering', short_name: 'KHMT', faculty: ee)
-Department.create(name: 'Power Systems Engineering', short_name: 'KHMT', faculty: ee)
-Department.create(name: 'Power Delivery Engineering', short_name: 'KHMT', faculty: ee)
+Department.find_or_create_by(name: 'Basic Electrical & Electronics Engineering', short_name: 'DBEE', faculty: ee)
+Department.find_or_create_by(name: 'Electronics Engineering', short_name: 'DOE', faculty: ee)
 
 # Majors
-cse.majors.create(name: 'Computer Science')
-cse.majors.create(name: 'Computer Engineering')
+cs_major = cse.majors.find_or_create_by(name: 'Computer Science')
+ce_major = cse.majors.find_or_create_by(name: 'Computer Engineering')
 
-ee.majors.create(name: 'Electrical')
-ee.majors.create(name: 'Electronics - Telecommunication')
-ee.majors.create(name: 'Automation Control')
+ee.majors.find_or_create_by(name: 'Electrical')
+ee.majors.find_or_create_by(name: 'Electronics - Telecommunication')
+ee.majors.find_or_create_by(name: 'Automation Control')
+
+puts 'Finished creating departments and faculties data'
+
+# Major committtees
+MajorCommittee.find_or_create_by(major: cs_major, name: 'Hội đồng ngành CS')
+MajorCommittee.find_or_create_by(major: ce_major, name: 'Hội đồng ngành CE')
+
+# Admin
+admin = Lecturer.new(name: 'Admin', email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'], mscb: 0, department: cs)
+if admin.save
+  admin.add_role :admin
+else
+  puts 'Failed to create Admin, please set admin email and admin password in environment variables '\
+       'ADMIN_EMAIL, ADMIN_PASSWORD and try again'
+end
