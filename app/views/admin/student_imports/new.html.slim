@@ -18,17 +18,17 @@
                 = 'Nhập số dòng header trong file excel'
         .row
           .col
+            = ff.input :mssv, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
+          .col
             = ff.input :name, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
           .col
             = ff.input :email, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
           .col
-            = ff.input :mssv, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
-          .col
-            = ff.input :dkmh, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
+            = ff.input :major, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
           .col
             = ff.input :education_program, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
           .col
-            = ff.input :major, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
+            = ff.input :dkmh, collection: Lecturers::ImportMap::EXCEL_COLUMNS, required: true
         .row
           .col
             small.form-text.text-muted

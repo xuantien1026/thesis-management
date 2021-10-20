@@ -3,7 +3,7 @@ vn:
     attributes:
       students/import_map:
         header_rows: Số dòng header
-        name: Tên GV
+        name: Họ và tên
         email: Email
         mssv: Mã số sinh viên
         dkmh: Đăng kí môn học

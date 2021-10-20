@@ -7,13 +7,18 @@ RSpec.describe Admin::StudentImportsController, type: :request do
 
   subject { post admin_student_import_path, params: params }
 
-  let(:params) do
-    {
-      excel_file: excel_file,
-      import_map: { header_rows: 1, name: 0, email: 1, mssv: 2, dkmh: 3, education_program: 4, major: 5 }
-    }
-  end
+  let(:params) { { excel_file: excel_file, import_map: import_map } }
+  let(:import_map) { { header_rows: 1, name: 0, email: 1, mssv: 2, dkmh: 3, education_program: 4, major: 5 } }
   let!(:major) { create :major, faculty: current_faculty, name: 'KHMT' }
+
+  context 'when excel file is valid' do
+    let(:excel_file) { fixture_file_upload 'student_imports/valid.xlsx' }
+    let(:import_map) { { header_rows: 1, name: 1, email: 2, mssv: 0, dkmh: 3, education_program: 6, major: 5 } }
+
+    it 'success' do
+      expect { subject }.to change(Student, :count).from(0).to(2)
+    end
+  end
 
   context 'when name is nil' do
     let(:excel_file) { fixture_file_upload 'student_imports/name_nil.xlsx' }

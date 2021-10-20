@@ -9,23 +9,23 @@ module Students
     def call
       # TODO: refactor this method
       read_first_worksheet
-      row_index = import_map.header_rows
+      @row_index = import_map.header_rows
       ApplicationRecord.transaction do
-        until @sheet[row_index].nil?
-          unless faculty.majors.find_by(name: @sheet[row_index][import_map.major].value)
+        until empty_row?
+          unless faculty.majors.find_by(name: current_row[import_map.major].value)
             context.errors ||= []
-            context.errors << ("Không tìm thấy chuyên ngành \"#{@sheet[row_index][import_map.major].value}\" (dòng #{row_index + 1})")
-            row_index += 1
+            context.errors << ("Không tìm thấy chuyên ngành \"#{current_row[import_map.major].value}\" (dòng #{@row_index + 1})")
+            @row_index += 1
             next
           end
-          student = Student.new(student_attributes(@sheet[row_index]))
+          student = Student.new(student_attributes.merge(password: DEFAULT_PASSWORD))
           if student.save
             # continue
           else
             context.errors ||= []
-            context.errors << ("#{student.errors.full_messages.first} (dòng #{row_index + 1})")
+            context.errors << ("#{student.errors.full_messages.first} (dòng #{@row_index + 1})")
           end
-          row_index += 1
+          @row_index += 1
         end
         context.fail! if context.errors.present?
       end
@@ -35,14 +35,25 @@ module Students
 
     DEFAULT_PASSWORD = 'password'
 
-    def student_attributes(row)
-      { mssv: row[import_map.mssv]&.value,
-        name: row[import_map.name]&.value,
-        email: row[import_map.email]&.value,
-        password: DEFAULT_PASSWORD,
-        dkmh: row[import_map.dkmh]&.value,
-        education_program: row[import_map.education_program]&.value,
-        major: row[import_map.major]&.value,
+    def current_row
+      @sheet[@row_index]
+    end
+
+    def empty_row?
+      current_row.nil? || all_cells_empty?
+    end
+
+    def all_cells_empty?
+      student_attributes.compact.blank?
+    end
+
+    def student_attributes
+      { mssv: current_row[import_map.mssv]&.value,
+        name: current_row[import_map.name]&.value,
+        email: current_row[import_map.email]&.value,
+        dkmh: current_row[import_map.dkmh]&.value,
+        education_program: current_row[import_map.education_program]&.value,
+        major: current_row[import_map.major]&.value,
       }
     end
 
