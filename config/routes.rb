@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       end
       resources :major_committees, only: %i[show]
       resource :lecturer_import, only: %i[new create]
+      resource :student_import, only: %i[new create]
     end
 
     namespace :department_management, as: :dept do

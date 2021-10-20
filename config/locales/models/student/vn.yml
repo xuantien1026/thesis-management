@@ -1,0 +1,10 @@
+vn:
+  activerecord:
+    attributes:
+      student:
+        name: Họ và tên
+        email: Email
+        mssv: Mã số sinh viên
+        dkmh: Đăng kí môn học
+        education_program: Chương trình đào tạo
+        major: Chuyên ngành

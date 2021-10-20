@@ -43,7 +43,7 @@ end
 RSpec.shared_context :signed_in_as_admin do
   include_context :basic_faculty
 
-  let(:admin) { create :lecturer, :as_admin }
+  let(:admin) { create :lecturer, :as_admin, department: current_department }
 
   before do
     sign_in admin

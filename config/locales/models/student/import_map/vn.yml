@@ -1,0 +1,11 @@
+vn:
+  activemodel:
+    attributes:
+      students/import_map:
+        header_rows: Số dòng header
+        name: Tên GV
+        email: Email
+        mssv: Mã số sinh viên
+        dkmh: Đăng kí môn học
+        education_program: Chương trình đào tạo
+        major: Chuyên ngành

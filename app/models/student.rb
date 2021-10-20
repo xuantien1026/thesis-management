@@ -40,11 +40,13 @@
 #
 class Student < User
   DKMH = %w[DCLV LVTN].freeze
-  composed_of :education_program, converter: proc { |string| EducationProgram.new(string) }
+  EDUCATION_PROGRAMS = %w[CQ CLC VLVH TC].freeze # Chinh quy, Chat luong cao, Vua lam vua hoc, Tai chuc
 
   scope :without_proposal, -> { where.not(id: ThesisProposalMember.pluck(:student_id)) }
 
   validates :dkmh, inclusion: DKMH
+  validates :education_program, inclusion: { in: EDUCATION_PROGRAMS, message: "không hợp lệ. Chương trình đào tạo phải là 1 trong những giá trị sau: #{EDUCATION_PROGRAMS.join(',')}" }
+  validates :mssv, :major, presence: true
 
   def profile
     {
