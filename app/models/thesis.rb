@@ -10,7 +10,6 @@
 #  description          :text
 #  education_program    :string
 #  english_title        :string
-#  majors               :string           default([]), is an Array
 #  max_student_count    :integer          default(1), not null
 #  mission              :text
 #  ordering             :integer
@@ -20,18 +19,21 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  defense_committee_id :bigint
+#  major_id             :bigint           not null
 #  semester_id          :bigint           not null
 #  thesis_proposal_id   :bigint
 #
 # Indexes
 #
 #  index_theses_on_defense_committee_id  (defense_committee_id)
+#  index_theses_on_major_id              (major_id)
 #  index_theses_on_semester_id           (semester_id)
 #  index_theses_on_thesis_proposal_id    (thesis_proposal_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (defense_committee_id => defense_committees.id)
+#  fk_rails_...  (major_id => majors.id)
 #  fk_rails_...  (semester_id => semesters.id)
 #
 class Thesis < ApplicationRecord
@@ -50,6 +52,8 @@ class Thesis < ApplicationRecord
   has_one :review, class_name: 'Theses::Review', dependent: :destroy
   has_one :reviewer, through: :review, source: :lecturer
 
+  accepts_nested_attributes_for :advisors
+
   scope :by_lecturer, lambda { |lecturer|
     joins(:advisors).where(advisors: { lecturer: lecturer, primary: true })
   }
@@ -66,10 +70,6 @@ class Thesis < ApplicationRecord
 
   def primary_advisor
     advisors.find(&:primary).lecturer
-  end
-
-  def major
-    majors.join(' - ')
   end
 
   def to_s

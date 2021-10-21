@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   shallow do
     namespace :admin do
       resources :faculties, only: %i[index show] do
-        resources :theses, only: :index
+        resources :theses, only: %i[index new create]
         resources :midterm_evaluations, only: :index
 
         resources :departments, only: [] do

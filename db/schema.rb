@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_25_040015) do
+ActiveRecord::Schema.define(version: 2021_10_20_153439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,12 +116,13 @@ ActiveRecord::Schema.define(version: 2021_09_25_040015) do
     t.integer "max_student_count", default: 1, null: false
     t.integer "status", default: 0
     t.string "education_program"
-    t.string "majors", default: [], array: true
     t.bigint "semester_id", null: false
     t.date "assignment_date"
     t.date "completion_date"
     t.bigint "defense_committee_id"
+    t.bigint "major_id", null: false
     t.index ["defense_committee_id"], name: "index_theses_on_defense_committee_id"
+    t.index ["major_id"], name: "index_theses_on_major_id"
     t.index ["semester_id"], name: "index_theses_on_semester_id"
     t.index ["thesis_proposal_id"], name: "index_theses_on_thesis_proposal_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_max_student_count"
@@ -340,6 +341,7 @@ ActiveRecord::Schema.define(version: 2021_09_25_040015) do
   add_foreign_key "major_compositions", "majors", column: "single_major_id"
   add_foreign_key "majors", "faculties"
   add_foreign_key "theses", "defense_committees"
+  add_foreign_key "theses", "majors"
   add_foreign_key "theses", "semesters"
   add_foreign_key "theses_advisor_evaluations", "theses_members"
   add_foreign_key "theses_advisors", "theses"
