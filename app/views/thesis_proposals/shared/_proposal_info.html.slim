@@ -23,10 +23,7 @@ dl
   dd = @thesis_proposal.mission
 
   dt Tài liệu tham khảo
-  dd
-    ol
-      - @thesis_proposal.references.each do |ref|
-        li = ref
+  dd = @thesis_proposal.reference
 
   dt Trạng thái
   dd = render StatusComponent.new(status: @thesis_proposal.status)

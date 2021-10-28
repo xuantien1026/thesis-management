@@ -72,7 +72,7 @@ class ThesisProposalsController < ApplicationController
   def thesis_proposal_params
     params.require(:thesis_proposal).permit(
       :semester_id, :major_id, :education_program, :title, :english_title, :description, :mission, :max_student_count,
-      references: []
+      :reference
     )
   end
 

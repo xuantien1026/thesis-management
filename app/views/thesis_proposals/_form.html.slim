@@ -16,11 +16,9 @@
   .form-group
     = form.input :mission, input_html: { rows: 5 }
   .form-group
-    .row
-      .col-6 data-controller="topic-reference"
-        = render TopicReferencesComponent.new(topic: thesis_proposal)
-      .col-6
-        = form.input :max_student_count
+    = form.input :reference, input_html: { rows: 5 }
+  .form-group
+    = form.input :max_student_count
   .form-group
     = hidden_field_tag :primary_advisor_id, current_user.id
   .form-group.d-flex.justify-content-center

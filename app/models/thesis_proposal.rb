@@ -11,7 +11,7 @@
 #  max_student_count :integer          default(1), not null
 #  mission           :text
 #  ordering          :integer
-#  references        :string           default([]), is an Array
+#  reference         :text
 #  status            :integer          default("waiting_for_approval")
 #  title             :string           not null
 #  created_at        :datetime         not null

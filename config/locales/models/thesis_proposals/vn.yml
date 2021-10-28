@@ -9,5 +9,5 @@ vn:
         english_title: 'Tên đề tài tiếng Anh'
         description: 'Mô tả'
         mission: 'Nhiệm vụ'
-        references: 'Tài liệu tham khảo'
+        reference: 'Tài liệu tham khảo'
         max_student_count: 'Số lượng sinh viên tối đa'
