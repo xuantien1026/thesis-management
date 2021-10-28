@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_115046) do
+ActiveRecord::Schema.define(version: 2021_10_28_130448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_115046) do
     t.string "english_title"
     t.text "mission"
     t.text "description"
-    t.integer "max_student_count", default: 1, null: false
+    t.integer "max_student_count", null: false
     t.integer "status", default: 0
     t.string "education_program"
     t.bigint "semester_id", null: false
@@ -278,7 +278,7 @@ ActiveRecord::Schema.define(version: 2021_10_28_115046) do
     t.string "english_title"
     t.text "mission"
     t.text "description"
-    t.integer "max_student_count", default: 1, null: false
+    t.integer "max_student_count", null: false
     t.integer "status", default: 0
     t.string "education_program"
     t.bigint "semester_id", null: false

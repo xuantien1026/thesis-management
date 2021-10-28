@@ -36,10 +36,8 @@
       dd = @thesis.description
 
       dt Tài liệu tham khảo
-      dd
-        ol
-          - @thesis.references.each do |ref|
-            li = ref
+      dd = @thesis.reference
+
 - if policy(@thesis).evaluate_as_advisor?
   .card
     .card-header

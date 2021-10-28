@@ -52,7 +52,7 @@ module Admin
 
     def thesis_params
       params.require(:thesis).permit(:semester_id, :major_id, :education_program, :title, :english_title, :description,
-                                     :mission, :max_student_count, advisor_attributes: [:lecturer_id, :primary])
+                                     :mission, :max_student_count, advisors_attributes: [:lecturer_id, :primary])
     end
   end
 end

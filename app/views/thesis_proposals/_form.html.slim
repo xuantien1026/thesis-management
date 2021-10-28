@@ -2,11 +2,18 @@
   .form-group
     .row
       .col-3
-        = form.input :semester_id, collection: Semester.all.order(id: :desc), value_method: :id, label_method: :to_s
+        = form.input :semester_id,
+                collection: Semester.all.order(id: :desc),
+                value_method: :id,
+                label_method: :to_s,
+                selected: form.object.semester_id || Current.semester.id,
+                input_html: { readonly: true }
       .col-3
         = form.input :major_id, collection: current_user.faculty.majors, value_method: :id, label_method: :name
       .col-3
         = form.input :education_program, collection: EducationProgram::PROGRAMS
+      .col-3
+        = form.input :max_student_count
   .form-group
     = form.input :title
   .form-group
@@ -17,8 +24,6 @@
     = form.input :mission, input_html: { rows: 5 }
   .form-group
     = form.input :reference, input_html: { rows: 5 }
-  .form-group
-    = form.input :max_student_count
   .form-group
     = hidden_field_tag :primary_advisor_id, current_user.id
   .form-group.d-flex.justify-content-center
