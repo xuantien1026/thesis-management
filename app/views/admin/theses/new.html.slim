@@ -1,6 +1,6 @@
 .card
   .card-header
-    h3 Đề cương luận văn mới
+    h3 Đăng kí bổ sung LVTN
   .card-body
     = simple_form_for @thesis, url: admin_faculty_theses_path, defaults: {input_html: {class: 'form-control'}} do |form|
       .form-group
@@ -19,11 +19,14 @@
         = form.input :description, input_html: { rows: 5 }
       .form-group
         = form.input :mission, input_html: { rows: 5 }
-      .form-group
-        = form.input :max_student_count
-      .form-group
-        = form.fields_for :advisors do |advisor_form|
-          = advisor_form.input :lecturer_id, collection: Lecturer.by_faculty(current_user.faculty), value_method: :id, label_method: :name
-          = advisor_form.hidden_field :primary, value: true
+      .row
+        .col
+          .form-group
+            = form.fields_for :advisors, defaults: {input_html: {class: 'form-control'}} do |advisor_form|
+              = advisor_form.input :lecturer_id, collection: Lecturer.by_faculty(current_user.faculty), value_method: :id, label_method: :name
+              = advisor_form.hidden_field :primary, value: true
+        .col
+          .form-group
+            = form.input :max_student_count
       .form-group.d-flex.justify-content-center
         = form.submit 'Submit', class: 'btn btn-primary'
