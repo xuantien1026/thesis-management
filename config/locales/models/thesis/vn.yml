@@ -1,7 +1,7 @@
 vn:
   activerecord:
     attributes:
-      thesis_proposal:
+      thesis:
         semester_id: 'Học kì'
         major_id: 'Ngành'
         education_program: 'Chương trình đào tạo'
@@ -9,5 +9,5 @@ vn:
         english_title: 'Tên đề tài tiếng Anh'
         description: 'Mô tả'
         mission: 'Nhiệm vụ'
-        reference: 'Tài liệu tham khảo'
         max_student_count: 'Số lượng sinh viên tối đa'
+

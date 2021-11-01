@@ -23,10 +23,10 @@ module Theses
   class Member < ApplicationRecord
     belongs_to :student
     belongs_to :thesis
-    has_one :midterm_evaluation, dependent: :restrict_with_exception
-    has_one :advisor_evaluation, dependent: :restrict_with_exception, foreign_key: 'theses_member_id',
+    has_one :midterm_evaluation, dependent: :destroy
+    has_one :advisor_evaluation, dependent: :destroy, foreign_key: 'theses_member_id',
                                  inverse_of: :member
-    has_one :reviewer_evaluation, dependent: :restrict_with_exception, foreign_key: 'theses_member_id',
+    has_one :reviewer_evaluation, dependent: :destroy, foreign_key: 'theses_member_id',
                                   inverse_of: :member
 
     delegate :name, :mssv, to: :student

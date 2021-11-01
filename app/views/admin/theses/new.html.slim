@@ -1,0 +1,34 @@
+.card
+  .card-header
+    h3 Đăng kí bổ sung LVTN
+  .card-body
+    = simple_form_for @thesis, url: admin_faculty_theses_path, defaults: {input_html: {class: 'form-control'}} do |form|
+      .form-group
+        .row
+          .col-3
+            = form.input :semester_id,
+                    collection: Semester.all.order(id: :desc),
+                    value_method: :id,
+                    label_method: :to_s,
+                    selected: form.object.semester_id || Current.semester,
+                    input_html: { readonly: true }
+          .col-3
+            = form.input :major_id, collection: current_user.faculty.majors, value_method: :id, label_method: :name
+          .col-3
+            = form.input :education_program, collection: EducationProgram::PROGRAMS
+          .col-3
+            = form.input :max_student_count
+      .form-group
+        = form.input :title
+      .form-group
+        = form.input :english_title
+      .form-group
+        = form.input :description, input_html: { rows: 5 }
+      .form-group
+        = form.input :mission, input_html: { rows: 5 }
+      .form-group
+        = form.fields_for :advisors, defaults: {input_html: {class: 'form-control'}} do |advisor_form|
+          = advisor_form.input :lecturer_id, collection: Lecturer.by_faculty(current_user.faculty), value_method: :id, label_method: :name
+          = advisor_form.hidden_field :primary, value: true
+      .form-group.d-flex.justify-content-center
+        = form.submit 'Submit', class: 'btn btn-primary'

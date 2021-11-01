@@ -26,5 +26,7 @@ module Theses
   class Advisor < ApplicationRecord
     belongs_to :thesis
     belongs_to :lecturer
+
+    validates :lecturer_id, presence: true
   end
 end

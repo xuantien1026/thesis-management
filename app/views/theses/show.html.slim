@@ -36,10 +36,36 @@
       dd = @thesis.description
 
       dt Tài liệu tham khảo
-      dd
-        ol
-          - @thesis.references.each do |ref|
-            li = ref
+      dd = @thesis.reference
+
+.card
+  .card-header
+    h3 = 'Danh sách sinh viên'
+  .card-body
+    - if @thesis.members.blank?
+      p = 'Chưa có sinh viên nào'
+    - else
+      table.table.table-borderless.table-sm
+        thead
+          tr
+            th Sinh viên
+            th
+        tbody
+          - @thesis.members.each do |member|
+            tr
+              td = "#{member.mssv} - #{member.name}"
+              td
+                - if policy(@thesis).remove_student?
+                  = link_to admin_thesis_member_path(member), method: :delete, class: 'btn btn-danger' do
+                    i.cil-delete.mr-2
+                    = 'Xoá SV'
+
+    - if policy(@thesis).add_student?
+      = turbo_frame_tag @thesis
+        = link_to new_admin_thesis_thesis_member_path(@thesis), class: 'btn btn-outline-primary' do
+          i.cil-plus.mr-2
+          = "Thêm sinh viên"
+
 - if policy(@thesis).evaluate_as_advisor?
   .card
     .card-header
@@ -101,8 +127,9 @@
         = 'Điền phiếu đánh giá LVTN cho tất cả SV'
 
 .card
-  .card-body
+  .card-header
     h3 Kết quả giữa kì
+  .card-body
     - if @thesis.midterm_evaluations.load.any?
       table.table
         thead

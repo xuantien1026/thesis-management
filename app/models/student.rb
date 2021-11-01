@@ -58,4 +58,8 @@ class Student < User
       'Chuyên ngành' => major
     }
   end
+
+  def mssv_name
+    "#{mssv} - #{name}"
+  end
 end

@@ -10,28 +10,30 @@
 #  description          :text
 #  education_program    :string
 #  english_title        :string
-#  majors               :string           default([]), is an Array
-#  max_student_count    :integer          default(1), not null
+#  max_student_count    :integer          not null
 #  mission              :text
 #  ordering             :integer
-#  references           :string           default([]), is an Array
+#  reference            :text
 #  status               :integer          default("waiting_for_approval")
 #  title                :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  defense_committee_id :bigint
+#  major_id             :bigint           not null
 #  semester_id          :bigint           not null
 #  thesis_proposal_id   :bigint
 #
 # Indexes
 #
 #  index_theses_on_defense_committee_id  (defense_committee_id)
+#  index_theses_on_major_id              (major_id)
 #  index_theses_on_semester_id           (semester_id)
 #  index_theses_on_thesis_proposal_id    (thesis_proposal_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (defense_committee_id => defense_committees.id)
+#  fk_rails_...  (major_id => majors.id)
 #  fk_rails_...  (semester_id => semesters.id)
 #
 FactoryBot.define do

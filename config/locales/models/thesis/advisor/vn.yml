@@ -1,0 +1,5 @@
+vn:
+  activerecord:
+    attributes:
+      theses/advisor:
+        lecturer_id: Giảng viên hướng dẫn

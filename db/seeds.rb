@@ -27,6 +27,9 @@ puts 'Finished creating departments and faculties data'
 MajorCommittee.find_or_create_by(major: cs_major, name: 'Hội đồng ngành CS')
 MajorCommittee.find_or_create_by(major: ce_major, name: 'Hội đồng ngành CE')
 
+# Semester
+Semester.create(number: 1, academic_year: Date.today.year, start_date: Date.today)
+
 # Admin
 admin = Lecturer.new(name: 'Admin', email: ENV['ADMIN_EMAIL'], password: ENV['ADMIN_PASSWORD'], mscb: 0, department: cs)
 if admin.save
@@ -35,3 +38,4 @@ else
   puts 'Failed to create Admin, please set admin email and admin password in environment variables '\
        'ADMIN_EMAIL, ADMIN_PASSWORD and try again'
 end
+
