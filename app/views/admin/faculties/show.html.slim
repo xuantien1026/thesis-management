@@ -5,7 +5,7 @@
     h4 Bộ môn
     ul
       - @departments.each do |department|
-        li = link_to department, admin_department_lecturers_path(department)
+        li = link_to "#{department.name} - #{department.short_name}", admin_department_lecturers_path(department)
     h4 Chuyên ngành
     ul
       - @majors.each do |major|

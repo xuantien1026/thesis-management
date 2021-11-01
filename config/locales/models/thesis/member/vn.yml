@@ -1,0 +1,5 @@
+vn:
+  activerecord:
+    attributes:
+      theses/member:
+        student_id: Sinh viên

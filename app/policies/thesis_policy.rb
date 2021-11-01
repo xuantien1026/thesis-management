@@ -11,6 +11,14 @@ class ThesisPolicy < ApplicationPolicy
     user == thesis.reviewer && thesis_has_members
   end
 
+  def add_student?
+    user.has_role? :admin
+  end
+
+  def remove_student?
+    user.has_role? :admin
+  end
+
   class Scope < Scope
     def resolve
       return lecturer_scope if user.is_a?(Lecturer)
