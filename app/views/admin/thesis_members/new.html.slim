@@ -4,7 +4,9 @@
       = f.input :student_id,
               collection: Student.all,
               value_method: :id,
-              label_method: :mssv_name
+              label_method: :mssv_name,
+              include_blank: false,
+              input_html: { data: { controller: 'select2' }}
       = f.hidden_field :thesis_id
     .form-group
       = f.submit 'Submit', class: 'btn btn-primary'

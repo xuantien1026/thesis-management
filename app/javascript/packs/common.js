@@ -9,3 +9,7 @@ document.addEventListener("turbo:load", function() {
   new coreui.Sidebar(document.querySelector('#sidebar'))
   $('.select2-init').select2()
 })
+
+document.addEventListener("turbo:before-cache", function() {
+  if ($('.select2-init').hasClass('select2-hidden-accessible')) { $('.select2-init').select2('destroy') }
+})
