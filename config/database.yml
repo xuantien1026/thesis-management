@@ -81,6 +81,5 @@ test:
 #
 production:
   <<: *default
-  database: thesis_management_production
-  username: thesis_management
-  password: <%= ENV['THESIS_MANAGEMENT_DATABASE_PASSWORD'] %>
+  database: thesis-management
+  url: <%= ENV['THESIS_MANAGEMENT_DATABASE_URL'] %>
