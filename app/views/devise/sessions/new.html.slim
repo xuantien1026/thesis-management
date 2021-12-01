@@ -1,23 +1,26 @@
 - if notice
-  .alert.alert-sucess = notice
+  .alert.alert-success = notice
+- if alert
+  .alert.alert-danger = alert
 
-.card-header Login
-.card-body
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    .form-group
-      = f.label :email
-      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+.card.mx-auto
+  .card-header Login
+  .card-body
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-group
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
 
-    .form-group
-      = f.label :password
-      = f.password_field :password, autocomplete: "current-password", class: 'form-control'
+      .form-group
+        = f.label :password
+        = f.password_field :password, autocomplete: "current-password", class: 'form-control'
 
-    - if devise_mapping.rememberable?
-      .form-check.form-group
-        = f.check_box :remember_me, class: 'form-check-input'
-        = f.label :remember_me, class: 'form-check-label'
+      - if devise_mapping.rememberable?
+        .form-check.form-group
+          = f.check_box :remember_me, class: 'form-check-input'
+          = f.label :remember_me, class: 'form-check-label'
 
-    .form-group
-      = f.submit "Log in", class: 'btn btn-primary'
+      .form-group
+        = f.submit "Log in", class: 'btn btn-primary'
 
-  = render "devise/shared/links"
+    = render "devise/shared/links"

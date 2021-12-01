@@ -7,7 +7,8 @@ html
     / coreui icon
     link rel="stylesheet" href="https://unpkg.com/@coreui/icons@2.0.0-beta.3/css/all.min.css"
     / coreui css
-    link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" crossorigin="anonymous"
+    link rel="stylesheet" href="https://unpkg.com/@coreui/coreui@3.4.0/dist/css/coreui.min.css" crossorigin="anonymous"
+
     = csrf_meta_tags
     = csp_meta_tag
 
@@ -15,9 +16,8 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body.d-flex.flex-row.align-items-center.app
-    .container
-      .card.w-50.mx-auto
-        = yield
+    .container.w-50
+      = yield
 
 scss:
   .app {
