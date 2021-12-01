@@ -88,4 +88,12 @@ RSpec.describe Admin::LecturerImportsController, type: :request do
       expect(flash.alert).to contain_exactly('Không tìm thấy bộ môn "KTMT" (dòng 2)')
     end
   end
+
+  context 'when excel file reaches a row with all empty values' do
+    let(:excel_file) { fixture_file_upload 'lecturer_imports/empty_value_last_rows.xlsx' }
+
+    it 'stops importing' do
+      expect { subject }.to change(Lecturer, :count).from(1).to(3)
+    end
+  end
 end
