@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "home#homepage"
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
   get '/profile', to: 'profile#show'
 
   shallow do
