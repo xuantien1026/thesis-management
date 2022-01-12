@@ -31,6 +31,10 @@ class ThesisProposalPolicy < ApplicationPolicy
     user.is_a?(Lecturer) && user.has_role?(:privileged_major_committee_member)
   end
 
+  def final_evaluate?
+    !ThesisProposal::FinalEvaluationSet.new(user, Current.semester).evaluated?
+  end
+
   private
 
   def student_viewing_faculty_approved_proposal?

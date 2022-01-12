@@ -43,6 +43,8 @@ class ThesisProposal < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :students, through: :members
 
+  has_one :final_evaluation, dependent: :destroy
+
   validates :title, :english_title, :semester_id, :major_id, :education_program,
             :mission, :description, :max_student_count, presence: true
   validates :max_student_count, numericality: { greater_than_or_equal_to: 1 }

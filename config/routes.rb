@@ -67,6 +67,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :thesis_proposal do
+      resource :final_evaluations, only: %i[new create]
+    end
+
     resources :thesis_proposals do
       member do
         post 'department_approve', to: 'thesis_proposals#department_approve'

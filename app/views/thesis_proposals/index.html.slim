@@ -1,8 +1,10 @@
 .card
   .card-header
     h3 Đề cương luận văn của tôi
-
   .card-body
+    .row.mb-3.actions.float-right
+      .col
+        = link_to 'Đánh giá cuối kì', new_thesis_proposal_final_evaluations_path, class: 'btn btn-primary' if policy(ThesisProposal).final_evaluate?
     table.table
       thead
         tr
@@ -12,6 +14,7 @@
           th Số SV
           th Ngành
           th Trạng thái
+          th Kết quả
       tbody
         - @thesis_proposals.each do |thesis_proposal|
           tr
@@ -21,6 +24,7 @@
             td = thesis_proposal.max_student_count
             td = thesis_proposal.major
             td = render StatusComponent.new(status: thesis_proposal.status)
+            td = thesis_proposal.final_evaluation&.result_i18n
 
   .card-footer
     = link_to 'Đề Cương Luận Văn Mới', new_thesis_proposal_path, class: 'btn btn-primary' if policy(ThesisProposal).create?

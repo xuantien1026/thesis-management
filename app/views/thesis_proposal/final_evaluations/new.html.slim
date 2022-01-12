@@ -1,0 +1,17 @@
+.card
+  h3.card-header = 'Đánh giá cuối kì ĐCLV'
+  .card-body
+    = simple_form_for @final_evaluation_set, url: thesis_proposal_final_evaluations_path do |f|
+      table.table.table-striped
+        tbody
+          - @final_evaluation_set.thesis_proposals.each do |thesis_proposal|
+            tr
+              td
+                = "Đề tài: #{thesis_proposal.ordering} - #{thesis_proposal}"
+                ul
+                  - thesis_proposal.students.each do |student|
+                    li = student.mssv_name
+                = f.simple_fields_for thesis_proposal.final_evaluation, index: thesis_proposal.id  do |ff|
+                  = ff.input :result, as: :radio_buttons, checked: :passed
+                  = ff.input :note
+      = f.button :submit, 'Submit'

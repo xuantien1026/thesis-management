@@ -1,0 +1,12 @@
+vn:
+  activerecord:
+    attributes:
+      thesis_proposal/final_evaluation:
+        result: Kết quả
+        note: Ghi chú
+  enums:
+    thesis_proposal:
+      final_evaluation:
+        result:
+          passed: Đạt
+          failed: Không đạt
