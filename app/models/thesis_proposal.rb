@@ -37,13 +37,13 @@ class ThesisProposal < ApplicationRecord
   belongs_to :semester
   belongs_to :major
 
-  has_many :advisors, dependent: :destroy
+  has_many :advisors, dependent: :destroy, class_name: 'ThesisProposals::Advisor'
   has_many :lecturers, through: :advisors
 
-  has_many :members, dependent: :destroy
+  has_many :members, dependent: :destroy, class_name: 'ThesisProposals::Member'
   has_many :students, through: :members
 
-  has_one :final_evaluation, dependent: :destroy
+  has_one :final_evaluation, dependent: :destroy, class_name: 'ThesisProposals::FinalEvaluation'
 
   validates :title, :english_title, :semester_id, :major_id, :education_program,
             :mission, :description, :max_student_count, presence: true

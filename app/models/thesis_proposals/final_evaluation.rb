@@ -13,7 +13,7 @@
 #
 #  index_thesis_proposal_final_evaluations_on_thesis_proposal_id  (thesis_proposal_id)
 #
-class ThesisProposal
+module ThesisProposals
   class FinalEvaluation < ApplicationRecord
     belongs_to :thesis_proposal
 

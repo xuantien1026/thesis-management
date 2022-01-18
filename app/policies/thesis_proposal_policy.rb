@@ -32,7 +32,7 @@ class ThesisProposalPolicy < ApplicationPolicy
   end
 
   def final_evaluate?
-    !ThesisProposal::FinalEvaluationSet.new(user, Current.semester).evaluated?
+    !ThesisProposals::FinalEvaluationSet.new(user, Current.semester).evaluated?
   end
 
   private

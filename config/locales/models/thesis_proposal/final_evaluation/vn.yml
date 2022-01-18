@@ -1,11 +1,11 @@
 vn:
   activerecord:
     attributes:
-      thesis_proposal/final_evaluation:
+      thesis_proposals/final_evaluation:
         result: Kết quả
         note: Ghi chú
   enums:
-    thesis_proposal:
+    thesis_proposals:
       final_evaluation:
         result:
           passed: Đạt

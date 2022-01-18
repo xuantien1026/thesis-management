@@ -21,7 +21,7 @@
 #  fk_rails_...  (lecturer_id => users.id)
 #  fk_rails_...  (thesis_proposal_id => thesis_proposals.id)
 #
-class ThesisProposal
+module ThesisProposals
   class Advisor < ApplicationRecord
     belongs_to :lecturer
     belongs_to :thesis_proposal

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_12_144805) do
+ActiveRecord::Schema.define(version: 2022_01_18_135059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -260,34 +260,6 @@ ActiveRecord::Schema.define(version: 2022_01_12_144805) do
     t.index ["thesis_id"], name: "index_theses_reviews_on_thesis_id"
   end
 
-  create_table "thesis_proposal_advisors", force: :cascade do |t|
-    t.bigint "thesis_proposal_id", null: false
-    t.bigint "lecturer_id", null: false
-    t.boolean "primary", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["lecturer_id"], name: "index_thesis_proposal_advisors_on_lecturer_id"
-    t.index ["thesis_proposal_id"], name: "index_thesis_proposal_advisors_on_thesis_proposal_id"
-  end
-
-  create_table "thesis_proposal_final_evaluations", force: :cascade do |t|
-    t.bigint "thesis_proposal_id", null: false
-    t.integer "result", null: false
-    t.string "note"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["thesis_proposal_id"], name: "index_thesis_proposal_final_evaluations_on_thesis_proposal_id"
-  end
-
-  create_table "thesis_proposal_members", force: :cascade do |t|
-    t.bigint "student_id"
-    t.bigint "thesis_proposal_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["student_id"], name: "index_thesis_proposal_members_on_student_id"
-    t.index ["thesis_proposal_id"], name: "index_thesis_proposal_members_on_thesis_proposal_id"
-  end
-
   create_table "thesis_proposals", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -305,6 +277,34 @@ ActiveRecord::Schema.define(version: 2022_01_12_144805) do
     t.index ["major_id"], name: "index_thesis_proposals_on_major_id"
     t.index ["semester_id"], name: "index_thesis_proposals_on_semester_id"
     t.check_constraint "max_student_count >= 1", name: "check_thesis_proposal_max_student_count"
+  end
+
+  create_table "thesis_proposals_advisors", force: :cascade do |t|
+    t.bigint "thesis_proposal_id", null: false
+    t.bigint "lecturer_id", null: false
+    t.boolean "primary", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecturer_id"], name: "index_thesis_proposals_advisors_on_lecturer_id"
+    t.index ["thesis_proposal_id"], name: "index_thesis_proposals_advisors_on_thesis_proposal_id"
+  end
+
+  create_table "thesis_proposals_final_evaluations", force: :cascade do |t|
+    t.bigint "thesis_proposal_id", null: false
+    t.integer "result", null: false
+    t.string "note"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["thesis_proposal_id"], name: "index_thesis_proposals_final_evaluations_on_thesis_proposal_id"
+  end
+
+  create_table "thesis_proposals_members", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "thesis_proposal_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_thesis_proposals_members_on_student_id"
+    t.index ["thesis_proposal_id"], name: "index_thesis_proposals_members_on_thesis_proposal_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -367,8 +367,8 @@ ActiveRecord::Schema.define(version: 2022_01_12_144805) do
   add_foreign_key "theses_members", "users", column: "student_id"
   add_foreign_key "theses_midterm_evaluations", "theses_members", column: "member_id"
   add_foreign_key "theses_reviewer_evaluations", "theses_members"
-  add_foreign_key "thesis_proposal_advisors", "thesis_proposals"
-  add_foreign_key "thesis_proposal_advisors", "users", column: "lecturer_id"
   add_foreign_key "thesis_proposals", "majors"
   add_foreign_key "thesis_proposals", "semesters"
+  add_foreign_key "thesis_proposals_advisors", "thesis_proposals"
+  add_foreign_key "thesis_proposals_advisors", "users", column: "lecturer_id"
 end

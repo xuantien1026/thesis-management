@@ -15,7 +15,7 @@
 #  index_thesis_proposal_members_on_student_id          (student_id)
 #  index_thesis_proposal_members_on_thesis_proposal_id  (thesis_proposal_id)
 #
-class ThesisProposal
+module ThesisProposals
   class Member < ApplicationRecord
     belongs_to :student
     belongs_to :thesis_proposal

@@ -4,7 +4,7 @@
   .card-body
     .row.mb-3.actions.float-right
       .col
-        = link_to 'Đánh giá cuối kì', new_thesis_proposal_final_evaluations_path, class: 'btn btn-primary' if policy(ThesisProposal).final_evaluate?
+        = link_to 'Đánh giá cuối kì', new_thesis_proposals_final_evaluations_path, class: 'btn btn-primary' if policy(ThesisProposal).final_evaluate?
     table.table
       thead
         tr

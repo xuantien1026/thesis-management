@@ -1,4 +1,4 @@
-class ThesisProposal
+module ThesisProposals
   class FinalEvaluationsController < LecturerController
     before_action :set_final_evaluation_set, only: %i[new create]
 
@@ -20,8 +20,8 @@ class ThesisProposal
     end
 
     def evaluations_param
-      params.require(:thesis_proposal_final_evaluation_set)
-            .require(:thesis_proposal_final_evaluation)
+      params.require(:thesis_proposals_final_evaluation_set)
+            .require(:thesis_proposals_final_evaluation)
             .transform_keys(&:to_i)
             .transform_values { |p| p.permit(:result, :note) }
     end

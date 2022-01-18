@@ -67,7 +67,7 @@ Rails.application.routes.draw do
       end
     end
 
-    namespace :thesis_proposal do
+    namespace :thesis_proposals do
       resource :final_evaluations, only: %i[new create]
     end
 
