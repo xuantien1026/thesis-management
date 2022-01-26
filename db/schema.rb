@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_19_144805) do
+ActiveRecord::Schema.define(version: 2022_01_26_160907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,6 +307,15 @@ ActiveRecord::Schema.define(version: 2022_01_19_144805) do
     t.index ["thesis_proposal_id"], name: "index_thesis_proposals_members_on_thesis_proposal_id"
   end
 
+  create_table "thesis_proposals_reviews", force: :cascade do |t|
+    t.bigint "lecturer_id", null: false
+    t.bigint "thesis_proposal_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecturer_id"], name: "index_thesis_proposals_reviews_on_lecturer_id"
+    t.index ["thesis_proposal_id"], name: "index_thesis_proposals_reviews_on_thesis_proposal_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -371,4 +380,6 @@ ActiveRecord::Schema.define(version: 2022_01_19_144805) do
   add_foreign_key "thesis_proposals", "semesters"
   add_foreign_key "thesis_proposals_advisors", "thesis_proposals"
   add_foreign_key "thesis_proposals_advisors", "users", column: "lecturer_id"
+  add_foreign_key "thesis_proposals_reviews", "thesis_proposals"
+  add_foreign_key "thesis_proposals_reviews", "users", column: "lecturer_id"
 end

@@ -9,7 +9,6 @@
       thead
         tr
           th MĐT
-          th Giảng viên
           th Tên đề tài
           th Số SV
           th Ngành
@@ -18,7 +17,6 @@
         - @thesis_proposals.each do |thesis_proposal|
           tr
             td = link_to thesis_proposal.id, thesis_proposal, target: '_top'
-            td = thesis_proposal.primary_advisor_name
             td = thesis_proposal.title
             td = thesis_proposal.max_student_count
             td = thesis_proposal.major

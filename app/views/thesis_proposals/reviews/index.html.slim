@@ -1,0 +1,17 @@
+.card
+  .card-header
+    h3 Danh sách phản biện ĐCLV
+  .card-body
+    - if @reviews.blank?
+      = 'Không có ĐCLV nào.'
+    - else
+      table.table
+        thead
+          tr
+            th Mã ĐCLV
+            th Tên ĐCLV
+        tbody
+          - @reviews.each do |review|
+            tr
+              td = link_to review.thesis_proposal.ordering, review.thesis_proposal
+              td = review.thesis_proposal

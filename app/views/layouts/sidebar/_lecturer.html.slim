@@ -6,19 +6,19 @@
   = render 'layouts/sidebar/head_of_department'
 - if current_user.has_role? :privileged_major_committee_member
   = render 'layouts/sidebar/major_committee'
-li.c-sidebar-nav-item
-  = link_to thesis_proposals_path, class: "c-sidebar-nav-link"
-    i.c-sidebar-nav-icon.cil-cursor
-    = "ĐCLV của tôi"
-li.c-sidebar-nav-item
-  = link_to theses_path, class: "c-sidebar-nav-link"
-    i.c-sidebar-nav-icon.cil-cursor
-    = "LVTN của tôi"
-li.c-sidebar-nav-item
-  = link_to theses_reviews_path, class: "c-sidebar-nav-link"
-    i.c-sidebar-nav-icon.cil-cursor
-    = "Danh sách phản biện"
-li.c-sidebar-nav-item
-  = link_to defense_committees_path, class: "c-sidebar-nav-link"
-    i.c-sidebar-nav-icon.cil-cursor
-    = "Danh sách HĐBV"
+
+li.c-sidebar-nav-item.c-sidebar-nav-dropdown
+  a.c-sidebar-nav-link.c-sidebar-nav-dropdown-toggle data-coreui-toggle="dropdown"
+    i.c-sidebar-nav-icon.cil-list
+    = 'Trang của tôi'
+  ul.c-sidebar-nav-dropdown-items
+    li.c-sidebar-nav-item
+      = link_to "ĐCLV của tôi", thesis_proposals_path, class: "c-sidebar-nav-link"
+    li.c-sidebar-nav-item
+      = link_to "LVTN của tôi", theses_path, class: "c-sidebar-nav-link"
+    li.c-sidebar-nav-item
+      = link_to "Phản biện LVTN", theses_reviews_path, class: "c-sidebar-nav-link"
+    li.c-sidebar-nav-item
+      = link_to "Phản biện ĐCLV", thesis_proposals_reviews_path, class: "c-sidebar-nav-link"
+    li.c-sidebar-nav-item
+      = link_to "Danh sách HĐBV", defense_committees_path, class: "c-sidebar-nav-link"

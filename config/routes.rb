@@ -23,12 +23,15 @@ Rails.application.routes.draw do
     end
 
     namespace :department_management, as: :dept do
-      resources :thesis_proposals, only: :index
+      resources :thesis_proposals, only: :index do
+        resource :review, except: :destroy, module: 'thesis_proposals'
+        collection do
+          resource :review_assignment, only: :show, module: 'thesis_proposals'
+        end
+      end
       resources :lecturers, only: %i[index show]
       resources :theses, only: :index do
-        scope module: :theses do
-          resource :review, except: :destroy
-        end
+        resource :review, except: :destroy, module: :theses
       end
       resources :defense_committees, only: %i[index new create] do
         collection do
@@ -68,6 +71,7 @@ Rails.application.routes.draw do
     end
 
     namespace :thesis_proposals do
+      resources :reviews, only: :index
       resource :final_evaluations, only: %i[new create]
     end
 

@@ -44,6 +44,9 @@ class ThesisProposal < ApplicationRecord
   has_many :students, through: :members
   has_many :final_evaluations, through: :members, class_name: 'ThesisProposals::FinalEvaluation'
 
+  has_one :review, class_name: 'ThesisProposals::Review'
+  has_one :reviewer, through: :review, source: :lecturer
+
   validates :title, :english_title, :semester_id, :major_id, :education_program,
             :mission, :description, :max_student_count, presence: true
   validates :max_student_count, numericality: { greater_than_or_equal_to: 1 }
