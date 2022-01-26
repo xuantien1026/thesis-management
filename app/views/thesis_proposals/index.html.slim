@@ -14,7 +14,6 @@
           th Số SV
           th Ngành
           th Trạng thái
-          th Kết quả
       tbody
         - @thesis_proposals.each do |thesis_proposal|
           tr
@@ -24,7 +23,6 @@
             td = thesis_proposal.max_student_count
             td = thesis_proposal.major
             td = render StatusComponent.new(status: thesis_proposal.status)
-            td = thesis_proposal.final_evaluation&.result_i18n
 
   .card-footer
     = link_to 'Đề Cương Luận Văn Mới', new_thesis_proposal_path, class: 'btn btn-primary' if policy(ThesisProposal).create?

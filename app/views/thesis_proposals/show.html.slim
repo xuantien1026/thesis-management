@@ -8,3 +8,20 @@
       = link_to edit_thesis_proposal_path(@thesis_proposal), class: 'btn btn-primary' do
         i.cil-pen.mr-2
         = 'Chỉnh sửa'
+
+- if @thesis_proposal.final_evaluations.present?
+  .card
+    h3.card-header Kết quả cuối kì
+    .card-body
+      table.table
+        thead
+          tr
+            th Sinh viên
+            th Kết quả
+            th Ghi chú
+        tbody
+          - @thesis_proposal.final_evaluations.includes(member: :student).each do |evaluation|
+            tr
+              td = "#{evaluation.member.mssv} - #{evaluation.member.name}"
+              td = evaluation.result_i18n
+              td = evaluation.note

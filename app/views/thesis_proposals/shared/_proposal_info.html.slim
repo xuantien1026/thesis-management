@@ -36,10 +36,3 @@ dl
     ol
       - @thesis_proposal.students.each do |student|
         li = "#{student.mssv} - #{student.name}"
-
-  dt Kết quả cuối kì
-  dd
-    - if @thesis_proposal.final_evaluation
-      = @thesis_proposal.final_evaluation.result_i18n
-    - else
-      = 'Chưa có kết quả'

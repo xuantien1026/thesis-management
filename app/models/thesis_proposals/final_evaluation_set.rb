@@ -10,23 +10,29 @@ module ThesisProposals
     end
 
     def thesis_proposals
-      @thesis_proposals = ThesisProposal.includes(:students, :final_evaluation).by_lecturer(lecturer).tap { |collection| collection.each { |tp| tp.build_final_evaluation if tp.final_evaluation.nil?} }
+      @thesis_proposals = ThesisProposal.includes(members: %i[student final_evaluation]).by_lecturer(lecturer).where(semester: semester)
+    end
+
+    def members
+      @members = thesis_proposals.map(&:members).flatten
     end
 
     def evaluated?
-      thesis_proposals.all? { |thesis_proposal| thesis_proposal.final_evaluation.persisted? }
+      members.all? { |member| member.final_evaluation&.persisted? }
     end
 
     def save
       ApplicationRecord.transaction do
-        thesis_proposals.each do |thesis_proposal|
-          thesis_proposal.final_evaluation.update(evaluations[thesis_proposal.id])
+        members.each do |member|
+          evaluation = FinalEvaluation.find_or_initialize_by(member: member)
+          evaluation.assign_attributes(evaluations[member.id])
+          evaluation.save!
         end
       end
     end
 
     private
 
-    attr_reader :lecturer, :evaluations
+    attr_reader :lecturer, :evaluations, :semester
   end
 end
