@@ -16,7 +16,7 @@
       tbody
         - @thesis_proposals.each do |thesis_proposal|
           tr
-            td = link_to thesis_proposal.id, thesis_proposal, target: '_top'
+            td = link_to thesis_proposal.ordering, thesis_proposal, target: '_top'
             td = thesis_proposal.title
             td = thesis_proposal.max_student_count
             td = thesis_proposal.major

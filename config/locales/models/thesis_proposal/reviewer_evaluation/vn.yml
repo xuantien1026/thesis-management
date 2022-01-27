@@ -1,0 +1,62 @@
+vn:
+  activerecord:
+    attributes:
+      thesis_proposals/reviewer_evaluation:
+        a1: A1. Động cơ và mục tiêu của đề tài
+        a2: A2. Kế hoạch làm việc cho luận văn
+        b1: B1. Đánh giá, biện luận các phương pháp tiếp cận cho bài toán đặt ra
+        b2: B2. Chất lượng công việc đã tiến hành
+        c1: C1. Hình thức trình bày báo cáo
+        c2: C2. Cấu trúc và nội dung báo cáo
+        d1: D1. Nội dung slides trình bày
+        d2: D2. Trình bày/ trả lời câu hỏi phản biện
+        e1: E1. Đánh giá tổng quan nội dung đề cương luận văn của sinh viên
+        e2: E2. Các góp ý thêm (nếu có)
+  enums:
+    thesis_proposals:
+      reviewer_evaluation:
+        a1:
+          a: a. Sinh viên hoàn toàn không đề cập đến động cơ và mục tiêu của đề tài
+          b: b. Sinh viên có đề cập đến động cơ và mục tiêu của đề tài nhưng chưa rõ ràng
+          c: c. Sinh viên trình bày rõ động cơ và mục tiêu của đề tài nhưng nên điều chỉnh vì mục tiêu là hơi khó hoặc còn đơn giản
+          d: d. Sinh viên trình bày động cơ và mục tiêu của đề tài rõ ràng và hợp lý
+        a2:
+          a: a. Hoàn toàn không có kế  hoạch làm việc cho giai đoạn LVTN
+          b: b. Có kế hoạch làm việc nhưng còn đơn giản
+          c: c. Có kế hoạch làm việc rõ ràng nhưng chưa thật hợp lý
+          d: d. Có kế hoạch làm việc rõ ràng và hợp lý
+        b1:
+          a: a. Chỉ đưa ra một hướng tiếp cận và hoàn toàn không biện luận/đánh giá.
+          b: b. Đưa ra nhiều hướng tiếp cận và so sánh đánh giá; hoặc chỉ đưa ra một hướng tiếp cận nhưng có biện luận. Tuy nhiên các đánh giá/biện luận chưa thật hợp lý và nên được cải thiện.
+          c: c. Đưa ra nhiều hướng tiếp cận và so sánh đánh giá; hoặc chỉ đưa ra một hướng tiếp cận nhưng có biện luận. Các đánh giá/biện luận là tương đối hợp lý nhưng vẫn còn một số điểm cần làm rõ.
+          d: d. Đưa ra nhiều hướng tiếp cận và so sánh đánh giá; hoặc chỉ đưa ra một hướng tiếp cận nhưng có biện luận. Các đánh giá/biện luận là rất hợp lý.
+        b2:
+          a: a. Những việc sinh viên đã làm là quá đơn giản (thiết kế giao diện ở mức đơn giản, viết chạy thử các API...)
+          b: b. Công việc tiến hành có độ khó phù hợp (đọc hiểu tài liệu công nghệ, đọc tài liệu học thuật, thiết kế, demo tính năng...) nhưng tiến độ còn chậm
+          c: c. Công việc có độ khó phù hợp, tiến độ  hợp lý
+          d: d. Công việc có độ khó cao, kết quả ban đầu rất tốt
+        c1:
+          a: a. Trình bày rất cẩu thả, nhiều lỗi chính tả, không chú ý định dạng
+          b: b. Trình bày có định dạng hợp lý, nhưng còn nhiều lỗi chính tả
+          c: c. Trình bày có định dạng hợp lý, thỉnh thoảng có lỗi chính tả
+          d: d. Trình bày tốt, hầu như không có lỗi chính tả
+        c2:
+          a: a. Báo cáo trình bày lộn xộn, phần lớn là sao chép
+          b: b. Báo cáo trình bày có cấu trúc nhưng chưa thật hợp lý (nội dung do sinh viên tự viết <50%)
+          c: c. Báo cáo có cấu trúc hợp lý, rõ ràng (nội dung do sinh viên viết >=50%)  nhưng nên có thêm phụ lục
+          d: d. Báo cáo có cấu trúc hợp lý, rõ ràng, phụ lục đầy đủ
+        d1:
+          a: a. Quá nhiều lỗi trình bày (sơ sài, cẩu thả hoặc quá lạm dụng hiệu ứng)
+          b: b. Nội dung slides được tổ chức hợp lý nhưng thỉnh thoảng vẫn có các lỗi trình bày
+          c: c. Nội dung slides tốt, gần như không có lỗi trình bày
+          d: d. Trình bày nội dung sáng tạo, sinh động, dễ theo dõi
+        d2:
+          a: a. Gần như không trả lời được các câu hỏi phản biện
+          b: b. Trả lời được các câu hỏi phản biện nhưng không thật sự tự tin và có nhiều điểm chưa rõ ràng
+          c: c. Trả lời được các câu hỏi phản biện dù chưa thật hợp lý
+          d: d. Trình bày tốt, rõ ràng mạch lạc. Trả lời các câu hỏi phản biện tự tin và chính xác
+        e1:
+          a: a. Chưa đạt
+          b: b. Đạt
+          c: c. Tốt
+          d: d. Rất tốt

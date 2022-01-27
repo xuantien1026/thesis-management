@@ -1,0 +1,38 @@
+.card
+  h3.card-header = "Nhận xét đề cương luận văn – #{current_semester}"
+  .card-body
+    p
+      strong = "Giảng viên hướng dẫn: "
+      = @thesis_proposal.primary_advisor
+
+    p
+      strong = "Giảng viên phản biện: "
+      = @thesis_proposal.reviewer
+    p
+      strong = "Tên đề tài: "
+      = @thesis_proposal
+    p
+      strong = "Sinh viên thực hiện: "
+      = @thesis_proposal.members.map { |member| "#{member.name}-#{member.mssv}" }.join(',')
+    hr
+    h4
+      strong = "Đánh giá: "
+      = "(người đánh giá đánh dấu vào lựa chọn đánh giá phù hợp nhất)"
+
+    = simple_form_for @reviewer_evaluation, url: thesis_proposal_reviewer_evaluation_path(@thesis_proposal) do |f|
+      h4 A. Mục tiêu và định hướng của đề tài
+      = f.input :a1, as: :radio_buttons
+      = f.input :a2, as: :radio_buttons
+      h4 B. Công việc sinh viên tiến hành trong giai đoạn đề cương luận văn
+      = f.input :b1, as: :radio_buttons
+      = f.input :b2, as: :radio_buttons
+      h4 C. Nhận xét về bản báo cáo đề cương luận văn
+      = f.input :c1, as: :radio_buttons
+      = f.input :c2, as: :radio_buttons
+      h4 D. Nhận xét về nội dung thuyết trình của sinh viên
+      = f.input :d1, as: :radio_buttons
+      = f.input :d2, as: :radio_buttons
+      h4 E. Nhận xét tổng quan
+      = f.input :e1, as: :radio_buttons
+      = f.input :e2
+      = f.button :submit, 'Submit'

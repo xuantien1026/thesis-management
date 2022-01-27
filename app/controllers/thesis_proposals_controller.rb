@@ -21,6 +21,7 @@ class ThesisProposalsController < ApplicationController
   def create
     authorize(ThesisProposal)
     @thesis_proposal = ThesisProposal.new(thesis_proposal_params)
+    @thesis_proposal.assign_ordering
     @thesis_proposal.advisors.build(lecturer: primary_advisor, primary: true)
     if @thesis_proposal.save
       flash[:notice] = 'Tạo đề cương luận văn thành công'

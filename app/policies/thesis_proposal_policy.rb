@@ -35,9 +35,17 @@ class ThesisProposalPolicy < ApplicationPolicy
     !ThesisProposals::FinalEvaluationSet.new(user, Current.semester).evaluated?
   end
 
+  def evaluate_as_reviewer?
+    user == thesis_proposal.reviewer && thesis_proposal_has_members
+  end
+
   private
 
   def student_viewing_faculty_approved_proposal?
     user.is_a?(Student) && thesis_proposal.faculty_approved?
+  end
+
+  def thesis_proposal_has_members
+    thesis_proposal.members.present?
   end
 end

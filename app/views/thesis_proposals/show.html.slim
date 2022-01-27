@@ -25,3 +25,20 @@
               td = "#{evaluation.member.mssv} - #{evaluation.member.name}"
               td = evaluation.result_i18n
               td = evaluation.note
+
+- if policy(@thesis_proposal).evaluate_as_reviewer?
+  .card
+    .card-header
+      h3 = "Phiếu nhận xét ĐCLV - Dành cho GVPB"
+    .card-body
+      - if @thesis_proposal.reviewer_evaluation.nil?
+        = link_to new_thesis_proposal_reviewer_evaluation_path(@thesis_proposal), class: 'btn btn-primary' do
+          i.cil-clipboard.mr-2
+          = 'Điền phiếu'
+      - else
+        = link_to thesis_proposal_reviewer_evaluation_path(@thesis_proposal), class: 'btn btn-info' do
+          i.cil-cloud-download.mr-2
+          = 'Download'
+        = link_to edit_thesis_proposal_reviewer_evaluation_path(@thesis_proposal), class: 'ml-3 btn btn-success' do
+          i.cil-pen.mr-2
+          = 'Chỉnh sửa'

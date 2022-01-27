@@ -81,6 +81,7 @@ Rails.application.routes.draw do
         post 'major_committee_approve', to: 'thesis_proposals#major_committee_approve'
         post 'faculty_approve', to: 'thesis_proposals#faculty_approve'
       end
+      resource :reviewer_evaluation, module: 'thesis_proposals'
     end
 
     resources :defense_committees, only: %i[index show] do

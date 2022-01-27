@@ -44,8 +44,10 @@ class ThesisProposal < ApplicationRecord
   has_many :students, through: :members
   has_many :final_evaluations, through: :members, class_name: 'ThesisProposals::FinalEvaluation'
 
-  has_one :review, class_name: 'ThesisProposals::Review'
+  has_one :review, class_name: 'ThesisProposals::Review', dependent: :destroy
   has_one :reviewer, through: :review, source: :lecturer
+
+  has_one :reviewer_evaluation, class_name: 'ThesisProposals::ReviewerEvaluation', dependent: :destroy
 
   validates :title, :english_title, :semester_id, :major_id, :education_program,
             :mission, :description, :max_student_count, presence: true
@@ -71,5 +73,17 @@ class ThesisProposal < ApplicationRecord
 
   def to_s
     title || english_title
+  end
+
+  def assign_ordering
+    self.ordering = next_ordering_in_semester
+  end
+
+  private
+
+  def next_ordering_in_semester
+    last_thesis = ThesisProposal.where(semester: Current.semester).order(:ordering).last
+
+    last_thesis.present? ? last_thesis.ordering + 1 : 1
   end
 end
