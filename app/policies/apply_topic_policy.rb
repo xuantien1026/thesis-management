@@ -40,11 +40,11 @@ class ApplyTopicPolicy < BaseActionPolicy
   end
 
   def student_has_appropriate_education_program
-    topic.education_program == student.education_program
+    topic.education_program.to_s == student.education_program
   end
 
   def topic_application
-    return ThesisProposal::Member if topic.is_a?(ThesisProposal)
+    return ThesisProposals::Member if topic.is_a?(ThesisProposal)
     return Theses::Member if topic.is_a?(Thesis)
   end
 end

@@ -16,7 +16,7 @@ module Students
       end
 
       def destroy
-        ::ThesisProposal::Member.find(params[:id]).destroy
+        ::ThesisProposals::Member.find(params[:id]).destroy
         redirect_back fallback_location: root_path, notice: 'Đã huỷ đăng kí ĐCLV'
       end
 

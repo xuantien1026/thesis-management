@@ -16,7 +16,7 @@
 #  index_thesis_proposals_members_on_thesis_proposal_id  (thesis_proposal_id)
 #
 FactoryBot.define do
-  factory :thesis_proposal_member, class: 'ThesisProposal::Member' do
+  factory :thesis_proposal_member, class: 'ThesisProposals::Member' do
     association :thesis_proposal
     association :student
   end
