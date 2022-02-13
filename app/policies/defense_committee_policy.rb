@@ -5,8 +5,16 @@ class DefenseCommitteePolicy < ApplicationPolicy
     record.inactive? && lecturer_has_session_authority?
   end
 
+  def download_report?
+    record.completed?
+  end
+
   def end_session?
     record.active? && lecturer_has_session_authority?
+  end
+
+  def evaluate?
+    record.active?
   end
 
   class Scope < Scope

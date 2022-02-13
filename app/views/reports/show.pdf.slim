@@ -1,0 +1,93 @@
+doctype html
+html
+  head
+    meta content='text/html' http-equiv='Content-Type' charset='UTF-8'
+    title Phiếu đánh giá LVTN
+    = stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css'
+    = wicked_pdf_stylesheet_link_tag 'pdf'
+  body
+    .text-center
+      .mb-4
+        div CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+        div Độc lập – Tự do – Hạnh phúc
+      .mb-4
+        .fw-bold BIÊN BẢN HỘI ĐỒNG BẢO VỆ LUẬN VĂN TỐT NGHIỆP LỚP ............
+        .fw-bold HỘI ĐỒNG: ........................................
+
+    .mb-4
+      p.fw-bold = "I. Thành viên Hội đồng:"
+      div = "Chủ tịch: #{@committee.chairman}"
+      div = "Thư kí: #{@committee.secretary}"
+      div = "Uỷ viên: #{@committee.peers.join(" - ")}"
+    .mb-4
+      .fw-bold = "II. Thời gian bắt đầu/ địa điểm:....................................."
+
+    .mb-4
+      p.fw-bold = "III. Kết quả bảo vệ của sinh viên:"
+      - @committee.theses.each.with_index(1) do |thesis, i|
+        .fw-bold = "#{i}. Đề tài: #{thesis}"
+        .ps-4
+          div = "GVHD: #{thesis.primary_advisor}"
+          div = "Bắt đầu:..............."
+          div = "Kết thúc:..............."
+          div = "Kết quả:"
+
+          table.table.table-bordered
+            thead
+              tr
+                th MSSV
+                th Họ tên sinh viên
+                th Điểm GVHD
+                th Điểm GVPB
+                - (1..@committee.members.length).each do |i|
+                  th =  "HĐ#{i}"
+                th Trung bình
+            tbody
+              - thesis.members.each do |thesis_member|
+                tr
+                  td = thesis_member.mssv
+                  td = thesis_member.name
+                  td = thesis_member.advisor_evaluation&.total_marking
+                  td = thesis_member.reviewer_evaluation&.total_marking
+                  - @committee.members.each do |committee_member|
+                    td = thesis_member.committee_evaluations.by(committee_member)&.total_marking
+                  td = thesis_member.final_average
+
+
+
+
+
+    .mb-4.ps-4 = "Hội đồng kết thúc vào:........................................."
+
+    .float-end.w-50
+      .text-center
+        .fw-bold Thư kí hội đồng
+        .signature-area = @committee.secretary
+    .float-end.w-50
+      .text-center
+        .fw-bold Chủ tịch hội đồng
+        .signature-area = @committee.chairman
+
+
+css:
+  body {
+    font-family: 'Times New Roman';
+    font-size: 20px;
+  }
+  .page-break {
+    display:block; clear:both; page-break-after:always;
+  }
+  .signature-area {
+    margin-top: 80px;
+  }
+  td:nth-child(2),th:nth-child(2) {
+    width: 250px;
+    text-align: center;
+  }
+  td:nth-child(3),th:nth-child(3) {
+    width: 50px;
+  }
+  td:nth-child(4),th:nth-child(4) {
+    width: 50px;
+  }
+

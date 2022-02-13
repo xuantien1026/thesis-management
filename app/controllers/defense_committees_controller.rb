@@ -19,7 +19,7 @@ class DefenseCommitteesController < ApplicationController
 
   def end_session
     authorize @committee
-    @committee.inactive!
+    @committee.completed!
     flash.notice = 'Đã kết thúc phiên làm việc'
     redirect_to @committee
   end

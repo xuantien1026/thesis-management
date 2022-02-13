@@ -90,6 +90,7 @@ Rails.application.routes.draw do
         post 'start_session', to: 'defense_committees#start_session'
         post 'end_session', to: 'defense_committees#end_session'
       end
+      resource :report, only: :show
     end
 
     resources :major_committees, only: [] do

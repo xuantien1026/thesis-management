@@ -28,7 +28,7 @@ class DefenseCommittee < ApplicationRecord
   has_many :theses, dependent: :nullify
   belongs_to :semester
 
-  enum session: { active: 1, inactive: 0 }
+  enum session: { completed: 2, active: 1, inactive: 0 }
 
   accepts_nested_attributes_for :members
   validates_associated :members

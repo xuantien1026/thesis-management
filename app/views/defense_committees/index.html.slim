@@ -1,9 +1,7 @@
 .card
-  .card-header
-    strong Danh sách Hội Đồng Bảo Vệ
-    p = current_semester
+  h4.card-header HĐBV của tôi
   .card-body
-    table.table.table-bordered
+    table.table
       thead
         tr
           th STT
@@ -11,6 +9,7 @@
           th Thư kí
           th Uỷ viên
           th Đề tài
+          th Trạng thái
       tbody
         - @committees.each do |committee|
           tr
@@ -25,4 +24,5 @@
               - committee.theses.each do |thesis|
                 ul
                   li = thesis
+            td = committee_session_status_bagde(committee)
   .card-footer

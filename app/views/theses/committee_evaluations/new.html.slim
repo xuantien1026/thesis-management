@@ -163,9 +163,7 @@
             td
               strong Điểm thưởng
               span = ' (nếu có, ghi rõ lý do của điểm thưởng, ví dụ đối với các đề tài có kết quả xuất sắc, có bài báo khoa học và/hoặc đạt các giải thưởng về học thuật)'
-              div
-                label = 'Lý do'
-                = f.input :bonus_reason
+              = f.input :bonus_reason
             td
               label = '(Tối đa 10 điểm)'
               = f.input :bonus_point
