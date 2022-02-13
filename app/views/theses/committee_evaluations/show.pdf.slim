@@ -1,0 +1,211 @@
+doctype html
+html
+  head
+    meta content='text/html' http-equiv='Content-Type' charset='UTF-8'
+    title Phiếu đánh giá LVTN
+    = stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css'
+    = wicked_pdf_stylesheet_link_tag 'pdf'
+  body
+    .row
+      .col
+        p TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TPHCM
+        p KHOA KHOA HỌC VÀ KỸ THUẬT MÁY TÍNH
+      .col
+        h2.fw-bold.text-center PHIẾU ĐÁNH GIÁ LVTN
+        p.text-center = @evaluation.member.thesis.semester
+    .row
+      .col
+        p
+          strong = "Thành viên hội đồng: "
+          = @evaluation.committee_member
+        p = "Tên đề tài: #{@evaluation.member.thesis}"
+        p = "Tên sinh viên: #{@evaluation.member.name}"
+        p = "MSSV: #{@evaluation.member.mssv}"
+        table.table.table-bordered
+          thead.bg-light.text-dark
+            tr
+              th Tiêu chí đánh giá
+              th Điểm đánh giá
+          tbody
+            tr.bg-light.text-dark
+              th = 'I. ĐÁNH GIÁ KẾT QUẢ LUẬN VĂN'
+              th = '(Tối đa 70 điểm)'
+            tr
+              td
+                p.fw-bold = 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra'
+                .pl-1
+                  p
+                    span = 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%.  '
+                    strong = '(0≤Điểm≤10)'
+                  p
+                    span = 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%.  '
+                    strong = '(10≤Điểm≤35)'
+                  p
+                    span = 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%.  '
+                    strong = '(35≤Điểm≤47)'
+                  p
+                    span = 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%.  '
+                    strong = '(47≤Điểm≤50)'
+              td
+                p.fst-italic = '(Tối đa 50 điểm)'
+                = @evaluation.marking1
+            tr
+              td
+                p.fw-bold = 'Câu 2. Đánh giá việc nhận diện các lợi ích thực tế của giải pháp trong luận văn'
+                .pl-1
+                  p
+                    span = 'A. Sinh viên không nêu được các lợi ích thực tế của giải pháp trong luận văn.  '
+                    strong = '(0≤Điểm≤1)'
+                  p
+                    span = 'B. Sinh viên nêu được một vài lợi ích thực tế của giải pháp trong luận văn về một vài khía cạnh nhất định nhưng không có minh chứng cụ thể.  '
+                    strong = '(1≤Điểm≤3)'
+                  p
+                    span = 'C. Sinh viên nêu được các lợi ích thực tế của giải pháp trong luận văn về một vài khía cạnh nhất định và có kèm theo minh chứng cụ thể.  '
+                    strong = '(3≤Điểm≤4)'
+                  p
+                    span = 'D. Sinh viên nêu được các lợi ích thực tế của giải pháp trong luận văn về các khía cạnh một cách toàn diện và có kèm theo đầy đủ các minh chứng cụ thể.  '
+                    strong = '(4≤Điểm≤5)'
+              td
+                p.fst-italic = '(Tối đa 5 điểm)'
+                = @evaluation.marking2
+
+
+            tr
+              td
+                p.fw-bold = 'Câu 3. Đánh giá về những giải pháp được đề xuất trong luận văn để giải quyết vấn đề'
+                .pl-1
+                  p
+                    span = 'A. Sinh viên nêu ra một giải pháp nhưng không biết ưu và nhược điểm.  '
+                    strong = '(0≤Điểm≤1)'
+                  p
+                    span = 'B. Sinh viên nêu ra một giải pháp, và phân tích ưu và nhược điểm.  '
+                    strong = '(1≤Điểm≤3)'
+                  p
+                    span = 'C. Sinh viên đưa ra nhiều giải pháp để giải quyết bài toán, có biện luận lựa chọn giải pháp nhưng chưa hợp lý.  '
+                    strong = '(3≤Điểm≤4)'
+                  p
+                    span = 'D. Sinh viên đưa ra nhiều giải pháp để giải quyết bài toán, đồng thời nêu rõ lý do và biện luận đúng, rõ ràng tại sao lựa chọn giải pháp đó.  '
+                    strong = '(4≤Điểm≤5)'
+              td
+                p.fst-italic = '(Tối đa 5 điểm)'
+                = @evaluation.marking3
+            tr
+              td
+                p.fw-bold = 'Câu 4. Đánh giá sản phẩm đạt được (mô hình, chương trình, hệ thống, ...)'
+                .pl-1
+                  p
+                    span = 'A. Sinh viên không thực hiện đánh giá sản phẩm đạt được của đề tài.  '
+                    strong = '(0≤Điểm≤1)'
+                  p
+                    span = 'B. Sinh viên trình bày phần đánh giá cho đề tài nhưng chưa đánh giá cho sản phẩm đạt được của đề tài.  '
+                    strong = '(1≤Điểm≤5)'
+                  p
+                    span = 'C. Sinh viên đánh giá sản phẩm đạt được của đề tài, ví dụ: bằng kỹ thuật kiểm tra chuyên môn hoặc làm thí nghiệm, nhưng không phù hợp với các yêu cầu của đề tài.  '
+                    strong = '(5≤Điểm≤9)'
+                  p
+                    span = 'D. Sinh viên đánh giá sản phẩm đạt được của đề tài, ví dụ: bằng kỹ thuật kiểm tra chuyên môn hoặc làm thí nghiệm, phù hợp với các yêu cầu của đề tài.  '
+                    strong = '(9≤Điểm≤10)'
+              td
+                p.fst-italic = '(Tối đa 10 điểm)'
+                = @evaluation.marking4
+            tr.bg-light.text-dark
+              th = 'II. ĐÁNH GIÁ KỸ NĂNG CỦA SINH VIÊN'
+              th = '(Tối đa 30 điểm)'
+            tr
+              td
+                p.fw-bold = 'Câu 5. Nội dung slide thuyết trình của sinh viên'
+                .pl-1
+                  p
+                    span = 'A. Nội dung slide sơ sài, rời rạc, không rõ ràng.  '
+                    strong = '(0≤Điểm≤1)'
+                  p
+                    span = 'B. Nội dung slide được tổ chức hợp lý nhưng có một số lỗi trình bày về chính tả, hình ảnh và bảng biểu được sử dụng minh họa không phù hợp.  '
+                    strong = '(1≤Điểm≤5)'
+                  p
+                    span = 'C. Nội dụng slide tốt, được tổ chức hợp lý, có hình ảnh và bảng biểu minh họa phù hợp nhưng chưa sinh động.  '
+                    strong = '(5≤Điểm≤9)'
+                  p
+                    span = 'D. Nội dung slide tốt, được tổ chức hợp lý, có hình ảnh và bảng biểu minh họa sáng tạo và sinh động.  '
+                    strong = '(9≤Điểm≤10)'
+              td
+                p.fst-italic = '(Tối đa 10 điểm)'
+                = @evaluation.marking5
+            tr
+              td
+                p.fw-bold = 'Câu 6. Khả năng thuyết trình của sinh viên'
+                .pl-1
+                  p
+                    span = 'A. Sinh viên trình bày không đầy đủ nội dung, không rõ ràng, gây khó hiểu.  '
+                    strong = '(0≤Điểm≤1)'
+                  p
+                    span = 'B. Sinh viên trình bày đầy đủ nội dung, nhưng thiếu tự tin, không thu hút, thường bị ngắt quãng.  '
+                    strong = '(1≤Điểm≤5)'
+                  p
+                    span = 'C. Sinh viên trình bày đầy đủ nội dung, tự tin, ít ngắt quãng, nhưng không quản lý tốt quỹ thời gian.  '
+                    strong = '(5≤Điểm≤9)'
+                  p
+                    span = 'D. Sinh viên trình bày đầy đủ nội dung, tự tin, cuốn hút người nghe, và quản lý tốt quỹ thời gian.  '
+                    strong = '(9≤Điểm≤10)'
+              td
+                p.fst-italic = '(Tối đa 10 điểm)'
+                = @evaluation.marking6
+            tr
+              td
+                p.fw-bold = 'Câu 7. Trả lời các câu hỏi phản biện trước hội đồng'
+                .pl-1
+                  p
+                    span = 'A. Sinh viên không trả lời được các câu hỏi phản biện trước hội đồng.  '
+                    strong = '(0≤Điểm≤1)'
+                  p
+                    span = 'B. Sinh viên trả lời được một vài câu hỏi phản biện trước hội đồng nhưng thiếu minh chứng.  '
+                    strong = '(1≤Điểm≤5)'
+                  p
+                    span = 'C. Sinh viên trả lời được hầu hết các câu hỏi phản biện trước hội đồng, có minh chứng nhưng chưa đầy đủ.  '
+                    strong = '(5≤Điểm≤9)'
+                  p
+                    span = 'D. Sinh viên trả lời được tất cả các câu hỏi phản biện trước hội đồng, có minh chứng phù hợp và đầy đủ.  '
+                    strong = '(9≤Điểm≤10)'
+              td
+                p.fst-italic = '(Tối đa 10 điểm)'
+                = @evaluation.marking7
+            tr
+              td
+                strong Điểm thưởng
+                span = ' (nếu có, ghi rõ lý do của điểm thưởng, ví dụ đối với các đề tài có kết quả xuất sắc, có bài báo khoa học và/hoặc đạt các giải thưởng về học thuật)'
+                div
+                  p.fst-italic = 'Lý do: '
+                  = @evaluation.bonus_reason
+              td
+                p.fst-italic = '(Tối đa 10 điểm)'
+                = @evaluation.bonus_point
+            tr
+              td
+                strong TỔNG ĐIỂM (nếu tổng điểm lớn hơn 100 điểm, thì tổng điểm sẽ là 100 điểm):
+              td = @evaluation.total_marking
+        .form-group
+          p.fst-italic = 'Nếu Thầy/Cô có góp ý cho biểu mẫu này thì Thầy/Cô vui lòng ghi chú lại. Khoa trân trọng cảm ơn các góp ý của Thầy/Cô!'
+          = @evaluation.opinion_about_form || '...'
+
+    .float-end.w-50
+      .text-center
+        div = "Ngày #{@evaluation.created_at.day} tháng #{@evaluation.created_at.month} năm #{@evaluation.created_at.year}"
+        .fw-bold GVHD chính ký & ghi rõ họ tên
+        .signature-area = @evaluation.committee_member
+    .page-break
+
+
+css:
+  body {
+    font-family: 'Times New Roman';
+    font-size: 13px;
+  }
+  .page-break {
+    display:block; clear:both; page-break-after:always;
+  }
+  .signature-area {
+    margin-top: 80px;
+  }
+  tr td:nth-child(2) {
+    width: 130px;
+    text-align: center;
+  }

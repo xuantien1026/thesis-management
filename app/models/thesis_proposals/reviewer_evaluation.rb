@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: thesis_proposals_reviewer_evaluations
@@ -28,15 +30,15 @@ module ThesisProposals
   class ReviewerEvaluation < ApplicationRecord
     belongs_to :thesis_proposal
 
-    enum a1: %w[a b c d], _prefix: true
-    enum a2: %w[a b c d], _prefix: true
-    enum b1: %w[a b c d], _prefix: true
-    enum b2: %w[a b c d], _prefix: true
-    enum c1: %w[a b c d], _prefix: true
-    enum c2: %w[a b c d], _prefix: true
-    enum d1: %w[a b c d], _prefix: true
-    enum d2: %w[a b c d], _prefix: true
-    enum e1: %w[a b c d], _prefix: true
+    enum a1: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
+    enum a2: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
+    enum b1: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
+    enum b2: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
+    enum c1: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
+    enum c2: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
+    enum d1: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
+    enum d2: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
+    enum e1: { 'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3 }, _prefix: true
 
     validates :a1, :a2, :b1, :b2, :c1, :c2, :d1, :d2, :e1, presence: true
   end

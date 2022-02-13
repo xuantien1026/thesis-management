@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ThesisProposals
   class FinalEvaluationSet
     include ActiveModel::Model
@@ -10,7 +12,8 @@ module ThesisProposals
     end
 
     def thesis_proposals
-      @thesis_proposals = ThesisProposal.includes(members: %i[student final_evaluation]).by_lecturer(lecturer).where(semester: semester)
+      @thesis_proposals = ThesisProposal.includes(members: %i[student
+                                                              final_evaluation]).by_lecturer(lecturer).where(semester: semester)
     end
 
     def members

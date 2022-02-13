@@ -45,7 +45,9 @@ class Student < User
   scope :without_proposal, -> { where.not(id: ThesisProposalMember.pluck(:student_id)) }
 
   validates :dkmh, inclusion: DKMH
-  validates :education_program, inclusion: { in: EDUCATION_PROGRAMS, message: "không hợp lệ. Chương trình đào tạo phải là 1 trong những giá trị sau: #{EDUCATION_PROGRAMS.join(',')}" }
+  validates :education_program,
+            inclusion: { in: EDUCATION_PROGRAMS,
+                         message: "không hợp lệ. Chương trình đào tạo phải là 1 trong những giá trị sau: #{EDUCATION_PROGRAMS.join(',')}" }
   validates :mssv, :major, presence: true
 
   def profile

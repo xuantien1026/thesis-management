@@ -44,6 +44,7 @@ class Thesis < ApplicationRecord
   belongs_to :semester
   belongs_to :major
   belongs_to :thesis_proposal, optional: true
+  belongs_to :defense_committee, optional: true
 
   has_many :members, class_name: 'Theses::Member', dependent: :destroy
   has_many :students, through: :members
@@ -61,7 +62,7 @@ class Thesis < ApplicationRecord
 
   accepts_nested_attributes_for :advisors
 
-  before_create :assign_ordering, if: ->{ ordering.nil? }
+  before_create :assign_ordering, if: -> { ordering.nil? }
 
   scope :by_lecturer, lambda { |lecturer|
     joins(:advisors).where(advisors: { lecturer: lecturer, primary: true })

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_175633) do
+ActiveRecord::Schema.define(version: 2022_02_12_125755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,6 +194,25 @@ ActiveRecord::Schema.define(version: 2022_01_26_175633) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lecturer_id"], name: "index_theses_advisors_on_lecturer_id"
     t.index ["thesis_id"], name: "index_theses_advisors_on_thesis_id"
+  end
+
+  create_table "theses_committee_evaluations", force: :cascade do |t|
+    t.bigint "committee_member_id", null: false
+    t.bigint "member_id", null: false
+    t.integer "marking1", null: false
+    t.integer "marking2", null: false
+    t.integer "marking3", null: false
+    t.integer "marking4", null: false
+    t.integer "marking5", null: false
+    t.integer "marking6", null: false
+    t.integer "marking7", null: false
+    t.integer "bonus_point"
+    t.text "bonus_reason"
+    t.text "opinion_about_form"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["committee_member_id"], name: "index_theses_committee_evaluations_on_committee_member_id"
+    t.index ["member_id"], name: "index_theses_committee_evaluations_on_member_id"
   end
 
   create_table "theses_members", force: :cascade do |t|
@@ -389,6 +408,8 @@ ActiveRecord::Schema.define(version: 2022_01_26_175633) do
   add_foreign_key "theses_advisor_evaluations", "theses_members"
   add_foreign_key "theses_advisors", "theses"
   add_foreign_key "theses_advisors", "users", column: "lecturer_id"
+  add_foreign_key "theses_committee_evaluations", "defense_committees_members", column: "committee_member_id"
+  add_foreign_key "theses_committee_evaluations", "theses_members", column: "member_id"
   add_foreign_key "theses_members", "users", column: "student_id"
   add_foreign_key "theses_midterm_evaluations", "theses_members", column: "member_id"
   add_foreign_key "theses_reviewer_evaluations", "theses_members"

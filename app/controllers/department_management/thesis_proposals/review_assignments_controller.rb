@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DepartmentManagement
   module ThesisProposals
     class ReviewAssignmentsController < BaseController
@@ -7,4 +9,3 @@ module DepartmentManagement
     end
   end
 end
-

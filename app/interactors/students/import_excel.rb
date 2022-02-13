@@ -53,8 +53,7 @@ module Students
         email: current_row[import_map.email]&.value,
         dkmh: current_row[import_map.dkmh]&.value,
         education_program: current_row[import_map.education_program]&.value,
-        major: current_row[import_map.major]&.value,
-      }
+        major: current_row[import_map.major]&.value }
     end
 
     def read_first_worksheet

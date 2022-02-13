@@ -23,8 +23,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'redis', '~> 4.0'
 
 gem 'activerecord-session_store'
-gem 'omniauth-google-oauth2'
 gem 'config'
+gem 'omniauth-google-oauth2'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -69,12 +69,12 @@ group :development do
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'capistrano', '~> 3.16', require: false
+  gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-rails', '~> 1.4'
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
   gem 'letter_opener'
   gem 'spring'
-  gem "capistrano", "~> 3.16", require: false
-  gem 'capistrano-rails', '~> 1.4'
-  gem 'capistrano-passenger', '~> 0.2.0'
-  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 end
 
 group :test do

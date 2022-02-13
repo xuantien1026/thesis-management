@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       resources :members, only: [] do
         resource :advisor_evaluation, except: :destroy
         resource :reviewer_evaluation, except: :destroy
+        resources :committee_evaluations, only: %i[show new create]
       end
     end
 

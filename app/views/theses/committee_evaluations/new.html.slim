@@ -1,0 +1,177 @@
+.card
+  .card-header
+    h3 Phiếu đánh giá LVTN - Dành cho hội đồng
+  .card-body
+    p
+      strong = "Thành viên hội đồng: "
+      = current_user
+    p = "Tên đề tài: #{@member.thesis}"
+    p = "Tên sinh viên: #{@member.name}"
+    p = "MSSV: #{@member.mssv}"
+    hr
+    p
+    = simple_form_for @evaluation, url: theses_member_committee_evaluations_path(@member), defaults: { label: false } do |f|
+      table.table.table-bordered
+        thead.bg-light.text-dark
+          tr
+            th Tiêu chí đánh giá
+            th Điểm đánh giá
+        tbody
+          tr.bg-light.text-dark
+            th = 'I. ĐÁNH GIÁ KẾT QUẢ LUẬN VĂN'
+            th = '(Tối đa 70 điểm)'
+          tr
+            td
+              p.font-weight-bold = 'Câu 1. Đánh giá về kết quả luận văn so với nhiệm vụ của đề tài đặt ra'
+              .pl-1
+                p
+                  span = 'A. Kết quả chỉ đáp ứng một phần nhỏ nhiệm vụ của đề tài với khối lượng công việc dưới 50%. '
+                  strong = '(0≤Điểm≤10)'
+                p
+                  span = 'B. Kết quả đáp ứng phần nhiệm vụ cơ bản của đề tài đặt ra với khối lượng công việc từ 50% đến 70%. '
+                  strong = '(10≤Điểm≤35)'
+                p
+                  span = 'C. Kết quả đáp ứng phần lớn nhiệm vụ chính của đề tài đặt ra với khối lượng công việc từ 70% đến 95%. '
+                  strong = '(35≤Điểm≤47)'
+                p
+                  span = 'D. Kết quả đáp ứng đầy đủ nhiệm vụ của đề tài đặt ra với khối lượng công việc trên 95%. '
+                  strong = '(47≤Điểm≤50)'
+            td
+              label = '(Tối đa 50 điểm)'
+              = f.input :marking1
+          tr
+            td
+              p.font-weight-bold = 'Câu 2. Đánh giá việc nhận diện các lợi ích thực tế của giải pháp trong luận văn'
+              .pl-1
+                p
+                  span = 'A. Sinh viên không nêu được các lợi ích thực tế của giải pháp trong luận văn. '
+                  strong = '(0≤Điểm≤1)'
+                p
+                  span = 'B. Sinh viên nêu được một vài lợi ích thực tế của giải pháp trong luận văn về một vài khía cạnh nhất định nhưng không có minh chứng cụ thể. '
+                  strong = '(1≤Điểm≤3)'
+                p
+                  span = 'C. Sinh viên nêu được các lợi ích thực tế của giải pháp trong luận văn về một vài khía cạnh nhất định và có kèm theo minh chứng cụ thể. '
+                  strong = '(3≤Điểm≤4)'
+                p
+                  span = 'D. Sinh viên nêu được các lợi ích thực tế của giải pháp trong luận văn về các khía cạnh một cách toàn diện và có kèm theo đầy đủ các minh chứng cụ thể. '
+                  strong = '(4≤Điểm≤5)'
+            td
+              label = '(Tối đa 5 điểm)'
+              = f.input :marking2
+
+
+
+          tr
+            td
+              p.font-weight-bold = 'Câu 3. Đánh giá về những giải pháp được đề xuất trong luận văn để giải quyết vấn đề'
+              .pl-1
+                p
+                  span = 'A. Sinh viên nêu ra một giải pháp nhưng không biết ưu và nhược điểm. '
+                  strong = '(0≤Điểm≤1)'
+                p
+                  span = 'B. Sinh viên nêu ra một giải pháp, và phân tích ưu và nhược điểm. '
+                  strong = '(1≤Điểm≤3)'
+                p
+                  span = 'C. Sinh viên đưa ra nhiều giải pháp để giải quyết bài toán, có biện luận lựa chọn giải pháp nhưng chưa hợp lý. '
+                  strong = '(3≤Điểm≤4)'
+                p
+                  span = 'D. Sinh viên đưa ra nhiều giải pháp để giải quyết bài toán, đồng thời nêu rõ lý do và biện luận đúng, rõ ràng tại sao lựa chọn giải pháp đó. '
+                  strong = '(4≤Điểm≤5)'
+            td
+              label = '(Tối đa 5 điểm)'
+              = f.input :marking3
+          tr
+            td
+              p.font-weight-bold = 'Câu 4. Đánh giá sản phẩm đạt được (mô hình, chương trình, hệ thống, ...)'
+              .pl-1
+                p
+                  span = 'A. Sinh viên không thực hiện đánh giá sản phẩm đạt được của đề tài. '
+                  strong = '(0≤Điểm≤1)'
+                p
+                  span = 'B. Sinh viên trình bày phần đánh giá cho đề tài nhưng chưa đánh giá cho sản phẩm đạt được của đề tài. '
+                  strong = '(1≤Điểm≤5)'
+                p
+                  span = 'C. Sinh viên đánh giá sản phẩm đạt được của đề tài, ví dụ: bằng kỹ thuật kiểm tra chuyên môn hoặc làm thí nghiệm, nhưng không phù hợp với các yêu cầu của đề tài. '
+                  strong = '(5≤Điểm≤9)'
+                p
+                  span = 'D. Sinh viên đánh giá sản phẩm đạt được của đề tài, ví dụ: bằng kỹ thuật kiểm tra chuyên môn hoặc làm thí nghiệm, phù hợp với các yêu cầu của đề tài. '
+                  strong = '(9≤Điểm≤10)'
+            td
+              label = '(Tối đa 10 điểm)'
+              = f.input :marking4
+          tr.bg-light.text-dark
+            th = 'II. ĐÁNH GIÁ KỸ NĂNG CỦA SINH VIÊN'
+            th = '(Tối đa 30 điểm)'
+          tr
+            td
+              p.font-weight-bold = 'Câu 5. Nội dung slide thuyết trình của sinh viên'
+              .pl-1
+                p
+                  span = 'A. Nội dung slide sơ sài, rời rạc, không rõ ràng. '
+                  strong = '(0≤Điểm≤1)'
+                p
+                  span = 'B. Nội dung slide được tổ chức hợp lý nhưng có một số lỗi trình bày về chính tả, hình ảnh và bảng biểu được sử dụng minh họa không phù hợp. '
+                  strong = '(1≤Điểm≤5)'
+                p
+                  span = 'C. Nội dụng slide tốt, được tổ chức hợp lý, có hình ảnh và bảng biểu minh họa phù hợp nhưng chưa sinh động. '
+                  strong = '(5≤Điểm≤9)'
+                p
+                  span = 'D. Nội dung slide tốt, được tổ chức hợp lý, có hình ảnh và bảng biểu minh họa sáng tạo và sinh động. '
+                  strong = '(9≤Điểm≤10)'
+            td
+              label = '(Tối đa 10 điểm)'
+              = f.input :marking5
+          tr
+            td
+              p.font-weight-bold = 'Câu 6. Khả năng thuyết trình của sinh viên'
+              .pl-1
+                p
+                  span = 'A. Sinh viên trình bày không đầy đủ nội dung, không rõ ràng, gây khó hiểu. '
+                  strong = '(0≤Điểm≤1)'
+                p
+                  span = 'B. Sinh viên trình bày đầy đủ nội dung, nhưng thiếu tự tin, không thu hút, thường bị ngắt quãng. '
+                  strong = '(1≤Điểm≤5)'
+                p
+                  span = 'C. Sinh viên trình bày đầy đủ nội dung, tự tin, ít ngắt quãng, nhưng không quản lý tốt quỹ thời gian. '
+                  strong = '(5≤Điểm≤9)'
+                p
+                  span = 'D. Sinh viên trình bày đầy đủ nội dung, tự tin, cuốn hút người nghe, và quản lý tốt quỹ thời gian. '
+                  strong = '(9≤Điểm≤10)'
+            td
+              label = '(Tối đa 10 điểm)'
+              = f.input :marking6
+          tr
+            td
+              p.font-weight-bold = 'Câu 7. Trả lời các câu hỏi phản biện trước hội đồng'
+              .pl-1
+                p
+                  span = 'A. Sinh viên không trả lời được các câu hỏi phản biện trước hội đồng.'
+                  strong = '(0≤Điểm≤1)'
+                p
+                  span = 'B. Sinh viên trả lời được một vài câu hỏi phản biện trước hội đồng nhưng thiếu minh chứng.'
+                  strong = '(1≤Điểm≤5)'
+                p
+                  span = 'C. Sinh viên trả lời được hầu hết các câu hỏi phản biện trước hội đồng, có minh chứng nhưng chưa đầy đủ.'
+                  strong = '(5≤Điểm≤9)'
+                p
+                  span = 'D. Sinh viên trả lời được tất cả các câu hỏi phản biện trước hội đồng, có minh chứng phù hợp và đầy đủ.'
+                  strong = '(9≤Điểm≤10)'
+            td
+              label = '(Tối đa 10 điểm)'
+              = f.input :marking7
+          tr
+            td
+              strong Điểm thưởng
+              span = ' (nếu có, ghi rõ lý do của điểm thưởng, ví dụ đối với các đề tài có kết quả xuất sắc, có bài báo khoa học và/hoặc đạt các giải thưởng về học thuật)'
+              div
+                label = 'Lý do'
+                = f.input :bonus_reason
+            td
+              label = '(Tối đa 10 điểm)'
+              = f.input :bonus_point
+      .form-group
+        label = 'Nếu Thầy/Cô có góp ý cho biểu mẫu này thì Thầy/Cô vui lòng ghi chú lại. Khoa trân trọng cảm ơn các góp ý của Thầy/Cô!'
+        = f.input :opinion_about_form
+      = f.hidden_field :member_id
+      = f.hidden_field :committee_member_id
+      = f.button :submit, 'Lưu'

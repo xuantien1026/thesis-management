@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: thesis_proposals_final_evaluations
@@ -17,6 +19,6 @@ module ThesisProposals
   class FinalEvaluation < ApplicationRecord
     belongs_to :member
 
-    enum result: [:passed, :failed]
+    enum result: { passed: 0, failed: 1 }
   end
 end

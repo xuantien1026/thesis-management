@@ -8,7 +8,8 @@ module Admin
 
     def create
       @import_map = Students::ImportMap.new(import_map_params)
-      context = Students::ImportExcel.call(excel_file: excel_file, import_map: @import_map, faculty: current_user.faculty)
+      context = Students::ImportExcel.call(excel_file: excel_file, import_map: @import_map,
+                                           faculty: current_user.faculty)
       if context.success?
         flash.notice = 'Thành công!'
         redirect_to new_admin_student_import_path

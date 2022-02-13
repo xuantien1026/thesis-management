@@ -46,7 +46,7 @@ RSpec.describe Admin::StudentImportsController, type: :request do
     it 'shows error message' do
       subject
 
-      expect(flash.alert).to contain_exactly("Chương trình đào tạo không hợp lệ. Chương trình đào tạo phải là 1 trong những giá trị sau: CQ,CLC,VLVH,TC (dòng 2)")
+      expect(flash.alert).to contain_exactly('Chương trình đào tạo không hợp lệ. Chương trình đào tạo phải là 1 trong những giá trị sau: CQ,CLC,VLVH,TC (dòng 2)')
     end
   end
 
@@ -56,7 +56,7 @@ RSpec.describe Admin::StudentImportsController, type: :request do
     it 'shows error message' do
       subject
 
-      expect(flash.alert).to contain_exactly("Không tìm thấy chuyên ngành \"Điện tử\" (dòng 2)")
+      expect(flash.alert).to contain_exactly('Không tìm thấy chuyên ngành "Điện tử" (dòng 2)')
     end
   end
 

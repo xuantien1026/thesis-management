@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ThesisProposals
   class ReviewerEvaluationsController < LecturerController
     before_action :set_thesis_proposal
@@ -21,7 +23,7 @@ module ThesisProposals
     end
 
     def update
-      @reviewer_evaluation =  @thesis_proposal.reviewer_evaluation
+      @reviewer_evaluation = @thesis_proposal.reviewer_evaluation
       if @reviewer_evaluation.update(reviewer_evaluation_params)
         flash.notice = 'Đã chỉnh sửa phiếu nhận xét ĐCLV'
         redirect_to @thesis_proposal

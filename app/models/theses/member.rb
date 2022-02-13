@@ -28,6 +28,11 @@ module Theses
                                  inverse_of: :member
     has_one :reviewer_evaluation, dependent: :destroy, foreign_key: 'theses_member_id',
                                   inverse_of: :member
+    has_many :committee_evaluations do
+      def by(committee_member)
+        find_by(committee_member: committee_member)
+      end
+    end
 
     delegate :name, :mssv, to: :student
   end

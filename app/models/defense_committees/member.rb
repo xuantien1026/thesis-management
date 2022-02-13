@@ -28,5 +28,9 @@ module DefenseCommittees
     belongs_to :lecturer
 
     enum role: { 'peer' => 0, 'secretary' => 1, 'chairman' => 2 }
+
+    def to_s
+      lecturer.name
+    end
   end
 end

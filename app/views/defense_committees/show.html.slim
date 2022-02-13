@@ -1,6 +1,6 @@
 .card
-  .card-header
-    strong = "Hội đồng bảo vệ"
+  h4.card-header
+    = "Hội đồng bảo vệ"
     .badge.badge-primary.float-right = @committee.session.humanize
   .card-body
     dt = "Chủ tịch"
@@ -12,11 +12,35 @@
       ul
       - @committee.peers.each do |peer|
         li = peer
-    dt = "Đề tài"
-    dd
-      ul
-        - @committee.theses.each do |thesis|
-          li = thesis
   .card-footer
     = button_to 'Bắt đầu phiên làm việc', start_session_defense_committee_path(@committee), class: 'btn btn-primary' if policy(@committee).start_session?
     = button_to 'Kết thúc phiên làm việc', end_session_defense_committee_path(@committee), class: 'btn btn-danger' if policy(@committee).end_session?
+
+.card
+  h4.card-header = "Chấm điểm"
+  .card-body
+    table.table.table-borderless
+      thead
+        tr
+          th MSSV
+          th Tên sinh viên
+          th Action
+      tbody
+        - @committee.theses.each do |thesis|
+          tr.bg-light.text-dark
+            td colspan="3" = "Luận văn  ##{thesis.ordering}:  #{thesis}"
+            - thesis.members.each do |member|
+              tr
+                td = member.mssv
+                td = member.name
+                td
+                  - evaluation = member.committee_evaluations.by(@committee_member)
+                  - if evaluation.nil?
+                    = link_to new_theses_member_committee_evaluation_path(member), class: 'btn btn-primary' do
+                      i.cil-clipboard.mr-2
+                      = 'Điền phiếu'
+                  - else
+                    = link_to theses_committee_evaluation_path(evaluation, format: :pdf), class: 'btn btn-success' do
+                      i.cil-cloud-download.mr-2
+                      = 'Download'
+

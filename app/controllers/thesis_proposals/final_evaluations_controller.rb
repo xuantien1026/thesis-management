@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ThesisProposals
   class FinalEvaluationsController < LecturerController
     before_action :set_final_evaluation_set, only: %i[new create]
