@@ -1,21 +1,22 @@
 .card
-  .card-header
-    h3 Danh sách đề cương luận văn
-
+  h4.card-header Danh sách đề cương luận văn
   .card-body
-    table.table
-      thead
-        tr
-          th MĐT
-          th Giảng viên
-          th Tên đề tài
-          th Số SV
-          th Ngành
-      tbody
-        - @thesis_proposals.each do |thesis_proposal|
+    - if @thesis_proposals.present?
+      table.table
+        thead
           tr
-            td = link_to thesis_proposal.id, students_thesis_proposal_path(thesis_proposal)
-            td = thesis_proposal.primary_advisor_name
-            td = thesis_proposal.title
-            td = thesis_proposal.max_student_count
-            td = thesis_proposal.major
+            th MĐT
+            th Giảng viên
+            th Tên đề tài
+            th Số SV
+            th Ngành
+        tbody
+          - @thesis_proposals.each do |thesis_proposal|
+            tr
+              td = link_to thesis_proposal.id, students_thesis_proposal_path(thesis_proposal)
+              td = thesis_proposal.primary_advisor_name
+              td = thesis_proposal.title
+              td = thesis_proposal.max_student_count
+              td = thesis_proposal.major
+    - else
+      = "Hiện tại chưa có Đề cương luận văn nào được Khoa công bố."

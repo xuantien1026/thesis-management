@@ -1,0 +1,60 @@
+- if @thesis
+  .card
+    h4.card-header Thông tin luận văn
+    .card-body
+      dl
+        .row
+          .col-3
+            dt Học kì
+            dd = @thesis.semester
+          .col-3
+            dt Mã đề tài
+            dd = @thesis.ordering
+          .col-3
+            dt Chương trình đào tạo
+            dd = @thesis.education_program
+          .col-3
+            dt Chuyên ngành
+            dd = @thesis.major
+
+        dt Giảng viên hướng dẫn
+        dd = @thesis.primary_advisor
+
+        dt Tên đề tài
+        dd = @thesis.title
+
+        dt Tên tiếng anh
+        dd = @thesis.english_title
+
+        dt Số lượng sinh viên tối đa
+        dd = @thesis.max_student_count
+
+        dt Nhiệm vụ đề tài
+        dd = @thesis.mission
+
+        dt Mô tả
+        dd = @thesis.description
+
+        dt Tài liệu tham khảo
+        dd = @thesis.reference
+
+  .card
+    h4.card-header Báo cáo LVTN
+    .card-body
+      - if @thesis.final_submission.attached?
+        p = "Bạn đã nộp báo cáo LVTN"
+        = link_to url_for(@thesis.final_submission), class: 'btn btn-success' do
+          i.mr-2.cil-cloud-download
+          = "Download báo cáo"
+      - else
+        = form_with url: thesis_final_submission_path(@thesis) do |f|
+          .form-group
+            = f.label :final_submission, "Nộp báo cáo LVTN"
+            = f.file_field :final_submission, class: 'form-control-file'
+          = f.button :submit, class: 'btn btn-primary' do
+            i.mr-2.cil-cloud-upload
+            = "Nộp báo cáo"
+
+
+- else
+  div = 'Bạn chưa đăng kí LVTN nào.'

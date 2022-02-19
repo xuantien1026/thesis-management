@@ -56,6 +56,8 @@ class Thesis < ApplicationRecord
   has_one :review, class_name: 'Theses::Review', dependent: :destroy
   has_one :reviewer, through: :review, source: :lecturer
 
+  has_one_attached :final_submission
+
   validates :title, :english_title, :semester_id, :major_id, :education_program,
             :mission, :description, :max_student_count, presence: true
   validates :max_student_count, numericality: { greater_than_or_equal_to: 1 }

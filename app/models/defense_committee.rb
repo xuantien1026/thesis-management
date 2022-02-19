@@ -5,7 +5,11 @@
 # Table name: defense_committees
 #
 #  id            :bigint           not null, primary key
+#  completed_at  :datetime
+#  location      :string
+#  scheduled_at  :datetime
 #  session       :integer          default("inactive")
+#  started_at    :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  department_id :bigint

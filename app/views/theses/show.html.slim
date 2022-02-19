@@ -66,6 +66,16 @@
           i.cil-plus.mr-2
           = "Thêm sinh viên"
 
+.card
+  h4.card-header Báo cáo LVTN
+  .card-body
+    - if @thesis.final_submission.attached?
+      = link_to url_for(@thesis.final_submission), class: 'btn btn-success' do
+        i.mr-2.cil-cloud-download
+        = "Download báo cáo"
+    - else
+      = "Chưa có báo cáo nào được nộp"
+
 - if policy(@thesis).evaluate_as_advisor?
   .card
     .card-header

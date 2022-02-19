@@ -51,6 +51,7 @@ Rails.application.routes.draw do
         end
         resources :members, only: %i[create destroy], module: :thesis_proposal, shallow: false
       end
+      resource :my_thesis, only: :show
     end
 
     namespace :theses do
@@ -68,6 +69,7 @@ Rails.application.routes.draw do
         resource :batch_advisor_evaluation, only: %i[new create]
         resource :batch_reviewer_evaluation, only: %i[new create]
         resource :mission_note, only: :show
+        resource :final_submission, only: %i[show create]
       end
     end
 
