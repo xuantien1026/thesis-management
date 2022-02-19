@@ -1,24 +1,26 @@
 .card
-  .card-header
-    h3 = "Đề xuất Hội Đồng Bảo Vệ - Bộ môn #{@department}"
+  h4.card-header
+    = "Đề xuất Hội đồng bảo vệ Luận văn tốt nghiệp - Bộ môn #{current_user.department}"
   .card-body data-controller='defense-committee'
     .d-flex.justify-content-end.mb-3
       button.btn.btn-primary.mr-1 data-action='defense-committee#suggest' Tách hội đồng
-      input type='number' placeholder='Số lượng' data-defense-committee-target='numberOfCommittees' min=1
+      input.form-control.w-25 type='number' placeholder='Số lượng' data-defense-committee-target='numberOfCommittees' min=1
     = form_with url: new_dept_defense_committee_path, method: :get
       table.table
         thead
           tr
             th Mã luận văn
             th Tên đề tài
-            th Hội đồng
+            th Hội đồng số
         - @thesis_groups.each do |primary_advisor, theses|
-          tbody data-defense-committee-target='thesisGroup'
-            tr
-              td.bg-light.text-dark colspan="3" = "GV: #{primary_advisor.name}"
-            - theses.each do |thesis|
+          - if theses.present?
+            tbody data-defense-committee-target='thesisGroup'
               tr
-                td = link_to thesis.ordering, thesis
-                td = thesis.title || thesis.english_title
-                td = number_field_tag "thesis_group[#{thesis.id}]", nil, min: 1, class: 'form-control committee-input', required: true, id: nil
+                td.bg-gray-500.font-weight-bold colspan="3" = "GV: #{primary_advisor.name}"
+              - theses.each do |thesis|
+                tr.bg-light.text-dark
+                  td = link_to thesis.ordering, thesis
+                  td = thesis.title || thesis.english_title
+                  td = number_field_tag "thesis_group[#{thesis.id}]", nil, min: 1,
+                          class: 'form-control committee-input', style: "width: 70px", required: true, id: nil
       = submit_tag 'Xem danh sách hội đồng', class: 'btn btn-primary', data: { turbo: false }
