@@ -35,3 +35,7 @@ vn:
       odd: "must be odd"
       even: "must be even"
       taken: "bị trùng lặp"
+
+  date:
+    formats:
+      default: "%d-%m-%Y"

@@ -18,7 +18,7 @@ module Admin
     def create
       @thesis = Thesis.new(thesis_params)
       if @thesis.save
-        flash.notice = 'Tạo đề cương luận văn thành công'
+        flash.notice = 'Đăng kí bổ sung LVTN thành công'
         redirect_to @thesis
       else
         render :new, status: :unprocessable_entity

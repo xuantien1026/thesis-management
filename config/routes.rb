@@ -98,6 +98,8 @@ Rails.application.routes.draw do
     resources :major_committees, only: [] do
       resources :thesis_proposals, only: :index, module: :major_committees
     end
+
+    resources :semesters, only: :index
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -1,0 +1,18 @@
+.card
+  .card-body
+    table.table.table-striped
+      thead
+        tr
+          th Học kì
+          th Ngày bắt đầu
+          th Ngày kết thúc
+          th Học kì hiện tại
+      tbody
+        - @semesters.each do |semester|
+          tr
+            td = semester
+            td = l semester.start_date
+            td = l semester.end_date
+            td
+              - if Current.semester == semester
+                i.cil-check-circle
