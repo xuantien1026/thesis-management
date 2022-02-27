@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_21_083343) do
+ActiveRecord::Schema.define(version: 2022_02_27_191027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 2022_02_21_083343) do
     t.bigint "semester_id"
     t.integer "session", default: 0
     t.datetime "scheduled_at"
-    t.string "location"
     t.datetime "started_at"
     t.datetime "completed_at"
+    t.string "location"
     t.index ["department_id"], name: "index_defense_committees_on_department_id"
     t.index ["semester_id"], name: "index_defense_committees_on_semester_id"
   end
