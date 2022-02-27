@@ -37,11 +37,11 @@ module Theses
     delegate :name, :mssv, to: :student
 
     def final_average
-      return unless advisor_evaluation && reviewer_evaluation
-
-      total_score = advisor_evaluation.total_marking + reviewer_evaluation.total_marking.to_i + committee_evaluations.sum(&:total_marking)
-      total_count = committee_evaluations.length + 2
-      total_score / total_count
+      total_score = advisor_evaluation&.total_marking.to_i + reviewer_evaluation&.total_marking.to_i + committee_evaluations.sum(&:total_marking)
+      total_count = committee_evaluations.length
+      total_count += 1 if advisor_evaluation
+      total_count += 1 if reviewer_evaluation
+      total_count.zero? ? 0 : total_score / total_count
     end
   end
 end

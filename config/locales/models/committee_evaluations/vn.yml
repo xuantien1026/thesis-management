@@ -1,0 +1,13 @@
+vn:
+  activerecord:
+    attributes:
+      theses/committee_evaluation:
+        marking1: "Điểm câu 1"
+        marking2: "Điểm câu 2"
+        marking3: "Điểm câu 3"
+        marking4: "Điểm câu 4"
+        marking5: "Điểm câu 5"
+        marking6: "Điểm câu 6"
+        marking7: "Điểm câu 7"
+        bonus_point: "Điểm thưởng"
+

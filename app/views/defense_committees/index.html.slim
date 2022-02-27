@@ -1,7 +1,7 @@
 .card
   h4.card-header HĐBV của tôi
   .card-body
-    table.table
+    table.table.table-hover
       thead
         tr
           th STT
@@ -12,8 +12,8 @@
           th Trạng thái
       tbody
         - @committees.each do |committee|
-          tr
-            td = link_to committee.id, defense_committee_path(committee)
+          tr.committee-row href=defense_committee_path(committee)
+            td = committee.id
             td = committee.chairman
             td = committee.secretary
             td
@@ -26,3 +26,13 @@
                   li = thesis
             td = committee_session_status_bagde(committee)
   .card-footer
+
+scss:
+  tbody tr {
+    cursor: pointer;
+  }
+
+javascript:
+  document.querySelectorAll('.committee-row').forEach(e => e.addEventListener('click', function(event) {
+    window.location.href = event.currentTarget.getAttribute('href')
+  }))

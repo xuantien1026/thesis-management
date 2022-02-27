@@ -38,6 +38,12 @@ module Theses
     TEMPLATE_PATH = 'app/documents/post_defense/phieu_danh_gia_LVTN_HD.docx'
     MARKING_ATTRS = (1..7).map { |i| "marking#{i}" }
 
+    validates(*MARKING_ATTRS, presence: true)
+    validates :marking1, inclusion: 0..50
+    validates :marking2, :marking3, inclusion: 0..5
+    validates :marking4, :marking5, :marking6, :marking7, inclusion: 0..10
+    validates :bonus_point, inclusion: 0..10, allow_nil: true
+
     def total_marking
       (MARKING_ATTRS.map { |attr| send(attr) }.sum + bonus_point.to_i).clamp(0, 100)
     end

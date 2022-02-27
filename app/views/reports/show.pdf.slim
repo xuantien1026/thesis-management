@@ -11,8 +11,8 @@ html
         div CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
         div Độc lập – Tự do – Hạnh phúc
       .mb-4
-        .fw-bold BIÊN BẢN HỘI ĐỒNG BẢO VỆ LUẬN VĂN TỐT NGHIỆP LỚP ............
-        .fw-bold HỘI ĐỒNG: ........................................
+        .fw-bold BIÊN BẢN HỘI ĐỒNG BẢO VỆ LUẬN VĂN TỐT NGHIỆP
+        .fw-bold HỘI ĐỒNG: #{@committee.id}
 
     .mb-4
       p.fw-bold = "I. Thành viên Hội đồng:"
@@ -20,7 +20,7 @@ html
       div = "Thư kí: #{@committee.secretary}"
       div = "Uỷ viên: #{@committee.peers.join(" - ")}"
     .mb-4
-      .fw-bold = "II. Thời gian bắt đầu/ địa điểm:....................................."
+      .fw-bold = "II. Thời gian bắt đầu/ địa điểm: #{l @committee.started_at, default: nil} - #{@committee.location}"
 
     .mb-4
       p.fw-bold = "III. Kết quả bảo vệ của sinh viên:"
@@ -53,11 +53,7 @@ html
                     td = thesis_member.committee_evaluations.by(committee_member)&.total_marking
                   td = thesis_member.final_average
 
-
-
-
-
-    .mb-4.ps-4 = "Hội đồng kết thúc vào:........................................."
+    .mb-4.ps-4 = "Hội đồng kết thúc vào: #{l @committee.completed_at, default: nil}"
 
     .float-end.w-50
       .text-center

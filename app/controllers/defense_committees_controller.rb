@@ -19,7 +19,7 @@ class DefenseCommitteesController < ApplicationController
 
   def end_session
     authorize @committee
-    @committee.completed!
+    @committee.update(session: :completed, completed_at: Time.current)
     flash.notice = 'Đã kết thúc phiên làm việc'
     redirect_to @committee
   end
